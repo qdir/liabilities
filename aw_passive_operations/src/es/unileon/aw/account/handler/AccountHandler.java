@@ -4,7 +4,7 @@
 package es.unileon.aw.account.handler;
 
 import es.unileon.aw.office.Office;
-import es.unileon.handler.Handler;
+import es.unileon.aw.handler.Handler;
 
 /**
  *

@@ -4,7 +4,7 @@ package es.unileon.aw.account;
 import es.unileon.aw.account.commands.AccountBridge;
 import es.unileon.aw.account.commands.Command;
 import es.unileon.aw.office.Office;
-import es.unileon.handler.Handler;
+import es.unileon.aw.handler.Handler;
 
 /**
  *

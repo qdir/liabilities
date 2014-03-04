@@ -1,7 +1,7 @@
 /* Application developed for AW subject, belonging to passive operations
 group.*/
 
-package es.unileon.handler;
+package es.unileon.aw.handler;
 
 /**
  *
