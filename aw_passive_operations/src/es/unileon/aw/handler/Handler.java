@@ -7,8 +7,6 @@ package es.unileon.aw.handler;
  *
  * @author runix
  */
-
-
 public interface Handler {
     
     /**

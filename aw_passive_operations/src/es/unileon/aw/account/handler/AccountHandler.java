@@ -5,6 +5,7 @@ package es.unileon.aw.account.handler;
 
 import es.unileon.aw.office.Office;
 import es.unileon.aw.handler.Handler;
+import es.unileon.aw.handler.MalformedHandlerException;
 
 /**
  *
@@ -13,9 +14,17 @@ import es.unileon.aw.handler.Handler;
 public class AccountHandler implements Handler {
 
     private Office office;
+    private static final int ACCOUNT_NUMBER_LENGTH = 10;
     
-    public AccountHandler(Office office) {
+    public AccountHandler(Office office, int accountNumber) throws MalformedHandlerException {
+        StringBuilder errors = new StringBuilder();
+        if((accountNumber+"").length() != ACCOUNT_NUMBER_LENGTH) {
+            errors.append("The accountNumber length must be "+ACCOUNT_NUMBER_LENGTH+"\n");
+        }
         
+        if(errors.length() > 1){
+            throw new MalformedHandlerException(errors.toString());
+        }
     }
     
     @Override
@@ -23,4 +32,7 @@ public class AccountHandler implements Handler {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
       
+    public String toString() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

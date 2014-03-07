@@ -12,20 +12,61 @@ import es.unileon.aw.handler.Handler;
  */
 public class Account {
     
-    
+    /**
+     * The office of the account
+     */
     private Office office;
-    private Handler handler;
+    /**
+     * The account identifier
+     */
+    private Handler id;
+    /**
+     * The amount of money of the account
+     */
+    private float money;
     
-    
-    public Account(Office office) {
-        
+    /**
+     * Create a new account
+     * 
+     * @param office (The office of the account)
+     * 
+     * @param accountnumber (the number of the account)
+     */
+    public Account(Office office, int accountnumber) {
+        this.money = 0;
     }
     
-    public void executeCommand(Command command) {
-        //Check if the command is valid and other security threats
-        command.execute(new AccountBridge());
-        //Check the data of the bridge, valid continue otherwise exception
+    /**
+     * 
+     * @param command (Commant to execute)
+     */
+    @SuppressWarnings("Test version")
+    public final void executeCommand(Command command) {
+        //Check if the command is valid and other security threats ?
+        AccountBridge acb = new AccountBridge(money);
+        command.execute(acb);
+        //Check the data of the bridge, valid continue otherwise exception ?
+        // <0 money in a debit account..
+        
         //Reload account data
-        throw new UnsupportedOperationException("Not supported yet");
+        float tempMoney = acb.getMoney();
+        money = tempMoney;  
+    }
+    
+    /**
+     * Get the amount of money of the account
+     * 
+     * @return (the amount of money)
+     */
+    public final float getAmountOfMoney() {
+        return this.money;
+    }
+    
+    /**
+     * Get the account ID
+     * @return (the account id)
+     */
+    public final Handler getID() {
+        return this.id;
     }
 }

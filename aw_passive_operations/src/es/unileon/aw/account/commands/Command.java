@@ -7,7 +7,7 @@ package es.unileon.aw.account.commands;
  *
  * @author runix
  */
-public interface Command {
+public interface Command  {
     
     public void execute(AccountBridge account);
 }
