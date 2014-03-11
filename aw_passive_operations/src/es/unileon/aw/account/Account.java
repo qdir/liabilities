@@ -1,21 +1,18 @@
-
 package es.unileon.aw.account;
 
-import es.unileon.aw.account.commands.AccountBridge;
-import es.unileon.aw.account.commands.Command;
+
+import es.unileon.aw.account.handler.AccountHandler;
+import es.unileon.aw.bank.Bank;
 import es.unileon.aw.office.Office;
 import es.unileon.aw.handler.Handler;
+import es.unileon.aw.handler.MalformedHandlerException;
 
 /**
  *
  * @author runix
  */
 public class Account {
-    
-    /**
-     * The office of the account
-     */
-    private Office office;
+
     /**
      * The account identifier
      */
@@ -23,34 +20,20 @@ public class Account {
     /**
      * The amount of money of the account
      */
-    private float money;
+    private float balance;
     
     /**
      * Create a new account
      * 
      * @param office (The office of the account)
      * 
+     * @param bank
+     * 
      * @param accountnumber (the number of the account)
      */
-    public Account(Office office, int accountnumber) {
-        this.money = 0;
-    }
-    
-    /**
-     * 
-     * @param command (Commant to execute)
-     */
-    @SuppressWarnings("Test version")
-    public final void executeCommand(Command command) {
-        //Check if the command is valid and other security threats ?
-        AccountBridge acb = new AccountBridge(money);
-        command.execute(acb);
-        //Check the data of the bridge, valid continue otherwise exception ?
-        // <0 money in a debit account..
-        
-        //Reload account data
-        float tempMoney = acb.getMoney();
-        money = tempMoney;  
+    public Account(Office office, Bank bank, int accountnumber) throws MalformedHandlerException {
+        this.id = new AccountHandler(office.getID(), bank.getID(), accountnumber);
+        this.balance = 0;
     }
     
     /**
@@ -58,8 +41,12 @@ public class Account {
      * 
      * @return (the amount of money)
      */
-    public final float getAmountOfMoney() {
-        return this.money;
+    public final float getBalance() {
+        return this.balance;
+    }
+    
+    public void addBalance(float balance) {
+        this.balance += balance;
     }
     
     /**
