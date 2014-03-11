@@ -3,6 +3,7 @@
 
 package es.unileon.aw.bank;
 
+import es.unileon.aw.handler.GenericHandler;
 import es.unileon.aw.handler.Handler;
 
 /**
@@ -11,7 +12,8 @@ import es.unileon.aw.handler.Handler;
  */
 public class Bank {
     
+    @SuppressWarnings("Temporal class")
     public Handler getID() {
-        return null;
+        return new GenericHandler("1234");
     }
 }

@@ -9,7 +9,16 @@ package es.unileon.aw.handler;
  */
 public class GenericHandler implements Handler {
 
+    /**
+     * Generic id
+     */
     private String id;
+    
+    /**
+     * Create a new Generic Handler
+     * 
+     * @param id (The id)
+     */
     public GenericHandler(String id) {
        this.id = id; 
     }
@@ -19,6 +28,7 @@ public class GenericHandler implements Handler {
        return this.id.compareTo(id);
     }
     
+    @Override
     public String toString() {
         return this.id;
     }

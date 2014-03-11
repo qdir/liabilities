@@ -1,6 +1,5 @@
 package es.unileon.aw.account;
 
-
 import es.unileon.aw.account.handler.AccountHandler;
 import es.unileon.aw.bank.Bank;
 import es.unileon.aw.office.Office;
@@ -37,7 +36,7 @@ public class Account {
     }
     
     /**
-     * Get the amount of money of the account
+     * Get the balance of the account
      * 
      * @return (the amount of money)
      */
@@ -45,6 +44,11 @@ public class Account {
         return this.balance;
     }
     
+    /**
+     * Change the account balance
+     * 
+     * @param balance ( the balance to add/substract)
+     */
     public void addBalance(float balance) {
         this.balance += balance;
     }
