@@ -52,7 +52,7 @@ public class AccountHandler implements Handler {
      * @param office ( the office id )
      * @param bank ( the bank id )
      * @param accountNumber ( the account number )
-     *
+     * @author runix
      * @throws MalformedHandlerException ( If the account number, office
      * handler, or bank handler aren't correct )
      */
@@ -91,23 +91,24 @@ public class AccountHandler implements Handler {
 
     /**
      * Calculate control digits of the account
-     * 
+     *
      * @param office ( office number in String format )
      * @param bank ( bank number in String format )
      * @param accountNumber ( accountNumber in String format)
      * @return ( control digits of the account )
+     * @author runix
      */
     private static String calculateDC(String office, String bank, String accountNumber) {
         return String.valueOf(calculateDigit("00" + office.toString()) + String.valueOf(bank.toString()) + calculateDigit(accountNumber + ""));
     }
 
     /**
-     * Calculate the control digit. The length of the string
-     * must be 10
-     * 
+     * Calculate the control digit. The length of the string must be 10
+     *
      * @param number ( The string with the numbers )
-     * 
+     *
      * @return ( the control digits )
+     * @author runix
      */
     private static int calculateDigit(String number) {
         final int[] weights = new int[]{1, 2, 4, 8, 5, 10, 9, 7, 3, 6};
