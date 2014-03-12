@@ -14,7 +14,7 @@ import es.unileon.aw.office.Office;
  */
 public class CommercialAccount extends Account {
 
-    public CommercialAccount(Office office, Bank bank, int accountnumber) throws MalformedHandlerException {
+    public CommercialAccount(Office office, Bank bank, String accountnumber) throws MalformedHandlerException {
         super(office, bank, accountnumber);
     }
     

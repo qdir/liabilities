@@ -32,7 +32,7 @@ public class Account {
      * @param accountnumber (the number of the account)
      * @author runix
      */
-    public Account(Office office, Bank bank, int accountnumber) throws MalformedHandlerException {
+    public Account(Office office, Bank bank, String accountnumber) throws MalformedHandlerException {
         this.id = new AccountHandler(office.getID(), bank.getID(), accountnumber);
         this.balance = 0;
     }

@@ -14,7 +14,7 @@ import es.unileon.aw.office.Office;
  */
 public class SightAccount extends Account{
 
-    public SightAccount(Office office, Bank bank, int accountnumber) throws MalformedHandlerException {
+    public SightAccount(Office office, Bank bank, String accountnumber) throws MalformedHandlerException {
         super(office, bank, accountnumber);
     }
     

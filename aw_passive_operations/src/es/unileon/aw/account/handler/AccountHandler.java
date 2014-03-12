@@ -18,7 +18,7 @@ public class AccountHandler implements Handler {
      *
      * @see ACCOUNT_NUMBER_LENGHT}
      */
-    private final int accountNumber;
+    private final String accountNumber;
 
     /**
      * The office identifier
@@ -56,9 +56,9 @@ public class AccountHandler implements Handler {
      * @throws MalformedHandlerException ( If the account number, office
      * handler, or bank handler aren't correct )
      */
-    public AccountHandler(Handler office, Handler bank, int accountNumber) throws MalformedHandlerException {
+    public AccountHandler(Handler office, Handler bank, String accountNumber) throws MalformedHandlerException {
         StringBuilder errors = new StringBuilder();
-        if ((accountNumber + "").length() != ACCOUNT_NUMBER_LENGTH) {
+        if (accountNumber.length() != ACCOUNT_NUMBER_LENGTH) {
             errors.append("The accountNumber length must be " + ACCOUNT_NUMBER_LENGTH + "\n");
         }
 
