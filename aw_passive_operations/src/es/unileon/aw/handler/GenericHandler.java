@@ -17,7 +17,7 @@ public class GenericHandler implements Handler {
     /**
      * Create a new Generic Handler
      *
-     * @param id (The id)3
+     * @param id (The id)
      * @author runix
      */
     public GenericHandler(String id) {
@@ -26,7 +26,7 @@ public class GenericHandler implements Handler {
 
     @Override
     public int compareTo(Handler another) {
-        return this.id.compareTo(id);
+        return this.id.compareTo(another.toString());
     }
 
     @Override
