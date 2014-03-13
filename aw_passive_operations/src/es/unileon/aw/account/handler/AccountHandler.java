@@ -58,14 +58,21 @@ public class AccountHandler implements Handler {
      */
     public AccountHandler(Handler office, Handler bank, String accountNumber) throws MalformedHandlerException {
         StringBuilder errors = new StringBuilder();
+        Pattern numberPattern = Pattern.compile("^[0-9]*$");
+        
+        
+        Matcher matcher = numberPattern.matcher(accountNumber);
+        if(!matcher.find()) {
+            errors.append("The accountNumber can only have numbers\n");
+        }
+        
         if (accountNumber.length() != ACCOUNT_NUMBER_LENGTH) {
             errors.append("The accountNumber length must be " + ACCOUNT_NUMBER_LENGTH + "\n");
         }
 
-        Pattern numberPattern = Pattern.compile("^[0-9]*$");
-        Matcher matcher = numberPattern.matcher(office.toString());
+        matcher = numberPattern.matcher(office.toString());
         if (!matcher.find()) {
-            errors.append("The office id length can has only numbers\n");
+            errors.append("The office id can only have numbers\n");
         }
         if (office.toString().length() != OFFICE_NUMBER_LENGTH) {
             errors.append("The office id length must be " + OFFICE_NUMBER_LENGTH + " \n");
@@ -73,7 +80,7 @@ public class AccountHandler implements Handler {
 
         matcher = numberPattern.matcher(bank.toString());
         if (!matcher.find()) {
-            errors.append("The bank id can only has numbers\n");
+            errors.append("The bank id can only have numbers\n");
         }
 
         if (bank.toString().length() != BANK_NUMBER_LENGTH) {
@@ -86,7 +93,7 @@ public class AccountHandler implements Handler {
         this.officeHandler = office;
         this.bankHandler = bank;
         this.accountNumber = accountNumber;
-        dc = calculateDC(office.toString(), bank.toString(), accountNumber + "");
+        this.dc = calculateDC(office.toString(), bank.toString(), accountNumber + "");
     }
 
     /**
