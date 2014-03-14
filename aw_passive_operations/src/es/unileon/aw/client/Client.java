@@ -16,22 +16,63 @@ public class Client {
     ArrayList<Account> authorizedAccounts;
     
     public Client(){
-        
+        titularAccounts = new ArrayList<Account>();
+        authorizedAccounts = new ArrayList<Account>();
     }
     
-    public boolean addTitularAccount(Account account){
-        return false;
+    public void addTitularAccount(Account account){
+        if(!titularAccounts.contains(account)){
+            titularAccounts.add(account);
+        }
     }
     
-    public boolean addAuthorizedAccount(Account account){
-        return false;
+    public void addAuthorizedAccount(Account account){
+        if(!authorizedAccounts.contains(account)){
+            authorizedAccounts.add(account);
+        }
     }
     
     public boolean removeTitularAccount(Handler accountHandler){
-        return false;
+        boolean result = false;
+        for(int i=0; i<titularAccounts.size(); i++){
+            Account account = titularAccounts.get(i);
+            if(account.getID().compareTo(accountHandler)==0){
+                result = titularAccounts.remove(account);
+            }
+        }
+        return result;
     }
     
     public boolean removeAuthorizedAccount(Handler accountHandler){
-        return false;
+        boolean result = false;
+        for(int i=0; i<authorizedAccounts.size(); i++){
+            Account account = authorizedAccounts.get(i);
+            if(account.getID().compareTo(accountHandler)==0){
+                result = authorizedAccounts.remove(account);
+            }
+        }
+        return result;
+    }
+    
+    public boolean existsTitularAccount(Handler accountHandler){
+        boolean result = false;
+        for(int i=0; i<titularAccounts.size(); i++){
+            Account account = titularAccounts.get(i);
+            if(account.getID().compareTo(accountHandler)==0){
+                result = true;
+            }
+        }
+        return result;
+    }
+    
+    public boolean existsAuthorizedAccount(Handler accountHandler){
+        boolean result = false;
+        for(int i=0; i<authorizedAccounts.size(); i++){
+            Account account = authorizedAccounts.get(i);
+            if(account.getID().compareTo(accountHandler)==0){
+                result = true;
+            }
+        }
+        return result;
     }
 }
