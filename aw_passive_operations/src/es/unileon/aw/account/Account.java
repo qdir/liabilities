@@ -11,7 +11,7 @@ import es.unileon.aw.handler.MalformedHandlerException;
  *
  * @author runix
  */
-public class Account {
+public abstract class Account {
 
     /**
      * The account identifier
@@ -61,6 +61,14 @@ public class Account {
         this.balance += balance;
     }
 
+    /**
+     * Get the account type
+     * 
+     * @return ( the type )
+     * 
+     * @author runix
+     */
+    public abstract AccountTypes getType();
     /**
      * Get the account ID
      *
