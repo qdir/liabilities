@@ -41,6 +41,7 @@ public abstract class Account {
      * Get the account balance
      *
      * @return (the balance)
+     * 
      * @author runix
      */
     public final float getBalance() {
@@ -55,6 +56,7 @@ public abstract class Account {
      * @throws es.unileon.aw.account.exception.BalanceException ( If there are
      * inconsistencies with the new balance, for example, if its a debit account
      * the balance cannot be negative.
+     * 
      * @author runix
      */
     public void addBalance(float balance) throws BalanceException {
