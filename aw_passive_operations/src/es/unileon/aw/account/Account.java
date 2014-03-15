@@ -34,13 +34,13 @@ public abstract class Account {
      */
     public Account(Office office, Bank bank, String accountnumber) throws MalformedHandlerException {
         this.id = new AccountHandler(office.getID(), bank.getID(), accountnumber);
-        this.balance = 0;
+        this.balance = 0.0f;
     }
 
     /**
-     * Get the balance of the account
+     * Get the account balance
      *
-     * @return (the amount of money)
+     * @return (the balance)
      * @author runix
      */
     public final float getBalance() {
