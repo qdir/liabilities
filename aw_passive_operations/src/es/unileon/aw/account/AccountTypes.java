@@ -4,7 +4,8 @@
 package es.unileon.aw.account;
 
 /**
- *
+ * Account types
+ * 
  * @author runix
  */
 public enum AccountTypes {
