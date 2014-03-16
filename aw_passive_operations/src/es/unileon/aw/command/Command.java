@@ -9,5 +9,7 @@ package es.unileon.aw.command;
  * @author Paula
  */
 public interface Command {
+ 
     void execute();
+    
 }
