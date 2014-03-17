@@ -1,5 +1,11 @@
 package es.unileon.aw.GUI.client;
+import es.unileon.aw.client.types.Person;
+import es.unileon.aw.client.types.data.Address;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.*;
 
 public class ClientsGUI extends JFrame {
@@ -41,58 +47,68 @@ public class ClientsGUI extends JFrame {
     
     private Choice accountTypeSeleccion;
 
+    private JPanel buttonPanel;
+    private JButton continueButton;
+    private JButton cancelButton;
+    private JButton deleteField;
+    
     public ClientsGUI(){
         //Creamos etiqueta y campo
-    	name = new JLabel("Nombre: ");
+    	name = new JLabel("*Nombre: ",JLabel.RIGHT);
     	nameText = new JTextField(23);
-    	
-    	surname = new JLabel("Apellidos:");
+
+    	surname = new JLabel("*Apellidos:",JLabel.RIGHT);
     	surnameText = new JTextField(23);
     	
-    	DNI= new JLabel("DNI: ");
+    	DNI= new JLabel("*DNI: ",JLabel.RIGHT);
     	DNIText = new JTextField(23);
     	
-    	birthday = new JLabel("Fecha de nacimiento (dd/mm/aa): ");
+    	birthday = new JLabel("*Fecha de nacimiento(dd/mm/aa): ",JLabel.RIGHT);
     	birthdayText = new JTextField(23);
         /////////////////////////////////////
-        address = new JLabel("Direccion ");
+        address = new JLabel("*Calle ",JLabel.RIGHT);
         addressText = new JTextField();
       
-        number = new JLabel("Nº: ");
+        number = new JLabel("Portal: ",JLabel.RIGHT);
         numberText = new JTextField(4);
         
-        portal = new JLabel("Portal: ");
+        portal = new JLabel("Piso: ",JLabel.RIGHT);
         portalText = new JTextField(4);
         
-        postalCode = new JLabel("CP: ");
+        postalCode = new JLabel("*CP: ",JLabel.RIGHT);
         postalCodeText=  new JTextField();
         
-        city = new JLabel("Ciudad: ");
+        city = new JLabel("Ciudad: ",JLabel.RIGHT);
         cityText = new JTextField();
         
-        country = new JLabel("Pais: ");
+        country = new JLabel("Pais: ",JLabel.RIGHT);
         countryText = new JTextField();
         //////////////////////////////////////
         
-        relationship = new JLabel("Estado civil: ");
+        relationship = new JLabel("*Estado civil: ",JLabel.RIGHT);
         relationshipText = new JTextField();
         
-        phone = new JLabel("Telefono: ");
+        phone = new JLabel("*Telefono: ",JLabel.RIGHT);
         phoneText1 = new JTextField(10);
         
-        phone2 = new JLabel("Telefono: ");
+        phone2 = new JLabel("Telefono: ",JLabel.RIGHT);
         phoneText2 = new JTextField(10);
         
-        accountType = new JLabel("Tipo de cuenta: ");
+        accountType = new JLabel("Tipo de cuenta: ",JLabel.RIGHT);
         accountTypeSeleccion = new Choice();
         accountTypeSeleccion.addItem("Tipo Cuenta 1");
         accountTypeSeleccion.addItem("Tipo Cuenta 2");
         accountTypeSeleccion.addItem("Tipo Cuenta 3");
+        
+        buttonPanel = new JPanel();
+        continueButton = new JButton("CONTINUAR");
+        cancelButton = new JButton ("CANCELAR");
+        deleteField = new JButton("RESET");
     	
         //Asignamos a la ventana principal el layout GridBagLayout
     	this.setLayout(new GridBagLayout());
         //tamaño de la ventana
-    	this.setSize(700, 300);
+    	this.setSize(700, 400);
         //No se podra modificar el tamaño
     	this.setResizable(false);
         
@@ -109,7 +125,7 @@ public class ClientsGUI extends JFrame {
     	//Nombre
     	constr.fill = GridBagConstraints.HORIZONTAL;
     	constr.anchor=GridBagConstraints.WEST;
-    	constr.insets=new Insets(0,0,0,0);
+    	constr.insets=new Insets(5,0,0,0);
     	constr.gridwidth=1;
         this.add(name, constr); //Añadimos el elemento y sus propiedades para que se situe donde queremos
         constr.gridwidth = GridBagConstraints.REMAINDER;
@@ -162,9 +178,8 @@ public class ClientsGUI extends JFrame {
 
         //DNI
         constr.fill=GridBagConstraints.HORIZONTAL;
-        constr.anchor=GridBagConstraints.WEST;
+        constr.anchor=GridBagConstraints.EAST;
         constr.gridwidth=1;
-        constr.insets=new Insets(0,0,0,0);
         add(DNI, constr);
         constr.gridwidth = GridBagConstraints.REMAINDER;
         add(DNIText, constr);
@@ -173,7 +188,6 @@ public class ClientsGUI extends JFrame {
         constr.fill=GridBagConstraints.HORIZONTAL;
         constr.anchor=GridBagConstraints.WEST;
         constr.gridwidth=1;
-        constr.insets=new Insets(0,0,0,0);
         add(birthday, constr);
         constr.gridwidth = GridBagConstraints.REMAINDER;
         add(birthdayText, constr);
@@ -198,10 +212,108 @@ public class ClientsGUI extends JFrame {
         constr.gridwidth = GridBagConstraints.REMAINDER;
         add(accountTypeSeleccion, constr);
         
+        //Botones continuar y cancelar. FlowLayout de izq a dcha
+        buttonPanel.setLayout(new FlowLayout());
+        buttonPanel.add(cancelButton);
+        buttonPanel.add(deleteField);
+        buttonPanel.add(continueButton);
         
+        constr.anchor=GridBagConstraints.SOUTH;
+        constr.insets = new Insets(25, 0, 0, 0);
+        add(buttonPanel, constr);
+        
+        DNIText.addKeyListener(new KeyAdapter(){
+   @Override
+   public void keyTyped(KeyEvent e){
+      char caracter = e.getKeyChar();
+
+      // Verificar si la tecla pulsada no es un digito
+      if(((caracter < '0') ||
+         (caracter > '9')) &&
+         (caracter != '\b' /*corresponde a BACK_SPACE*/))
+      {
+         e.consume();  // ignorar el evento de teclado
+      }
+   }
+});
+        
+        continueButton.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                  validate(nameText);
+                  validate(surnameText);
+                  validate(addressText);
+                  validate(postalCodeText);
+                  validate(DNIText);
+                  validate(birthdayText);
+                  validate(relationshipText);
+                  validate(phoneText1);
+                  
+                    if(validate(nameText)&&
+                  validate(surnameText)&&
+                  validate(addressText)&&
+                  validate(postalCodeText)&&
+                  validate(DNIText)&&
+                  validate(birthdayText)&&
+                  validate(relationshipText)&&
+                  validate(phoneText1)){
+                  //Crear cliente
+                        int phone2;
+                        if(phoneText2.getText().compareTo("")==0){
+                            phone2=0;
+                        }else{
+                            phone2=Integer.parseInt(phoneText2.getText());
+                        }
+                      Person person = new Person(nameText.getText(), surnameText.getText(), null, relationshipText.getText(), Integer.parseInt(phoneText1.getText()), phone2, null, Integer.parseInt(DNIText.getText()));
+                      
+                      System.out.println(person.getId().toString());
+                  }else{
+                      System.out.println("No validado");
+                  }
+                }
+            });
+        deleteField.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    deleteFields(nameText);
+                    deleteFields(surnameText);
+                    deleteFields(addressText);
+                    deleteFields(portalText);
+                    deleteFields(numberText);
+                    deleteFields(postalCodeText);
+                    deleteFields(DNIText);
+                    deleteFields(birthdayText);
+                    deleteFields(relationshipText);
+                    deleteFields(phoneText1);
+                    deleteFields(phoneText2);
+                    deleteFields(cityText);
+                    deleteFields(countryText);     
+                }
+            });
         //Accion al cerrar la ventana
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
+    }
+    
+    
+    /*
+    Comprobar si los campos estan vacios
+    */
+    public boolean validate(JTextField text){
+        boolean validate = false;
+        if(text.getText().trim().length()==0){
+            text.setBorder(BorderFactory.createLineBorder(Color.RED));
+        }else{
+            validate=true;
+            text.setBorder(BorderFactory.createLineBorder(null));
+        }
+        return validate;
+    }
+    
+    public void deleteFields(JTextField t){
+        t.setText("");
     }
     
     
