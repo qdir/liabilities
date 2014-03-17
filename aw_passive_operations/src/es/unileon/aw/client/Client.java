@@ -12,12 +12,14 @@ import es.unileon.aw.handler.Handler;
  * @author Gonzalo
  */
 public class Client {
-    ArrayList<Account> titularAccounts;
-    ArrayList<Account> authorizedAccounts;
+    private Handler id;
+    private ArrayList<Account> titularAccounts;
+    private ArrayList<Account> authorizedAccounts;
     
-    public Client(){
+    public Client(Handler clientHandler){
         titularAccounts = new ArrayList<Account>();
         authorizedAccounts = new ArrayList<Account>();
+        this.id=clientHandler;
     }
     
     public void addTitularAccount(Account account){
@@ -75,4 +77,9 @@ public class Client {
         }
         return result;
     }
+
+    public Handler getId() {
+        return id;
+    }
+    
 }
