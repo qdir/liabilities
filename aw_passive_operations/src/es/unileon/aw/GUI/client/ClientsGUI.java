@@ -1,4 +1,5 @@
 package es.unileon.aw.GUI.client;
+import es.unileon.aw.GUI.account.AccountGUI;
 import es.unileon.aw.client.types.Person;
 import es.unileon.aw.client.types.data.Address;
 import java.awt.*;
@@ -320,6 +321,7 @@ public class ClientsGUI extends JFrame {
     
     
     public static void main(String[] args) {
-        ClientsGUI gui = new ClientsGUI();
+       ClientsGUI cgui = new ClientsGUI();
+       AccountGUI gui = new AccountGUI();
     }
 }
