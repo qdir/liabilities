@@ -3,10 +3,11 @@
 
 package es.unileon.aw.account.handler;
 
-import es.unileon.aw.bank.Bank;
-import es.unileon.aw.handler.GenericHandler;
-import es.unileon.aw.handler.MalformedHandlerException;
-import es.unileon.aw.office.Office;
+import es.unileon.ulebank.account.handler.AccountHandler;
+import es.unileon.ulebank.bank.Bank;
+import es.unileon.ulebank.handler.GenericHandler;
+import es.unileon.ulebank.handler.MalformedHandlerException;
+import es.unileon.ulebank.office.Office;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

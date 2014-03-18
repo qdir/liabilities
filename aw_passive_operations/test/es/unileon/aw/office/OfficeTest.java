@@ -3,8 +3,9 @@
 
 package es.unileon.aw.office;
 
-import es.unileon.aw.handler.GenericHandler;
-import es.unileon.aw.handler.Handler;
+import es.unileon.ulebank.office.Office;
+import es.unileon.ulebank.handler.GenericHandler;
+import es.unileon.ulebank.handler.Handler;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

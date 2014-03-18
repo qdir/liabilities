@@ -2,6 +2,7 @@
  group.*/
 package es.unileon.aw.handler;
 
+import es.unileon.ulebank.handler.GenericHandler;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

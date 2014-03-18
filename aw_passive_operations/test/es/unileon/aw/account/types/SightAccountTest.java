@@ -3,12 +3,13 @@
 
 package es.unileon.aw.account.types;
 
-import es.unileon.aw.account.Account;
-import es.unileon.aw.account.AccountTypes;
-import es.unileon.aw.account.exception.BalanceException;
-import es.unileon.aw.bank.Bank;
-import es.unileon.aw.handler.MalformedHandlerException;
-import es.unileon.aw.office.Office;
+import es.unileon.ulebank.account.types.SightAccount;
+import es.unileon.ulebank.account.Account;
+import es.unileon.ulebank.account.AccountTypes;
+import es.unileon.ulebank.account.exception.BalanceException;
+import es.unileon.ulebank.bank.Bank;
+import es.unileon.ulebank.handler.MalformedHandlerException;
+import es.unileon.ulebank.office.Office;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
