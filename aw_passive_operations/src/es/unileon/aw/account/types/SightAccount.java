@@ -21,11 +21,7 @@ public class SightAccount extends Account {
 
     @Override
     public void addBalance(float balance) throws BalanceException {
-        if (this.getBalance() + balance > 0) {
-            super.addBalance(balance);
-        } else {
             throw new BalanceException("The account balance cannot be negative");
-        }
     }
 
     @Override
