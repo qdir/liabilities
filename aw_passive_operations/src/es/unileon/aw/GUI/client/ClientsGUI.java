@@ -96,9 +96,9 @@ public class ClientsGUI extends JFrame {
         
         accountType = new JLabel("Tipo de cuenta: ",JLabel.RIGHT);
         accountTypeSeleccion = new Choice();
-        accountTypeSeleccion.addItem("Tipo Cuenta 1");
-        accountTypeSeleccion.addItem("Tipo Cuenta 2");
-        accountTypeSeleccion.addItem("Tipo Cuenta 3");
+        accountTypeSeleccion.addItem("Cuenta a la vista");
+        accountTypeSeleccion.addItem("Cuenta comercial");
+        accountTypeSeleccion.addItem("Cuenta corriente");
         
         buttonPanel = new JPanel();
         continueButton = new JButton("CONTINUAR");
@@ -266,7 +266,9 @@ public class ClientsGUI extends JFrame {
                             phone2=Integer.parseInt(phoneText2.getText());
                         }
                       Person person = new Person(nameText.getText(), surnameText.getText(), null, relationshipText.getText(), Integer.parseInt(phoneText1.getText()), phone2, null, Integer.parseInt(DNIText.getText()));
-                      
+                      /*Aqui se pasa a la ventana de los autorizados
+                      pasandole: person y el tipo del seleccionable
+                      */
                       System.out.println(person.getId().toString());
                   }else{
                       System.out.println("No validado");
