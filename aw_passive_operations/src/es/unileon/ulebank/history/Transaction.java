@@ -14,12 +14,13 @@ import java.util.logging.Handler;
  * @author roobre
  */
 public abstract class Transaction {
-    private Handler id;
-    private double amount;
-    private Date date;
-    private Date effectiveDate;
-    private String subject;
-    private Enum<TransactionType> type;
+    
+    protected Handler id;
+    protected double amount;
+    protected Date date;
+    protected Date effectiveDate;
+    protected String subject;
+    protected Enum<TransactionType> type;
 
     /**
      * @return the id
