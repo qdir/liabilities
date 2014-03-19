@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- *
+ * Temporary class which simulates an Account "Database".
+ * Intended for internal use only
  * @author Emanuel Iosif Relea
  */
 public class TemporaryAccountData {
@@ -66,6 +67,10 @@ public class TemporaryAccountData {
         accountList.add(account1);
         
     }
+    
+    /*
+    * Getter for account list
+    */
     
     public ArrayList<Account> getAccountList(){
         
