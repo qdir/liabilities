@@ -15,6 +15,7 @@ public class History<T extends Transaction> {
         this.transactions = new ArrayList();
     }
 
+    
     public Collection<T> getTransactions() {
         return this.transactions;
     }
