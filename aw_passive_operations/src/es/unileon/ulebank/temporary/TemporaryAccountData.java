@@ -70,6 +70,8 @@ public class TemporaryAccountData {
     
     /*
     * Getter for account list
+    *
+    *@return accountList  
     */
     
     public ArrayList<Account> getAccountList(){

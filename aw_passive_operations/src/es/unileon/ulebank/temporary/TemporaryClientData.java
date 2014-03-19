@@ -62,6 +62,8 @@ public class TemporaryClientData {
     
     /*
     * Getter for Client List
+    *
+    * @return clientList
     */
     
     public ArrayList<Client> getClientList(){
