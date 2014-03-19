@@ -21,13 +21,13 @@ public class Person extends Client{
     private int[] phoneNumbers;
     private String profession;
     
-    public Person(int dniNumber){
-        super(new PersonHandler(dniNumber));
+    public Person(int dniNumber, char dniLetter){
+        super(new PersonHandler(dniNumber, dniLetter));
         phoneNumbers = new int[2];
     }
 
-    public Person(String name, String surnames, Address address, String civilState, int phoneNumber1, int phoneNumber2, String profession, int dniNumber) {
-        super(new PersonHandler(dniNumber));
+    public Person(String name, String surnames, Address address, String civilState, int phoneNumber1, int phoneNumber2, String profession, int dniNumber, char dniLetter) {
+        super(new PersonHandler(dniNumber, dniLetter));
         this.name = name;
         this.surnames = surnames;
         this.address = address;

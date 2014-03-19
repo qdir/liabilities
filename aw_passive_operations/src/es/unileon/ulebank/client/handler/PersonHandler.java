@@ -14,7 +14,8 @@ public class PersonHandler implements Handler{
     int dni;
     char letter;
     
-    public PersonHandler(int dni){
+    public PersonHandler(int dni, char letter){
+        //TODO throws exception id dni isn't correct
         this.dni=dni;
     }
     @Override

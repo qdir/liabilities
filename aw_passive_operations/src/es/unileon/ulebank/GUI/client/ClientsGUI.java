@@ -266,11 +266,12 @@ public class ClientsGUI extends JFrame {
                         }else{
                             phone2=Integer.parseInt(phoneText2.getText());
                         }
-                      Person person = new Person(nameText.getText(), surnameText.getText(), null, relationshipText.getText(), Integer.parseInt(phoneText1.getText()), phone2, null, Integer.parseInt(DNIText.getText()));
+                      //TODO incluir letra DNI
+                      //Person person = new Person(nameText.getText(), surnameText.getText(), null, relationshipText.getText(), Integer.parseInt(phoneText1.getText()), phone2, null, Integer.parseInt(DNIText.getText()));
                       /*Aqui se pasa a la ventana de los autorizados
                       pasandole: person y el tipo del seleccionable
                       */
-                      System.out.println(person.getId().toString());
+                      //System.out.println(person.getId().toString());
                   }else{
                       System.out.println("No validado");
                   }
