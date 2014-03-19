@@ -322,7 +322,8 @@ public class ClientsGUI extends JFrame {
     
     
     public static void main(String[] args) {
-       ClientsGUI cgui = new ClientsGUI();
-       AccountGUI gui = new AccountGUI();
+       findClientGUI findClient = new findClientGUI();
+       //ClientsGUI cgui = new ClientsGUI();
+       //AccountGUI gui = new AccountGUI();
     }
 }
