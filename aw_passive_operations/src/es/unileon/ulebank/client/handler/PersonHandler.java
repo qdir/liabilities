@@ -17,7 +17,6 @@ public class PersonHandler implements Handler{
     public PersonHandler(int dni, char letter){
         //TODO throws exception id dni isn't correct
         this.dni=dni;
-        this.letter=letter;
     }
     @Override
     public int compareTo(Handler another) {
@@ -26,7 +25,7 @@ public class PersonHandler implements Handler{
     
     @Override
     public String toString(){
-        return Integer.toString(dni+letter);
+        return Integer.toString(dni);
     }
     /*private char getDniLetter(int dni){
         return 'A';
