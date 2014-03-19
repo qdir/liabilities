@@ -7,7 +7,7 @@ import java.util.Collection;
  *
  * @author roobre
  */
-public class History<T extends Transaction> {
+public abstract class History<T extends Transaction> {
 
     private final Collection<T> transactions;
 
