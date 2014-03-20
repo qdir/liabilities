@@ -6,10 +6,9 @@ package es.unileon.ulebank.account.exception;
  *
  * @author runix
  */
-@Deprecated
-public class BalanceException extends Exception {
+public class TransactionException extends Exception{
 
-    public BalanceException(String msg) {
+    public TransactionException(String msg) {
         super(msg);
     }
 }

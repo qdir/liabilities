@@ -1,6 +1,7 @@
 package es.unileon.ulebank.account;
 
 import es.unileon.ulebank.account.exception.BalanceException;
+import es.unileon.ulebank.account.exception.TransactionException;
 import es.unileon.ulebank.account.handler.AccountHandler;
 import es.unileon.ulebank.account.history.AccountHistory;
 import es.unileon.ulebank.bank.Bank;
@@ -133,11 +134,29 @@ public abstract class Account {
      *
      * @param transaction
      *
-     * @throws BalanceException (If there are inconsistencies with the new
-     * balance, for example, if its a debit account the balance cannot be
-     * negative.
+     * @throws TransactionException (if the subject or id is null or empty)
      */
-    public void doTransaction(Transaction transaction) throws BalanceException {
+    public void doTransaction(Transaction transaction) throws TransactionException {
+        StringBuilder err = new StringBuilder();
+        if (transaction.getSubject() == null) {
+            err.append("The subject cannot be null");
+        }
+
+        if (transaction.getSubject().length() == 0) {
+            err.append("Transaction length cannot be 0");
+        }
+
+        if (transaction.getId() == null) {
+            err.append(("The id cannot be null"));
+        }
+
+        if (transaction.getId().toString().length() == 0) {
+            err.append(("The id size cannot be 0"));
+        }
+
+        if (err.length() > 0) {
+            throw new TransactionException(err.toString());
+        }
         this.history.addTransaction(transaction);
         this.balance += transaction.getAmount();
     }
