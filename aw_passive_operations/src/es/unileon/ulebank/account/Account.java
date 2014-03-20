@@ -25,9 +25,9 @@ public abstract class Account {
      */
     private Handler id;
     /**
-     * The amount of money of the account
+     * The account balance
      */
-    private float balance;
+    private double balance;
     /**
      * The account titulars
      */
@@ -108,7 +108,7 @@ public abstract class Account {
      *
      * @author runix
      */
-    public final float getBalance() {
+    public final double getBalance() {
         return this.balance;
     }
 
