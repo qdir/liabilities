@@ -9,8 +9,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.*;
 
-public class ClientsGUI extends JFrame {
+public class ClientsGUI extends GUIOperations {
 
+    private int dni;
     //Declaramos las etiquetas que vamos a utilizar
     private JLabel name;
     private JLabel surname;
@@ -223,22 +224,26 @@ public class ClientsGUI extends JFrame {
         constr.insets = new Insets(25, 0, 0, 0);
         add(buttonPanel, constr);
         
-        DNIText.addKeyListener(new KeyAdapter(){
-   @Override
-   public void keyTyped(KeyEvent e){
-      char caracter = e.getKeyChar();
-
-      // Verificar si la tecla pulsada no es un digito
-      if(((caracter < '0') ||
-         (caracter > '9')) &&
-         (caracter != '\b' /*corresponde a BACK_SPACE*/))
-      {
-         e.consume();  // ignorar el evento de teclado
-      }
-   }
-});
-        
-        continueButton.addActionListener(new ActionListener() {
+       phoneText1.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyTyped(KeyEvent e){
+                onlyNumbers(e);
+            }
+       });
+       phoneText2.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyTyped(KeyEvent e){
+                onlyNumbers(e);
+            }
+       });
+       postalCodeText.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyTyped(KeyEvent e){
+                onlyNumbers(e);
+            }
+       });
+       
+       continueButton.addActionListener(new ActionListener() {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -261,13 +266,27 @@ public class ClientsGUI extends JFrame {
                   validate(phoneText1)){
                   //Crear cliente
                         int phone2;
+                        
                         if(phoneText2.getText().compareTo("")==0){
                             phone2=0;
                         }else{
                             phone2=Integer.parseInt(phoneText2.getText());
                         }
+                        
+                        Character caracter = DNIText.getText().charAt(DNIText.getText().length()-1);
+                        try{
+                            //Quitamos la letra al DNI
+                           dni = Integer.parseInt(DNIText.getText().substring(0,DNIText.getText().length()-2));
+                        }catch(NumberFormatException ex){
+                            ex.printStackTrace();
+                        }
+                        if(Character.isLetter(caracter)){
+                            System.out.println("Es una letra");
+                        
                       //TODO incluir letra DNI
-                      //Person person = new Person(nameText.getText(), surnameText.getText(), null, relationshipText.getText(), Integer.parseInt(phoneText1.getText()), phone2, null, Integer.parseInt(DNIText.getText()));
+                        Person person = new Person(nameText.getText(), surnameText.getText(), null, relationshipText.getText(), Integer.parseInt(phoneText1.getText()), phone2, null, dni, caracter);
+                        System.out.println("Hemos creado al cliente");
+                        }
                       /*Aqui se pasa a la ventana de los autorizados
                       pasandole: person y el tipo del seleccionable
                       */
@@ -299,31 +318,5 @@ public class ClientsGUI extends JFrame {
         //Accion al cerrar la ventana
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
-    }
-    
-    
-    /*
-    Comprobar si los campos estan vacios
-    */
-    public boolean validate(JTextField text){
-        boolean validate = false;
-        if(text.getText().trim().length()==0){
-            text.setBorder(BorderFactory.createLineBorder(Color.RED));
-        }else{
-            validate=true;
-            text.setBorder(BorderFactory.createLineBorder(null));
-        }
-        return validate;
-    }
-    
-    public void deleteFields(JTextField t){
-        t.setText("");
-    }
-    
-    
-    public static void main(String[] args) {
-       findClientGUI findClient = new findClientGUI();
-       //ClientsGUI cgui = new ClientsGUI();
-       //AccountGUI gui = new AccountGUI();
     }
 }

@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.*;
 
-public class findClientGUI extends JFrame {
+public class findClientGUI extends GUIOperations {
     
     private JPanel buttonPanel;
     private JTextField dniFinder;
