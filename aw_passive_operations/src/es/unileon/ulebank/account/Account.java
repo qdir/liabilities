@@ -150,8 +150,11 @@ public abstract class Account {
     }
 
     /**
+     * Do a transaction. A transaction is a movement of money, that is, do a
+     * transaction is the only way to take out or take money money into an
+     * account.
      *
-     * @param transaction
+     * @param transaction ( Transaction to do)
      *
      * @throws TransactionException (if the subject or id is null or empty)
      */
