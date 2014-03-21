@@ -161,19 +161,19 @@ public abstract class Account {
     public synchronized void doTransaction(Transaction transaction) throws TransactionException {
         StringBuilder err = new StringBuilder();
         if (transaction.getSubject() == null) {
-            err.append("The subject cannot be null");
+            err.append("The subject cannot be null \n");
         }
 
         if (transaction.getSubject().length() == 0) {
-            err.append("Transaction length cannot be 0");
+            err.append("Transaction length cannot be 0 \n");
         }
 
         if (transaction.getId() == null) {
-            err.append(("The id cannot be null"));
+            err.append(("The id cannot be null \n"));
         }
 
         if (transaction.getId().toString().length() == 0) {
-            err.append(("The id size cannot be 0"));
+            err.append(("The id size cannot be 0 \n"));
         }
 
         if (err.length() > 0) {
