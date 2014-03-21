@@ -13,6 +13,7 @@ import es.unileon.ulebank.history.History;
 import es.unileon.ulebank.history.Transaction;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -43,9 +44,9 @@ public abstract class Account {
      *
      * @param office (The office of the account)
      *
-     * @param bank
+     * @param bank ( The bank of the office )
      *
-     * @param accountnumber (the number of the account)
+     * @param accountnumber (the accountNumber)
      *
      * @throws es.unileon.ulebank.handler.MalformedHandlerException
      *
@@ -53,7 +54,7 @@ public abstract class Account {
     public Account(Office office, Bank bank, String accountnumber) throws MalformedHandlerException {
         this.id = new AccountHandler(office.getID(), bank.getID(), accountnumber);
         this.history = new AccountHistory();
-        this.balance = 0.0f;
+        this.balance = 0.0d;
         this.titulars = new ArrayList<>();
     }
 
@@ -131,12 +132,30 @@ public abstract class Account {
     }
 
     /**
+     * Check if there are incosistences. If the program crash when a transaction
+     * was being doing maybe the account balance not be the same as the sum of
+     * all transactions. So, if the method return false imply that the last
+     * transaction hadn't been finished.
+     *
+     * @return ( True if the account is consistent, and false otherwise)
+     */
+    public boolean checkInconsistences() {
+        Collection<Transaction> trans = this.getTransactions();
+        Iterator<Transaction> iterator = trans.iterator();
+        double balance = 0.0d;
+        while (iterator.hasNext()) {
+            balance += iterator.next().getAmount();
+        }
+        return balance == this.balance;
+    }
+
+    /**
      *
      * @param transaction
      *
      * @throws TransactionException (if the subject or id is null or empty)
      */
-    public void doTransaction(Transaction transaction) throws TransactionException {
+    public synchronized void doTransaction(Transaction transaction) throws TransactionException {
         StringBuilder err = new StringBuilder();
         if (transaction.getSubject() == null) {
             err.append("The subject cannot be null");
