@@ -1,5 +1,6 @@
-package es.unileon.ulebank.GUI.contractForm;
+package es.unileon.ulebank.GUI.tools;
 
+import es.unileon.ulebank.GUI.contractForm.*;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -10,9 +11,7 @@ import javax.swing.JPanel;
 
 /**
  * Class which represents a panel where an image is drawn
- * 
  * @author Emanuel Iosif Relea
- * @version 2.5
  */
 
 @SuppressWarnings("serial")

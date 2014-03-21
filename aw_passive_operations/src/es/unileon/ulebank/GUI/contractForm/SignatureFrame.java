@@ -1,29 +1,42 @@
 package es.unileon.ulebank.GUI.contractForm;
 
+import es.unileon.ulebank.GUI.tools.*;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JLabel;
-
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.UIManager;
 import javax.swing.JButton;
 
+/**
+ * Class which displays and handles the Signature window behaviour
+ * @author Emanuel Iosif Relea
+ */
+
 public class SignatureFrame {
 
+        /**
+         * Represents the window's main frame
+         */
 	private JFrame frame;
-
+        
+        /**
+         * Class constructor
+         */
 	public SignatureFrame() {
 		
 		launchFrame();
 	}
-
+        
+        /**
+         * Displays the main window and the components attached to it
+         */
 	private void launchFrame() {
 		
 		frame = new JFrame();
@@ -86,24 +99,32 @@ public class SignatureFrame {
 		denyButton.setContentAreaFilled(false);
 		denyButton.setBorderPainted(false);
 		denyButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		denyButton.setFocusPainted(false);
-		
-		denyButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-							
-				Toolkit.getDefaultToolkit().beep();
-				JOptionPane.showMessageDialog(frame,
-				    "Operation Canceled!",
-				    "Operation Canceled!",
-				    JOptionPane.ERROR_MESSAGE);
-				
-				frame.dispose();
-				
-			}
-		});
-		
-		
+		denyButton.setFocusPainted(false);						
+		denyButtonAction(denyButton);            
+                
 		frame.setVisible(true);
 			
 	}
+        
+        /**
+         * Method which describes the denny button behaviour
+         * @param denyButton button used to cancel operations
+         */
+        private void denyButtonAction(JButton denyButton){
+            
+            denyButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+
+                            Toolkit.getDefaultToolkit().beep();
+                            JOptionPane.showMessageDialog(frame,
+                                "Operation Canceled!",
+                                "Operation Canceled!",
+                                JOptionPane.ERROR_MESSAGE);
+
+                            frame.dispose();
+
+                    }
+            });
+            
+        }
 }

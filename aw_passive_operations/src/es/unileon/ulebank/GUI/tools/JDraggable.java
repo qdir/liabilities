@@ -1,5 +1,6 @@
-package es.unileon.ulebank.GUI.contractForm;
+package es.unileon.ulebank.GUI.tools;
 
+import es.unileon.ulebank.GUI.contractForm.*;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -7,11 +8,8 @@ import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
 
 /**
- *  This class allows you to move a Component(including windows) by using a mouse.
- *  
- *  
+ *  This class allows you to move a Component(including windows) by using a mouse. 
  *  @author Emanuel Iosif Relea
- *  @version 2.5
  */
 public class JDraggable extends MouseAdapter
 {
@@ -49,7 +47,8 @@ public class JDraggable extends MouseAdapter
 	 *  will be passed to the first ancestor of this specified class.
 	 *
 	 *  @param destinationClass  the Class of the ancestor component
-     * @param components
+     * @param components the Components to be registered for forwarding drag
+	 *                       events to the parent component to be moved
 	 */
 	public JDraggable(Class<?> destinationClass, Component... components)
 	{
@@ -128,7 +127,7 @@ public class JDraggable extends MouseAdapter
 	 *  This will prevent these events from being confused with a
 	 *  MouseMotionListener that supports component resizing.
 	 *
-	 *  @param  dragInsets
+	 *  @param  dragInsets insets to be dragged
 	 */
 	public void setDragInsets(Insets dragInsets)
 	{
@@ -151,7 +150,7 @@ public class JDraggable extends MouseAdapter
 	 *  component must be contained within the parent. Negative values means the
 	 *  component can be moved outside the parent.
 	 *
-	 *  @param  edgeInsets
+	 *  @param  edgeInsets insets to be set
 	 */
 	public void setEdgeInsets(Insets edgeInsets)
 	{
@@ -161,7 +160,7 @@ public class JDraggable extends MouseAdapter
 	/**
 	 *  Remove listeners from the specified component
 	 *
-     * @param components
+     * @param components components the listeners are removed from
 	 */
 	public void deregisterComponent(Component... components)
 	{
@@ -212,7 +211,7 @@ public class JDraggable extends MouseAdapter
 	 *  destination - the component that will ultimately be moved
 	 *  pressed - the Point where the mouse was pressed in the destination
 	 *      component coordinates.
-     * @param e
+     * @param e mouse pressed event
 	 */
 	@Override
 	public void mousePressed(MouseEvent e)
@@ -269,7 +268,7 @@ public class JDraggable extends MouseAdapter
 	/**
 	 *  Move the component to its new location. The dragged Point must be in
 	 *  the destination coordinates.
-     * @param e
+     * @param e mouse dragged event
 	 */
 	@Override
 	public void mouseDragged(MouseEvent e)
@@ -337,7 +336,7 @@ public class JDraggable extends MouseAdapter
 
 	/**
 	 *  Restore the original state of the Component
-     * @param e
+     * @param e mouse released event
 	 */
 	@Override
 	public void mouseReleased(MouseEvent e)

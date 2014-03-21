@@ -1,14 +1,13 @@
-package es.unileon.ulebank.GUI.contractForm;
+package es.unileon.ulebank.GUI.tools;
 
+import es.unileon.ulebank.GUI.contractForm.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
 /**
  * Class which represents a panel where the user can draw with his cursor
- * 
  * @author Emanuel Iosif Relea
- * @version 2.5
  */
 @SuppressWarnings("serial")
 public class JDrawable extends JPanel {
