@@ -1,7 +1,7 @@
 package es.unileon.ulebank.GUI.client;
 //prueba
 import es.unileon.ulebank.client.types.Person;
-//import es.unileon.ulebank.temporary.TemporaryClients;
+import es.unileon.ulebank.temporary.TemporaryClients;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -67,7 +67,7 @@ public class ClientsGUI extends GUIOperations {
      Other variables
      */
     private int dni;
-    //private TemporaryClients clientT;
+    private TemporaryClients clientT;
 
     /*
      Constructor of the interface
@@ -300,7 +300,7 @@ public class ClientsGUI extends GUIOperations {
                     Character caracter = DNIText.getText().charAt(DNIText.getText().length() - 1);
                     try {
                         //Quitamos la letra al DNI
-                        dni = Integer.parseInt(DNIText.getText().substring(0, DNIText.getText().length() - 2));
+                        dni = Integer.parseInt(DNIText.getText().substring(0, DNIText.getText().length() - 1));
                     } catch (NumberFormatException ex) {
                         ex.printStackTrace();
                     }
@@ -309,11 +309,12 @@ public class ClientsGUI extends GUIOperations {
                         System.out.println("Es una letra");
 
                         Person person = new Person(nameText.getText(), surnameText.getText(), null, maritalStatusText.getText(), Integer.parseInt(phoneText1.getText()), phone2, null, dni, caracter);
-                        System.out.println("Hemos creado al cliente");
+                        System.out.println("Hemos creado al cliente con dni "+dni);
+                        
 
                         //Test
-                        //clientT = new TemporaryClients();
-                        //clientT.addClient(person);
+                        clientT = new TemporaryClients();
+                        clientT.addClient(person);
 
                     }
                     /*Aqui se pasa a la ventana de los autorizados

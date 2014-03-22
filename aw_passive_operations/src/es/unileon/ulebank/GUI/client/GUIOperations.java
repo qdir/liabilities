@@ -2,6 +2,7 @@
  group.*/
 package es.unileon.ulebank.GUI.client;
 
+import es.unileon.ulebank.GUI.account.AccountGUI;
 import es.unileon.ulebank.GUI.contractForm.ContractFormGUI;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
@@ -69,11 +70,12 @@ public class GUIOperations extends JFrame {
         int dni = 0;
         try {
             //Quitamos la letra al DNI. Obtenemos solo el numero
-            dni = Integer.parseInt(DNIText.substring(0, DNIText.length() - 2));
+            //TODO con -2 no me pone el dni completo
+            dni = Integer.parseInt(DNIText.substring(0, DNIText.length() - 1));
         } catch (NumberFormatException ex) {
             ex.printStackTrace();
         }
-        
+        System.out.println("el dni sin letra es: " + dni);
 
         return dni;
     }
@@ -101,7 +103,7 @@ public class GUIOperations extends JFrame {
     }
     
     public static void main(String[] args) {
-        //findClientGUI findClient = new findClientGUI();
+        findClientGUI findClient = new findClientGUI();
         ClientsGUI cgui = new ClientsGUI();
         //AccountGUI gui = new AccountGUI();
         //ContractFormGUI contractGui = new ContractFormGUI();
