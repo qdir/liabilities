@@ -294,11 +294,12 @@ public class ContractFormGUI {
 		
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		
-		mainFrame.setBounds(100, 100, 1000, screenSize.height);
+		mainFrame.setBounds(0, 0, 1000, screenSize.height-40);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setUndecorated(true);
 		mainFrame.setResizable(false);
 		mainFrame.setLocationRelativeTo(null);
+                mainFrame.setLocation(mainFrame.getLocation().x, 0);            
 		mainFrame.getContentPane().setLayout(null);
 		ImageIcon frameImage = new ImageIcon("resources/es/unileon/ulebank/GUI/contractForm/frameImage2.jpg");
 		mainFrame.setIconImage(frameImage.getImage());
@@ -309,14 +310,14 @@ public class ContractFormGUI {
                 customTitleBar.setLayout(null);	
                 
                 JPicture picture = new JPicture("resources/es/unileon/ulebank/GUI/contractForm/grayBackground3.jpg");
-                picture.setBounds(0, 40, 1000, screenSize.height);
+                picture.setBounds(0, 40, 1000, screenSize.height-40);
                 mainFrame.getContentPane().add(picture);
                 picture.setLayout(null);
         
                  new JDraggable(mainFrame, customTitleBar);
 										
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(27, 22, 949, screenSize.height-118);
+		scrollPane.setBounds(27, 22, 949, screenSize.height-158);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(16);
 		picture.add(scrollPane);
 		
@@ -725,7 +726,7 @@ public class ContractFormGUI {
 		
                 Icon editIcon = new ImageIcon("resources/es/unileon/ulebank/GUI/contractForm/EditButton.jpg");
                 JButton editButton = new JButton(editIcon);
-		editButton.setBounds(37, (int)screenSize.getHeight()-90, 41, 41);
+		editButton.setBounds(37, (int)screenSize.getHeight()-130, 41, 41);
 		picture.add(editButton);
 		editButton.setOpaque(false);
 		editButton.setContentAreaFilled(false);
