@@ -96,7 +96,7 @@ public class JButtons {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
                                
 		JButton denyButton = new JButton(denyIcon);
-		denyButton.setBounds(918, (int)screenSize.getHeight()-90, 41, 41);
+		denyButton.setBounds(918, (int)screenSize.getHeight()-130, 41, 41);
 		picture.add(denyButton);
 		denyButton.setOpaque(false);
 		denyButton.setContentAreaFilled(false);
@@ -108,7 +108,7 @@ public class JButtons {
                 denyButtonAction(denyButton);
                 
 		JButton acceptButton = new JButton(acceptIcon);
-		acceptButton.setBounds(854, (int)screenSize.getHeight()-90, 41, 41);
+		acceptButton.setBounds(854, (int)screenSize.getHeight()-130, 41, 41);
 		picture.add(acceptButton);
 		acceptButton.setOpaque(false);
 		acceptButton.setContentAreaFilled(false);
