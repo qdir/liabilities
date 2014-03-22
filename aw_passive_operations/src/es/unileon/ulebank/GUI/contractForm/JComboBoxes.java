@@ -4,7 +4,7 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 /**
- * Class which contains the JComboBox componets in the main window
+ * Class which contains the JComboBox components in the main window
  * @author Emanuel Iosif Relea
  */
 public class JComboBoxes {
@@ -21,7 +21,7 @@ public class JComboBoxes {
     
     /**
      * Places the combo boxes in the corresponding panel
-     * @param contentPanel contentpanel panel where the JComboBox components are placed
+     * @param contentPanel contentPanel panel where the JComboBox components are placed
      */
     private void placeComboBoxes(JPanel contentPanel){
         
