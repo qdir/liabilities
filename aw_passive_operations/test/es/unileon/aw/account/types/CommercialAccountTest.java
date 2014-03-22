@@ -179,5 +179,88 @@ public class CommercialAccountTest {
   
     }
     
+     /**
+     * Test of throw of TransactionException in doTransaction method, of class SightAccount.
+     * @throws es.unileon.aw.account.exception.TransactionException
+     */
+    @Test (expected=NullPointerException.class)
+    public void testDoTransactionNullSubject() throws TransactionException {
+        
+        System.out.println("doTransactionNullSubject");
+        
+        Transaction transaction = new GenericTransaction(new GenericHandler("1234"), 10.5d, new Date(), new Date(), null, TransactionType.CHARGE);
+        
+        this.commercialAccount.doTransaction(transaction);
+    }
+    
+     /**
+     * Test of throw of TransactionException in doTransaction method, of class SightAccount.
+     * @throws es.unileon.aw.account.exception.TransactionException
+     */
+    @Test (expected=TransactionException.class)
+    public void testDoTransactionEmptySubject() throws TransactionException {
+        
+        System.out.println("doTransactionEmptySubject");
+        
+        Transaction transaction = new GenericTransaction(new GenericHandler("1234"), 10.5d, new Date(), new Date(), "", TransactionType.CHARGE);
+        
+        this.commercialAccount.doTransaction(transaction);
+    }
+    
+     /**
+     * Test of throw of TransactionException in doTransaction method, of class SightAccount.
+     * @throws es.unileon.aw.account.exception.TransactionException
+     */
+    @Test (expected=NullPointerException.class)
+    public void testDoTransactionNullId() throws TransactionException {
+        
+        System.out.println("doTransactionNullId");
+        
+        Transaction transaction = new GenericTransaction(null, 10.5d, new Date(), new Date(), "Imposicion", TransactionType.CHARGE);
+        
+        this.commercialAccount.doTransaction(transaction);
+    }
+    
+     /**
+     * Test of throw of TransactionException in doTransaction method, of class SightAccount.
+     * @throws es.unileon.aw.account.exception.TransactionException
+     */
+    @Test (expected=TransactionException.class)
+    public void testDoTransactionEmptyId() throws TransactionException {
+        
+        System.out.println("doTransactionEmptyId");
+        
+        Transaction transaction = new GenericTransaction(new GenericHandler(""), 10.5d, new Date(), new Date(), "Imposicion", TransactionType.CHARGE);
+        
+        this.commercialAccount.doTransaction(transaction);
+    }
+    
+     /**
+     * Test of throw of TransactionException in doTransaction method, of class SightAccount.
+     * @throws es.unileon.aw.account.exception.TransactionException
+     */
+    @Test (expected=TransactionException.class)
+    public void testDoTransactionNullDate() throws TransactionException {
+        
+        System.out.println("doTransactionNullDate");
+        
+        Transaction transaction = new GenericTransaction(new GenericHandler("1234"), 10.5d, null, new Date(), "Imposicion", TransactionType.CHARGE);
+        
+        this.commercialAccount.doTransaction(transaction);
+    }  
+    
+     /**
+     * Test of throw of TransactionException in doTransaction method, of class SightAccount.
+     * @throws es.unileon.aw.account.exception.TransactionException
+     */
+    @Test (expected=TransactionException.class)
+    public void testDoTransactionNullEffectiveDate() throws TransactionException {
+        
+        System.out.println("doTransactionNullEffectiveDate");
+        
+        Transaction transaction = new GenericTransaction(new GenericHandler("1234"), 10.5d, new Date(), null, "Imposicion", TransactionType.CHARGE);
+        
+        this.commercialAccount.doTransaction(transaction);
+    }  
     
 }
