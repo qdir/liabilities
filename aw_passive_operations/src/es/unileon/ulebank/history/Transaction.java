@@ -7,7 +7,7 @@
 package es.unileon.ulebank.history;
 
 import java.util.Date;
-import java.util.logging.Handler;
+import es.unileon.ulebank.handler.Handler;
 
 /**
  *
