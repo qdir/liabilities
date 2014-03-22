@@ -20,10 +20,19 @@ public class AccountGUI extends JFrame implements ActionListener {
 	private JLabel moneda;
 	private JLabel disponibilidad;
 	private JLabel nombre;
+        private JLabel apellidos;
+        private JLabel fechaNacimiento;
 	private JLabel DNI;
-	private JLabel fechaNacimiento;
+        private JLabel estadoCivil;
 	private JLabel direccion;
+        private JLabel localidad;
+        private JLabel provincia;
+        private JLabel codigoPostal;
+        private JLabel telefono;
 	private JLabel titulares;
+        private JLabel autorizados;
+        private JLabel datosCuenta;
+        private JLabel blanco;
 	
 	private JTextField numeroCuentaText;
 	private JTextField modalidadText;
@@ -31,16 +40,22 @@ public class AccountGUI extends JFrame implements ActionListener {
 	private JTextField monedaText;
 	private JTextField disponibilidadText;
 	private JTextField nombreText;
+        private JTextField apellidosText;
+        private JTextField fechaNacimientoText;
 	private JTextField DNIText;
-	private JTextField fechaNacimientoText;
+        private JTextField estadoCivilText;
 	private JTextField direccionText;
+        private JTextField localidadText;
+        private JTextField provinciaText;
+        private JTextField codigoPostalText;
+        private JTextField telefonoText;
 	
-	private JButton anyadir1;
+	private JButton anyadirTitular;
 	private JButton anyadir2;
 	
 	public AccountGUI() {
 		
-		numeroCuenta = new JLabel("N� de Cuenta: ");
+	numeroCuenta = new JLabel("Numero de Cuenta: ");
     	numeroCuentaText = new JTextField(20);
     	
     	modalidad = new JLabel("Modalidad: ");
@@ -55,117 +70,262 @@ public class AccountGUI extends JFrame implements ActionListener {
     	disponibilidad = new JLabel("Disponibilidad: ");
     	disponibilidadText = new JTextField(20);
     	
-    	nombre = new JLabel("Apellidos y Nombre o Raz�n Social: ");
+    	nombre = new JLabel("Nombre: ");
     	nombreText = new JTextField(20);
+        
+        apellidos = new JLabel("Apellidos: ");
+        apellidosText = new JTextField(20);
+        
+        fechaNacimiento = new JLabel("Fecha Nacimiento: ");
+    	fechaNacimientoText = new JTextField(20);
     	
     	DNI = new JLabel("NIF-CIF: ");
     	DNIText = new JTextField(20);
+        
+        estadoCivil = new JLabel("Estado civil: ");
+        estadoCivilText = new JTextField(20);
     	
-    	fechaNacimiento = new JLabel("Fecha Nacimiento: ");
-    	fechaNacimientoText = new JTextField(20);
-    	
-    	direccion = new JLabel("Domicilio: ");
+    	direccion = new JLabel("Direccion: ");
     	direccionText = new JTextField(20);
+        
+        localidad = new JLabel("Localidad: ");
+        localidadText = new JTextField(20);
+        
+        provincia = new JLabel("Provincia: ");
+        provinciaText = new JTextField(20);
+        
+        codigoPostal = new JLabel("Codigo Postal: ");
+        codigoPostalText = new JTextField(20);
+        
+        telefono = new JLabel("Telefono: ");
+        telefonoText = new JTextField(20);
     	
-    	titulares = new JLabel("TITULARES: ");
+        blanco = new JLabel("          ");
+        datosCuenta = new JLabel("DATOS DE LA CUENTA");
+    	titulares = new JLabel("TITULARES");
+        autorizados = new JLabel("AUTORIZADOS");
     	
-       	anyadir1 = new JButton("anyadir titular");
+       	anyadirTitular = new JButton("Titular +");
        	anyadir2 = new JButton("anyadir asociado");
     	
     	this.setLayout(new GridBagLayout());
-    	this.setSize(800, 400);
+    	this.setSize(1000, 600);
     	this.setResizable(false);
     	
-    	GridBagConstraints constr=new GridBagConstraints();
-    	
-    	constr.fill = GridBagConstraints.HORIZONTAL;
-    	constr.anchor=GridBagConstraints.WEST;
-    	constr.insets=new Insets(0,0,0,0);
-    	constr.gridwidth=1;
-        this.add(numeroCuenta, constr); 
-        constr.gridwidth = GridBagConstraints.REMAINDER;
-        add(numeroCuentaText, constr);
+    	GridBagConstraints constraints =new GridBagConstraints();
+        
+        constraints.anchor = GridBagConstraints.WEST;
+        
+        constraints.gridx = 0; 
+        constraints.gridy = 0;  
+        constraints.gridwidth = 5; 
+        constraints.gridheight = 1;
+        constraints.insets = new Insets(0,0,20,0);
+        this.getContentPane().add(datosCuenta, constraints);
         
         
-        constr.fill = GridBagConstraints.HORIZONTAL;
-    	constr.anchor=GridBagConstraints.WEST;
-    	constr.insets=new Insets(0,0,0,0);
-    	constr.gridwidth=1;
-        add(modalidad, constr);
-        constr.gridwidth = GridBagConstraints.REMAINDER;
-        add(modalidadText, constr);
+        constraints.gridx = 0; //Empieza en la columna 0
+        constraints.gridy = 1;  //Empieza en la fila 0
+        constraints.gridwidth = 1; //Ocupa una columna
+        constraints.gridheight = 1; //Ocupa dos filas
+        constraints.insets = new Insets(0,0,0,0);
+        this.getContentPane().add(numeroCuenta, constraints);
         
-        constr.fill = GridBagConstraints.HORIZONTAL;
-    	constr.anchor=GridBagConstraints.WEST;
-    	constr.insets=new Insets(0,0,0,0);
-    	constr.gridwidth=1;
-        this.add(oficina, constr);
-        constr.gridwidth = GridBagConstraints.REMAINDER;
-        add(oficinaText, constr);
+        constraints.gridx = 1; 
+        constraints.gridy = 1;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(numeroCuentaText, constraints);
         
-        constr.fill = GridBagConstraints.HORIZONTAL;
-    	constr.anchor=GridBagConstraints.WEST;
-    	constr.insets=new Insets(0,0,0,0);
-    	constr.gridwidth=1;
-        this.add(moneda, constr); 
-        constr.gridwidth = GridBagConstraints.REMAINDER;
-        add(monedaText, constr);
+        constraints.gridx = 2; 
+        constraints.gridy = 1;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(blanco, constraints);
         
-        constr.fill = GridBagConstraints.HORIZONTAL;
-    	constr.anchor=GridBagConstraints.WEST;
-    	constr.insets=new Insets(0,0,0,0);
-    	constr.gridwidth=1;
-        this.add(disponibilidad, constr);
-        constr.gridwidth = GridBagConstraints.REMAINDER;
-        add(disponibilidadText, constr);   
+        constraints.gridx = 3; 
+        constraints.gridy = 1;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(modalidad, constraints);
         
-        constr.fill = GridBagConstraints.HORIZONTAL;
-    	constr.anchor=GridBagConstraints.WEST;
-    	constr.insets=new Insets(0,0,0,0);
-    	constr.gridwidth=1;
-    	constr.gridwidth = GridBagConstraints.REMAINDER;
-        this.add(titulares, constr);      
+        constraints.gridx = 4; 
+        constraints.gridy = 1;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(modalidadText, constraints);
+        
+        constraints.gridx = 0; 
+        constraints.gridy = 2;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(moneda, constraints);
+        
+        constraints.gridx = 1; 
+        constraints.gridy = 2;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(monedaText, constraints);
+        
+        constraints.gridx = 3; 
+        constraints.gridy = 2;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(disponibilidad, constraints);
+        
+        constraints.gridx = 4; 
+        constraints.gridy = 2;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(disponibilidadText, constraints);
 
-        constr.fill = GridBagConstraints.HORIZONTAL;
-    	constr.anchor=GridBagConstraints.WEST;
-    	constr.insets=new Insets(0,0,0,0);
-    	constr.gridwidth=1;
-        this.add(nombre, constr);
-        constr.gridwidth = GridBagConstraints.REMAINDER;
-        add(nombreText, constr);  
+        constraints.gridx = 0; 
+        constraints.gridy = 3;  
+        constraints.gridwidth = 5; 
+        constraints.gridheight = 1;
+        constraints.insets = new Insets(40,0,20,0);
+        this.getContentPane().add(titulares, constraints);
         
-        constr.fill = GridBagConstraints.HORIZONTAL;
-    	constr.anchor=GridBagConstraints.WEST;
-    	constr.insets=new Insets(0,0,0,0);
-    	constr.gridwidth=1;
-        this.add(DNI, constr);
-        constr.gridwidth = GridBagConstraints.REMAINDER;
-        add(DNIText, constr);   
+        constraints.insets = new Insets(0,0,0,0);
+        constraints.gridx = 0; 
+        constraints.gridy = 4;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(nombre, constraints);
         
-        constr.fill = GridBagConstraints.HORIZONTAL;
-    	constr.anchor=GridBagConstraints.WEST;
-    	constr.insets=new Insets(0,0,0,0);
-    	constr.gridwidth=1;
-        this.add(fechaNacimiento, constr);
-        constr.gridwidth = GridBagConstraints.REMAINDER;
-        add(fechaNacimientoText, constr);       
+        constraints.gridx = 1; 
+        constraints.gridy = 4;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(nombreText, constraints);
         
-        constr.fill = GridBagConstraints.HORIZONTAL;
-    	constr.anchor=GridBagConstraints.WEST;
-    	constr.insets=new Insets(0,0,0,0);
-    	constr.gridwidth=1;
-        this.add(direccion, constr);
-        constr.gridwidth = GridBagConstraints.REMAINDER;
-        add(direccionText, constr);       
+        constraints.gridx = 3; 
+        constraints.gridy = 4;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(direccion, constraints);
         
-        constr.fill = GridBagConstraints.HORIZONTAL;
-    	constr.anchor=GridBagConstraints.WEST;
-    	constr.insets=new Insets(0,0,0,0);
-    	constr.gridwidth=1;
-        this.add(anyadir1, constr); 
-        constr.gridwidth = GridBagConstraints.REMAINDER;
+        constraints.gridx = 4; 
+        constraints.gridy = 4;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(direccionText, constraints);
         
-        anyadir1.addActionListener((ActionListener) this);
+        constraints.gridx = 0; 
+        constraints.gridy = 5;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(apellidos, constraints);
+        
+        constraints.gridx = 1; 
+        constraints.gridy = 5;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(apellidosText, constraints);
+        
+        constraints.gridx = 3; 
+        constraints.gridy = 5;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(localidad, constraints);
+        
+        constraints.gridx = 4; 
+        constraints.gridy = 5;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(localidadText, constraints);
+        
+        constraints.gridx = 0; 
+        constraints.gridy = 6;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(fechaNacimiento, constraints);
+        
+        constraints.gridx = 1; 
+        constraints.gridy = 6;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(fechaNacimientoText, constraints);
+        
+        constraints.gridx = 3; 
+        constraints.gridy = 6;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(provincia, constraints);
+        
+        constraints.gridx = 4; 
+        constraints.gridy = 6;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(provinciaText, constraints);
+        
+        constraints.gridx = 0; 
+        constraints.gridy = 7;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(DNI, constraints);
+        
+        constraints.gridx = 1; 
+        constraints.gridy = 7;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(DNIText, constraints);
+        
+        constraints.gridx = 3; 
+        constraints.gridy = 7;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(codigoPostal, constraints);
+        
+        constraints.gridx = 4; 
+        constraints.gridy = 7;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(codigoPostalText, constraints);
+        
+        constraints.gridx = 0; 
+        constraints.gridy = 8;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(estadoCivil, constraints);
+        
+        constraints.gridx = 1; 
+        constraints.gridy = 8;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(estadoCivilText, constraints);
+        
+        constraints.gridx = 3; 
+        constraints.gridy = 8;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(telefono, constraints);
+        
+        constraints.gridx = 4; 
+        constraints.gridy = 8;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(telefonoText, constraints);
+        
+        constraints.gridx = 0; 
+        constraints.gridy = 9;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(anyadirTitular, constraints);
+        
+        
+        constraints.gridx = 0; 
+        constraints.gridy = 10;  
+        constraints.gridwidth = 5; 
+        constraints.gridheight = 1;
+        constraints.insets = new Insets(40,0,20,0);
+        this.getContentPane().add(autorizados, constraints);
+        
+        constraints.insets = new Insets(0,0,0,0);
+
+        
+        
+        anyadirTitular.addActionListener((ActionListener) this);
 
         
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
