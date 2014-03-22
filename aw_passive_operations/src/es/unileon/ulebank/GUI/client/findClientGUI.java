@@ -3,6 +3,7 @@
 
 package es.unileon.ulebank.GUI.client;
 
+import es.unileon.ulebank.temporary.TemporaryClients;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -20,6 +21,7 @@ public class findClientGUI extends GUIOperations {
     private JTextField dniFinder;
     private JLabel dniLabel;
     private JButton find;
+    private TemporaryClients temporalC;
     
     public findClientGUI(){
         //Variables
@@ -55,19 +57,38 @@ public class findClientGUI extends GUIOperations {
         add(buttonPanel, cstr);
         
         dniFinder.addActionListener(new ActionListener() {
+            //TODO revisar, no funciona
+            @Override
+            public void actionPerformed(ActionEvent e) {
+              options();
+            }
+        });
+       
+        temporalC = new TemporaryClients();
+        find.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+              if(dniFinder.getText().compareToIgnoreCase("Introduce el DNI del cliente")==0){
+                System.out.println("No has introducido ningun DNI");
+              }else{
+                System.out.println("El dni introducido es: "+dniFinder.getText());
+                //Sacamos la letra
+                  Character caracter = dniFinder.getText().charAt(dniFinder.getText().length() - 1);
+                  
+                  temporalC.findClient(removeLetter(dniFinder.getText()), caracter);
+              }
             }
         });
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }
  
-    public static void options(String text){
-        if(text.compareToIgnoreCase("Introduce el DNI del cliente")==0){
+    public void options(){
+       
+        if(dniFinder.getText().compareToIgnoreCase("Introduce el DNI del cliente")==0){
             System.out.println("Son iguales");
+            dniFinder.setText(null);
         }else{
             System.out.println("No son iguales");
         }

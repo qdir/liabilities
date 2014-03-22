@@ -49,9 +49,20 @@ public class GUIOperations extends JFrame{
          e.consume();  // ignorar el evento de teclado
       }}
         
-    
+    public int removeLetter(String DNIText) {
+        int dni=0;
+        try {
+            //Quitamos la letra al DNI. Obtenemos solo el numero
+            dni = Integer.parseInt(DNIText.substring(0, DNIText.length() - 2));
+        } catch (NumberFormatException ex) {
+            ex.printStackTrace();
+        }
+       
+        return dni;
+    }
+   
     public static void main(String[] args) {
-       //findClientGUI findClient = new findClientGUI();
+       findClientGUI findClient = new findClientGUI();
        ClientsGUI cgui = new ClientsGUI();
        //AccountGUI gui = new AccountGUI();
     } 

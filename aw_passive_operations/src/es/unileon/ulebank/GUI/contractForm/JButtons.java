@@ -46,8 +46,8 @@ public class JButtons {
      */
     private void placeButtons(JPicture customTitleBar, JPanel contentPanel, JPicture picture){
         
-        Icon closeIcon = new ImageIcon("resources/es/unileon/aw/GUI/contractForm/closeButton.jpg");
-		Icon minimizeIcon = new ImageIcon("resources/es/unileon/aw/GUI/contractForm/minimizeButton.jpg");
+        Icon closeIcon = new ImageIcon("resources/es/unileon/ulebank/GUI/contractForm/closeButton.jpg");
+		Icon minimizeIcon = new ImageIcon("resources/es/unileon/ulebank/GUI/contractForm/minimizeButton.jpg");
 		
 		JButton closeButton = new JButton(closeIcon);
 		closeButton.setBounds(972, 8, 23, 23);
@@ -71,7 +71,7 @@ public class JButtons {
                 
                 minimizeButtonAction(minimizeButton);
                 
-                Icon addIcon = new ImageIcon("resources/es/unileon/aw/GUI/contractForm/AddButton.png");
+                Icon addIcon = new ImageIcon("resources/es/unileon/ulebank/GUI/contractForm/AddButton.png");
 		
 		JButton addOwner = new JButton(addIcon);
 		addOwner.setBounds(193, 403, 23, 23);
@@ -91,8 +91,8 @@ public class JButtons {
 		addAuthorized.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		addAuthorized.setFocusPainted(false);
                                
-		Icon acceptIcon = new ImageIcon("resources/es/unileon/aw/GUI/contractForm/AcceptButton.jpg");
-		Icon denyIcon = new ImageIcon("resources/es/unileon/aw/GUI/contractForm/DenyButton.jpg");               						
+		Icon acceptIcon = new ImageIcon("resources/es/unileon/ulebank/GUI/contractForm/AcceptButton.jpg");
+		Icon denyIcon = new ImageIcon("resources/es/unileon/ulebank/GUI/contractForm/DenyButton.jpg");               						
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
                                
 		JButton denyButton = new JButton(denyIcon);

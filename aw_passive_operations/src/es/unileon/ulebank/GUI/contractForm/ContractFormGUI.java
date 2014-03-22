@@ -300,15 +300,15 @@ public class ContractFormGUI {
 		mainFrame.setResizable(false);
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.getContentPane().setLayout(null);
-		ImageIcon frameImage = new ImageIcon("resources/es/unileon/aw/GUI/contractForm/frameImage2.jpg");
+		ImageIcon frameImage = new ImageIcon("resources/es/unileon/ulebank/GUI/contractForm/frameImage2.jpg");
 		mainFrame.setIconImage(frameImage.getImage());
                 
-                JPicture customTitleBar = new JPicture("resources/es/unileon/aw/GUI/contractForm/customTitleBar.jpg");
+                JPicture customTitleBar = new JPicture("resources/es/unileon/ulebank/GUI/contractForm/customTitleBar.jpg");
                 customTitleBar.setBounds(0, 0, 1000, 41);
                 mainFrame.getContentPane().add(customTitleBar);
                 customTitleBar.setLayout(null);	
                 
-                JPicture picture = new JPicture("resources/es/unileon/aw/GUI/contractForm/grayBackground3.jpg");
+                JPicture picture = new JPicture("resources/es/unileon/ulebank/GUI/contractForm/grayBackground3.jpg");
                 picture.setBounds(0, 40, 1000, screenSize.height);
                 mainFrame.getContentPane().add(picture);
                 picture.setLayout(null);
@@ -613,7 +613,7 @@ public class ContractFormGUI {
 		administrationFee.setBounds(327, 4450, 50, 20);
 		contentPanel.add(administrationFee);										
 		
-                JPicture table1 = new JPicture("resources/es/unileon/aw/GUI/contractForm/table1.png");
+                JPicture table1 = new JPicture("resources/es/unileon/ulebank/GUI/contractForm/table1.png");
                 table1.setBounds(83, 4575, 807, 202);
                 contentPanel.add(table1);
                 table1.setLayout(null);
@@ -682,7 +682,7 @@ public class ContractFormGUI {
 		buyingFeePercentage.setBounds(305, 5679, 50, 20);
 		contentPanel.add(buyingFeePercentage);				
 		
-		JPicture table2 = new JPicture("resources/es/unileon/aw/GUI/contractForm/table2.png");
+		JPicture table2 = new JPicture("resources/es/unileon/ulebank/GUI/contractForm/table2.png");
 		table2.setBounds(39, 5848, 851, 207);
 		contentPanel.add(table2);
 		table2.setLayout(null);
@@ -703,7 +703,7 @@ public class ContractFormGUI {
 		repaymentFee.setBounds(715, 73, 50, 17);
 		table2.add(repaymentFee);										
 		
-                JPicture table3 = new JPicture("resources/es/unileon/aw/GUI/contractForm/table3.png");
+                JPicture table3 = new JPicture("resources/es/unileon/ulebank/GUI/contractForm/table3.png");
                 table3.setLayout(null);
                 table3.setBounds(39, 6159, 851, 96);
                 contentPanel.add(table3);
@@ -723,7 +723,7 @@ public class ContractFormGUI {
                 //INITIALIZE JBUTTONS HERE
                 new JButtons(mainFrame, customTitleBar, contentPanel, picture);
 		
-                Icon editIcon = new ImageIcon("resources/es/unileon/aw/GUI/contractForm/EditButton.jpg");
+                Icon editIcon = new ImageIcon("resources/es/unileon/ulebank/GUI/contractForm/EditButton.jpg");
                 JButton editButton = new JButton(editIcon);
 		editButton.setBounds(37, (int)screenSize.getHeight()-90, 41, 41);
 		picture.add(editButton);
