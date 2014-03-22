@@ -24,6 +24,22 @@ public class JButtons {
      */
     JFrame mainFrame;
     
+    
+    /**
+     * button which adds a new Owner
+     */
+    private JButton addOwner;
+    
+    /**
+     * The thread which checks availability options
+     */
+    private Thread worker;
+    
+    /**
+     * Dictates whether the a thread needs to stop or not
+     */
+    private boolean terminateThread = false;
+    
     /**
      * Class constructor
      * @param mainFrame frame of the main window
@@ -73,7 +89,7 @@ public class JButtons {
                 
                 Icon addIcon = new ImageIcon("resources/es/unileon/ulebank/GUI/contractForm/AddButton.png");
 		
-		JButton addOwner = new JButton(addIcon);
+		addOwner = new JButton(addIcon);
 		addOwner.setBounds(193, 403, 23, 23);
 		contentPanel.add(addOwner);
 		addOwner.setOpaque(false);
@@ -131,6 +147,8 @@ public class JButtons {
                 public void actionPerformed(ActionEvent e) {
 
                         mainFrame.dispose();
+                        terminateThread = true;
+                        worker.interrupt();
 
                 }
         });
@@ -169,6 +187,8 @@ public class JButtons {
                             JOptionPane.ERROR_MESSAGE);
 
                         mainFrame.dispose();
+                        terminateThread = true;
+                        worker.interrupt();
 
                 }
         });
@@ -185,10 +205,28 @@ public class JButtons {
                 public void actionPerformed(ActionEvent e) {
 
                         new SignatureFrame();
+                        terminateThread = true;
+                        worker.interrupt();
 
                 }
         });
         
+    }
+    
+    public JButton getAddOwnerButton(){
+        
+        return addOwner;
+        
+    }
+    
+    public void setWorker(Thread worker){
+        
+        this.worker = worker;
+    }
+    
+    public boolean getTerminateThread(){
+        
+        return terminateThread;
     }
     
 }

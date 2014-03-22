@@ -22,6 +22,7 @@ import javax.swing.UIManager;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Color;
+import java.util.Random;
 
 /**
  * Class which represents the main window of the form with all its components
@@ -354,7 +355,7 @@ public class ContractFormGUI {
 		accNum.setBackground(UIManager.getColor("Button.background"));
 		accNum.setBounds(65, 42, 222, 20);
 		contentPanel.add(accNum);
-		accNum.setColumns(10);				
+		accNum.setColumns(10);               
 		
 		iban = new JTextField();
 		iban.setEditable(false);
@@ -365,6 +366,8 @@ public class ContractFormGUI {
 		iban.setBounds(65, 73, 274, 20);
 		contentPanel.add(iban);				
 		
+                calcAccNum();
+                
 		accNum2 = new JTextField();
 		accNum2.setEditable(false);
 		accNum2.setBackground(UIManager.getColor("Button.background"));
@@ -372,10 +375,7 @@ public class ContractFormGUI {
 		contentPanel.add(accNum2);
 		accNum2.setColumns(10);
 		accNum2.setHorizontalAlignment(SwingConstants.CENTER);
-		accNum2.setText(accNum.getText());				
-		
-                //INITIALIZE JCOMBOBOXES HERE
-		new JComboBoxes(contentPanel);				
+		accNum2.setText(accNum.getText());						               				
 		
 		name = new JTextField();
 		name.setHorizontalAlignment(SwingConstants.CENTER);
@@ -722,8 +722,13 @@ public class ContractFormGUI {
                 //INITIALIZE JTEXTAREAS HERE
                 new JTextAreas(contentPanel);
                 //INITIALIZE JBUTTONS HERE
-                new JButtons(mainFrame, customTitleBar, contentPanel, picture);
-		
+                JButtons buttons = new JButtons(mainFrame, customTitleBar, contentPanel, picture);
+                //INITIALIZE JCOMBOBOXES HERE
+		Runnable task = new JComboBoxes(contentPanel, buttons.getAddOwnerButton(), buttons);
+		Thread worker = new Thread(task);
+                worker.start();
+                buttons.setWorker(worker);
+                
                 Icon editIcon = new ImageIcon("resources/es/unileon/ulebank/GUI/contractForm/EditButton.jpg");
                 JButton editButton = new JButton(editIcon);
 		editButton.setBounds(37, (int)screenSize.getHeight()-130, 41, 41);
@@ -811,4 +816,27 @@ public class ContractFormGUI {
 		});
             
         }
+        
+        /**
+         * Calculates the account number to assign
+         */
+        private void calcAccNum(){
+            
+            final String BANK = "2096";
+            final String OFFICE = "0059";
+            final String CONTROL = "56";
+            final String IBAN = "ES30";
+            String accNum = "";
+            
+            Random random = new Random();
+            
+            for(int i=0; i<10; i++){
+                accNum = accNum + (Integer.toString(random.nextInt(10)));
+            }     
+            
+            accNum = BANK + " " + OFFICE + " " + CONTROL + " " + accNum;
+            this.accNum.setText(accNum);
+            iban.setText(IBAN + " " + accNum);
+        }
+                
 }
