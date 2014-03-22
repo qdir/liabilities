@@ -66,7 +66,9 @@ public class JComboBoxes implements Runnable{
      * Method which checks constantly the item selected in the availability combo box
      * and it hides/shows the add owner button based on that particular item
      */
-    public void run() {
+    
+    @Override
+    public void run(){
         
         while(true){
             if (!availability.getSelectedItem().toString().equals("Independiente")){
@@ -78,6 +80,7 @@ public class JComboBoxes implements Runnable{
             if(buttons.getTerminateThread())
                 return;
         }
+        
     }
     
     
