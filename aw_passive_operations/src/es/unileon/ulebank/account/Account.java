@@ -176,6 +176,13 @@ public abstract class Account {
             err.append(("The id size cannot be 0 \n"));
         }
 
+        if(transaction.getDate() == null) {
+            err.append("The date cannot be null");
+        }
+        
+        if(transaction.getEffectiveDate() == null) {
+            err.append("The effective date cannot be null");
+        }
         if (err.length() > 0) {
             throw new TransactionException(err.toString());
         }
