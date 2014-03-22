@@ -2,6 +2,7 @@ package es.unileon.ulebank.GUI.client;
 import es.unileon.ulebank.GUI.account.AccountGUI;
 import es.unileon.ulebank.client.types.Person;
 import es.unileon.ulebank.client.types.data.Address;
+import es.unileon.ulebank.temporary.TemporaryClients;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -53,7 +54,7 @@ public class ClientsGUI extends GUIOperations {
     private JButton continueButton;
     private JButton cancelButton;
     private JButton deleteField;
-    
+    private TemporaryClients clientT;
     public ClientsGUI(){
         //Creamos etiqueta y campo
     	name = new JLabel("*Nombre: ",JLabel.RIGHT);
@@ -282,10 +283,12 @@ public class ClientsGUI extends GUIOperations {
                         }
                         if(Character.isLetter(caracter)){
                             System.out.println("Es una letra");
-                        
-                      //TODO incluir letra DNI
+
                         Person person = new Person(nameText.getText(), surnameText.getText(), null, relationshipText.getText(), Integer.parseInt(phoneText1.getText()), phone2, null, dni, caracter);
                         System.out.println("Hemos creado al cliente");
+                        clientT = new TemporaryClients();
+                        clientT.addClient(person);
+                        
                         }
                       /*Aqui se pasa a la ventana de los autorizados
                       pasandole: person y el tipo del seleccionable
