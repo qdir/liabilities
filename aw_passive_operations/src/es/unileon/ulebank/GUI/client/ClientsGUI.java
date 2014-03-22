@@ -1,5 +1,5 @@
 package es.unileon.ulebank.GUI.client;
-
+//prueba
 import es.unileon.ulebank.client.types.Person;
 //import es.unileon.ulebank.temporary.TemporaryClients;
 import java.awt.*;
