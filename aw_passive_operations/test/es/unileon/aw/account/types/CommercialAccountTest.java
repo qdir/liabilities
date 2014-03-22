@@ -143,7 +143,7 @@ public class CommercialAccountTest {
      * @throws es.unileon.aw.account.exception.TransactionException
      */
     @Test
-    public void testGetTransaction() throws TransactionException{
+    public void testGetTransactions() throws TransactionException{
         
         System.out.println("getTransaction");
         
