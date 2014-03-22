@@ -44,12 +44,12 @@ public class SignatureFrame {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setUndecorated(true);
 		frame.setResizable(false);
-		ImageIcon frameImage = new ImageIcon("resources/es/unileon/aw/GUI/contractForm/frameImage2.jpg");
+		ImageIcon frameImage = new ImageIcon("resources/es/unileon/ulebank/GUI/contractForm/frameImage2.jpg");
 		frame.setIconImage(frameImage.getImage());
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(null);
 		
-		JPicture picture = new JPicture("resources/es/unileon/aw/GUI/contractForm/grayBackground3.jpg");
+		JPicture picture = new JPicture("resources/es/unileon/ulebank/GUI/contractForm/grayBackground3.jpg");
 		picture.setBounds(0, 0, 810, 422);
 		frame.getContentPane().add(picture);
 		
@@ -80,8 +80,8 @@ public class SignatureFrame {
 		drawable_1.setBounds(419, 82, 381, 280);
 		picture.add(drawable_1);
 		
-		Icon acceptIcon = new ImageIcon("resources/es/unileon/aw/GUI/contractForm/AcceptButton2.png");
-		Icon denyIcon = new ImageIcon("resources/es/unileon/aw/GUI/contractForm/DenyButton2.png");
+		Icon acceptIcon = new ImageIcon("resources/es/unileon/ulebank/GUI/contractForm/AcceptButton2.png");
+		Icon denyIcon = new ImageIcon("resources/es/unileon/ulebank/GUI/contractForm/DenyButton2.png");
 		
 		JButton acceptButton = new JButton(acceptIcon);
 		acceptButton.setBounds(713, 382, 33, 33);

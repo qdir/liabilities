@@ -40,7 +40,7 @@ public class JTextAreas {
         
         String fileText = null;
         try {
-            fileText = this.readFile("resources/es/unileon/aw/GUI/contractForm/text/text1.txt");
+            fileText = this.readFile("resources/es/unileon/ulebank/GUI/contractForm/text/text1.txt");
         } catch (IOException ex) {
             Logger.getLogger(JTextAreas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -55,7 +55,7 @@ public class JTextAreas {
 	contentPanel.add(txtArea1);
         
         try {
-            fileText = this.readFile("resources/es/unileon/aw/GUI/contractForm/text/text3.txt");
+            fileText = this.readFile("resources/es/unileon/ulebank/GUI/contractForm/text/text3.txt");
         } catch (IOException ex) {
             Logger.getLogger(JTextAreas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -70,7 +70,7 @@ public class JTextAreas {
 	contentPanel.add(txtArea3);
         
         try {
-            fileText = this.readFile("resources/es/unileon/aw/GUI/contractForm/text/text2.txt");
+            fileText = this.readFile("resources/es/unileon/ulebank/GUI/contractForm/text/text2.txt");
         } catch (IOException ex) {
             Logger.getLogger(JTextAreas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -85,7 +85,7 @@ public class JTextAreas {
 	contentPanel.add(textArea2);
         
         try {
-            fileText = this.readFile("resources/es/unileon/aw/GUI/contractForm/text/text12.txt");
+            fileText = this.readFile("resources/es/unileon/ulebank/GUI/contractForm/text/text12.txt");
         } catch (IOException ex) {
             Logger.getLogger(JTextAreas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -100,7 +100,7 @@ public class JTextAreas {
         contentPanel.add(textArea12);
         
         try {
-            fileText = this.readFile("resources/es/unileon/aw/GUI/contractForm/text/text11.txt");
+            fileText = this.readFile("resources/es/unileon/ulebank/GUI/contractForm/text/text11.txt");
         } catch (IOException ex) {
             Logger.getLogger(JTextAreas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -115,7 +115,7 @@ public class JTextAreas {
         contentPanel.add(textArea11);
         
         try {
-            fileText = this.readFile("resources/es/unileon/aw/GUI/contractForm/text/text10.txt");
+            fileText = this.readFile("resources/es/unileon/ulebank/GUI/contractForm/text/text10.txt");
         } catch (IOException ex) {
             Logger.getLogger(JTextAreas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -130,7 +130,7 @@ public class JTextAreas {
         contentPanel.add(textArea10);
         
         try {
-            fileText = this.readFile("resources/es/unileon/aw/GUI/contractForm/text/text9.txt");
+            fileText = this.readFile("resources/es/unileon/ulebank/GUI/contractForm/text/text9.txt");
         } catch (IOException ex) {
             Logger.getLogger(JTextAreas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -145,7 +145,7 @@ public class JTextAreas {
         contentPanel.add(textArea9);
         
         try {
-            fileText = this.readFile("resources/es/unileon/aw/GUI/contractForm/text/text8.txt");
+            fileText = this.readFile("resources/es/unileon/ulebank/GUI/contractForm/text/text8.txt");
         } catch (IOException ex) {
             Logger.getLogger(JTextAreas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -160,7 +160,7 @@ public class JTextAreas {
         contentPanel.add(textArea8);
         
         try {
-            fileText = this.readFile("resources/es/unileon/aw/GUI/contractForm/text/text7.txt");
+            fileText = this.readFile("resources/es/unileon/ulebank/GUI/contractForm/text/text7.txt");
         } catch (IOException ex) {
             Logger.getLogger(JTextAreas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -175,7 +175,7 @@ public class JTextAreas {
         contentPanel.add(textArea7);
         
         try {
-            fileText = this.readFile("resources/es/unileon/aw/GUI/contractForm/text/text6.txt");
+            fileText = this.readFile("resources/es/unileon/ulebank/GUI/contractForm/text/text6.txt");
         } catch (IOException ex) {
             Logger.getLogger(JTextAreas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -190,7 +190,7 @@ public class JTextAreas {
         contentPanel.add(txtArea6);
         
         try {
-            fileText = this.readFile("resources/es/unileon/aw/GUI/contractForm/text/text5.txt");
+            fileText = this.readFile("resources/es/unileon/ulebank/GUI/contractForm/text/text5.txt");
         } catch (IOException ex) {
             Logger.getLogger(JTextAreas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -205,7 +205,7 @@ public class JTextAreas {
         contentPanel.add(textArea5);
         
         try {
-            fileText = this.readFile("resources/es/unileon/aw/GUI/contractForm/text/text4.txt");
+            fileText = this.readFile("resources/es/unileon/ulebank/GUI/contractForm/text/text4.txt");
         } catch (IOException ex) {
             Logger.getLogger(JTextAreas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -220,7 +220,7 @@ public class JTextAreas {
         contentPanel.add(textArea4);
         
         try {
-            fileText = this.readFile("resources/es/unileon/aw/GUI/contractForm/text/text13.txt");
+            fileText = this.readFile("resources/es/unileon/ulebank/GUI/contractForm/text/text13.txt");
         } catch (IOException ex) {
             Logger.getLogger(JTextAreas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -235,7 +235,7 @@ public class JTextAreas {
         contentPanel.add(txtArea13);
         
         try {
-            fileText = this.readFile("resources/es/unileon/aw/GUI/contractForm/text/text15.txt");
+            fileText = this.readFile("resources/es/unileon/ulebank/GUI/contractForm/text/text15.txt");
         } catch (IOException ex) {
             Logger.getLogger(JTextAreas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -250,7 +250,7 @@ public class JTextAreas {
         contentPanel.add(textArea15);
         
         try {
-            fileText = this.readFile("resources/es/unileon/aw/GUI/contractForm/text/text14.txt");
+            fileText = this.readFile("resources/es/unileon/ulebank/GUI/contractForm/text/text14.txt");
         } catch (IOException ex) {
             Logger.getLogger(JTextAreas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -265,7 +265,7 @@ public class JTextAreas {
         contentPanel.add(textArea14);
         
         try {
-            fileText = this.readFile("resources/es/unileon/aw/GUI/contractForm/text/text17.txt");
+            fileText = this.readFile("resources/es/unileon/ulebank/GUI/contractForm/text/text17.txt");
         } catch (IOException ex) {
             Logger.getLogger(JTextAreas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -280,7 +280,7 @@ public class JTextAreas {
         contentPanel.add(textArea17);
         
         try {
-            fileText = this.readFile("resources/es/unileon/aw/GUI/contractForm/text/text16.txt");
+            fileText = this.readFile("resources/es/unileon/ulebank/GUI/contractForm/text/text16.txt");
         } catch (IOException ex) {
             Logger.getLogger(JTextAreas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -295,7 +295,7 @@ public class JTextAreas {
         contentPanel.add(textArea16);
         
         try {
-            fileText = this.readFile("resources/es/unileon/aw/GUI/contractForm/text/text18.txt");
+            fileText = this.readFile("resources/es/unileon/ulebank/GUI/contractForm/text/text18.txt");
         } catch (IOException ex) {
             Logger.getLogger(JTextAreas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -311,7 +311,7 @@ public class JTextAreas {
         contentPanel.add(textArea18);
         
         try {
-            fileText = this.readFile("resources/es/unileon/aw/GUI/contractForm/text/text182.txt");
+            fileText = this.readFile("resources/es/unileon/ulebank/GUI/contractForm/text/text182.txt");
         } catch (IOException ex) {
             Logger.getLogger(JTextAreas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -326,7 +326,7 @@ public class JTextAreas {
 	contentPanel.add(txtArea18);
         
         try {
-            fileText = this.readFile("resources/es/unileon/aw/GUI/contractForm/text/text19.txt");
+            fileText = this.readFile("resources/es/unileon/ulebank/GUI/contractForm/text/text19.txt");
         } catch (IOException ex) {
             Logger.getLogger(JTextAreas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -341,7 +341,7 @@ public class JTextAreas {
 	contentPanel.add(txtArea19);
         
         try {
-            fileText = this.readFile("resources/es/unileon/aw/GUI/contractForm/text/text20.txt");
+            fileText = this.readFile("resources/es/unileon/ulebank/GUI/contractForm/text/text20.txt");
         } catch (IOException ex) {
             Logger.getLogger(JTextAreas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -356,7 +356,7 @@ public class JTextAreas {
         contentPanel.add(textArea20);
         
         try {
-            fileText = this.readFile("resources/es/unileon/aw/GUI/contractForm/text/text21.txt");
+            fileText = this.readFile("resources/es/unileon/ulebank/GUI/contractForm/text/text21.txt");
         } catch (IOException ex) {
             Logger.getLogger(JTextAreas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -372,7 +372,7 @@ public class JTextAreas {
         contentPanel.add(txtArea21);
         
         try {
-            fileText = this.readFile("resources/es/unileon/aw/GUI/contractForm/text/text23.txt");
+            fileText = this.readFile("resources/es/unileon/ulebank/GUI/contractForm/text/text23.txt");
         } catch (IOException ex) {
             Logger.getLogger(JTextAreas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -387,7 +387,7 @@ public class JTextAreas {
         contentPanel.add(textArea23);
         
         try {
-            fileText = this.readFile("resources/es/unileon/aw/GUI/contractForm/text/text22.txt");
+            fileText = this.readFile("resources/es/unileon/ulebank/GUI/contractForm/text/text22.txt");
         } catch (IOException ex) {
             Logger.getLogger(JTextAreas.class.getName()).log(Level.SEVERE, null, ex);
         }

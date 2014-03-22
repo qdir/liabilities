@@ -29,15 +29,15 @@ public class JPictures {
         
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         
-        JPicture uleBankLogo = new JPicture("resources/es/unileon/aw/GUI/contractForm/UleBankLogo.png");
+        JPicture uleBankLogo = new JPicture("resources/es/unileon/ulebank/GUI/contractForm/UleBankLogo.png");
 	uleBankLogo.setBounds(572, 0, 349, 110);
 	contentPanel.add(uleBankLogo);
         
-        JPicture uleBankLogo2 = new JPicture("resources/es/unileon/aw/GUI/contractForm/UleBankLogo.png");
+        JPicture uleBankLogo2 = new JPicture("resources/es/unileon/ulebank/GUI/contractForm/UleBankLogo.png");
 	uleBankLogo2.setBounds(572, 3500, 349, 110);
 	contentPanel.add(uleBankLogo2);
         
-        JPicture table4 = new JPicture("resources/es/unileon/aw/GUI/contractForm/table4.png");
+        JPicture table4 = new JPicture("resources/es/unileon/ulebank/GUI/contractForm/table4.png");
 	table4.setBounds(39, 6382, 851, 787);
 	contentPanel.add(table4);
 	table4.setLayout(null);
