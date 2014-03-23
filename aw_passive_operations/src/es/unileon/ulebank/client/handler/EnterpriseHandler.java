@@ -11,9 +11,11 @@ import es.unileon.ulebank.handler.Handler;
  */
 public class EnterpriseHandler implements Handler{
 
+    char letter;
     int cif;
 
-    public EnterpriseHandler(int cif) {
+    public EnterpriseHandler(char letter, int cif) {
+        this.letter=letter;
         this.cif = cif;
     }
     
@@ -24,7 +26,7 @@ public class EnterpriseHandler implements Handler{
     
     @Override
     public String toString(){
-        return Integer.toString(cif);
+        return letter + Integer.toString(cif);
     }
     
 }
