@@ -3,7 +3,9 @@
 
 package es.unileon.ulebank.client.handler;
 
+import es.unileon.ulebank.client.handler.dniLetters.DniLetters;
 import es.unileon.ulebank.handler.Handler;
+import es.unileon.ulebank.handler.MalformedHandlerException;
 
 /**
  *
@@ -16,8 +18,12 @@ public class PersonHandler implements Handler{
     
     public PersonHandler(int dni, char letter){
         //TODO throws exception id dni isn't correct
-        this.dni=dni;
-        this.letter=letter;
+        if(DniLetters.getInstance().isDniValid(dni, letter)){
+            this.dni=dni;
+            this.letter=letter;
+        }else{
+            //throw new MalformedHandlerException();
+        }
     }
     @Override
     public int compareTo(Handler another) {
@@ -28,8 +34,5 @@ public class PersonHandler implements Handler{
     public String toString(){
         return Integer.toString(dni)+letter;
     }
-    /*private char getDniLetter(int dni){
-        return 'A';
-    }*/
     
 }
