@@ -2,6 +2,7 @@
  group.*/
 package es.unileon.ulebank.GUI.client;
 
+import es.unileon.ulebank.client.Client;
 import es.unileon.ulebank.temporary.TemporaryClients;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -66,6 +67,7 @@ public class findClientGUI extends GUIOperations {
         });
 
         temporalC = new TemporaryClients();
+        
         find.addActionListener(new ActionListener() {
 
             @Override
@@ -77,8 +79,8 @@ public class findClientGUI extends GUIOperations {
                     //Sacamos la letra
                     Character caracter = dniFinder.getText().charAt(dniFinder.getText().length() - 1);
                     System.out.println("La letra es: "+ caracter);
-                    //temporalC.findClient(removeLetter(dniFinder.getText()), caracter);
-                    temporalC.findClient(removeLetter(dniFinder.getText()), caracter);
+                    Client client = temporalC.findClient(removeLetter(dniFinder.getText()), caracter);
+                    ClientsGUI cgui = new ClientsGUI(client);
                 }
             }
         });
