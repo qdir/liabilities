@@ -5,8 +5,10 @@ package es.unileon.ulebank.GUI.account;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JLabel;
@@ -29,6 +31,7 @@ public class AuthorizedGUI extends JFrame implements ActionListener {
         private JLabel codigoPostal;
         private JLabel telefono;
         private JLabel blanco;
+        private JLabel autorizado;
     
         
         private JTextField nombreText;
@@ -41,6 +44,8 @@ public class AuthorizedGUI extends JFrame implements ActionListener {
         private JTextField provinciaText;
         private JTextField codigoPostalText;
         private JTextField telefonoText;
+        
+        private JButton anyadir;
         
         public AuthorizedGUI() {
             
@@ -76,15 +81,26 @@ public class AuthorizedGUI extends JFrame implements ActionListener {
             
             blanco = new JLabel("          ");
             
+            autorizado = new JLabel("AUTORIZADO");
+            
+            anyadir = new JButton("Añadir autorizado");
+            
             
             this.setLayout(new GridBagLayout());
             this.setSize(800, 400);
             this.setResizable(false);
     	
             GridBagConstraints constraints =new GridBagConstraints();
+            
+            constraints.insets = new Insets(0,0,40,0);    
+            constraints.gridx = 0; 
+            constraints.gridy = 0;  
+            constraints.gridwidth = 5; 
+            constraints.gridheight = 4;
+            this.getContentPane().add(autorizado, constraints);
         
             constraints.anchor = GridBagConstraints.WEST;
-            
+            constraints.insets = new Insets(0,0,0,0); 
             constraints.gridx = 2; 
             constraints.gridy = 4;  
             constraints.gridwidth = 1; 
@@ -211,9 +227,18 @@ public class AuthorizedGUI extends JFrame implements ActionListener {
             constraints.gridheight = 1;
             this.getContentPane().add(telefonoText, constraints);
             
+            constraints.insets = new Insets(20,0,20,0);        
+            constraints.gridx = 0; 
+            constraints.gridy = 9;  
+            constraints.gridwidth = 1; 
+            constraints.gridheight = 1;
+            this.getContentPane().add(anyadir, constraints);
+            
              
             this.setDefaultCloseOperation(EXIT_ON_CLOSE);
             this.setVisible(true);
+            
+            anyadir.addActionListener(this);
         }
         
         
@@ -222,7 +247,7 @@ public class AuthorizedGUI extends JFrame implements ActionListener {
         }
     
         public void actionPerformed(ActionEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            this.dispose();
         }
     
 }

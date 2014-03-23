@@ -17,7 +17,7 @@ import javax.swing.JTextField;
  *
  * @author JesusNieto
  */
-public class HolderGUI extends JFrame implements ActionListener {
+public class HolderGUI extends JFrame implements ActionListener{
 
     
         private JLabel nombre;
@@ -238,21 +238,22 @@ public class HolderGUI extends JFrame implements ActionListener {
              
             this.setDefaultCloseOperation(EXIT_ON_CLOSE);
             this.setVisible(true);
+            
+            anyadir.addActionListener(this);
+            
         }
     
+
     
     
-    
-    
-    
-    
-    public static void main(String[] args) {
-        HolderGUI gui = new HolderGUI();
-    }
-    
+        public static void main(String[] args) {
+            HolderGUI gui = new HolderGUI();
+        }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.dispose();
     }
     
+
 }

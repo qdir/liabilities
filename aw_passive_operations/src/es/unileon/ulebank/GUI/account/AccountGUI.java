@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 
-public class AccountGUI extends JFrame implements ActionListener {
+public class AccountGUI extends JFrame{
 	
 	private JLabel numeroCuenta;
 	private JLabel modalidad;
@@ -27,6 +27,10 @@ public class AccountGUI extends JFrame implements ActionListener {
         private JLabel titular2;
         private JLabel titular3;
         private JLabel titular4;
+        private JLabel autorizado1;
+        private JLabel autorizado2;
+        private JLabel autorizado3;
+        private JLabel autorizado4;
 	
 	private JTextField numeroCuentaText;
 	private JTextField modalidadText;
@@ -37,9 +41,13 @@ public class AccountGUI extends JFrame implements ActionListener {
         private JTextField titular2Text;
         private JTextField titular3Text;
         private JTextField titular4Text;
+        private JTextField autorizado1Text;
+        private JTextField autorizado2Text;
+        private JTextField autorizado3Text;
+        private JTextField autorizado4Text;
 	
 	private JButton anyadirTitular;
-	private JButton anyadir2;
+	private JButton anyadirAutorizado;
 	
 	public AccountGUI() {
 		
@@ -69,6 +77,18 @@ public class AccountGUI extends JFrame implements ActionListener {
         
         titular4 = new JLabel("Titular 4: ");
         titular4Text = new JTextField(20);
+        
+        autorizado1 = new JLabel("Autorizado 1: ");
+        autorizado1Text = new JTextField(20);
+        
+        autorizado2 = new JLabel("Autorizado 2: ");
+        autorizado2Text = new JTextField(20);
+        
+        autorizado3 = new JLabel("Autorizado 3: ");
+        autorizado3Text = new JTextField(20);
+        
+        autorizado4 = new JLabel("Autorizado 4: ");
+        autorizado4Text = new JTextField(20);
     	
         blanco = new JLabel("          ");
         datosCuenta = new JLabel("DATOS DE LA CUENTA");
@@ -76,7 +96,7 @@ public class AccountGUI extends JFrame implements ActionListener {
         autorizados = new JLabel("AUTORIZADOS");
     	
        	anyadirTitular = new JButton("Titular +");
-       	anyadir2 = new JButton("anyadir asociado");
+       	anyadirAutorizado = new JButton("Autorizado +");
     	
     	this.setLayout(new GridBagLayout());
     	this.setSize(1000, 600);
@@ -220,27 +240,84 @@ public class AccountGUI extends JFrame implements ActionListener {
         constraints.insets = new Insets(40,0,20,0);
         this.getContentPane().add(autorizados, constraints);
         
+        constraints.insets = new Insets(0,0,10,0);
+        constraints.gridx = 0; 
+        constraints.gridy = 13;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(anyadirAutorizado, constraints);
+        
         constraints.insets = new Insets(0,0,0,0);
+        constraints.gridx = 0; 
+        constraints.gridy = 14;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(autorizado1, constraints);
+        
+        constraints.gridx = 1; 
+        constraints.gridy = 14;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(autorizado1Text, constraints);
+        
+        constraints.gridx = 3; 
+        constraints.gridy = 14;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(autorizado2, constraints);
+        
+        constraints.gridx = 4; 
+        constraints.gridy = 14;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(autorizado2Text, constraints);
+        
+        constraints.gridx = 0; 
+        constraints.gridy = 15;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(autorizado3, constraints);
+        
+        constraints.gridx = 1; 
+        constraints.gridy = 15;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(autorizado3Text, constraints);
+        
+        constraints.gridx = 3; 
+        constraints.gridy = 15;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(autorizado4, constraints);
+        
+        constraints.gridx = 4; 
+        constraints.gridy = 15;  
+        constraints.gridwidth = 1; 
+        constraints.gridheight = 1;
+        this.getContentPane().add(autorizado4Text, constraints);
 
         
+        anyadirTitular.addActionListener(new ActionListener(){
+	    public void actionPerformed(ActionEvent e){
+		    HolderGUI holder = new HolderGUI();
+		}
+	});
         
-        anyadirTitular.addActionListener((ActionListener) this);
-
+        
+        anyadirAutorizado.addActionListener(new ActionListener(){
+	    public void actionPerformed(ActionEvent e){
+		    AuthorizedGUI authorized = new AuthorizedGUI();
+		}
+	});
+        
         
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
 		
-	}
-	
-	public void actionPerformed(ActionEvent e) {
-            HolderGUI holder = new HolderGUI();
-        	
     }
 	
-	public static void main(String[] args) {
+        
+    public static void main(String[] args) {
         AccountGUI gui = new AccountGUI();
     }
-	
-	
-
 }
