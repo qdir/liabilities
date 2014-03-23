@@ -26,7 +26,7 @@ public class PersonHandler implements Handler{
     
     @Override
     public String toString(){
-        return Integer.toString(dni+letter);
+        return Integer.toString(dni)+letter;
     }
     /*private char getDniLetter(int dni){
         return 'A';
