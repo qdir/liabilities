@@ -1,8 +1,6 @@
 package es.unileon.ulebank.GUI.contractForm;
 
 import es.unileon.ulebank.GUI.tools.JPicture;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import javax.swing.JPanel;
 
 /**
@@ -11,13 +9,13 @@ import javax.swing.JPanel;
  */
 public class JPictures {
     
-    public JPictures(JPanel contentPanel){
+    public JPictures(JPanel contentPanel, JPanel panelAuthorized){
         
         /**
          * Class constructor
          * @param contentPanel panel where the pictures are placed
          */
-        placePictures(contentPanel);
+        placePictures(contentPanel, panelAuthorized);
         
     }
     
@@ -25,21 +23,19 @@ public class JPictures {
      * Places all the JPicture components
      * @param contentPanel panel where the pictures are placed
      */
-    private void placePictures(JPanel contentPanel){
+    private void placePictures(JPanel contentPanel, JPanel panelAuthorized){
         
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        
-        JPicture uleBankLogo = new JPicture("resources/es/unileon/ulebank/GUI/contractForm/UleBankLogo.png");
+    JPicture uleBankLogo = new JPicture("resources/es/unileon/ulebank/GUI/contractForm/UleBankLogo.png");
 	uleBankLogo.setBounds(572, 0, 349, 110);
 	contentPanel.add(uleBankLogo);
         
-        JPicture uleBankLogo2 = new JPicture("resources/es/unileon/ulebank/GUI/contractForm/UleBankLogo.png");
-	uleBankLogo2.setBounds(572, 3500, 349, 110);
-	contentPanel.add(uleBankLogo2);
+    JPicture uleBankLogo2 = new JPicture("resources/es/unileon/ulebank/GUI/contractForm/UleBankLogo.png");
+	uleBankLogo2.setBounds(572, 2750, 349, 110);
+	panelAuthorized.add(uleBankLogo2);
         
-        JPicture table4 = new JPicture("resources/es/unileon/ulebank/GUI/contractForm/table4.png");
-	table4.setBounds(39, 6382, 851, 787);
-	contentPanel.add(table4);
+    JPicture table4 = new JPicture("resources/es/unileon/ulebank/GUI/contractForm/table4.png");
+	table4.setBounds(39, 5632, 851, 787);
+	panelAuthorized.add(table4);
 	table4.setLayout(null);
                                                   
     }
