@@ -1,6 +1,9 @@
 package es.unileon.ulebank.GUI.contractForm;
 
 import java.awt.Font;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -215,9 +218,9 @@ public class JLabels {
 	lblCurrency3.setBounds(149, 957, 90, 14);
 	contentPanel.add(lblCurrency3);
 		
-	JLabel lblFecha = new JLabel("18/03/2014");
-	lblFecha.setBounds(103, 996, 182, 14);
-	contentPanel.add(lblFecha);
+	JLabel lblDate = new JLabel(getDate());
+	lblDate.setBounds(103, 996, 182, 14);
+	contentPanel.add(lblDate);
         
         JLabel lblClausula = new JLabel("CL\u00C1USULAS");
 	lblClausula.setFont(new Font("Times New Roman", Font.BOLD, 24));
@@ -380,6 +383,17 @@ public class JLabels {
 	lblPersonalDataProcessing.setBounds(39, 7400, 400, 14);
 	contentPanel.add(lblPersonalDataProcessing);
                              
+    }
+    
+    private String getDate(){
+        
+        String date;
+        
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar cal = Calendar.getInstance();
+        date = dateFormat.format(cal.getTime());
+        
+        return date;
     }
     
 }
