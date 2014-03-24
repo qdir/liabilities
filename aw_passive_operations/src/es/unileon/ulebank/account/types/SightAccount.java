@@ -15,13 +15,43 @@ import es.unileon.ulebank.office.Office;
  */
 public class SightAccount extends Account {
 
-    public SightAccount(Office office, Bank bank, String accountnumber) throws MalformedHandlerException {
+    double interest;
+    private double administrationWage;
+    private double anualInterest;
+    private double administrationFee;
+    private double negativeBallanceFee;
+    private double complaintFee;
+    private double buyingFee;
+    private double withdrawFee;
+    private double chequeFee;
+    private double repaymentFee;
+    private double depositOperationFee;
+    private double magneticSuppportFee;
+    private double paperFee;
+    private double terminalFee;
+    private double buyingFeePercentage;
+
+    public SightAccount(Office office, Bank bank, String accountnumber, double interest,
+            double administrationWage,
+            double anualInterest,
+            double administrationFee,
+            double negativeBallanceFee,
+            double complaintFee,
+            double buyingFee,
+            double withdrawFee,
+            double chequeFee,
+            double repaymentFee,
+            double depositOperationFee,
+            double magneticSuppportFee,
+            double paperFee,
+            double terminalFee,
+            double buyingFeePercentage) throws MalformedHandlerException {
         super(office, bank, accountnumber);
     }
 
     @Override
     public void addBalance(float balance) throws BalanceException {
-            throw new BalanceException("The account balance cannot be negative");
+        throw new BalanceException("The account balance cannot be negative");
     }
 
     @Override
