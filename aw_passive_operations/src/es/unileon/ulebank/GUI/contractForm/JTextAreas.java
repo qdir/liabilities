@@ -20,7 +20,7 @@ import javax.swing.UIManager;
  */
 public class JTextAreas {
     
-    private Charset encoding = StandardCharsets.UTF_8;
+    private final Charset ENCODING = StandardCharsets.UTF_8;
     
     public JTextAreas(JPanel contentPanel){
         
@@ -406,7 +406,7 @@ public class JTextAreas {
     private String readFile(String path) throws IOException {
 
         byte[] encoded = Files.readAllBytes(Paths.get(path));
-        return encoding.decode(ByteBuffer.wrap(encoded)).toString();      
+        return ENCODING.decode(ByteBuffer.wrap(encoded)).toString();      
     }
     
 }
