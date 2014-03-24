@@ -385,6 +385,10 @@ public class JLabels {
                              
     }
     
+    /**
+     * Retrieves system's current date
+     * @return date Current system date in dd/MM/yyyy format
+     */
     private String getDate(){
         
         String date;
