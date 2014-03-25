@@ -200,15 +200,6 @@ public abstract class Account {
     }
 
     /**
-     * Get the account type
-     *
-     * @return ( the type )
-     *
-     * @author runix
-     */
-    public abstract AccountTypes getType();
-
-    /**
      * Get the account ID
      *
      * @return (the account id)

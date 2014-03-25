@@ -23,10 +23,6 @@ public class CommercialAccount extends Account {
     public void addBalance(float balance) throws BalanceException {
             super.addBalance(balance);
     }
-    
-    @Override
-    public AccountTypes getType() {
-        return AccountTypes.COMMERCIAL_ACCOUNT;
-    }
+
 
 }

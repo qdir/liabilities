@@ -53,10 +53,4 @@ public class SightAccount extends Account {
     public void addBalance(float balance) throws BalanceException {
         throw new BalanceException("The account balance cannot be negative");
     }
-
-    @Override
-    public AccountTypes getType() {
-        return AccountTypes.SIGH_ACCOUNT;
-    }
-
 }
