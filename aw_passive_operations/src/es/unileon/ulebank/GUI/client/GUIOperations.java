@@ -52,6 +52,7 @@ public class GUIOperations extends JFrame {
     public void onlyNumbers(KeyEvent e) {
         char caracter = e.getKeyChar();
 
+        
         // Verificar si la tecla pulsada no es un digito
         if (((caracter < '0')
                 || (caracter > '9'))
