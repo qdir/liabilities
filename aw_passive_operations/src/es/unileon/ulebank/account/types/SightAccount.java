@@ -3,7 +3,6 @@
 package es.unileon.ulebank.account.types;
 
 import es.unileon.ulebank.account.Account;
-import es.unileon.ulebank.account.exception.BalanceException;
 import es.unileon.ulebank.bank.Bank;
 import es.unileon.ulebank.fees.FeeStrategy;
 import es.unileon.ulebank.handler.MalformedHandlerException;
@@ -68,10 +67,6 @@ public class SightAccount extends Account {
         super(office, bank, accountnumber);
     }
 
-    @Override
-    public void addBalance(float balance) throws BalanceException {
-        throw new BalanceException("The account balance cannot be negative");
-    }
 
     public void setInterest(FeeStrategy interest) {
         this.interest = interest;

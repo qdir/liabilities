@@ -1,6 +1,5 @@
 package es.unileon.ulebank.account;
 
-import es.unileon.ulebank.account.exception.BalanceException;
 import es.unileon.ulebank.account.exception.TransactionException;
 import es.unileon.ulebank.account.handler.AccountHandler;
 import es.unileon.ulebank.account.history.AccountHistory;
@@ -122,22 +121,6 @@ public abstract class Account {
         return this.balance;
     }
 
-    /**
-     * Change the account balance
-     *
-     * @param balance ( the balance to add/substract)
-     *
-     * @throws es.unileon.aw.account.exception.BalanceException ( If there are
-     * inconsistencies with the new balance, for example, if its a debit account
-     * the balance cannot be negative.
-     *
-     * @author runix
-     */
-    @Deprecated
-    @SuppressWarnings("Migration to doTransaction")
-    public void addBalance(float balance) throws BalanceException {
-        this.balance += balance;
-    }
 
     /**
      * Check if there are incosistences. If the program crash when a transaction
