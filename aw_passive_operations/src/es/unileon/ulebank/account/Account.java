@@ -6,15 +6,17 @@ import es.unileon.ulebank.account.handler.AccountHandler;
 import es.unileon.ulebank.account.history.AccountHistory;
 import es.unileon.ulebank.bank.Bank;
 import es.unileon.ulebank.client.Client;
-import es.unileon.ulebank.office.Office;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
 import es.unileon.ulebank.history.History;
 import es.unileon.ulebank.history.Transaction;
+import es.unileon.ulebank.office.Office;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import org.apache.log4j.Logger;
+
 
 /**
  *
@@ -22,10 +24,12 @@ import java.util.List;
  */
 public abstract class Account {
 
+    private static final Logger LOG = Logger.getLogger(Account.class.getName());
     /**
      * The account identifier
      */
     private Handler id;
+
     /**
      * The account balance
      */
@@ -176,11 +180,11 @@ public abstract class Account {
             err.append(("The id size cannot be 0 \n"));
         }
 
-        if(transaction.getDate() == null) {
+        if (transaction.getDate() == null) {
             err.append("The date cannot be null");
         }
-        
-        if(transaction.getEffectiveDate() == null) {
+
+        if (transaction.getEffectiveDate() == null) {
             err.append("The effective date cannot be null");
         }
         if (err.length() > 0) {
