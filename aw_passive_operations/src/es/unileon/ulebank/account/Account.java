@@ -22,7 +22,7 @@ import org.apache.log4j.Logger;
  * @author runix
  */
 public abstract class Account {
-   
+
     private static final Logger LOG = Logger.getLogger(Account.class.getName());
     /**
      * The account identifier
@@ -73,11 +73,11 @@ public abstract class Account {
     public boolean addTitular(Client client) {
         for (int i = 0; i < this.titulars.size(); i++) {
             if (this.titulars.get(i).getId().compareTo(client.getId()) == 0) {
-                LOG.error("Cannot add the titular "+client.getId().toString()+" , the titular already exists");
+                LOG.error("Cannot add the titular " + client.getId().toString() + " , the titular already exists");
                 return false;
             }
         }
-        LOG.info(("Add new titular "+client.getId()));
+        LOG.info(("Add new titular " + client.getId()));
         this.titulars.add(client);
         return true;
     }
@@ -93,12 +93,12 @@ public abstract class Account {
     public boolean deleteTitular(Handler id) {
         for (int i = 0; i < this.titulars.size(); i++) {
             if (this.titulars.get(i).getId().compareTo(id) == 0) {
-                LOG.info("Delete "+id.toString()+" titular");
+                LOG.info("Delete " + id.toString() + " titular");
                 this.titulars.remove(i);
                 return true;
             }
         }
-        LOG.error("Cannot remove the titular "+id.toString()+" because it doesn't exist");
+        LOG.error("Cannot remove the titular " + id.toString() + " because it doesn't exist");
         return false;
     }
 
@@ -171,23 +171,23 @@ public abstract class Account {
         if (transaction.getSubject() == null) {
             err.append("The subject cannot be null \n");
         }
-        
+
         if (transaction.getSubject().length() == 0) {
             err.append("Transaction length cannot be 0 \n");
         }
-        
+
         if (transaction.getId() == null) {
             err.append(("The id cannot be null \n"));
         }
-        
+
         if (transaction.getId().toString().length() == 0) {
             err.append(("The id size cannot be 0 \n"));
         }
-        
+
         if (transaction.getDate() == null) {
             err.append("The date cannot be null");
         }
-        
+
         if (transaction.getEffectiveDate() == null) {
             err.append("The effective date cannot be null");
         }
@@ -195,9 +195,15 @@ public abstract class Account {
             LOG.error(err.toString());
             throw new TransactionException(err.toString());
         }
-        this.history.addTransaction(transaction);
-        this.balance += transaction.getAmount();
-        LOG.info("Did transaction with id : "+transaction.getId());
+        boolean success = this.history.addTransaction(transaction);
+        if (success) {
+            this.balance += transaction.getAmount();
+            LOG.info("Did transaction with id : " + transaction.getId());
+        } else {
+            String error = "Cannot store the transaction\n";
+            LOG.error(error);
+            throw new TransactionException(error);
+        }   
     }
 
     /**
