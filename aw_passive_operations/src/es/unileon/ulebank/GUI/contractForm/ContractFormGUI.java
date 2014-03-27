@@ -1,24 +1,31 @@
 package es.unileon.ulebank.GUI.contractForm;
 
 import es.unileon.ulebank.GUI.tools.*;
-import es.unileon.ulebank.GUI.tools.JPicture;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
 import java.awt.Font;
+
 import javax.swing.JTextField;
+
 import java.awt.SystemColor;
+
 import javax.swing.UIManager;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Color;
@@ -272,6 +279,16 @@ public class ContractFormGUI {
          * Used to determined whether the Text Fields are activated or not
          */
 	private boolean flip = false;
+        private JTextField textField;
+        private JTextField textField_1;
+        private JTextField textField_2;
+        private JTextField textField_3;
+        private JTextField textField_4;
+        private JTextField textField_5;
+        private JTextField textField_6;
+        private JTextField textField_7;
+        private JTextField textField_8;
+        private JTextField textField_9;
 
 	public static void main(String[] args) {
 		
@@ -754,7 +771,9 @@ public class ContractFormGUI {
         
         editButtonAction(editButton);
                 
-		mainFrame.setVisible(true);
+		mainFrame.setVisible(true);	
+
+    	contentPanel.revalidate();
 				
 	}
         
