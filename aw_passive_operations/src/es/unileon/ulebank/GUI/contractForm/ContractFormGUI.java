@@ -278,17 +278,7 @@ public class ContractFormGUI {
         /**
          * Used to determined whether the Text Fields are activated or not
          */
-	private boolean flip = false;
-        private JTextField textField;
-        private JTextField textField_1;
-        private JTextField textField_2;
-        private JTextField textField_3;
-        private JTextField textField_4;
-        private JTextField textField_5;
-        private JTextField textField_6;
-        private JTextField textField_7;
-        private JTextField textField_8;
-        private JTextField textField_9;
+	private boolean flip = false;       
 
 	public static void main(String[] args) {
 		
