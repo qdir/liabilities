@@ -13,6 +13,7 @@ import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.office.Office;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import org.apache.log4j.Logger;
@@ -23,6 +24,11 @@ import org.apache.log4j.Logger;
  */
 public abstract class Account {
 
+    //TODO, need to add liquidation frequency
+    //and a method to perform the liquidation 
+    /**
+     * The logger of the class
+     */
     private static final Logger LOG = Logger.getLogger(Account.class.getName());
     /**
      * The account identifier
@@ -45,7 +51,20 @@ public abstract class Account {
      * The strategy to liquidate the account
      */
     private LiquidationStrategy strategy;
-    
+    /**
+     * The last liquidation
+     */
+    private Date lastLiquidation;
+    /**
+     * The liquidation frequency in months
+     */
+    private int liquidationFrecuency;
+
+    /**
+     * The default liquidation frecuency
+     */
+    private static final int DEFAULT_LIQUIDATION_FREQUENCY = 6;
+
     /**
      * Create a new account
      *
@@ -63,7 +82,30 @@ public abstract class Account {
         this.history = new AccountHistory();
         this.balance = 0.0d;
         this.titulars = new ArrayList<>();
+        this.lastLiquidation = new Date(System.currentTimeMillis());
+        this.liquidationFrecuency = DEFAULT_LIQUIDATION_FREQUENCY;
         LOG.info("Create a new account with number " + accountnumber + " office " + office.getID().toString() + " bank " + bank.getID());
+    }
+
+    /**
+     * Set the liquidation frecuency in months
+     *
+     * ( Default {
+     *
+     *
+     * @see DEFAULT_LIQUIDATION_FREQUENCY} )
+     *
+     * @param liquidationFrecuency ( new liquidation frecuency )
+     *
+     * @return (true if success, false if the param is negative or zero)
+     */
+    public boolean setLiquidationFrecuency(int liquidationFrecuency) {
+        LOG.info("Change liquidation frecuency to " + liquidationFrecuency);
+        if (liquidationFrecuency >= 1) {
+            this.liquidationFrecuency = liquidationFrecuency;
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -125,7 +167,6 @@ public abstract class Account {
     public final double getBalance() {
         return this.balance;
     }
-
 
     /**
      * Check if there are incosistences. If the program crash when a transaction
@@ -191,13 +232,13 @@ public abstract class Account {
             String error = "Cannot store the transaction\n";
             LOG.error(error);
             throw new TransactionException(error);
-        }   
+        }
     }
-    
+
     /**
      * Set the strategy to liquidate the account
-     * 
-     * @param strategy  ( The strategy )
+     *
+     * @param strategy ( The strategy )
      */
     public void setLiquidationStrategy(LiquidationStrategy strategy) {
         this.strategy = strategy;
