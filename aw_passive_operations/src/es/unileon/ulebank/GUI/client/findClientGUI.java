@@ -10,6 +10,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import javax.swing.*;
 
 /**
@@ -57,7 +59,21 @@ public class findClientGUI extends GUIOperations {
         cstr.anchor = GridBagConstraints.SOUTH;
         cstr.insets = new Insets(15, 0, 0, 0);
         add(buttonPanel, cstr);
+        dniFinder.addFocusListener(new FocusListener(){
 
+            @Override
+            public void focusGained(FocusEvent e) {
+                 options(dniFinder);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if(dniFinder.getText().compareTo("")==0){
+                    dniFinder.setText("Introduce el DNI del cliente");
+                }
+            }
+        
+        });
         dniFinder.addActionListener(new ActionListener() {
             //TODO revisar, no funciona
             @Override

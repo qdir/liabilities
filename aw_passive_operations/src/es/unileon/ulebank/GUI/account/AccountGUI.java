@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -33,10 +34,8 @@ public class AccountGUI extends JFrame{
         private JLabel autorizado4;
 	
 	private JTextField numeroCuentaText;
-	private JTextField modalidadText;
 	private JTextField oficinaText;
 	private JTextField monedaText;
-	private JTextField disponibilidadText;
         private JTextField titular1Text;
         private JTextField titular2Text;
         private JTextField titular3Text;
@@ -48,6 +47,9 @@ public class AccountGUI extends JFrame{
 	
 	private JButton anyadirTitular;
 	private JButton anyadirAutorizado;
+        
+        private JComboBox modalidadButton;
+        private JComboBox disponibilidadButton;
 	
 	public AccountGUI() {
 		
@@ -55,7 +57,11 @@ public class AccountGUI extends JFrame{
     	numeroCuentaText = new JTextField(20);
     	
     	modalidad = new JLabel("Modalidad: ");
-    	modalidadText = new JTextField(20);
+    	modalidadButton = new JComboBox();
+        modalidadButton.addItem("La Cartilla");
+        modalidadButton.addItem("Empresa");
+        modalidadButton.addItem("Cuenta Plus");
+        modalidadButton.addItem("Cuenta Personal");
     	
     	oficina = new JLabel("Oficina: ");
     	oficinaText = new JTextField(20);
@@ -64,7 +70,11 @@ public class AccountGUI extends JFrame{
     	monedaText = new JTextField(20);
     	
     	disponibilidad = new JLabel("Disponibilidad: ");
-    	disponibilidadText = new JTextField(20);
+    	disponibilidadButton = new JComboBox();
+        disponibilidadButton.addItem("Independiente");
+        disponibilidadButton.addItem("Mancomunada");
+        disponibilidadButton.addItem("Indistinta");
+       
         
         titular1 = new JLabel("Titular 1: ");
         titular1Text = new JTextField(20);
@@ -143,7 +153,7 @@ public class AccountGUI extends JFrame{
         constraints.gridy = 1;  
         constraints.gridwidth = 1; 
         constraints.gridheight = 1;
-        this.getContentPane().add(modalidadText, constraints);
+        this.getContentPane().add(modalidadButton, constraints);
         
         constraints.gridx = 0; 
         constraints.gridy = 2;  
@@ -167,7 +177,7 @@ public class AccountGUI extends JFrame{
         constraints.gridy = 2;  
         constraints.gridwidth = 1; 
         constraints.gridheight = 1;
-        this.getContentPane().add(disponibilidadText, constraints);
+        this.getContentPane().add(disponibilidadButton, constraints);
 
         constraints.gridx = 0; 
         constraints.gridy = 3;  
@@ -316,6 +326,10 @@ public class AccountGUI extends JFrame{
 		
     }
 	
+        
+    public void establecerNombre(String nombre) {
+        titular1Text.setText(nombre);
+    }
         
     public static void main(String[] args) {
         AccountGUI gui = new AccountGUI();

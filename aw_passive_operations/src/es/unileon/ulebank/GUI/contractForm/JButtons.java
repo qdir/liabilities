@@ -1,8 +1,10 @@
 package es.unileon.ulebank.GUI.contractForm;
 
 import es.unileon.ulebank.GUI.tools.JPicture;
+
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,16 +43,40 @@ public class JButtons {
     private boolean terminateThread = false;
     
     /**
+     * Panel which hosts the components that will shift down when the addOwner button is pressed
+     */
+    private JPanel panelOwners;
+    
+    /**
+     * Panel which hosts the components that will shift down when the addAuthorized button is pressed
+     */
+    private JPanel panelAuthorized;
+    
+    /**
+     * Panel which holds most of the components in the main window.
+     */
+    private JPanel contentPanel;
+    
+    /**
+     * Amount of pixeles needed for the owner and authorized panels
+     */
+    private final int PANELSIZEINCREMENT = 152;
+    
+    /**
      * Class constructor
      * @param mainFrame frame of the main window
      * @param customTitleBar custom title bar for the window
      * @param contentPanel panel where the JButtons are placed
      * @param picture background image for the main window
      */
-    public JButtons(JFrame mainFrame, JPicture customTitleBar, JPanel contentPanel, JPicture picture){
+    public JButtons(JFrame mainFrame, JPicture customTitleBar, JPanel contentPanel,
+    					JPicture picture,JPanel panelOwners, JPanel panelAuthorized){
         
         this.mainFrame = mainFrame;
-        placeButtons(customTitleBar, contentPanel, picture);
+        this.panelOwners = panelOwners;
+        this.panelAuthorized = panelAuthorized;
+        this.contentPanel = contentPanel;
+        placeButtons(customTitleBar, picture);
         
     }
     
@@ -60,7 +86,7 @@ public class JButtons {
      * @param contentPanel panel where the JButtons are placed
      * @param picture background image for the main window
      */
-    private void placeButtons(JPicture customTitleBar, JPanel contentPanel, JPicture picture){
+    private void placeButtons(JPicture customTitleBar, JPicture picture){
         
         Icon closeIcon = new ImageIcon("resources/es/unileon/ulebank/GUI/contractForm/closeButton.jpg");
 		Icon minimizeIcon = new ImageIcon("resources/es/unileon/ulebank/GUI/contractForm/minimizeButton.jpg");
@@ -85,9 +111,9 @@ public class JButtons {
 		minimizeButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		minimizeButton.setFocusPainted(false);
                 
-                minimizeButtonAction(minimizeButton);
+        minimizeButtonAction(minimizeButton);
                 
-                Icon addIcon = new ImageIcon("resources/es/unileon/ulebank/GUI/contractForm/AddButton.png");
+        Icon addIcon = new ImageIcon("resources/es/unileon/ulebank/GUI/contractForm/AddButton.png");
 		
 		addOwner = new JButton(addIcon);
 		addOwner.setBounds(193, 403, 23, 23);
@@ -98,15 +124,19 @@ public class JButtons {
 		addOwner.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		addOwner.setFocusPainted(false);
 		
+		addOwnerButtonAction(addOwner);
+		
 		JButton addAuthorized = new JButton(addIcon);
-		addAuthorized.setBounds(193, 594, 23, 23);
-		contentPanel.add(addAuthorized);
+		addAuthorized.setBounds(193, 34, 23, 23);
+		panelOwners.add(addAuthorized);
 		addAuthorized.setOpaque(false);
 		addAuthorized.setContentAreaFilled(false);
 		addAuthorized.setBorderPainted(false);
 		addAuthorized.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		addAuthorized.setFocusPainted(false);
-                               
+        
+		addAuthorizedButtonAction(addAuthorized);
+		
 		Icon acceptIcon = new ImageIcon("resources/es/unileon/ulebank/GUI/contractForm/AcceptButton.jpg");
 		Icon denyIcon = new ImageIcon("resources/es/unileon/ulebank/GUI/contractForm/DenyButton.jpg");               						
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -119,9 +149,9 @@ public class JButtons {
 		denyButton.setBorderPainted(false);
 		denyButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		denyButton.setFocusPainted(false);		
-                denyButton.setToolTipText("Reject Contract");                		
+        denyButton.setToolTipText("Reject Contract");                		
 		
-                denyButtonAction(denyButton);
+        denyButtonAction(denyButton);
                 
 		JButton acceptButton = new JButton(acceptIcon);
 		acceptButton.setBounds(854, (int)screenSize.getHeight()-130, 41, 41);
@@ -133,7 +163,7 @@ public class JButtons {
 		acceptButton.setFocusPainted(false);
 		acceptButton.setToolTipText("Accept Contract");
 
-                acceptButtonAction(acceptButton);
+        acceptButtonAction(acceptButton);
         
     }
     
@@ -213,20 +243,71 @@ public class JButtons {
         
     }
     
+    /**
+     * Getter for the addOwner button
+     * @return add owner button
+     */
     public JButton getAddOwnerButton(){
         
         return addOwner;
         
     }
     
+    /**
+     * Setter for the worker attribute
+     * @param worker
+     */
     public void setWorker(Thread worker){
         
         this.worker = worker;
     }
     
+    /**
+     * Getter for the therminateThread boolean
+     * @return
+     */
     public boolean getTerminateThread(){
         
         return terminateThread;
+    }
+    
+    private void addOwnerButtonAction(JButton addOwner){
+    	
+    	addOwner.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+            	Dimension dimension = contentPanel.getSize();           	
+            	contentPanel.setPreferredSize(new Dimension((int)dimension.getWidth(), (int)dimension.getHeight() + PANELSIZEINCREMENT));
+            	
+            	Point point = panelOwners.getLocation();
+            	panelOwners.setLocation((int)point.getX(), (int)point.getY() + PANELSIZEINCREMENT);
+	
+            	contentPanel.revalidate();
+            	
+            }
+    	});  	
+    	
+    }
+    
+    private void addAuthorizedButtonAction(JButton addAuthorized){
+    	
+    	addAuthorized.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+            	Dimension dimension = contentPanel.getSize();           	
+            	contentPanel.setPreferredSize(new Dimension((int)dimension.getWidth(), (int)dimension.getHeight() + PANELSIZEINCREMENT));
+            	
+            	dimension = panelOwners.getSize();
+            	panelOwners.setSize((int)dimension.getWidth(), (int)dimension.getHeight() + PANELSIZEINCREMENT);
+            	
+            	Point point = panelAuthorized.getLocation();
+            	panelAuthorized.setLocation((int)point.getX(), (int)point.getY() + PANELSIZEINCREMENT);
+            	
+            	contentPanel.revalidate();
+            	
+            }
+    	}); 	
+    	
     }
     
 }

@@ -1,20 +1,20 @@
 package es.unileon.ulebank.account;
 
-import es.unileon.ulebank.account.exception.BalanceException;
 import es.unileon.ulebank.account.exception.TransactionException;
 import es.unileon.ulebank.account.handler.AccountHandler;
 import es.unileon.ulebank.account.history.AccountHistory;
 import es.unileon.ulebank.bank.Bank;
 import es.unileon.ulebank.client.Client;
-import es.unileon.ulebank.office.Office;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
 import es.unileon.ulebank.history.History;
 import es.unileon.ulebank.history.Transaction;
+import es.unileon.ulebank.office.Office;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -22,10 +22,12 @@ import java.util.List;
  */
 public abstract class Account {
 
+    private static final Logger LOG = Logger.getLogger(Account.class.getName());
     /**
      * The account identifier
      */
     private Handler id;
+
     /**
      * The account balance
      */
@@ -56,6 +58,7 @@ public abstract class Account {
         this.history = new AccountHistory();
         this.balance = 0.0d;
         this.titulars = new ArrayList<>();
+        LOG.info("Create a new account with number " + accountnumber + " office " + office.getID().toString() + " bank " + bank.getID());
     }
 
     /**
@@ -69,9 +72,11 @@ public abstract class Account {
     public boolean addTitular(Client client) {
         for (int i = 0; i < this.titulars.size(); i++) {
             if (this.titulars.get(i).getId().compareTo(client.getId()) == 0) {
+                LOG.error("Cannot add the titular " + client.getId().toString() + " , the titular already exists");
                 return false;
             }
         }
+        LOG.info(("Add new titular " + client.getId()));
         this.titulars.add(client);
         return true;
     }
@@ -87,10 +92,12 @@ public abstract class Account {
     public boolean deleteTitular(Handler id) {
         for (int i = 0; i < this.titulars.size(); i++) {
             if (this.titulars.get(i).getId().compareTo(id) == 0) {
+                LOG.info("Delete " + id.toString() + " titular");
                 this.titulars.remove(i);
                 return true;
             }
         }
+        LOG.error("Cannot remove the titular " + id.toString() + " because it doesn't exist");
         return false;
     }
 
@@ -114,22 +121,6 @@ public abstract class Account {
         return this.balance;
     }
 
-    /**
-     * Change the account balance
-     *
-     * @param balance ( the balance to add/substract)
-     *
-     * @throws es.unileon.aw.account.exception.BalanceException ( If there are
-     * inconsistencies with the new balance, for example, if its a debit account
-     * the balance cannot be negative.
-     *
-     * @author runix
-     */
-    @Deprecated
-    @SuppressWarnings("Migration to doTransaction")
-    public void addBalance(float balance) throws BalanceException {
-        this.balance += balance;
-    }
 
     /**
      * Check if there are incosistences. If the program crash when a transaction
@@ -176,18 +167,26 @@ public abstract class Account {
             err.append(("The id size cannot be 0 \n"));
         }
 
-        if(transaction.getDate() == null) {
+        if (transaction.getDate() == null) {
             err.append("The date cannot be null");
         }
-        
-        if(transaction.getEffectiveDate() == null) {
+
+        if (transaction.getEffectiveDate() == null) {
             err.append("The effective date cannot be null");
         }
         if (err.length() > 0) {
+            LOG.error(err.toString());
             throw new TransactionException(err.toString());
         }
-        this.history.addTransaction(transaction);
-        this.balance += transaction.getAmount();
+        boolean success = this.history.addTransaction(transaction);
+        if (success) {
+            this.balance += transaction.getAmount();
+            LOG.info("Did transaction with id : " + transaction.getId());
+        } else {
+            String error = "Cannot store the transaction\n";
+            LOG.error(error);
+            throw new TransactionException(error);
+        }   
     }
 
     /**
@@ -198,15 +197,6 @@ public abstract class Account {
     public Collection<Transaction> getTransactions() {
         return this.history.getTransactions();
     }
-
-    /**
-     * Get the account type
-     *
-     * @return ( the type )
-     *
-     * @author runix
-     */
-    public abstract AccountTypes getType();
 
     /**
      * Get the account ID

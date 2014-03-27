@@ -107,7 +107,7 @@ public class SignatureFrame {
 	}
         
         /**
-         * Method which describes the denny button behaviour
+         * Method which describes the deny button behavior
          * @param denyButton button used to cancel operations
          */
         private void denyButtonAction(JButton denyButton){

@@ -13,12 +13,12 @@ public class JComboBoxes implements Runnable{
     /**
      * Combo box which contains the owner availability
      */
-    private JComboBox availability;
+    private JComboBox<Object> availability;
     
     /**
      * Combo box which contains the account modality
      */
-    private JComboBox modality;
+    private JComboBox<Object> modality;
     
     /**
      * Add owner button
@@ -30,7 +30,7 @@ public class JComboBoxes implements Runnable{
      */
     private JButtons buttons;
     
-    /*
+    /**
     * Class constructor
     * @param contentpanel panel where the JComboBox components are placed
     */
@@ -48,14 +48,14 @@ public class JComboBoxes implements Runnable{
      */
     private void placeComboBoxes(JPanel contentPanel, JButton addUserButton, JButtons buttons){
         
-        String[] mod = {"La Cartilla+", "Empresa", "Cuenta Plus", "Cuenta Personal"};		
+    String[] mod = {"La Cartilla+", "Empresa", "Cuenta Plus", "Cuenta Personal"};		
 	String[] disp = { "Independiente", "Mancomunada", "Indistinta"};
         
-	modality = new JComboBox(mod);
+	modality = new JComboBox<Object>(mod);
 	modality.setBounds(579, 305, 147, 20);
 	contentPanel.add(modality);
                 
-	availability = new JComboBox(disp);		
+	availability = new JComboBox<Object>(disp);		
 	availability.setBounds(579, 338, 147, 20);
 	contentPanel.add(availability);        
         

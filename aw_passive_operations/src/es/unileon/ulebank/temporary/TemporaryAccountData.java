@@ -41,7 +41,8 @@ public class TemporaryAccountData {
         
         accountList = new ArrayList();
         Account account1 = null;
-        
+       
+        /*
         try {
             account1 = new SightAccount(new Office(), new Bank(), "9874455387");
         } catch (MalformedHandlerException ex) {
@@ -64,7 +65,7 @@ public class TemporaryAccountData {
             ex.printStackTrace();
         }
         
-        accountList.add(account1);
+        accountList.add(account1);*/
         
     }
     
