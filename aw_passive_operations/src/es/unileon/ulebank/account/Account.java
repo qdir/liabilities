@@ -3,6 +3,7 @@ package es.unileon.ulebank.account;
 import es.unileon.ulebank.account.exception.TransactionException;
 import es.unileon.ulebank.account.handler.AccountHandler;
 import es.unileon.ulebank.account.history.AccountHistory;
+import es.unileon.ulebank.account.liquidation.LiquidationStrategy;
 import es.unileon.ulebank.bank.Bank;
 import es.unileon.ulebank.client.Client;
 import es.unileon.ulebank.handler.Handler;
@@ -40,7 +41,11 @@ public abstract class Account {
      * The history of the account
      */
     private final History<Transaction> history;
-
+    /**
+     * The strategy to liquidate the account
+     */
+    private LiquidationStrategy strategy;
+    
     /**
      * Create a new account
      *
@@ -187,6 +192,15 @@ public abstract class Account {
             LOG.error(error);
             throw new TransactionException(error);
         }   
+    }
+    
+    /**
+     * Set the strategy to liquidate the account
+     * 
+     * @param strategy  ( The strategy )
+     */
+    public void setLiquidationStrategy(LiquidationStrategy strategy) {
+        this.strategy = strategy;
     }
 
     /**
