@@ -13,16 +13,11 @@ import es.unileon.ulebank.office.Office;
  * @author Paula
  */
 public class CreateAccountCommand implements Command{
-    private Handler id;
-    private String accountNumber;
-    private Office office;
-    private final Bank bank;
+
     
     
     public CreateAccountCommand(Bank bank, Office office, String accountNumber){
-        this.accountNumber= accountNumber;
-        this.office=office;
-        this.bank=bank;
+       
 }
     
     @Override
