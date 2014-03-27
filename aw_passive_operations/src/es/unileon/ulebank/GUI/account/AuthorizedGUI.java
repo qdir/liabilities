@@ -20,7 +20,7 @@ import javax.swing.JTextField;
  */
 public class AuthorizedGUI extends JFrame implements ActionListener {
     
-     private JLabel nombre;
+        private JLabel nombre;
         private JLabel apellidos;
         private JLabel fechaNacimiento;
 	private JLabel DNI;
@@ -241,6 +241,9 @@ public class AuthorizedGUI extends JFrame implements ActionListener {
             anyadir.addActionListener(this);
         }
         
+        public String obtenerNombre() {
+            return nombreText.getText();
+        }
         
         public static void main(String[] args) {
             AuthorizedGUI gui = new AuthorizedGUI();
@@ -249,5 +252,7 @@ public class AuthorizedGUI extends JFrame implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             this.dispose();
         }
+        
+       
     
 }
