@@ -1,5 +1,6 @@
 package es.unileon.ulebank.GUI.client;
 //prueba
+
 import es.unileon.ulebank.client.Client;
 import es.unileon.ulebank.client.types.Person;
 import es.unileon.ulebank.client.types.data.Address;
@@ -12,7 +13,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.*;
 
 public class ClientsGUI extends GUIOperations {
-   
+
     /*
      Variable declaration of the labels in the graphical interface
      */
@@ -25,6 +26,7 @@ public class ClientsGUI extends GUIOperations {
     private final JLabel locality;
     private final JLabel postalCode;
     private final JLabel city;
+    private final JLabel letter;
     //
     private final JLabel DNI;
     private final JLabel birthdate;
@@ -32,6 +34,7 @@ public class ClientsGUI extends GUIOperations {
     private final JLabel phone;
     private final JLabel phone2;
     private final JLabel accountType;
+    private final JLabel profession;
 
     /*
      Variable declaration of the edit text in the graphical interface
@@ -45,6 +48,10 @@ public class ClientsGUI extends GUIOperations {
     private JTextField localityText;
     private JTextField postalCodeText;
     private JTextField cityText;
+    private final JTextField letterText;
+    private final JTextField professionText;
+
+    
     //
     private JTextField DNIText;
     private JTextField birthdateText;
@@ -76,7 +83,7 @@ public class ClientsGUI extends GUIOperations {
      Constructor of the interface
      */
     public ClientsGUI(Client client) {
-        person = (Person)client;
+        person = (Person) client;
         /*
          Creation of the label and the field
          */
@@ -95,10 +102,13 @@ public class ClientsGUI extends GUIOperations {
         address = new JLabel("*Calle ", JLabel.RIGHT);
         addressText = new JTextField();
 
-        number = new JLabel("Portal: ", JLabel.RIGHT);
+        number = new JLabel("Numero: ", JLabel.RIGHT);
         numberText = new JTextField(4);
+        
+        letter = new JLabel("Letra: ", JLabel.RIGHT);
+        letterText = new JTextField(4);
 
-        portal = new JLabel("Piso: ", JLabel.RIGHT);
+        portal = new JLabel("Portal: ", JLabel.RIGHT);
         portalText = new JTextField(4);
 
         postalCode = new JLabel("*CP: ", JLabel.RIGHT);
@@ -112,8 +122,11 @@ public class ClientsGUI extends GUIOperations {
         //////////////////////////////////////
 
         maritalStatus = new JLabel("*Estado civil: ", JLabel.RIGHT);
-        maritalStatusText = new JTextField();
-
+        maritalStatusText = new JTextField(15);
+        
+        profession = new JLabel("*Profesion: ", JLabel.RIGHT);
+        professionText = new JTextField(15);
+        
         phone = new JLabel("*Telefono: ", JLabel.RIGHT);
         phoneText1 = new JTextField(10);
 
@@ -180,6 +193,9 @@ public class ClientsGUI extends GUIOperations {
         //Address: number
         add(number, constr);
         add(numberText, constr);
+        //Address: letra
+        add(letter, constr);
+        add(letterText, constr);
         //Address: zity code
         add(postalCode, constr);
         constr.gridwidth = GridBagConstraints.REMAINDER; //Si quitamos esto, nos pondrá toodo en la misma fila
@@ -239,20 +255,20 @@ public class ClientsGUI extends GUIOperations {
         constr.insets = new Insets(25, 0, 0, 0);
         add(buttonPanel, constr);
 
-           if(person != null){
-               nameText.setText(person.getName());
-               surnameText.setText(person.getSurnames());
-               maritalStatusText.setText(person.getCivilState());
-               DNIText.setText(person.getId().toString());
-               phoneText1.setText(Integer.toString(person.getPhoneNumber(0)));
-               phoneText2.setText(Integer.toString(person.getPhoneNumber(1)));
-               Address addressRcv = person.getAddress();
-               //portalText.setText(Integer.toString(addressRcv.getBlockNumber()));
-               postalCodeText.setText(Integer.toString(addressRcv.getZipCode()));
-               addressText.setText(addressRcv.getStreet());
-               cityText.setText(addressRcv.getProvince());
-               localityText.setText(addressRcv.getLocality());
-           }
+        if (person != null) {
+            nameText.setText(person.getName());
+            surnameText.setText(person.getSurnames());
+            maritalStatusText.setText(person.getCivilState());
+            DNIText.setText(person.getId().toString());
+            phoneText1.setText(Integer.toString(person.getPhoneNumber(0)));
+            phoneText2.setText(Integer.toString(person.getPhoneNumber(1)));
+            Address addressRcv = person.getAddress();
+            //portalText.setText(Integer.toString(addressRcv.getBlockNumber()));
+            postalCodeText.setText(Integer.toString(addressRcv.getZipCode()));
+            addressText.setText(addressRcv.getStreet());
+            cityText.setText(addressRcv.getProvince());
+            localityText.setText(addressRcv.getLocality());
+        }
         /*
          The fields that only accepts numbers or digits
          */
@@ -325,10 +341,9 @@ public class ClientsGUI extends GUIOperations {
                     //THIRD
                     if (Character.isLetter(caracter)) {
                         System.out.println("Es una letra");
-                        Address finalAddress = new Address(addressText.getText(), Integer.parseInt(portalText.getText()), Integer.parseInt(numberText.getText()), (char)0, localityText.getText(), cityText.getText(), Integer.parseInt(postalCodeText.getText()));
+                        Address finalAddress = new Address(addressText.getText(), Integer.parseInt(portalText.getText()), Integer.parseInt(numberText.getText()), (char) 0, localityText.getText(), cityText.getText(), Integer.parseInt(postalCodeText.getText()));
                         Person person = new Person(nameText.getText(), surnameText.getText(), null, maritalStatusText.getText(), Integer.parseInt(phoneText1.getText()), phone2, null, dni, caracter);
-                        System.out.println("Hemos creado al cliente con dni "+dni);
-                        
+                        System.out.println("Hemos creado al cliente con dni " + dni);
 
                         //Test
                         clientT = new TemporaryClients();
@@ -363,8 +378,7 @@ public class ClientsGUI extends GUIOperations {
                 deleteFields(cityText);
             }
         });
-        
-        
+
         //Accion al cerrar la ventana
         //this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);

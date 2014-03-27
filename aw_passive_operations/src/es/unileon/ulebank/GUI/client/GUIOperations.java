@@ -52,7 +52,6 @@ public class GUIOperations extends JFrame {
     public void onlyNumbers(KeyEvent e) {
         char caracter = e.getKeyChar();
 
-        
         // Verificar si la tecla pulsada no es un digito
         if (((caracter < '0')
                 || (caracter > '9'))
@@ -92,17 +91,19 @@ public class GUIOperations extends JFrame {
         return caracter;
     }
 
-    
-    public void options(JTextField dniFinder) {
+    /**
+     * Method used to select the correct option when someone click on the text.
+     * @param dniFinder 
+     */
+    public void findOptions(JTextField dniFinder) {
 
-        if (dniFinder.getText().compareToIgnoreCase("Introduce el DNI del cliente") == 0) {
-            System.out.println("Son iguales");
+        if (dniFinder.getText().compareToIgnoreCase("Introduce el DNI del cliente") == 0 || dniFinder.getText().compareToIgnoreCase("") == 0) {
             dniFinder.setText(null);
         } else {
             System.out.println("No son iguales");
         }
     }
-    
+
     public static void main(String[] args) {
         findClientGUI findClient = new findClientGUI();
         //ClientsGUI cgui = new ClientsGUI();
