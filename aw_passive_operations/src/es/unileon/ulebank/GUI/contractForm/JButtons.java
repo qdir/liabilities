@@ -25,7 +25,7 @@ public class JButtons {
     /**
      * The frame of the main window
      */
-    JFrame mainFrame;
+    private JFrame mainFrame;
     
     
     /**
