@@ -132,6 +132,16 @@ public class JLabels {
 	lblCP.setFont(new Font("Tahoma", Font.PLAIN, 12));
 	lblCP.setBounds(482, 507, 51, 14);
 	contentPanel.add(lblCP);
+	
+	JLabel lblMaritalStatus = new JLabel("Estado Civil:");
+	lblMaritalStatus.setFont(new Font("Tahoma", Font.PLAIN, 12));
+	lblMaritalStatus.setBounds(83, 534, 90, 14);
+	contentPanel.add(lblMaritalStatus);
+        
+    JLabel lblPhoneNum = new JLabel("Tel\u00E9fono:");
+	lblPhoneNum.setFont(new Font("Tahoma", Font.PLAIN, 12));
+	lblPhoneNum.setBounds(482, 532, 63, 14);
+	contentPanel.add(lblPhoneNum);
         
     JLabel lblSeparator = new JLabel("-----------------------------------------"
 			+ "-----------------------------------------------------------------------"
@@ -182,17 +192,7 @@ public class JLabels {
 	JLabel lblCPAut = new JLabel("C.P:");
 	lblCPAut.setFont(new Font("Tahoma", Font.PLAIN, 12));
 	lblCPAut.setBounds(482, 141, 51, 14);
-	panelOwners.add(lblCPAut);
-	
-	JLabel lblMaritalStatus = new JLabel("Estado Civil:");
-	lblMaritalStatus.setFont(new Font("Tahoma", Font.PLAIN, 12));
-	lblMaritalStatus.setBounds(83, 534, 90, 14);
-	contentPanel.add(lblMaritalStatus);
-        
-    JLabel lblPhoneNum = new JLabel("Tel\u00E9fono:");
-	lblPhoneNum.setFont(new Font("Tahoma", Font.PLAIN, 12));
-	lblPhoneNum.setBounds(482, 532, 63, 14);
-	contentPanel.add(lblPhoneNum);
+	panelOwners.add(lblCPAut);		
         
     JLabel lblMaritalStatusAut = new JLabel("Estado Civil:");
 	lblMaritalStatusAut.setFont(new Font("Tahoma", Font.PLAIN, 12));

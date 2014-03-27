@@ -1,6 +1,6 @@
 package es.unileon.ulebank.GUI.contractForm;
 
-import es.unileon.ulebank.GUI.tools.JPicture;
+import es.unileon.ulebank.GUI.tools.*;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -8,6 +8,7 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,7 +25,7 @@ public class JButtons {
     /**
      * The frame of the main window
      */
-    JFrame mainFrame;
+    private JFrame mainFrame;
     
     
     /**
@@ -61,6 +62,14 @@ public class JButtons {
      * Amount of pixeles needed for the owner and authorized panels
      */
     private final int PANELSIZEINCREMENT = 152;
+    
+    private int panelBaseLocationOwners = 152;
+    private int panelBaseLocationAuthorized = 152;
+    private final int CLIENTSTARTLOCATION = 575;
+    private final int AUTHORIZEDSTARTLOCATION = 210;
+    
+    private ArrayList<JClientPanel> clientPanelList = new ArrayList<JClientPanel>();
+    private ArrayList<JClientPanel> authorizedPanelList = new ArrayList<JClientPanel>();
     
     /**
      * Class constructor
@@ -284,6 +293,26 @@ public class JButtons {
 	
             	contentPanel.revalidate();
             	
+            	JClientPanel clientPanel = new JClientPanel();
+            	contentPanel.add(clientPanel);
+            	clientPanelList.add(clientPanel);           	
+            	
+            	if(clientPanelList.size() == 1){
+            		            	
+	            	clientPanel.setLocation(0, CLIENTSTARTLOCATION);
+	            		            	
+	            	contentPanel.repaint();
+            	
+            	}else{            		           			            	            		            		            		
+            		
+	            	clientPanel.setLocation(0, CLIENTSTARTLOCATION + panelBaseLocationOwners);
+	            	
+	            	panelBaseLocationOwners = panelBaseLocationOwners + PANELSIZEINCREMENT;
+	            		            		           	            	
+	            	contentPanel.repaint();
+            		
+            	}
+            	
             }
     	});  	
     	
@@ -304,6 +333,27 @@ public class JButtons {
             	panelAuthorized.setLocation((int)point.getX(), (int)point.getY() + PANELSIZEINCREMENT);
             	
             	contentPanel.revalidate();
+            	
+            	JClientPanel authorizedPanel = new JClientPanel();
+            	panelOwners.add(authorizedPanel);
+            	authorizedPanelList.add(authorizedPanel);
+            	
+            	if(authorizedPanelList.size() == 1){
+	            	
+	            	authorizedPanel.setLocation(0, AUTHORIZEDSTARTLOCATION);
+	            		            	
+	            	panelOwners.repaint();
+            	
+            	}else{            		           		
+	            	                    		            		
+	            	authorizedPanel.setLocation(0, AUTHORIZEDSTARTLOCATION + panelBaseLocationAuthorized);
+	            	
+	            	panelBaseLocationAuthorized = panelBaseLocationAuthorized + PANELSIZEINCREMENT;
+	            		            	
+	            	panelOwners.repaint();
+            		
+            	}
+            	           	
             	
             }
     	}); 	
