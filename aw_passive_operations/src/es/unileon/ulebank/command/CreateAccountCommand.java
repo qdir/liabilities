@@ -4,9 +4,6 @@
  */
 package es.unileon.ulebank.command;
 
-import es.unileon.ulebank.bank.Bank;
-import es.unileon.ulebank.handler.Handler;
-import es.unileon.ulebank.office.Office;
 
 /**
  *
@@ -16,7 +13,7 @@ public class CreateAccountCommand implements Command{
 
     
     
-    public CreateAccountCommand(Bank bank, Office office, String accountNumber){
+    public CreateAccountCommand(){
        
 }
     
