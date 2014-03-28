@@ -23,7 +23,7 @@ public class TemporaryClients {
        
         Address addressTest = new Address("Jose maria fernandez", 20, 8, 'D', "Leon", "Leon", 25001);
         Client clientTest = new Person("Maria", "Fernandez Gomez", addressTest, "married",
-                                    666123456, 918456138, null , 71463465, 'G');
+                                    666123456, 918456138, "estudiante" , 71463465, 'G');
      clients.add(clientTest);
     }
     

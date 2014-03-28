@@ -231,6 +231,12 @@ public class ClientsGUI extends GUIOperations {
         constr.gridwidth = GridBagConstraints.REMAINDER;
         add(maritalStatusText, constr);
 
+        //Profession
+        constr.gridwidth = 1;
+        add(profession, constr);
+        constr.gridwidth = GridBagConstraints.REMAINDER;
+        add(professionText, constr);
+        
         //Phones
         constr.gridwidth = 1;
         add(phone, constr);
@@ -262,12 +268,16 @@ public class ClientsGUI extends GUIOperations {
             DNIText.setText(person.getId().toString());
             phoneText1.setText(Integer.toString(person.getPhoneNumber(0)));
             phoneText2.setText(Integer.toString(person.getPhoneNumber(1)));
+            professionText.setText(person.getProfession());
             Address addressRcv = person.getAddress();
-            //portalText.setText(Integer.toString(addressRcv.getBlockNumber()));
+            letterText.setText(Character.toString(addressRcv.getDoor()));
+            portalText.setText(Integer.toString(addressRcv.getBlockNumber()));
+            numberText.setText(Integer.toString(addressRcv.getFloor()));
             postalCodeText.setText(Integer.toString(addressRcv.getZipCode()));
             addressText.setText(addressRcv.getStreet());
             cityText.setText(addressRcv.getProvince());
             localityText.setText(addressRcv.getLocality());
+            
         }
         /*
          The fields that only accepts numbers or digits
