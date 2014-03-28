@@ -16,6 +16,7 @@ import javax.swing.JTextField;
  * @author Eva
  */
 public class GUIOperations extends JFrame {
+    private String startField = "Introduce el identificador del cliente";
 
     /**
      * Validate the fields. If isn´t complete a red border appears in the
@@ -97,7 +98,7 @@ public class GUIOperations extends JFrame {
      */
     public void findOptions(JTextField dniFinder) {
 
-        if (dniFinder.getText().compareToIgnoreCase("Introduce el DNI del cliente") == 0 || dniFinder.getText().compareToIgnoreCase("") == 0) {
+        if (dniFinder.getText().compareToIgnoreCase(startField) == 0 || dniFinder.getText().compareToIgnoreCase("") == 0) {
             dniFinder.setText(null);
         } else {
             System.out.println("No son iguales");
@@ -105,9 +106,8 @@ public class GUIOperations extends JFrame {
     }
 
     public static void main(String[] args) {
-        findClientGUI findClient = new findClientGUI();
-        //ClientsGUI cgui = new ClientsGUI();
+        findClientGUI fClients = new findClientGUI();
         //AccountGUI gui = new AccountGUI();
-        //ContractFormGUI contractGui = new ContractFormGUI();
+        ContractFormGUI contractGui = new ContractFormGUI();
     }
 }
