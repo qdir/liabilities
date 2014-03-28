@@ -7,14 +7,12 @@ import es.unileon.ulebank.temporary.TemporaryClients;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicBorders;
 
 /**
  * At the start of the application is necessary to introduce a DNI.
@@ -31,13 +29,15 @@ public class findClientGUI extends GUIOperations {
     private final JTextField dniFinder;
     private final JButton find;
     private TemporaryClients temporalC;
+    private final String startField ="Introduce el identificador del cliente";
 
     /**
      * Constructor of the class. In that we create the window
      */
     public findClientGUI() {
+        
         //Variables
-        dniFinder = new JTextField("Introduce el DNI del cliente", 20);
+        dniFinder = new JTextField(startField, 20);
         dniFinder.setEditable(false);
         selectionPanel = new JPanel();
 
@@ -105,7 +105,7 @@ public class findClientGUI extends GUIOperations {
             @Override
             public void focusLost(FocusEvent e) {
                 if (dniFinder.getText().compareTo("") == 0) {
-                    dniFinder.setText("Introduce el DNI del cliente");
+                    dniFinder.setText(startField);
                 }
             }
         });
@@ -122,7 +122,7 @@ public class findClientGUI extends GUIOperations {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (dniFinder.getText().compareToIgnoreCase("Introduce el DNI del cliente") == 0) {
+                if (dniFinder.getText().compareToIgnoreCase(startField) == 0) {
                     System.out.println("No has introducido ningun DNI");
                 } else {
                     System.out.println("El dni introducido es: " + dniFinder.getText());
