@@ -106,8 +106,8 @@ public class GUIOperations extends JFrame {
     }
 
     public static void main(String[] args) {
-        findClientGUI fClients = new findClientGUI();
-        //AccountGUI gui = new AccountGUI();
-        ContractFormGUI contractGui = new ContractFormGUI();
+        //FindClientGUI fClients = new FindClientGUI();
+        AccountGUI gui = new AccountGUI();
+        //ContractFormGUI contractGui = new ContractFormGUI();
     }
 }
