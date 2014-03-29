@@ -1,10 +1,14 @@
 package es.unileon.ulebank.GUI.client;
 //prueba
 
+import com.toedter.calendar.JCalendar;
+import com.toedter.calendar.JDateChooser;
 import es.unileon.ulebank.client.Client;
 import es.unileon.ulebank.client.types.Person;
 import es.unileon.ulebank.client.types.data.Address;
 import es.unileon.ulebank.temporary.TemporaryClients;
+import java.util.Calendar;
+import java.util.Date;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -68,6 +72,7 @@ public class ClientsGUI extends GUIOperations {
      Creation of the button panel and the buttons
      */
     private final JPanel buttonPanel;
+    private final JPanel calendarPanel;
     private final JButton continueButton;
     private final JButton cancelButton;
     private final JButton deleteField;
@@ -78,7 +83,8 @@ public class ClientsGUI extends GUIOperations {
     private int dni;
     private TemporaryClients clientT;
     private Person person;
-
+    
+   private com.toedter.calendar.JDateChooser jDateChooser;
     /*
      Constructor of the interface
      */
@@ -133,6 +139,11 @@ public class ClientsGUI extends GUIOperations {
         phone2 = new JLabel("Telefono: ", JLabel.RIGHT);
         phoneText2 = new JTextField(10);
 
+        calendarPanel = new JPanel();
+        calendarPanel.setLayout(new BoxLayout(calendarPanel, BoxLayout.X_AXIS));
+        jDateChooser = new JDateChooser();
+        //jDateChooser.setSize(95,20);
+        calendarPanel.add(jDateChooser);
         /*
          Creation of the elements in the menu
          */
@@ -154,6 +165,8 @@ public class ClientsGUI extends GUIOperations {
         //No se podra modificar el tamaño
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        
+        
 
         //We create the settings for the layout. It determine the position of the elements
         GridBagConstraints constr = new GridBagConstraints();
@@ -223,7 +236,8 @@ public class ClientsGUI extends GUIOperations {
         constr.gridwidth = 1;
         add(birthdate, constr);
         constr.gridwidth = GridBagConstraints.REMAINDER;
-        add(birthdateText, constr);
+        add(calendarPanel, constr);
+        //add(birthdateText, constr);
 
         //Marital Status
         constr.gridwidth = 1;
