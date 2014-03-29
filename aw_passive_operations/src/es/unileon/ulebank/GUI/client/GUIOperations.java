@@ -2,10 +2,12 @@
  group.*/
 package es.unileon.ulebank.GUI.client;
 
+import com.toedter.calendar.JDateChooser;
 import es.unileon.ulebank.GUI.account.AccountGUI;
 import es.unileon.ulebank.GUI.contractForm.ContractFormGUI;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.util.Date;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
@@ -34,6 +36,18 @@ public class GUIOperations extends JFrame {
             text.setBorder(BorderFactory.createLineBorder(null));
         }
         return validate;
+    }
+    
+    public boolean validateBirthDate(JDateChooser datechooser){
+        boolean valid = false;
+        if(datechooser.getDate()==null){
+            valid =false;
+            datechooser.setBorder(BorderFactory.createLineBorder(Color.RED));
+        }else{
+            valid = true;
+            datechooser.setBorder(BorderFactory.createLineBorder(null));
+        }
+        return valid;
     }
 
     /**

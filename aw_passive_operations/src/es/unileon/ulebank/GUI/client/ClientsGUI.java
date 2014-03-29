@@ -58,7 +58,7 @@ public class ClientsGUI extends GUIOperations {
     
     //
     private JTextField DNIText;
-    private JTextField birthdateText;
+    //private JTextField birthdateText;
     private JTextField maritalStatusText;
     private JTextField phoneText1;
     private JTextField phoneText2;
@@ -84,7 +84,8 @@ public class ClientsGUI extends GUIOperations {
     private TemporaryClients clientT;
     private Person person;
     
-   private com.toedter.calendar.JDateChooser jDateChooser;
+   private com.toedter.calendar.JDateChooser jdateChooser;
+   private final Date actualDate;
     /*
      Constructor of the interface
      */
@@ -102,8 +103,8 @@ public class ClientsGUI extends GUIOperations {
         DNI = new JLabel("*DNI: ", JLabel.RIGHT);
         DNIText = new JTextField(23);
 
-        birthdate = new JLabel("*Fecha de nacimiento(dd/mm/aa): ", JLabel.RIGHT);
-        birthdateText = new JTextField(23);
+        birthdate = new JLabel("*Fecha de nacimiento(dd/mm/aaaa): ", JLabel.RIGHT);
+        //birthdateText = new JTextField(23);
         /////////////////////////////////////
         address = new JLabel("*Calle ", JLabel.RIGHT);
         addressText = new JTextField();
@@ -141,9 +142,12 @@ public class ClientsGUI extends GUIOperations {
 
         calendarPanel = new JPanel();
         calendarPanel.setLayout(new BoxLayout(calendarPanel, BoxLayout.X_AXIS));
-        jDateChooser = new JDateChooser();
+        jdateChooser = new JDateChooser();
+        actualDate = new Date();
+        jdateChooser.setMaxSelectableDate(actualDate);
+        
         //jDateChooser.setSize(95,20);
-        calendarPanel.add(jDateChooser);
+        calendarPanel.add(jdateChooser);
         /*
          Creation of the elements in the menu
          */
@@ -291,6 +295,7 @@ public class ClientsGUI extends GUIOperations {
             addressText.setText(addressRcv.getStreet());
             cityText.setText(addressRcv.getProvince());
             localityText.setText(addressRcv.getLocality());
+            jdateChooser.setDate(person.getBirthDate());
             
         }
         /*
@@ -327,7 +332,8 @@ public class ClientsGUI extends GUIOperations {
                 validate(addressText);
                 validate(postalCodeText);
                 validate(DNIText);
-                validate(birthdateText);
+                validateBirthDate(jdateChooser);
+                //validate(birthdateText);
                 validate(maritalStatusText);
                 validate(phoneText1);
 
@@ -336,7 +342,8 @@ public class ClientsGUI extends GUIOperations {
                         && validate(addressText)
                         && validate(postalCodeText)
                         && validate(DNIText)
-                        && validate(birthdateText)
+                        && validateBirthDate(jdateChooser)
+                        //&& validate(birthdateText)
                         && validate(maritalStatusText)
                         && validate(phoneText1)) {
 
@@ -366,7 +373,7 @@ public class ClientsGUI extends GUIOperations {
                     if (Character.isLetter(caracter)) {
                         System.out.println("Es una letra");
                         Address finalAddress = new Address(addressText.getText(), Integer.parseInt(portalText.getText()), Integer.parseInt(numberText.getText()), (char) 0, localityText.getText(), cityText.getText(), Integer.parseInt(postalCodeText.getText()));
-                        Person person = new Person(nameText.getText(), surnameText.getText(), null, maritalStatusText.getText(), Integer.parseInt(phoneText1.getText()), phone2, null, dni, caracter);
+                        Person person = new Person(nameText.getText(), surnameText.getText(), null, maritalStatusText.getText(), Integer.parseInt(phoneText1.getText()), phone2, null, dni, caracter ,jdateChooser.getDate());
                         System.out.println("Hemos creado al cliente con dni " + dni);
 
                         //Test
@@ -374,6 +381,11 @@ public class ClientsGUI extends GUIOperations {
                         clientT.addClient(person);
 
                     }
+                    
+                    //Obtener fecha(PRUEBAS)
+                   
+                    Date date = jdateChooser.getDate();
+                    System.out.println("La fecha elegida es: "+date);
                     /*Aqui se pasa a la ventana de los autorizados
                      pasandole: person y el tipo del seleccionable
                      */
@@ -394,7 +406,7 @@ public class ClientsGUI extends GUIOperations {
                 deleteFields(numberText);
                 deleteFields(postalCodeText);
                 deleteFields(DNIText);
-                deleteFields(birthdateText);
+                //deleteFields(birthdateText);
                 deleteFields(maritalStatusText);
                 deleteFields(phoneText1);
                 deleteFields(phoneText2);

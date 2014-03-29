@@ -7,6 +7,7 @@ import es.unileon.ulebank.client.Client;
 import es.unileon.ulebank.client.handler.PersonHandler;
 import es.unileon.ulebank.client.types.data.Address;
 import es.unileon.ulebank.handler.Handler;
+import java.util.Date;
 
 /**
  *
@@ -20,13 +21,14 @@ public class Person extends Client{
     private String civilState;
     private int[] phoneNumbers;
     private String profession;
+    private Date birthDate;
     
     public Person(int dniNumber, char dniLetter){
         super(new PersonHandler(dniNumber, dniLetter));
         phoneNumbers = new int[2];
     }
 
-    public Person(String name, String surnames, Address address, String civilState, int phoneNumber1, int phoneNumber2, String profession, int dniNumber, char dniLetter) {
+    public Person(String name, String surnames, Address address, String civilState, int phoneNumber1, int phoneNumber2, String profession, int dniNumber, char dniLetter, Date birthDate) {
         super(new PersonHandler(dniNumber, dniLetter));
         this.name = name;
         this.surnames = surnames;
@@ -36,10 +38,17 @@ public class Person extends Client{
         this.phoneNumbers[0]=phoneNumber1;
         this.phoneNumbers[1]=phoneNumber2;
         this.profession = profession;
+        this.birthDate = birthDate;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
     
-    
-
     public String getName() {
         return name;
     }

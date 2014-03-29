@@ -7,6 +7,7 @@ import es.unileon.ulebank.client.handler.PersonHandler;
 import es.unileon.ulebank.client.types.Person;
 import es.unileon.ulebank.client.types.data.Address;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 ////////////////////INCOMPLETO/////////////////////
@@ -23,7 +24,7 @@ public class TemporaryClients {
        
         Address addressTest = new Address("Jose maria fernandez", 20, 8, 'D', "Leon", "Leon", 25001);
         Client clientTest = new Person("Maria", "Fernandez Gomez", addressTest, "married",
-                                    666123456, 918456138, "estudiante" , 71463465, 'G');
+                                    666123456, 918456138, "estudiante" , 71463465, 'G', new Date(1995, 10, 5));
      clients.add(clientTest);
     }
     
