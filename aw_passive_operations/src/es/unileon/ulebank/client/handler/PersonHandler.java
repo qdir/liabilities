@@ -16,13 +16,13 @@ public class PersonHandler implements Handler{
     int dni;
     char letter;
     
-    public PersonHandler(int dni, char letter){
+    public PersonHandler(int dni, char letter) throws MalformedHandlerException{
         //TODO throws exception id dni isn't correct
         if(DniLetters.getInstance().isDniValid(dni, letter)){
             this.dni=dni;
             this.letter=letter;
         }else{
-            //throw new MalformedHandlerException();
+            throw new MalformedHandlerException("Incorrect DNI");
         }
     }
     @Override

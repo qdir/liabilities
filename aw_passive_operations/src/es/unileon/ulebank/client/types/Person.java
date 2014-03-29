@@ -7,6 +7,7 @@ import es.unileon.ulebank.client.Client;
 import es.unileon.ulebank.client.handler.PersonHandler;
 import es.unileon.ulebank.client.types.data.Address;
 import es.unileon.ulebank.handler.Handler;
+import es.unileon.ulebank.handler.MalformedHandlerException;
 import java.util.Date;
 
 /**
@@ -23,12 +24,12 @@ public class Person extends Client{
     private String profession;
     private Date birthDate;
     
-    public Person(int dniNumber, char dniLetter){
+    public Person(int dniNumber, char dniLetter) throws MalformedHandlerException{
         super(new PersonHandler(dniNumber, dniLetter));
         phoneNumbers = new int[2];
     }
 
-    public Person(String name, String surnames, Address address, String civilState, int phoneNumber1, int phoneNumber2, String profession, int dniNumber, char dniLetter, Date birthDate) {
+    public Person(String name, String surnames, Address address, String civilState, int phoneNumber1, int phoneNumber2, String profession, int dniNumber, char dniLetter, Date birthDate) throws MalformedHandlerException {
         super(new PersonHandler(dniNumber, dniLetter));
         this.name = name;
         this.surnames = surnames;

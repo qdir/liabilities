@@ -123,18 +123,18 @@ public class AccountGUI extends GUIOperations{
             DNIAuthorizedText = new JTextField(20);
 
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            setBounds(100,100,1276,840);
+            
             contentPaneUno = new JPanel();
                        
             int width = this.getToolkit().getScreenSize().width;
             int height = this.getToolkit().getScreenSize().height;
-            setSize( width , height );
+            setBounds(0,0,width,height-50);
             setVisible(true);
             JScrollPane scrollpane = new JScrollPane(contentPaneUno);
             setContentPane(scrollpane);
 
             
-            GridLayout layout = new GridLayout(10,0);
+            GridLayout layout = new GridLayout();
 
             contentPaneUno.setLayout(layout);
             

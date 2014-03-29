@@ -6,6 +6,7 @@ package es.unileon.ulebank.client;
 import java.util.ArrayList;
 import es.unileon.ulebank.account.Account;
 import es.unileon.ulebank.handler.Handler;
+import java.util.Iterator;
 
 /**
  *
@@ -13,64 +14,36 @@ import es.unileon.ulebank.handler.Handler;
  */
 public class Client {
     private Handler id;
-    private ArrayList<Account> titularAccounts;
-    private ArrayList<Account> authorizedAccounts;
+    private ArrayList<Account> accounts;
     
     public Client(Handler clientHandler){
-        titularAccounts = new ArrayList<Account>();
-        authorizedAccounts = new ArrayList<Account>();
+        accounts = new ArrayList<Account>();
         this.id=clientHandler;
     }
     
-    public void addTitularAccount(Account account){
-        if(!titularAccounts.contains(account)){
-            titularAccounts.add(account);
+    public void add(Account account){
+        if(!accounts.contains(account)){
+            accounts.add(account);
         }
     }
     
-    public void addAuthorizedAccount(Account account){
-        if(!authorizedAccounts.contains(account)){
-            authorizedAccounts.add(account);
-        }
-    }
-    
-    public boolean removeTitularAccount(Handler accountHandler){
+    public boolean removeAccount(Handler accountHandler){
         boolean result = false;
-        for(int i=0; i<titularAccounts.size(); i++){
-            Account account = titularAccounts.get(i);
+        Iterator<Account> iterator = accounts.iterator();
+        while(iterator.hasNext()){
+            Account account = iterator.next();
             if(account.getID().compareTo(accountHandler)==0){
-                result = titularAccounts.remove(account);
+                result = accounts.remove(account);
             }
         }
         return result;
     }
     
-    public boolean removeAuthorizedAccount(Handler accountHandler){
+    public boolean existsAccount(Handler accountHandler){
         boolean result = false;
-        for(int i=0; i<authorizedAccounts.size(); i++){
-            Account account = authorizedAccounts.get(i);
-            if(account.getID().compareTo(accountHandler)==0){
-                result = authorizedAccounts.remove(account);
-            }
-        }
-        return result;
-    }
-    
-    public boolean existsTitularAccount(Handler accountHandler){
-        boolean result = false;
-        for(int i=0; i<titularAccounts.size(); i++){
-            Account account = titularAccounts.get(i);
-            if(account.getID().compareTo(accountHandler)==0){
-                result = true;
-            }
-        }
-        return result;
-    }
-    
-    public boolean existsAuthorizedAccount(Handler accountHandler){
-        boolean result = false;
-        for(int i=0; i<authorizedAccounts.size(); i++){
-            Account account = authorizedAccounts.get(i);
+        Iterator<Account> iterator = accounts.iterator();
+        while(iterator.hasNext()){
+            Account account = iterator.next();
             if(account.getID().compareTo(accountHandler)==0){
                 result = true;
             }
