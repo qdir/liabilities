@@ -3,6 +3,7 @@
 package es.unileon.ulebank.GUI.client;
 
 import es.unileon.ulebank.client.Client;
+import es.unileon.ulebank.handler.MalformedHandlerException;
 import es.unileon.ulebank.temporary.TemporaryClients;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -12,6 +13,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
@@ -34,7 +37,7 @@ public class FindClientGUI extends GUIOperations {
     /**
      * Constructor of the class. In that we create the window
      */
-    public FindClientGUI() {
+    public FindClientGUI() throws MalformedHandlerException {
         
         //Variables
         dniFinder = new JTextField(startField, 20);
@@ -125,12 +128,16 @@ public class FindClientGUI extends GUIOperations {
                 if (dniFinder.getText().compareToIgnoreCase(startField) == 0) {
                     System.out.println("No has introducido ningun DNI");
                 } else {
-                    System.out.println("El dni introducido es: " + dniFinder.getText());
-                    //Sacamos la letra
-                    Character caracter = dniFinder.getText().charAt(dniFinder.getText().length() - 1);
-                    System.out.println("La letra es: " + caracter);
-                    Client client = temporalC.findClient(removeLetter(dniFinder.getText()), caracter);
-                    ClientsGUI cgui = new ClientsGUI(client);
+                    try {
+                        System.out.println("El dni introducido es: " + dniFinder.getText());
+                        //Sacamos la letra
+                        Character caracter = dniFinder.getText().charAt(dniFinder.getText().length() - 1);
+                        System.out.println("La letra es: " + caracter);
+                        Client client = temporalC.findClient(removeLetter(dniFinder.getText()), caracter);
+                        ClientsGUI cgui = new ClientsGUI(client);
+                    } catch (MalformedHandlerException ex) {
+                        Logger.getLogger(FindClientGUI.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
 

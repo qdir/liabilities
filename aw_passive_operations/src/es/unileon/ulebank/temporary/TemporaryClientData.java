@@ -40,7 +40,7 @@ public class TemporaryClientData {
         
         clientList = new ArrayList();
         
-        Address address1 = new Address("Gonzalez Armas", 1, 3, 'C', "La Bagneza", "Leon", 24233);
+        /*Address address1 = new Address("Gonzalez Armas", 1, 3, 'C', "La Bagneza", "Leon", 24233);
         Client client1 = new Person("Oscar", "Sevilla Fernandez", address1, "married",
                                     671313555, 987774331, "Surgeon", 96538721, 'Z', null);
         
@@ -56,7 +56,7 @@ public class TemporaryClientData {
         client1 = new Person("David", "Alvarez Blanco", address1, "divorced",
                                     699645001, 987094231, "Bodybuilder", 48621759, 'M',null);
         
-        clientList.add(client1);
+        clientList.add(client1);*/
         
     }
     
