@@ -1,7 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/* Application developed for AW subject, belonging to passive operations
+ group.*/
+
 package es.unileon.ulebank.command;
 
 
