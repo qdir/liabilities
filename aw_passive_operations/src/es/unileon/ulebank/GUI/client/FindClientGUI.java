@@ -37,7 +37,7 @@ public class FindClientGUI extends GUIOperations {
     /**
      * Constructor of the class. In that we create the window
      */
-    public FindClientGUI() throws MalformedHandlerException {
+    public FindClientGUI()  {
         
         //Variables
         dniFinder = new JTextField(startField, 20);
@@ -112,35 +112,38 @@ public class FindClientGUI extends GUIOperations {
                 }
             }
         });
-
-        /*dniFinder.addActionListener(new ActionListener() {
-         @Override
-         public void actionPerformed(ActionEvent e) {
-         findOptions(dniFinder);
-         }
-         });*/
-        temporalC = new TemporaryClients();
+        try {
+            temporalC = new TemporaryClients();
+        } catch (MalformedHandlerException ex) {
+            Logger.getLogger(FindClientGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         find.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                int option = -1;
                 if (dniFinder.getText().compareToIgnoreCase(startField) == 0) {
                     System.out.println("No has introducido ningun DNI");
                 } else {
-                    try {
-                        System.out.println("El dni introducido es: " + dniFinder.getText());
-                        //Sacamos la letra
-                        Character caracter = dniFinder.getText().charAt(dniFinder.getText().length() - 1);
-                        System.out.println("La letra es: " + caracter);
-                        Client client = temporalC.findClient(removeLetter(dniFinder.getText()), caracter);
-                        ClientsGUI cgui = new ClientsGUI(client);
-                    } catch (MalformedHandlerException ex) {
-                        Logger.getLogger(FindClientGUI.class.getName()).log(Level.SEVERE, null, ex);
+                    if (DNIButton.isSelected()) {
+                        try {
+                            option = 0;
+                            System.out.println("El dni introducido es: " + dniFinder.getText());
+                            //Sacamos la letra
+                            Character caracter = dniFinder.getText().charAt(dniFinder.getText().length() - 1);
+                            Client client = temporalC.findClient(removeLetter(dniFinder.getText()), caracter);
+                            ClientsGUI cgui = new ClientsGUI(client, option);
+                        } catch (MalformedHandlerException ex) {
+                            Logger.getLogger(FindClientGUI.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }else if(CIFButton.isSelected()){
+                        option = 1;
+                        ClientsGUI egui = new ClientsGUI(null, option);
+                        System.out.println("Es una empresa");
                     }
                 }
             }
-
         });
 
         find.addActionListener(new ActionListener() {
