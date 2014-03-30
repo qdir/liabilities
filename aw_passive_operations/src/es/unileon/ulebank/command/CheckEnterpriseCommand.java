@@ -18,7 +18,7 @@ public class CheckEnterpriseCommand implements Command{
         
         public CheckEnterpriseCommand(int cif, char letter){
             this.enterpriseCode= new EnterpriseHandler(letter, cif);
-            asdsd
+            
         }
     @Override
     public void execute() {

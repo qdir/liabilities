@@ -19,7 +19,7 @@ public class CheckClientCommand implements Command{
         public CheckClientCommand (int dni, char letter) throws MalformedHandlerException{
             
             this.nif=new PersonHandler(dni, letter);
-            this,dni.jaasa
+            
         }
     
     

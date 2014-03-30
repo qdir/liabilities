@@ -1,4 +1,4 @@
-asdsad/* Application developed for AW subject, belonging to passive operations
+/* Application developed for AW subject, belonging to passive operations
  group.*/
 
 package es.unileon.ulebank.command;
