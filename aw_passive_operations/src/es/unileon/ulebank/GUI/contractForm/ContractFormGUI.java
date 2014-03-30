@@ -8,7 +8,6 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -17,15 +16,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-
 import java.awt.Font;
-
 import javax.swing.JTextField;
-
 import java.awt.SystemColor;
-
 import javax.swing.UIManager;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Color;
@@ -211,7 +205,7 @@ public class ContractFormGUI {
 	private JTextField monthlyFeePlus;
         
         /**
-         * Trimestrall Fee Personal Account Modality
+         * Trimestral Fee Personal Account Modality
          */
 	private JTextField trimestralFeePersonal;
         
@@ -312,17 +306,17 @@ public class ContractFormGUI {
 		ImageIcon frameImage = new ImageIcon("resources/es/unileon/ulebank/GUI/contractForm/frameImage2.jpg");
 		mainFrame.setIconImage(frameImage.getImage());
                 
-        JPicture customTitleBar = new JPicture("resources/es/unileon/ulebank/GUI/contractForm/customTitleBar.jpg");
-        customTitleBar.setBounds(0, 0, 1000, 41);
-        mainFrame.getContentPane().add(customTitleBar);
-        customTitleBar.setLayout(null);	
-        
-        JPicture picture = new JPicture("resources/es/unileon/ulebank/GUI/contractForm/grayBackground3.jpg");
-        picture.setBounds(0, 40, 1000, screenSize.height-40);
-        mainFrame.getContentPane().add(picture);
-        picture.setLayout(null);
+                JPicture customTitleBar = new JPicture("resources/es/unileon/ulebank/GUI/contractForm/customTitleBar.jpg");
+                customTitleBar.setBounds(0, 0, 1000, 41);
+                mainFrame.getContentPane().add(customTitleBar);
+                customTitleBar.setLayout(null);	
 
-         new JDraggable(mainFrame, customTitleBar);
+                JPicture picture = new JPicture("resources/es/unileon/ulebank/GUI/contractForm/grayBackground3.jpg");
+                picture.setBounds(0, 40, 1000, screenSize.height-40);
+                mainFrame.getContentPane().add(picture);
+                picture.setLayout(null);
+
+                new JDraggable(mainFrame, customTitleBar);
 										
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(27, 22, 949, screenSize.height-158);
@@ -334,7 +328,7 @@ public class ContractFormGUI {
 		contentPanel.setPreferredSize(new Dimension(931, 7800));
 		contentPanel.setLayout(null);				
 		
-        currency = new JTextField();
+                currency = new JTextField();
 		currency.setEditable(false);
 		currency.setColumns(10);
 		currency.setBackground(SystemColor.menu);
@@ -629,10 +623,10 @@ public class ContractFormGUI {
 		administrationFee.setBounds(327, 3700, 50, 20);
 		panelAuthorized.add(administrationFee);										
 		
-        JPicture table1 = new JPicture("resources/es/unileon/ulebank/GUI/contractForm/table1.png");
-        table1.setBounds(83, 3825, 807, 202);
-        panelAuthorized.add(table1);
-        table1.setLayout(null);
+                JPicture table1 = new JPicture("resources/es/unileon/ulebank/GUI/contractForm/table1.png");
+                table1.setBounds(83, 3825, 807, 202);
+                panelAuthorized.add(table1);
+                table1.setLayout(null);
                 
 		withdrawFee = new JTextField();
 		withdrawFee.setEditable(false);
@@ -719,10 +713,10 @@ public class ContractFormGUI {
 		repaymentFee.setBounds(715, 73, 50, 17);
 		table2.add(repaymentFee);										
 		
-        JPicture table3 = new JPicture("resources/es/unileon/ulebank/GUI/contractForm/table3.png");
-        table3.setLayout(null);
-        table3.setBounds(39, 5409, 851, 96);
-        panelAuthorized.add(table3);
+                JPicture table3 = new JPicture("resources/es/unileon/ulebank/GUI/contractForm/table3.png");
+                table3.setLayout(null);
+                table3.setBounds(39, 5409, 851, 96);
+                panelAuthorized.add(table3);
                 
 		chequeFee = new JTextField();
 		chequeFee.setText("10,00");
@@ -733,23 +727,23 @@ public class ContractFormGUI {
 		table3.add(chequeFee);								
         
 		//INITIALIZE JLABELS HERE
-        new JLabels(contentPanel, currency, interest, panelOwners, panelAuthorized);
+                new JLabels(contentPanel, currency, interest, panelOwners, panelAuthorized);
 		//INITIALIZE JPICTURES HERE
-        new JPictures(contentPanel, panelAuthorized);
-        //INITIALIZE JTEXTAREAS HERE
-        new JTextAreas(panelAuthorized);
-        //INITIALIZE JBUTTONS HERE
-        JButtons buttons = new JButtons(mainFrame, customTitleBar, contentPanel, picture,
+                new JPictures(contentPanel, panelAuthorized);
+                //INITIALIZE JTEXTAREAS HERE
+                new JTextAreas(panelAuthorized);
+                //INITIALIZE JBUTTONS HERE
+                JButtons buttons = new JButtons(mainFrame, customTitleBar, contentPanel, picture,
         													panelOwners, panelAuthorized);
-        //INITIALIZE JCOMBOBOXES HERE
+                //INITIALIZE JCOMBOBOXES HERE
 		Runnable task = new JComboBoxes(contentPanel, buttons.getAddOwnerButton(), buttons);
 		
 		Thread worker = new Thread(task);
-        worker.start();
-        buttons.setWorker(worker);
+                worker.start();
+                buttons.setWorker(worker);
         
-        Icon editIcon = new ImageIcon("resources/es/unileon/ulebank/GUI/contractForm/EditButton.jpg");
-        JButton editButton = new JButton(editIcon);
+                Icon editIcon = new ImageIcon("resources/es/unileon/ulebank/GUI/contractForm/EditButton.jpg");
+                JButton editButton = new JButton(editIcon);
 		editButton.setBounds(37, (int)screenSize.getHeight()-130, 41, 41);
 		picture.add(editButton);
 		editButton.setOpaque(false);
@@ -757,18 +751,18 @@ public class ContractFormGUI {
 		editButton.setBorderPainted(false);
 		editButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		editButton.setFocusPainted(false);
-        editButton.setToolTipText("Edit Contract");
+                editButton.setToolTipText("Edit Contract");
         
-        editButtonAction(editButton);
+                editButtonAction(editButton);
                 
 		mainFrame.setVisible(true);	
 
-    	contentPanel.revalidate();
+                contentPanel.revalidate();
 				
 	}
         
         /**
-         * Method which describes the edditButton behaviour
+         * Method which describes the edditButton behavior
          * @param editButton represents the button used to enable disabled fields
          */
         private void editButtonAction(JButton editButton){

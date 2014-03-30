@@ -59,16 +59,38 @@ public class JButtons {
     private JPanel contentPanel;
     
     /**
-     * Amount of pixeles needed for the owner and authorized panels
+     * Amount of pixels needed for the owner and authorized panels
      */
     private final int PANELSIZEINCREMENT = 152;
     
+    /**
+     * Y Location in pixels for the owners panel
+     */
     private int panelBaseLocationOwners = 152;
+    
+    /**
+     * Y Location in pixels for the authorized person panel
+     */
     private int panelBaseLocationAuthorized = 152;
+    
+    /**
+     * Start Y Location in pixels for the owners panel
+     */
     private final int CLIENTSTARTLOCATION = 575;
+    
+    /**
+     * Start Y Location in pixels for the authorized person panel
+     */
     private final int AUTHORIZEDSTARTLOCATION = 210;
     
+    /**
+     * List of owner panels
+     */
     private ArrayList<JClientPanel> clientPanelList = new ArrayList<JClientPanel>();
+    
+    /**
+     * List of authorized person panels
+     */
     private ArrayList<JClientPanel> authorizedPanelList = new ArrayList<JClientPanel>();
     
     /**
@@ -97,7 +119,7 @@ public class JButtons {
      */
     private void placeButtons(JPicture customTitleBar, JPicture picture){
         
-        Icon closeIcon = new ImageIcon("resources/es/unileon/ulebank/GUI/contractForm/closeButton.jpg");
+                Icon closeIcon = new ImageIcon("resources/es/unileon/ulebank/GUI/contractForm/closeButton.jpg");
 		Icon minimizeIcon = new ImageIcon("resources/es/unileon/ulebank/GUI/contractForm/minimizeButton.jpg");
 		
 		JButton closeButton = new JButton(closeIcon);
@@ -120,9 +142,9 @@ public class JButtons {
 		minimizeButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		minimizeButton.setFocusPainted(false);
                 
-        minimizeButtonAction(minimizeButton);
+                minimizeButtonAction(minimizeButton);
                 
-        Icon addIcon = new ImageIcon("resources/es/unileon/ulebank/GUI/contractForm/AddButton.png");
+                Icon addIcon = new ImageIcon("resources/es/unileon/ulebank/GUI/contractForm/AddButton.png");
 		
 		addOwner = new JButton(addIcon);
 		addOwner.setBounds(193, 403, 23, 23);
@@ -158,9 +180,9 @@ public class JButtons {
 		denyButton.setBorderPainted(false);
 		denyButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		denyButton.setFocusPainted(false);		
-        denyButton.setToolTipText("Reject Contract");                		
+                denyButton.setToolTipText("Reject Contract");                		
 		
-        denyButtonAction(denyButton);
+                denyButtonAction(denyButton);
                 
 		JButton acceptButton = new JButton(acceptIcon);
 		acceptButton.setBounds(854, (int)screenSize.getHeight()-130, 41, 41);
@@ -172,7 +194,7 @@ public class JButtons {
 		acceptButton.setFocusPainted(false);
 		acceptButton.setToolTipText("Accept Contract");
 
-        acceptButtonAction(acceptButton);
+                acceptButtonAction(acceptButton);
         
     }
     
@@ -280,6 +302,11 @@ public class JButtons {
         return terminateThread;
     }
     
+    
+    /**
+     * Describes the behavior of the add owner button
+     * @param addOwner add owner button
+     */
     private void addOwnerButtonAction(JButton addOwner){
     	
     	addOwner.addActionListener(new ActionListener() {
@@ -318,6 +345,10 @@ public class JButtons {
     	
     }
     
+    /**
+     * Describes the behavior of the add authorized person button
+     * @param addAuthorized add authorized person button
+     */
     private void addAuthorizedButtonAction(JButton addAuthorized){
     	
     	addAuthorized.addActionListener(new ActionListener() {
