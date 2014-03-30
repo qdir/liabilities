@@ -10,7 +10,5 @@ package es.unileon.ulebank.command;
 public interface Command {
  
     void execute();
-    void añadir epojdsfde;
-    sjdfheurtfwe4t53wd;
-    retiehrtk5e4y
+   
 }
