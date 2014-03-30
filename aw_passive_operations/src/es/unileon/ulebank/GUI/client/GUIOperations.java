@@ -3,11 +3,8 @@
 package es.unileon.ulebank.GUI.client;
 
 import com.toedter.calendar.JDateChooser;
-import es.unileon.ulebank.GUI.account.AccountGUI;
-import es.unileon.ulebank.GUI.contractForm.ContractFormGUI;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
-import java.util.Date;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
@@ -18,7 +15,7 @@ import javax.swing.JTextField;
  * @author Eva
  */
 public class GUIOperations extends JFrame {
-    private String startField = "Introduce el identificador del cliente";
+    private final String startField = "Introduce el identificador del cliente";
 
     /**
      * Validate the fields. If isn´t complete a red border appears in the

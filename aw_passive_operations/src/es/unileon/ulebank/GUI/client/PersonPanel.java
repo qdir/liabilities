@@ -58,22 +58,6 @@ public class PersonPanel extends JPanel {
     private JTextField cityText;
     private JTextField letterText;
     private JTextField professionText;
-
-    public JTextField getLetterText() {
-        return letterText;
-    }
-
-    public void setLetterText(JTextField letterText) {
-        this.letterText = letterText;
-    }
-
-    public JTextField getProfessionText() {
-        return professionText;
-    }
-
-    public void setProfessionText(JTextField professionText) {
-        this.professionText = professionText;
-    }
     private JTextField DNIText;
     //private JTextField birthdateText;
     private JTextField maritalStatusText;
@@ -106,7 +90,7 @@ public class PersonPanel extends JPanel {
      */
     public PersonPanel(Client client) {
         super();
-        
+
         person = (Person) client;
         /*
          Creation of the label and the field
@@ -135,12 +119,12 @@ public class PersonPanel extends JPanel {
         portalText = new JTextField(4);
 
         postalCode = new JLabel("*CP: ", JLabel.RIGHT);
-        postalCodeText = new JTextField();
+        postalCodeText = new JTextField(4);
 
         locality = new JLabel("Localidad: ", JLabel.RIGHT);
         localityText = new JTextField();
 
-        city = new JLabel("Ciudad: ", JLabel.RIGHT);
+        city = new JLabel("Provincia: ", JLabel.RIGHT);
         cityText = new JTextField();
         //////////////////////////////////////
 
@@ -401,5 +385,21 @@ public class PersonPanel extends JPanel {
 
     public void setJdateChooser(JDateChooser jdateChooser) {
         this.jdateChooser = jdateChooser;
+    }
+
+    public JTextField getLetterText() {
+        return letterText;
+    }
+
+    public void setLetterText(JTextField letterText) {
+        this.letterText = letterText;
+    }
+
+    public JTextField getProfessionText() {
+        return professionText;
+    }
+
+    public void setProfessionText(JTextField professionText) {
+        this.professionText = professionText;
     }
 }//End of the class
