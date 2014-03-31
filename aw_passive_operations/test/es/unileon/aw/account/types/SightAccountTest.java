@@ -5,11 +5,12 @@ package es.unileon.aw.account.types;
 
 import es.unileon.ulebank.account.types.SightAccount;
 import es.unileon.ulebank.account.Account;
-import es.unileon.ulebank.account.AccountTypes;
-import es.unileon.ulebank.account.exception.BalanceException;
 import es.unileon.ulebank.account.exception.TransactionException;
+import es.unileon.ulebank.account.liquidation.LiquidationStrategy;
 import es.unileon.ulebank.bank.Bank;
+import es.unileon.ulebank.client.Client;
 import es.unileon.ulebank.handler.GenericHandler;
+import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
 import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.Transaction;
@@ -21,6 +22,7 @@ import java.util.Date;
 import java.util.Iterator;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,9 +34,45 @@ public class SightAccountTest {
     
     private Account sightAccount;
     
+    private double interest;
+    private double administrationWage;
+    private double anualInterest;
+    private double administrationFee;
+    private double negativeBallanceFee;
+    private double complaintFee;
+    private double buyingFee;
+    private double withdrawFee;
+    private double chequeFee;
+    private double repaymentFee;
+    private double depositOperationFee;
+    private double magneticSuppportFee;
+    private double paperFee; 
+    private double terminalFee;
+    private double buyingFeePercentage; 
+    
     @Before
     public void setUp() throws MalformedHandlerException {
-        this.sightAccount = new SightAccount(new Office(), new Bank(), "0000000000");
+        
+        this.interest = 1.0d;
+        this.administrationWage = 1.0d;
+        this.anualInterest = 1.0d;
+        this.administrationFee = 1.0d;
+        this.negativeBallanceFee = 1.0d;
+        this.complaintFee = 1.0d;
+        this.buyingFee = 1.0d;
+        this.withdrawFee = 1.0d;
+        this.chequeFee = 1.0d;
+        this.repaymentFee = 1.0d;
+        this.depositOperationFee = 1.0d; 
+        this.magneticSuppportFee = 1.0d; 
+        this.paperFee = 1.0d; 
+        this.terminalFee = 1.0d; 
+        this.buyingFeePercentage = 1.0d; 
+        
+        this.sightAccount = new SightAccount(new Office(), new Bank(), "0000000000", interest
+        , administrationWage, anualInterest, administrationFee, negativeBallanceFee
+        , complaintFee, buyingFee, withdrawFee, chequeFee, repaymentFee, depositOperationFee
+        , magneticSuppportFee, paperFee, terminalFee, buyingFeePercentage);
     }
     /**
      * Test of throw of BalaceException in addBalance method, of class SightAccount.
@@ -42,27 +80,57 @@ public class SightAccountTest {
      */
     @Test (expected=MalformedHandlerException.class)
     public void testMoreAccountnumberLength() throws MalformedHandlerException {
-        this.sightAccount = new SightAccount(new Office(), new Bank(), "000000000000");
+        
+        System.out.println("moreAccountnumberLength");
+        
+        this.sightAccount = new SightAccount(new Office(), new Bank(), "000000000000", interest
+        , administrationWage, anualInterest, administrationFee, negativeBallanceFee
+        , complaintFee, buyingFee, withdrawFee, chequeFee, repaymentFee, depositOperationFee
+        , magneticSuppportFee, paperFee, terminalFee, buyingFeePercentage);
     }
     
     @Test (expected=MalformedHandlerException.class)
     public void testLessAccountnumberLength() throws MalformedHandlerException {
-        this.sightAccount = new SightAccount(new Office(), new Bank(), "000000");
+        
+        System.out.println("lessAccountnumberLength");
+        
+        this.sightAccount = new SightAccount(new Office(), new Bank(), "000000", interest
+        , administrationWage, anualInterest, administrationFee, negativeBallanceFee
+        , complaintFee, buyingFee, withdrawFee, chequeFee, repaymentFee, depositOperationFee
+        , magneticSuppportFee, paperFee, terminalFee, buyingFeePercentage);
     }
     
     @Test (expected=MalformedHandlerException.class)
     public void testCorrectAccountnumberLengthInterspersedLetters () throws MalformedHandlerException {
-        this.sightAccount = new SightAccount(new Office(), new Bank(), "00aa00aa00");
+        
+        System.out.println("correctAccountnumberLengthInterspersedLetters");
+        
+        this.sightAccount = new SightAccount(new Office(), new Bank(), "00aa00aa00", interest
+        , administrationWage, anualInterest, administrationFee, negativeBallanceFee
+        , complaintFee, buyingFee, withdrawFee, chequeFee, repaymentFee, depositOperationFee
+        , magneticSuppportFee, paperFee, terminalFee, buyingFeePercentage);
     }
     
     @Test (expected=MalformedHandlerException.class)
     public void testMoreAccountnumberLengthInterspersedLetters () throws MalformedHandlerException {
-        this.sightAccount = new SightAccount(new Office(), new Bank(), "0000aa00aa0000");
+        
+        System.out.println("moreAccountnumberLengthInterspersedLetters");
+        
+        this.sightAccount = new SightAccount(new Office(), new Bank(), "0000aa00aa0000", interest
+        , administrationWage, anualInterest, administrationFee, negativeBallanceFee
+        , complaintFee, buyingFee, withdrawFee, chequeFee, repaymentFee, depositOperationFee
+        , magneticSuppportFee, paperFee, terminalFee, buyingFeePercentage);
     }
     
     @Test (expected=MalformedHandlerException.class)
     public void testLessAccountnumberLengthInterspersedLetters () throws MalformedHandlerException {
-        this.sightAccount = new SightAccount(new Office(), new Bank(), "aa00aa");
+        
+        System.out.println("lessAccountnumberLengthInterspersedLetters");
+        
+        this.sightAccount = new SightAccount(new Office(), new Bank(), "aa00aa", interest
+        , administrationWage, anualInterest, administrationFee, negativeBallanceFee
+        , complaintFee, buyingFee, withdrawFee, chequeFee, repaymentFee, depositOperationFee
+        , magneticSuppportFee, paperFee, terminalFee, buyingFeePercentage);
     }
     
     /**
@@ -82,41 +150,41 @@ public class SightAccountTest {
      * Test of addBalance method, of class SightAccount.
      * @throws es.unileon.aw.account.exception.BalanceException
      */
-    @Test (expected=BalanceException.class)
-    public void testAddBalance() throws BalanceException {
-        
-        System.out.println("addBalance");
-        
-        float balance = 2.0F;
-        float expResult = 2.0F;
-        this.sightAccount.addBalance(balance);
-        assertEquals(expResult, this.sightAccount.getBalance(), 2.0F);
-    }
+//    @Test (expected=BalanceException.class)
+//    public void testAddBalance() throws BalanceException {
+//        
+//        System.out.println("addBalance");
+//        
+//        float balance = 2.0F;
+//        float expResult = 2.0F;
+//        this.sightAccount.addBalance(balance);
+//        assertEquals(expResult, this.sightAccount.getBalance(), 2.0F);
+//    }
     
      /**
      * Test of throw of BalaceException in addBalance method, of class SightAccount.
      * @throws es.unileon.aw.account.exception.BalanceException
      */
-    @Test (expected=BalanceException.class)
-    public void testNegativeBalance() throws BalanceException {
-        
-        System.out.println("negativeBalance");
-        
-        float balance = -2.0F;
-        this.sightAccount.addBalance(balance);
-    }
+//    @Test (expected=BalanceException.class)
+//    public void testNegativeBalance() throws BalanceException {
+//        
+//        System.out.println("negativeBalance");
+//        
+//        float balance = -2.0F;
+//        this.sightAccount.addBalance(balance);
+//    }
     
      /**
      * Test of getType method, of class CommercialAccount.
      */
-    @Test
-    public void testGetType() {
-        
-        System.out.println("getType");
-
-        AccountTypes expResult = AccountTypes.SIGH_ACCOUNT;
-        assertEquals(expResult, this.sightAccount.getType());
-    }
+//    @Test
+//    public void testGetType() {
+//         
+//        System.out.println("getType");
+//    
+//        AccountTypes expResult = AccountTypes.SIGH_ACCOUNT;
+//        assertEquals(expResult, this.sightAccount.getType());
+//    }
     
     /**
      * Test of doTransaction method, of class SightAccount.
@@ -257,4 +325,87 @@ public class SightAccountTest {
         
         this.sightAccount.doTransaction(transaction);
     }    
+    
+     /**
+     * Test of setLiquidationFrecuency method, of class SightAccount.
+     */
+    @Test
+    public void testSetLiquidationFrecuencyMoreThanOne() {
+        
+        System.out.println("setLiquidationFrecuencyMoreThanOne");
+        
+        assertTrue(this.sightAccount.setLiquidationFrecuency(2));
+    }  
+    
+    /**
+     * Test of setLiquidationFrecuency method, of class SightAccount.
+     */
+    @Test
+    public void testSetLiquidationFrecuencyLessThanOne() {
+        
+        System.out.println("setLiquidationFrecuencyLessThanOne");
+        
+        assertFalse(this.sightAccount.setLiquidationFrecuency(0));
+    } 
+    
+     /**
+     * Test of addTitular method, of class SightAccount.
+     */
+    @Test
+    public void testAddTitular() {
+        
+        System.out.println("addTitular");
+        
+        Client client1 = new Client(new GenericHandler("1234"));
+        Client client2 = new Client(new GenericHandler("1234"));
+        
+        assertTrue(this.sightAccount.addTitular(client1));
+        assertFalse(this.sightAccount.addTitular(client2));
+    } 
+    
+     /**
+     * Test of deleteTitular method, of class SightAccount.
+     */
+    @Test
+    public void testDeleteTitular() {
+        
+        System.out.println("deleteTitular");
+        
+        Client client1 = new Client(new GenericHandler("1234"));
+        Client client2 = new Client(new GenericHandler("5678"));
+        
+        this.sightAccount.addTitular(client1);
+        
+        assertTrue(this.sightAccount.deleteTitular(client1.getId()));
+        assertFalse(this.sightAccount.deleteTitular(client2.getId()));
+    } 
+    
+    /**
+     * Test of getTitulars method, of class SightAccount.
+     */
+    @Test
+    public void testGetTitulars() {
+        
+        System.out.println("getTitulars");
+        
+        Client client1 = new Client(new GenericHandler("1234"));
+        Client client2 = new Client(new GenericHandler("5678"));
+        
+        this.sightAccount.addTitular(client1);
+        this.sightAccount.addTitular(client2);
+        
+        assertEquals(this.sightAccount.getTitulars().size(), 2);
+    } 
+    
+    /**
+     * Test of setLiquidationStrategy method, of class SightAccount.
+     */
+    @Test
+    public void testSetLiquidationStrategy() {
+        
+        System.out.println("setLiquidationStrategy");
+
+//        LiquidationStrategy liquidationStrategy = new ();
+//        assertTrue(this.sightAccount.setLiquidationStrategy(liquidationStrategy));
+    } 
 }
