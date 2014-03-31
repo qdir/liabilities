@@ -2,6 +2,7 @@
  group.*/
 package es.unileon.ulebank.account.handler;
 
+import es.unileon.ulebank.handler.GenericHandler;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
 import java.util.regex.Matcher;
@@ -31,20 +32,28 @@ public class AccountHandler implements Handler {
     /**
      * the number of digits ( account number )
      */
-    private static final int ACCOUNT_NUMBER_LENGTH = 10;
+    private static final int ACCOUNT_NUMBER_LENGTH = 0b1010;
     /**
      * the number of digits ( office number )
      */
-    private static final int OFFICE_NUMBER_LENGTH = 4;
+    private static final int OFFICE_NUMBER_LENGTH = 0b100;
     /**
      * the number of digits ( bank number )
      */
-    private static final int BANK_NUMBER_LENGTH = 4;
-
+    private static final int BANK_NUMBER_LENGTH = 0b100;
+    /**
+     * number of fields
+     */
+    private static final int NUMBER_OF_FIELDS = 0b100;
     /**
      * The control digits
      */
     private final String dc;
+
+    /**
+     * Separator of the fields
+     */
+    private final static String SEPARATOR = "-";
 
     /**
      * Create a new AccountHandler
@@ -59,13 +68,12 @@ public class AccountHandler implements Handler {
     public AccountHandler(Handler office, Handler bank, String accountNumber) throws MalformedHandlerException {
         StringBuilder errors = new StringBuilder();
         Pattern numberPattern = Pattern.compile("^[0-9]*$");
-        
-        
+
         Matcher matcher = numberPattern.matcher(accountNumber);
-        if(!matcher.find()) {
+        if (!matcher.find()) {
             errors.append("The accountNumber can only have numbers\n");
         }
-        
+
         if (accountNumber.length() != ACCOUNT_NUMBER_LENGTH) {
             errors.append("The accountNumber length must be " + ACCOUNT_NUMBER_LENGTH + "\n");
         }
@@ -96,6 +104,21 @@ public class AccountHandler implements Handler {
         this.dc = calculateDC(office.toString(), bank.toString(), accountNumber + "");
     }
 
+    public AccountHandler(Handler another) throws MalformedHandlerException {
+        this(getField(another, 0), getField(another, 1), getField(another, 3).toString());
+
+    }
+
+    private static Handler getField(Handler another, int number) throws MalformedHandlerException {
+        String[] splitHandler = another.toString().split(SEPARATOR);
+        if (splitHandler.length != NUMBER_OF_FIELDS) {
+            throw new MalformedHandlerException("The handler fields (String) must be separated by \"" + SEPARATOR + "\" and has 4 fields");
+        }
+
+        return new GenericHandler(splitHandler[number]);
+
+    }
+
     /**
      * Calculate control digits of the account
      *
@@ -107,6 +130,22 @@ public class AccountHandler implements Handler {
      */
     private static String calculateDC(String office, String bank, String accountNumber) {
         return String.valueOf(calculateDigit("00" + office.toString()) + String.valueOf(bank.toString()) + calculateDigit(accountNumber + ""));
+    }
+
+    public Handler getBankHandler() {
+        return this.bankHandler;
+    }
+
+    public Handler getOfficeHandler() {
+        return this.officeHandler;
+    }
+
+    public String getNumber() {
+        return this.accountNumber;
+    }
+
+    public String getDC() {
+        return this.dc;
     }
 
     /**
@@ -140,6 +179,6 @@ public class AccountHandler implements Handler {
 
     @Override
     public String toString() {
-        return bankHandler.toString() + "-" + officeHandler.toString() + "-" + dc + "-" + accountNumber;
+        return bankHandler.toString() + SEPARATOR + officeHandler.toString() + SEPARATOR + dc + SEPARATOR + accountNumber;
     }
 }

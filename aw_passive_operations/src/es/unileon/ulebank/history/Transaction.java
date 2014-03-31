@@ -5,7 +5,6 @@
  */
 package es.unileon.ulebank.history;
 
-import es.unileon.ulebank.account.Account;
 import es.unileon.ulebank.handler.Handler;
 import java.util.Date;
 
@@ -21,8 +20,8 @@ public abstract class Transaction {
     private Date effectiveDate;
     private final String subject;
     private final Enum<TransactionType> type;
-    private Handler destination;
-    private Handler origin;
+    private final Handler destination;
+    private final Handler origin;
     
     public Transaction(Handler id, double amount, Date date, String subject, Enum<TransactionType> type, Handler destination, Handler origin) {
         this.id = id;

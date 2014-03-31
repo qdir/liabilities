@@ -8,9 +8,12 @@ import es.unileon.ulebank.bank.Bank;
 import es.unileon.ulebank.client.Client;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
+import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.History;
 import es.unileon.ulebank.history.Transaction;
+import es.unileon.ulebank.history.TransactionType;
 import es.unileon.ulebank.office.Office;
+import es.unileon.ulebank.transaction.TransactionDestination;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -187,60 +190,13 @@ public abstract class Account {
     }
 
     /**
-     * Do a transaction. A transaction is a movement of money, that is, do a
-     * transaction is the only way to take out or take money money into an
-     * account.
-     *
-     * @param transaction ( Transaction to do)
-     *
-     * @throws TransactionException (if the subject or id is null or empty)
-     */
-    @Deprecated
-    public synchronized void doTransaction(Transaction transaction) throws TransactionException {
-        StringBuilder err = new StringBuilder();
-        if (transaction.getSubject() == null) {
-            err.append("The subject cannot be null \n");
-        }
-
-        if (transaction.getSubject().length() == 0) {
-            err.append("Transaction length cannot be 0 \n");
-        }
-
-        if (transaction.getId() == null) {
-            err.append(("The id cannot be null \n"));
-        }
-
-        if (transaction.getId().toString().length() == 0) {
-            err.append(("The id size cannot be 0 \n"));
-        }
-
-        if (transaction.getDate() == null) {
-            err.append("The date cannot be null");
-        }
-
-        if (transaction.getEffectiveDate() == null) {
-            err.append("The effective date cannot be null");
-        }
-        if (err.length() > 0) {
-            LOG.error(err.toString());
-            throw new TransactionException(err.toString());
-        }
-        boolean success = this.history.addTransaction(transaction);
-        if (success) {
-            this.balance += transaction.getAmount();
-            LOG.info("Did transaction with id : " + transaction.getId());
-        } else {
-            String error = "Cannot store the transaction\n";
-            LOG.error(error);
-            throw new TransactionException(error);
-        }
-    }
-
-    /**
+     * Withdraw money from the account and put into the destination.
      *
      * @param transaction
+     * @param destination
+     * @throws es.unileon.ulebank.account.exception.TransactionException
      */
-    public synchronized void doWithdrawal(Transaction transaction) throws TransactionException {
+    public synchronized void doWithdrawal(Transaction transaction, TransactionDestination destination) throws TransactionException {
         StringBuilder err = new StringBuilder();
         if (transaction.getSubject() == null) {
             err.append("The subject cannot be null \n");
@@ -262,10 +218,6 @@ public abstract class Account {
             err.append("The date cannot be null \n");
         }
 
-        if (transaction.getEffectiveDate() == null) {
-            err.append("The effective date cannot be null \n");
-        }
-
         if (transaction.getDestination() == null) {
             err.append("The destination account id cannot be null \n");
         }
@@ -274,8 +226,8 @@ public abstract class Account {
             err.append("The origin cannot be null \n");
         }
 
-        if (transaction.getAmount() > 0) {
-            err.append("Fail, the amount of money cannot be posive, for depositing money call doDeposit method\n");
+        if (transaction.getAmount() >= 0) {
+            err.append("Fail, the amount of money must be less than zero, for depositing money call doDeposit method\n");
         }
         if (err.length() > 0) {
             LOG.error(err.toString());
@@ -285,9 +237,12 @@ public abstract class Account {
         if (success) {
             this.balance += transaction.getAmount();
             try {
-                //TODO call doDeposit method of the other account!
+
+                Transaction move = new GenericTransaction(id, -transaction.getAmount(), transaction.getDate(), transaction.getSubject(), TransactionType.CHARGE, transaction.getOrigin(), this.id
+                );
+                destination.forwardTransaction(move);
                 transaction.setEffectiveDate(new Date(System.currentTimeMillis()));
-            } catch (Throwable t) {
+            } catch (TransactionException | MalformedHandlerException t) {
                 this.balance -= transaction.getAmount();
                 this.history.remove(transaction);
                 String error = "Cannot complete the transaction. The  account will be restored to a previous state \n Cause : " + t.toString();
@@ -299,11 +254,13 @@ public abstract class Account {
             LOG.error(error);
             throw new TransactionException(error);
         }
+
     }
 
     /**
      *
      * @param transaction
+     * @throws es.unileon.ulebank.account.exception.TransactionException
      */
     public synchronized void doDeposit(Transaction transaction) throws TransactionException {
         StringBuilder err = new StringBuilder();
@@ -327,10 +284,6 @@ public abstract class Account {
             err.append("The date cannot be null \n");
         }
 
-        if (transaction.getEffectiveDate() == null) {
-            err.append("The effective date cannot be null \n");
-        }
-
         if (transaction.getDestination() == null) {
             err.append("The destination account id cannot be null \n");
         }
@@ -342,9 +295,9 @@ public abstract class Account {
         if (transaction.getOrigin() == null) {
             err.append("The origin cannot be null \n");
         }
-        
-        if (transaction.getAmount() < 0) {
-            err.append("Fail, the amount cannot be negative. For getting money call doWithdrawal method");
+
+        if (transaction.getAmount() <= 0) {
+            err.append("Fail, the amount must be greater than zero. For getting money call doWithdrawal method");
         }
 
         if (err.length() > 0) {
