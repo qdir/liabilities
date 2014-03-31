@@ -15,7 +15,7 @@ import javax.swing.UIManager;
 import javax.swing.JButton;
 
 /**
- * Class which displays and handles the Signature window behaviour
+ * Class which displays and handles the Signature window behavior
  * @author Emanuel Iosif Relea
  */
 

@@ -15,6 +15,7 @@ import static org.junit.Assert.*;
  *
  * @author Tania Pérez
  */
+
 public class CreateAccountCommandTest {
     
     public CreateAccountCommandTest() {
@@ -42,7 +43,7 @@ public class CreateAccountCommandTest {
     @Test
     public void testExecute() {
         System.out.println("execute");
-        CreateAccountCommand instance = null;
+        CreateAccountCommand instance = new CreateAccountCommand();
         instance.execute();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

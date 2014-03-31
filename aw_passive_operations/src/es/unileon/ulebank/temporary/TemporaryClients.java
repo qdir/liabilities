@@ -6,7 +6,9 @@ import es.unileon.ulebank.client.Client;
 import es.unileon.ulebank.client.handler.PersonHandler;
 import es.unileon.ulebank.client.types.Person;
 import es.unileon.ulebank.client.types.data.Address;
+import es.unileon.ulebank.handler.MalformedHandlerException;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 ////////////////////INCOMPLETO/////////////////////
@@ -19,15 +21,15 @@ public class TemporaryClients {
  
     private static ArrayList<Client> clients = new ArrayList<Client>();
     
-    public TemporaryClients(){
+    public TemporaryClients() throws MalformedHandlerException{
        
         Address addressTest = new Address("Jose maria fernandez", 20, 8, 'D', "Leon", "Leon", 25001);
         Client clientTest = new Person("Maria", "Fernandez Gomez", addressTest, "married",
-                                    666123456, 918456138, "estudiante" , 71463465, 'G');
+                                    666123456, 918456138, "estudiante" , 71463465, 'G', new Date(1995, 10, 5));
      clients.add(clientTest);
     }
     
-    public static Client findClient(int DNI, char letter){
+    public static Client findClient(int DNI, char letter) throws MalformedHandlerException{
         System.out.println("vamos a buscar");
         System.out.println("numero clientes: "+ clients.size());
         Client person = null;

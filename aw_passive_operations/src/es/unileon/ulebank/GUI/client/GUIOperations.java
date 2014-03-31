@@ -2,8 +2,7 @@
  group.*/
 package es.unileon.ulebank.GUI.client;
 
-import es.unileon.ulebank.GUI.account.AccountGUI;
-import es.unileon.ulebank.GUI.contractForm.ContractFormGUI;
+import com.toedter.calendar.JDateChooser;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import javax.swing.BorderFactory;
@@ -16,7 +15,7 @@ import javax.swing.JTextField;
  * @author Eva
  */
 public class GUIOperations extends JFrame {
-    private String startField = "Introduce el identificador del cliente";
+    private final String startField = "Introduce el identificador del cliente";
 
     /**
      * Validate the fields. If isn´t complete a red border appears in the
@@ -34,6 +33,18 @@ public class GUIOperations extends JFrame {
             text.setBorder(BorderFactory.createLineBorder(null));
         }
         return validate;
+    }
+    
+    public boolean validateBirthDate(JDateChooser datechooser){
+        boolean valid = false;
+        if(datechooser.getDate()==null){
+            valid =false;
+            datechooser.setBorder(BorderFactory.createLineBorder(Color.RED));
+        }else{
+            valid = true;
+            datechooser.setBorder(BorderFactory.createLineBorder(null));
+        }
+        return valid;
     }
 
     /**
@@ -106,8 +117,8 @@ public class GUIOperations extends JFrame {
     }
 
     public static void main(String[] args) {
-        //FindClientGUI fClients = new FindClientGUI();
-        AccountGUI gui = new AccountGUI();
+        FindClientGUI fClients = new FindClientGUI();
+        //AccountGUI gui = new AccountGUI();
         //ContractFormGUI contractGui = new ContractFormGUI();
     }
 }

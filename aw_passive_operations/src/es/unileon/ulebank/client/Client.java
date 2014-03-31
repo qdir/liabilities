@@ -6,71 +6,74 @@ package es.unileon.ulebank.client;
 import java.util.ArrayList;
 import es.unileon.ulebank.account.Account;
 import es.unileon.ulebank.handler.Handler;
+import java.util.Iterator;
 
 /**
- *
- * @author Gonzalo
+ *Class tha provides the basic gestion data of a client in a bank
+ * 
+ * @author Gonzalo Nicolas Barreales
  */
 public class Client {
-    private Handler id;
-    private ArrayList<Account> titularAccounts;
-    private ArrayList<Account> authorizedAccounts;
     
+    /**
+     * Identifier of the client
+     */
+    private Handler id;
+    
+    /**
+     * Accounts where the client appear
+     */
+    private ArrayList<Account> accounts;
+    
+    /**
+     * Constructor of client. Receive the id and initilize the list of accounts
+     * 
+     * @param clientHandler 
+     */
     public Client(Handler clientHandler){
-        titularAccounts = new ArrayList<Account>();
-        authorizedAccounts = new ArrayList<Account>();
+        accounts = new ArrayList<Account>();
         this.id=clientHandler;
     }
     
-    public void addTitularAccount(Account account){
-        if(!titularAccounts.contains(account)){
-            titularAccounts.add(account);
+    /**
+     * Adds an account to the list of clients. If the account exists, it won't be added
+     * 
+     * @param account 
+     */
+    public void add(Account account){
+        if(!accounts.contains(account)){
+            accounts.add(account);
         }
     }
     
-    public void addAuthorizedAccount(Account account){
-        if(!authorizedAccounts.contains(account)){
-            authorizedAccounts.add(account);
-        }
-    }
-    
-    public boolean removeTitularAccount(Handler accountHandler){
+    /**
+     * Remove the account identified with acountHandler
+     * 
+     * @param accountHandler
+     * @return true if account is deleted, false if account doesn't exists
+     */
+    public boolean removeAccount(Handler accountHandler){
         boolean result = false;
-        for(int i=0; i<titularAccounts.size(); i++){
-            Account account = titularAccounts.get(i);
+        Iterator<Account> iterator = accounts.iterator();
+        while(iterator.hasNext()){
+            Account account = iterator.next();
             if(account.getID().compareTo(accountHandler)==0){
-                result = titularAccounts.remove(account);
+                result = accounts.remove(account);
             }
         }
         return result;
     }
     
-    public boolean removeAuthorizedAccount(Handler accountHandler){
+    /**
+     * Check if the account idientified with account Handler exists
+     * @param accountHandler
+     * @return true if the account exists, false if it doesn't exists
+     */
+    public boolean existsAccount(Handler accountHandler){
         boolean result = false;
-        for(int i=0; i<authorizedAccounts.size(); i++){
-            Account account = authorizedAccounts.get(i);
-            if(account.getID().compareTo(accountHandler)==0){
-                result = authorizedAccounts.remove(account);
-            }
-        }
-        return result;
-    }
-    
-    public boolean existsTitularAccount(Handler accountHandler){
-        boolean result = false;
-        for(int i=0; i<titularAccounts.size(); i++){
-            Account account = titularAccounts.get(i);
-            if(account.getID().compareTo(accountHandler)==0){
-                result = true;
-            }
-        }
-        return result;
-    }
-    
-    public boolean existsAuthorizedAccount(Handler accountHandler){
-        boolean result = false;
-        for(int i=0; i<authorizedAccounts.size(); i++){
-            Account account = authorizedAccounts.get(i);
+        Iterator<Account> iterator = accounts.iterator();
+        while(iterator.hasNext()){
+            Account account = iterator.next();
             if(account.getID().compareTo(accountHandler)==0){
                 result = true;
             }
@@ -78,6 +81,9 @@ public class Client {
         return result;
     }
 
+    /**
+     * @return id of the client
+     */
     public Handler getId() {
         return id;
     }
