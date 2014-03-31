@@ -3,24 +3,53 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package es.unileon.ulebank.history;
 
-import java.util.Date;
+import es.unileon.ulebank.account.Account;
 import es.unileon.ulebank.handler.Handler;
+import java.util.Date;
 
 /**
  *
  * @author roobre
  */
 public abstract class Transaction {
+
+    private final Handler id;
+    private final double amount;
+    private final Date date;
+    private Date effectiveDate;
+    private final String subject;
+    private final Enum<TransactionType> type;
+    private Handler destination;
+    private Handler origin;
     
-    protected Handler id;
-    protected double amount;
-    protected Date date;
-    protected Date effectiveDate;
-    protected String subject;
-    protected Enum<TransactionType> type;
+    public Transaction(Handler id, double amount, Date date, String subject, Enum<TransactionType> type, Handler destination, Handler origin) {
+        this.id = id;
+        this.amount = amount;
+        this.date = date;
+        this.subject = subject;
+        this.type = type;
+        this.destination = destination;
+        this.origin = origin;
+    }
+
+    /**
+     * The transaction origin
+     * @return (The origin)
+     */
+    public Handler getOrigin() {
+        return this.origin;
+    }
+    
+    /**
+     * The transaction destination
+     *
+     * @return ( the destination )
+     */
+    public Handler getDestination() {
+        return this.destination;
+    }
 
     /**
      * @return the id
@@ -62,5 +91,22 @@ public abstract class Transaction {
      */
     public Enum<TransactionType> getType() {
         return type;
+    }
+
+    /**
+     * Set the effective date of the transaction This date, can be set only
+     * once. So, if you set the date once, you can modify it.
+     *
+     * @param effectiveDate ( Date to set )
+     */
+    public void setEffectiveDate(Date effectiveDate) {
+        if (this.effectiveDate == null) {
+            this.effectiveDate = date;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Transaction " + "id=" + id + ", amount=" + amount + ", date=" + date + ", effectiveDate=" + effectiveDate + ", subject=" + subject;
     }
 }

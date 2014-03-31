@@ -195,6 +195,7 @@ public abstract class Account {
      *
      * @throws TransactionException (if the subject or id is null or empty)
      */
+    @Deprecated
     public synchronized void doTransaction(Transaction transaction) throws TransactionException {
         StringBuilder err = new StringBuilder();
         if (transaction.getSubject() == null) {
@@ -228,6 +229,132 @@ public abstract class Account {
         if (success) {
             this.balance += transaction.getAmount();
             LOG.info("Did transaction with id : " + transaction.getId());
+        } else {
+            String error = "Cannot store the transaction\n";
+            LOG.error(error);
+            throw new TransactionException(error);
+        }
+    }
+
+    /**
+     *
+     * @param transaction
+     */
+    public synchronized void doWithdrawal(Transaction transaction) throws TransactionException {
+        StringBuilder err = new StringBuilder();
+        if (transaction.getSubject() == null) {
+            err.append("The subject cannot be null \n");
+        }
+
+        if (transaction.getSubject().length() == 0) {
+            err.append("Transaction length cannot be 0 \n");
+        }
+
+        if (transaction.getId() == null) {
+            err.append(("The id cannot be null \n"));
+        }
+
+        if (transaction.getId().toString().length() == 0) {
+            err.append(("The id size cannot be 0 \n"));
+        }
+
+        if (transaction.getDate() == null) {
+            err.append("The date cannot be null \n");
+        }
+
+        if (transaction.getEffectiveDate() == null) {
+            err.append("The effective date cannot be null \n");
+        }
+
+        if (transaction.getDestination() == null) {
+            err.append("The destination account id cannot be null \n");
+        }
+
+        if (transaction.getOrigin() == null) {
+            err.append("The origin cannot be null \n");
+        }
+
+        if (transaction.getAmount() > 0) {
+            err.append("Fail, the amount of money cannot be posive, for depositing money call doDeposit method\n");
+        }
+        if (err.length() > 0) {
+            LOG.error(err.toString());
+            throw new TransactionException(err.toString());
+        }
+        boolean success = this.history.addTransaction(transaction);
+        if (success) {
+            this.balance += transaction.getAmount();
+            try {
+                //TODO call doDeposit method of the other account!
+                transaction.setEffectiveDate(new Date(System.currentTimeMillis()));
+            } catch (Throwable t) {
+                this.balance -= transaction.getAmount();
+                this.history.remove(transaction);
+                String error = "Cannot complete the transaction. The  account will be restored to a previous state \n Cause : " + t.toString();
+                LOG.error(error);
+                throw new TransactionException(error);
+            }
+        } else {
+            String error = "Cannot store the transaction\n";
+            LOG.error(error);
+            throw new TransactionException(error);
+        }
+    }
+
+    /**
+     *
+     * @param transaction
+     */
+    public synchronized void doDeposit(Transaction transaction) throws TransactionException {
+        StringBuilder err = new StringBuilder();
+        if (transaction.getSubject() == null) {
+            err.append("The subject cannot be null \n");
+        }
+
+        if (transaction.getSubject().length() == 0) {
+            err.append("Transaction length cannot be 0 \n");
+        }
+
+        if (transaction.getId() == null) {
+            err.append(("The id cannot be null \n"));
+        }
+
+        if (transaction.getId().toString().length() == 0) {
+            err.append(("The id size cannot be 0 \n"));
+        }
+
+        if (transaction.getDate() == null) {
+            err.append("The date cannot be null \n");
+        }
+
+        if (transaction.getEffectiveDate() == null) {
+            err.append("The effective date cannot be null \n");
+        }
+
+        if (transaction.getDestination() == null) {
+            err.append("The destination account id cannot be null \n");
+        }
+
+        if (transaction.getDestination().compareTo(this.id) != 0) {
+            err.append("Fail, wrong destination \n");
+        }
+
+        if (transaction.getOrigin() == null) {
+            err.append("The origin cannot be null \n");
+        }
+        
+        if (transaction.getAmount() < 0) {
+            err.append("Fail, the amount cannot be negative. For getting money call doWithdrawal method");
+        }
+
+        if (err.length() > 0) {
+            LOG.error(err.toString());
+            throw new TransactionException(err.toString());
+        }
+        boolean success = this.history.addTransaction(transaction);
+        if (success) {
+            this.balance += transaction.getAmount();
+            transaction.setEffectiveDate(new Date(System.currentTimeMillis()));
         } else {
             String error = "Cannot store the transaction\n";
             LOG.error(error);

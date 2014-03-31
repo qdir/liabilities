@@ -45,6 +45,10 @@ public abstract class History<T extends Transaction> {
         return transactions;
     }
 
+    public boolean remove(Transaction t) {
+       return  this.transactions.remove(t);
+    }
+
     public Collection<T> getTransactions() {
         return new ArrayList<>(this.transactions);
     }
