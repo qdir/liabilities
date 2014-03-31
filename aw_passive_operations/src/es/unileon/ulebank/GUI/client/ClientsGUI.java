@@ -19,14 +19,12 @@ public class ClientsGUI extends GUIOperations {
     /*
      Creation of the button panel and the buttons
      */
-
     private PersonPanel personPanel;
     private EnterprisePanel enterprisePanel;
     private final JPanel buttonPanel;
     private final JButton continueButton;
     private final JButton cancelButton;
     private final JButton deleteField;
-
     /*
      Other variables
      */
@@ -45,9 +43,11 @@ public class ClientsGUI extends GUIOperations {
      * @param client
      * @param option
      */
+     
     public ClientsGUI(Client client, int option) {
+       
+        //TODO
         person = (Person) client;
-
         buttonPanel = new JPanel();
         continueButton = new JButton("CONTINUAR");
         cancelButton = new JButton("CANCELAR");
@@ -55,10 +55,12 @@ public class ClientsGUI extends GUIOperations {
 
         //Asignamos a la ventana principal el layout GridBagLayout
         this.setLayout(new BorderLayout());
+       //JScrollPane scrollPane = new JScrollPane(enterprisePanel);
+       //this.add(scrollPane);
         //tamaño de la ventana
         this.setSize(700, 400);
         //No se podra modificar el tamaño
-        this.setResizable(false);
+        //this.setResizable(false);
         this.setLocationRelativeTo(null);
 
         //Continue, reset and cancel buttons,used FlowLayout(izq a dcha)
@@ -70,6 +72,7 @@ public class ClientsGUI extends GUIOperations {
 
         if (option == 0) {
             personPanel = new PersonPanel(person);
+            
             this.add(personPanel, BorderLayout.CENTER);
 
             if (person != null) {
@@ -219,7 +222,8 @@ public class ClientsGUI extends GUIOperations {
             enterprisePanel = new EnterprisePanel();
             this.add(enterprisePanel, BorderLayout.CENTER);
         }
-            
+            JScrollPane scroll = new JScrollPane(enterprisePanel);
+            this.getContentPane().add(scroll);
             this.setVisible(true);
         
    
