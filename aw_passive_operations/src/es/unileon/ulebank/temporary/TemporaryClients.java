@@ -7,6 +7,8 @@ import es.unileon.ulebank.client.handler.PersonHandler;
 import es.unileon.ulebank.client.types.Person;
 import es.unileon.ulebank.client.types.data.Address;
 import es.unileon.ulebank.handler.MalformedHandlerException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -21,11 +23,12 @@ public class TemporaryClients {
  
     private static ArrayList<Client> clients = new ArrayList<Client>();
     
-    public TemporaryClients() throws MalformedHandlerException{
-       
+    public TemporaryClients() throws MalformedHandlerException, ParseException{
+       SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+	Date date = sdf.parse("01/05/1993");
         Address addressTest = new Address("Jose maria fernandez", 20, 8, 'D', "Leon", "Leon", 25001);
         Client clientTest = new Person("Maria", "Fernandez Gomez", addressTest, "married",
-                                    666123456, 918456138, "estudiante" , 71463465, 'G', new Date(1995, 10, 5));
+                                    666123456, 918456138, "estudiante" , 71463465, 'G', date);
      clients.add(clientTest);
     }
     
