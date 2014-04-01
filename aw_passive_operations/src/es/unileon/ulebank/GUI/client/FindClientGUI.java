@@ -129,6 +129,7 @@ public class FindClientGUI extends GUIOperations {
                     if (DNIButton.isSelected()) {
                         try {
                             option = 0;
+                            System.out.println(option);
                             System.out.println("El dni introducido es: " + dniFinder.getText());
                             //Sacamos la letra
                             Character caracter = dniFinder.getText().charAt(dniFinder.getText().length() - 1);
@@ -146,17 +147,6 @@ public class FindClientGUI extends GUIOperations {
             }
         });
 
-        find.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                if (DNIButton.isSelected()) {
-                    System.out.println("la eleccion es DNI");
-                } else if (CIFButton.isSelected()) {
-                    System.out.println("la eleccion es CIF");
-                }
-            }
-        });
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }

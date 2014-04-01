@@ -71,10 +71,11 @@ public class ClientsGUI extends GUIOperations {
         add(buttonPanel, BorderLayout.SOUTH);
 
         if (option == 0) {
+           
             personPanel = new PersonPanel(person);
             
             this.add(personPanel, BorderLayout.CENTER);
-
+ System.out.println("estamos en la ventana del dni");
             if (person != null) {
                 personPanel.getNameText().setText(person.getName());
                 personPanel.getSurnameText().setText(person.getSurnames());
@@ -221,9 +222,10 @@ public class ClientsGUI extends GUIOperations {
         }else if (option== 1){
             enterprisePanel = new EnterprisePanel();
             this.add(enterprisePanel, BorderLayout.CENTER);
-        }
             JScrollPane scroll = new JScrollPane(enterprisePanel);
             this.getContentPane().add(scroll);
+        }
+
             this.setVisible(true);
         
    
