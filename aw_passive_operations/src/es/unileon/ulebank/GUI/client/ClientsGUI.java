@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
@@ -178,6 +179,8 @@ public class ClientsGUI extends GUIOperations {
                                 //Test
                                 clientT = new TemporaryClients();
                             } catch (MalformedHandlerException ex) {
+                                Logger.getLogger(ClientsGUI.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (ParseException ex) {
                                 Logger.getLogger(ClientsGUI.class.getName()).log(Level.SEVERE, null, ex);
                             }
                             clientT.addClient(person);
