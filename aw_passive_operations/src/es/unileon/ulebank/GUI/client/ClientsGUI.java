@@ -45,7 +45,7 @@ public class ClientsGUI extends GUIOperations {
      */
      
     public ClientsGUI(Client client, int option) {
-       
+       this.setTitle("ULE BANK: Cliente");
         //TODO
         person = (Person) client;
         buttonPanel = new JPanel();
@@ -55,8 +55,7 @@ public class ClientsGUI extends GUIOperations {
 
         //Asignamos a la ventana principal el layout GridBagLayout
         this.setLayout(new BorderLayout());
-       //JScrollPane scrollPane = new JScrollPane(enterprisePanel);
-       //this.add(scrollPane);
+       
         //tamaño de la ventana
         this.setSize(700, 400);
         //No se podra modificar el tamaño
@@ -227,7 +226,5 @@ public class ClientsGUI extends GUIOperations {
         }
 
             this.setVisible(true);
-        
-   
     }
 }

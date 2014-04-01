@@ -38,7 +38,7 @@ public class FindClientGUI extends GUIOperations {
      * Constructor of the class. In that we create the window
      */
     public FindClientGUI()  {
-        
+        this.setTitle("ULE BANK");
         //Variables
         dniFinder = new JTextField(startField, 20);
         dniFinder.setEditable(false);
