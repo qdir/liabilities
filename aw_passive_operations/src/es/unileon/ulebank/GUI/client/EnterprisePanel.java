@@ -25,27 +25,27 @@ public class EnterprisePanel extends JPanel {
     //Address Company
     private final JLabel companyAddress;
     private final JLabel contactCompanyAddress;
+    private final JLabel otherInformation;
     
-    private AddressPanel enterpriseAddress;
-    private AddressPanel contactAddress;
-    /*private final JLabel address;
+   
+    private final JLabel address;
     private final JLabel number;
     private final JLabel portal;
     private final JLabel locality;
     private final JLabel postalCode;
     private final JLabel city;
-    private final JLabel door;*/
+    private final JLabel door;
     //
     private final JLabel phone;
     private final JLabel fax;
     //Address Contact
-    /*private final JLabel contactAddress;
+    private final JLabel contactAddress;
     private final JLabel contactNumber;
     private final JLabel contactPortal;
     private final JLabel contactLocality;
     private final JLabel contactPostalCode;
     private final JLabel contactCity;
-    private final JLabel contactDoor;*/
+    private final JLabel contactDoor;
     //
     private final JLabel contactPerson;
     private final JLabel position;
@@ -61,24 +61,24 @@ public class EnterprisePanel extends JPanel {
      */
     private JTextField businessNameText; //Razon Social
     //Address Company
-   /* private JTextField enterpriseAddressText;
+    private JTextField enterpriseAddressText;
     private JTextField numberText;
     private JTextField portalText;
     private JTextField localityText;
     private JTextField postalCodeText;
     private JTextField cityText;
-    private JTextField doorText;*/
+    private JTextField doorText;
     //
     private JTextField phoneText;
     private JTextField faxText;
     //Address Contact
-   /* private JTextField contactAddressText;
+    private JTextField contactAddressText;
     private JTextField contactNumberText;
     private JTextField contactPortalText;
     private JTextField contactLocalityText;
     private JTextField contactPostalCodeText;
     private JTextField contactCityText;
-    private JTextField contactDoorText;*/
+    private JTextField contactDoorText;
     //
     private JTextField contactPersonText;
     private JTextField positionText;
@@ -95,63 +95,63 @@ public class EnterprisePanel extends JPanel {
         /*
         Declaration of labels
         */
-        companyAddress = new JLabel("DIRECCION DE LA EMPRESA", JLabel.CENTER);
-        contactCompanyAddress = new JLabel("DIRECCION DE CONTACTO", JLabel.CENTER);
+        companyAddress = new JLabel("<html><u><bold><b1>DIRECCION DE LA EMPRESA</u></bold></b1></html>", JLabel.CENTER);
+        contactCompanyAddress = new JLabel("<html><u><bold><b1>DIRECCION DE CONTACTO</u></bold></b1></html>", JLabel.CENTER);
+        otherInformation = new JLabel("<html><u><bold><b1>OTROS DATOS</u></bold></b1></html>", JLabel.CENTER);
         
-        
-        businessName = new JLabel("*Razón social: "); //Razon Social
+        businessName = new JLabel("*Razón social: ", JLabel.RIGHT); //Razon Social
         //Address Company
-        /*address = new JLabel("*Calle: ");
-        number = new JLabel("Numero: ");
-        portal = new JLabel("Portal: ");
-        locality = new JLabel("*Localidad: ");
-        postalCode = new JLabel("*Codigo Postal: ");
-        city = new JLabel("*Provincia: ");
-        door = new JLabel("Puerta: ");*/
+        address = new JLabel("*Calle: ", JLabel.RIGHT);
+        number = new JLabel("Numero: ", JLabel.RIGHT);
+        portal = new JLabel("Portal: ", JLabel.RIGHT);
+        locality = new JLabel("*Localidad: ", JLabel.RIGHT);
+        postalCode = new JLabel("*Codigo Postal: ", JLabel.RIGHT);
+        city = new JLabel("*Provincia: ", JLabel.RIGHT);
+        door = new JLabel("Puerta: ", JLabel.RIGHT);
         /////////////////////
-        phone = new JLabel("*Telefono: ");
-        fax = new JLabel("*Fax: ");
+        phone = new JLabel("*Telefono: ", JLabel.RIGHT);
+        fax = new JLabel("*Fax: ", JLabel.RIGHT);
         //Address Contact
-        /*contactAddress = new JLabel("Direccion de contacto: ");
-        contactNumber = new JLabel("Numero: ");
-        contactPortal = new JLabel("Portal: ");
-        contactLocality = new JLabel("Localidad: ");
-        contactPostalCode = new JLabel("Codigo Postal: ");
-        contactCity = new JLabel("Provincia: ");
-        contactDoor = new JLabel("Puerta: ");*/
+        contactAddress = new JLabel("*Calle: ", JLabel.RIGHT);
+        contactNumber = new JLabel("Numero: ", JLabel.RIGHT);
+        contactPortal = new JLabel("Portal: ", JLabel.RIGHT);
+        contactLocality = new JLabel("*Localidad: ", JLabel.RIGHT);
+        contactPostalCode = new JLabel("*Codigo Postal: ", JLabel.RIGHT);
+        contactCity = new JLabel("*Provincia: ", JLabel.RIGHT);
+        contactDoor = new JLabel("Puerta: ", JLabel.RIGHT);
         /////////////////////
-        contactPerson = new JLabel("*Persona de contacto: ");
-        position = new JLabel("*cargo: ");
-        creationDate = new JLabel("*Fecha de constitucion: ");
-        CIF = new JLabel("*CIF: ");
-        CNAE = new JLabel("*CNAE: ");
-        legalForm = new JLabel("Forma jurídica: ");//Desplegable opciones
-        sector = new JLabel("Sector: ");
-        email = new JLabel("*E-mail: ");
+        contactPerson = new JLabel("*Persona de contacto: ", JLabel.RIGHT);
+        position = new JLabel("*cargo: ", JLabel.RIGHT);
+        creationDate = new JLabel("*Fecha de constitucion: ", JLabel.RIGHT);
+        CIF = new JLabel("*CIF: ", JLabel.RIGHT);
+        CNAE = new JLabel("*CNAE: ", JLabel.RIGHT);
+        legalForm = new JLabel("*Forma jurídica: ", JLabel.RIGHT);//Desplegable opciones
+        sector = new JLabel("*Sector: ", JLabel.RIGHT);
+        email = new JLabel("*E-mail: ", JLabel.RIGHT);
 
         /*
         Declaration of fields
         */
         businessNameText = new JTextField(10); //Razon Social
         //Address Company
-        /*enterpriseAddressText = new JTextField(20);
+        enterpriseAddressText = new JTextField(20);
         numberText = new JTextField(4);
         portalText = new JTextField(4);
         localityText = new JTextField(4);
         postalCodeText = new JTextField(4);
         cityText = new JTextField(4);
-        doorText = new JTextField(4);*/
+        doorText = new JTextField(4);
         //
         phoneText = new JTextField(10);
         faxText = new JTextField(10);
         //Address Contact
-       /* contactAddressText = new JTextField();
+        contactAddressText = new JTextField();
         contactNumberText = new JTextField();
         contactPortalText = new JTextField();
         contactLocalityText = new JTextField();
         contactPostalCodeText = new JTextField();
         contactCityText = new JTextField();
-        contactDoorText = new JTextField();*/
+        contactDoorText = new JTextField();
         //
         contactPersonText = new JTextField(10);
         positionText = new JTextField(10);
@@ -190,12 +190,10 @@ public class EnterprisePanel extends JPanel {
         constr.insets = new Insets(20, 0, 10, 0);
         constr.gridwidth = GridBagConstraints.REMAINDER;
         this.add(companyAddress, constr);
-        //constr.insets = new Insets(5, 0, 0, 0);
-        //constr.gridwidth = 1;//Ocupa solo una fila
-        enterpriseAddress = new AddressPanel();
-        enterpriseAddress.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        this.add(enterpriseAddress,constr);
-        /*this.add(address, constr);
+        constr.insets = new Insets(5, 0, 0, 0);
+        constr.gridwidth = 1;//Ocupa solo una fila
+      
+        this.add(address, constr);
         constr.gridwidth = GridBagConstraints.REMAINDER; //salto de linea
         this.add(enterpriseAddressText, constr);
         //Address: Portal
@@ -219,21 +217,16 @@ public class EnterprisePanel extends JPanel {
         //Address: city
         this.add(city, constr);
         constr.gridwidth = GridBagConstraints.REMAINDER;
-        this.add(cityText, constr);*/
-        
+        this.add(cityText, constr);        
         
         //Contact Address: Street
         constr.gridwidth = GridBagConstraints.REMAINDER;
         constr.insets = new Insets(20, 0, 10, 0);
         this.add(contactCompanyAddress, constr);
         
-        //constr.insets = new Insets(5, 0, 0, 0);
-        //constr.gridwidth = 1;//Ocupa solo una fila
-        //constr.gridwidth = GridBagConstraints.REMAINDER;
-        contactAddress = new AddressPanel();
-        contactAddress.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        constr.insets = new Insets(5, 0, 0, 0);
+        constr.gridwidth = 1;//Ocupa solo una fila
         this.add(contactAddress, constr);
-        /*this.add(contactAddress, constr);
         
         constr.gridwidth = GridBagConstraints.REMAINDER; //salto de linea
         this.add(contactAddressText, constr);
@@ -259,8 +252,12 @@ public class EnterprisePanel extends JPanel {
         //Address: city
         this.add(contactCity, constr);
         constr.gridwidth = GridBagConstraints.REMAINDER;
-        this.add(contactCityText, constr);*/
+        this.add(contactCityText, constr);
 
+        //Other information
+        constr.insets = new Insets(20, 0, 10, 0);
+        constr.gridwidth = GridBagConstraints.REMAINDER;
+        this.add(otherInformation, constr);
         //Phone and Fax
         constr.insets = new Insets(5, 0, 0, 0);
         constr.gridwidth = 1;
