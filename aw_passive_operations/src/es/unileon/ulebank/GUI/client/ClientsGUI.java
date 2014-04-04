@@ -1,5 +1,6 @@
 package es.unileon.ulebank.GUI.client;
 
+import es.unileon.ulebank.GUI.account.AccountGUI;
 import es.unileon.ulebank.client.Client;
 import es.unileon.ulebank.client.types.Person;
 import es.unileon.ulebank.client.types.data.Address;
@@ -22,10 +23,10 @@ public class ClientsGUI extends GUIOperations {
      */
     private PersonPanel personPanel;
     private EnterprisePanel enterprisePanel;
-    private final JPanel buttonPanel;
-    private final JButton continueButton;
-    private final JButton cancelButton;
-    private final JButton deleteField;
+    private JPanel buttonPanel;
+    private JButton continueButton;
+    private JButton cancelButton;
+    private JButton deleteField;
     /*
      Other variables
      */
@@ -47,6 +48,15 @@ public class ClientsGUI extends GUIOperations {
      
     public ClientsGUI(Client client, int option) {
        this.setTitle("ULE BANK: Cliente");
+       createWindow(client, option, null,null);
+    }
+     public ClientsGUI(Client client, int option, JTextField other,AccountGUI accountWindow) {
+       this.setTitle("ULE BANK: Cliente");
+       createWindow(client, option, other,accountWindow);
+    }
+    
+    
+     private void createWindow(Client client, int option, final JTextField otherClient, final AccountGUI accountWindow){
         //TODO
         person = (Person) client;
         buttonPanel = new JPanel();
@@ -165,12 +175,16 @@ public class ClientsGUI extends GUIOperations {
                             ex.printStackTrace();
                         }
                         //THIRD
+                        //String birthdate = jdateChooser.getDateFormatString();
+                        //System.out.println("su nacimientos es: "+birthdate);
                         if (Character.isLetter(caracter)) {
                             System.out.println("Es una letra");
-                            Address finalAddress = new Address(personPanel.getAddressText().getText(), Integer.parseInt(personPanel.getPortalText().getText()), Integer.parseInt(personPanel.getNumberText().getText()), (char) 0, personPanel.getLocalityText().getText(), personPanel.getCityText().getText(), Integer.parseInt(personPanel.getPostalCodeText().getText()));
+                            //Address finalAddress = new Address(personPanel.getAddressText().getText(), Integer.parseInt(personPanel.getPortalText().getText()), Integer.parseInt(personPanel.getNumberText().getText()), personPanel.getLetterText().getText().charAt(0), personPanel.getLocalityText().getText(), personPanel.getCityText().getText(), Integer.parseInt(personPanel.getPostalCodeText().getText()));
                             Person person = null;
+                            
                             try {
-                                person = new Person(personPanel.getNameText().getText(), personPanel.getSurnameText().getText(), null, personPanel.getMaritalStatusText().getText(), Integer.parseInt(personPanel.getPhoneText1().getText()), phone2, null, dni, caracter, jdateChooser.getDate());
+                                person = new Person(personPanel.getNameText().getText(),personPanel.getSurnameText().getText(), null, personPanel.getMaritalStatusText().getText(), Integer.parseInt(personPanel.getPhoneText1().getText()), phone2, null, dni, caracter, personPanel.getJdateChooser().getDate());
+                            
                             } catch (MalformedHandlerException ex) {
                                 Logger.getLogger(ClientsGUI.class.getName()).log(Level.SEVERE, null, ex);
                             }
@@ -187,9 +201,15 @@ public class ClientsGUI extends GUIOperations {
 
                         }
 
+                        if(otherClient!=null){
+                            //System.out.println(person.getName());
+                            //otherClient.setText(personPanel.getName());
+                          accountWindow.getHolderText1().setText(personPanel.getNameText().getText());
+                          accountWindow.repaint();
+                        }
                     //Obtener fecha(PRUEBAS)
-                        Date date = jdateChooser.getDate();
-                        System.out.println("La fecha elegida es: " + date);
+                        
+                        //System.out.println("La fecha elegida es: " + date);
                         /*Aqui se pasa a la ventana de los autorizados
                          pasandole: person y el tipo del seleccionable
                          */
@@ -227,7 +247,7 @@ public class ClientsGUI extends GUIOperations {
             JScrollPane scroll = new JScrollPane(enterprisePanel);
             this.getContentPane().add(scroll);
         }
-
-            this.setVisible(true);
-    }
+         
+        this.setVisible(true);
+        }
 }

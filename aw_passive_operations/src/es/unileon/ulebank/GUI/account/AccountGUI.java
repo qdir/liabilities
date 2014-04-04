@@ -1,5 +1,6 @@
 package es.unileon.ulebank.GUI.account;
 
+import es.unileon.ulebank.GUI.client.ClientsGUI;
 import es.unileon.ulebank.GUI.client.FindClientGUI;
 import es.unileon.ulebank.GUI.client.GUIOperations;
 import es.unileon.ulebank.GUI.client.PersonPanel;
@@ -27,6 +28,14 @@ public class AccountGUI extends GUIOperations {
 	
         private JLabel accountData;                  
         private JLabel accountNumber;
+
+    public JTextField getHolderText1() {
+        return holderText1;
+    }
+
+    public void setHolderText1(JTextField holderText1) {
+        this.holderText1 = holderText1;
+    }
 	private JLabel mode;
 	private JLabel coin;
 	private JLabel availability;
@@ -87,9 +96,10 @@ public class AccountGUI extends GUIOperations {
         private JLabel blanco;
         private int countHolder;
         private int countAuthorized;
+        private AccountGUI window;
         
 	public AccountGUI() {
-		
+            
             contentPaneUno = new JPanel();
             
             accountData = new JLabel("DATOS DE LA CUENTA");          
@@ -404,6 +414,7 @@ public class AccountGUI extends GUIOperations {
             constraints.gridy = 15;
             contentPaneUno.add(conti, constraints);
             
+            window= this;
             
             holder1.setVisible(false);
             holderText1.setVisible(false);
@@ -458,6 +469,7 @@ public class AccountGUI extends GUIOperations {
                                          DNI1.setVisible(true);
                                          DNIText1.setVisible(true);
                                          deleteHolder1.setVisible(true);
+                                         ClientsGUI cgui = new ClientsGUI(null, 0, holderText1,window);
                                          break;
                                      case 2: 
                                          holder2.setVisible(true);
