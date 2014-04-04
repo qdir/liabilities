@@ -6,6 +6,7 @@ import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.history.History;
 import es.unileon.ulebank.history.Transaction;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,6 +34,30 @@ public class AccountHistory {
             }
         }
         return remove;
+    }
+
+    public List<AccountEntry> getTransactionsFrom(Date beginning) {
+        List<AccountEntry> transactions = new ArrayList<>();
+        if (beginning != null) {
+            for (AccountEntry actual : this.entries) {
+                if (beginning.before(actual.getEffectiveDate())) {
+                    transactions.add(actual);
+                }
+            }
+        }
+        return transactions;
+    }
+
+    public List<AccountEntry> getTransactionsBetween(Date beginning, Date end) {
+        List<AccountEntry> transactions = new ArrayList<>();
+        if (beginning != null) {
+            for (AccountEntry actual : this.entries) {
+                if (beginning.before(actual.getEffectiveDate()) && end.after(actual.getEffectiveDate())) {
+                    transactions.add(actual);
+                }
+            }
+        }
+        return transactions;
     }
 
     public List<AccountEntry> getHistory() {
