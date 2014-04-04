@@ -178,7 +178,7 @@ public class CommercialAccountTest {
         
         assertTrue(this.commercialAccount.checkInconsistences());
         
-        doTransactions = this.commercialAccount.getTransactions();
+        doTransactions = this.commercialAccount.getHistory();
         
         assertEquals(doTransactions.size(), 3, 3);
         

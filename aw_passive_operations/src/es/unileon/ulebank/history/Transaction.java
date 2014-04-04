@@ -21,26 +21,16 @@ public abstract class Transaction {
     private final String subject;
     private final Enum<TransactionType> type;
     private final Handler destination;
-    private final Handler origin;
-    
-    public Transaction(Handler id, double amount, Date date, String subject, Enum<TransactionType> type, Handler destination, Handler origin) {
+
+    public Transaction(Handler id, double amount, Date date, String subject, Enum<TransactionType> type, Handler destination) {
         this.id = id;
         this.amount = amount;
         this.date = date;
         this.subject = subject;
         this.type = type;
         this.destination = destination;
-        this.origin = origin;
     }
 
-    /**
-     * The transaction origin
-     * @return (The origin)
-     */
-    public Handler getOrigin() {
-        return this.origin;
-    }
-    
     /**
      * The transaction destination
      *

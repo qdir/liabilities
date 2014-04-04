@@ -9,7 +9,6 @@ import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.office.Office;
-import es.unileon.ulebank.transaction.TransactionDestination;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,29 +53,14 @@ public class Bank {
         return false;
     }
 
-    public void doWithDrawal(Transaction t, TransactionDestination destination) throws MalformedHandlerException, TransactionException {
+    public void doTransaction(Transaction t) throws MalformedHandlerException, TransactionException {
         if (t != null && t.getDestination() != null) {
             Handler office = new AccountHandler(t.getDestination()).getOfficeHandler();
             boolean finish = false;
             for (int i = 0; i < this.offices.size() && !finish; i++) {
                 if (this.offices.get(i).getID().compareTo(office) == 0) {
                     finish = true;
-                    this.offices.get(i).doWithdrawal(t, destination);
-                }
-            }
-        } else {
-            throw new TransactionException(("The transaction cannot be null or destination be null"));
-        }
-    }
-
-    public void doDeposit(Transaction t) throws MalformedHandlerException, TransactionException {
-        if (t != null && t.getDestination() != null) {
-            Handler office = new AccountHandler(t.getDestination()).getOfficeHandler();
-            boolean finish = false;
-            for (int i = 0; i < this.offices.size() && !finish; i++) {
-                if (this.offices.get(i).getID().compareTo(office) == 0) {
-                    finish = true;
-                    this.offices.get(i).doDeposit(t);
+                    this.offices.get(i).doTransaction(t);
                 }
             }
         } else {

@@ -2,7 +2,9 @@ package es.unileon.ulebank.account;
 
 import es.unileon.ulebank.account.exception.TransactionException;
 import es.unileon.ulebank.account.handler.AccountHandler;
+import es.unileon.ulebank.account.history.AccountEntry;
 import es.unileon.ulebank.account.history.AccountHistory;
+import es.unileon.ulebank.account.history.DetailedInformation;
 import es.unileon.ulebank.account.liquidation.LiquidationStrategy;
 import es.unileon.ulebank.bank.Bank;
 import es.unileon.ulebank.client.Client;
@@ -13,7 +15,6 @@ import es.unileon.ulebank.history.History;
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.history.TransactionType;
 import es.unileon.ulebank.office.Office;
-import es.unileon.ulebank.transaction.TransactionDestination;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -49,7 +50,7 @@ public abstract class Account {
     /**
      * The history of the account
      */
-    private final History<Transaction> history;
+    private final AccountHistory history;
     /**
      * The strategy to liquidate the account
      */
@@ -180,8 +181,7 @@ public abstract class Account {
      * @return ( True if the account is consistent, and false otherwise)
      */
     public boolean checkInconsistences() {
-        Collection<Transaction> trans = this.getTransactions();
-        Iterator<Transaction> iterator = trans.iterator();
+        Iterator<AccountEntry> iterator = this.getHistory().getHistory().iterator();
         double balance = 0.0d;
         while (iterator.hasNext()) {
             balance += iterator.next().getAmount();
@@ -193,10 +193,9 @@ public abstract class Account {
      * Withdraw money from the account and put into the destination.
      *
      * @param transaction
-     * @param destination
      * @throws es.unileon.ulebank.account.exception.TransactionException
      */
-    public synchronized void doWithdrawal(Transaction transaction, TransactionDestination destination) throws TransactionException {
+    public synchronized void doWithdrawal(Transaction transaction) throws TransactionException {
         StringBuilder err = new StringBuilder();
         if (transaction.getSubject() == null) {
             err.append("The subject cannot be null \n");
@@ -204,6 +203,10 @@ public abstract class Account {
 
         if (transaction.getSubject().length() == 0) {
             err.append("Transaction length cannot be 0 \n");
+        }
+
+        if (transaction.getType() != TransactionType.CHARGE) {
+            err.append("Withdrawal operations must be " + TransactionType.CHARGE + " type\n");
         }
 
         if (transaction.getId() == null) {
@@ -222,33 +225,19 @@ public abstract class Account {
             err.append("The destination account id cannot be null \n");
         }
 
-        if (transaction.getOrigin() == null) {
-            err.append("The origin cannot be null \n");
-        }
-
-        if (transaction.getAmount() >= 0) {
-            err.append("Fail, the amount of money must be less than zero, for depositing money call doDeposit method\n");
+        if (transaction.getAmount() < 0) {
+            err.append("Fail, the amount of money cannot be less than zero\n");
         }
         if (err.length() > 0) {
             LOG.error(err.toString());
             throw new TransactionException(err.toString());
         }
-        boolean success = this.history.addTransaction(transaction);
+        DetailedInformation extraInformation = new DetailedInformation();
+        AccountEntry accountEntry = new AccountEntry(transaction.getType(), transaction.getAmount(), transaction.getSubject(), transaction.getId(), transaction.getDate(), transaction.getEffectiveDate(), extraInformation);
+        boolean success = this.history.appendEntry(accountEntry);
         if (success) {
-            this.balance += transaction.getAmount();
-            try {
-
-                Transaction move = new GenericTransaction(id, -transaction.getAmount(), transaction.getDate(), transaction.getSubject(), TransactionType.CHARGE, transaction.getOrigin(), this.id
-                );
-                destination.forwardTransaction(move);
-                transaction.setEffectiveDate(new Date(System.currentTimeMillis()));
-            } catch (TransactionException | MalformedHandlerException t) {
-                this.balance -= transaction.getAmount();
-                this.history.remove(transaction);
-                String error = "Cannot complete the transaction. The  account will be restored to a previous state \n Cause : " + t.toString();
-                LOG.error(error);
-                throw new TransactionException(error);
-            }
+            this.balance -= transaction.getAmount();
+            transaction.setEffectiveDate(new Date(System.currentTimeMillis()));
         } else {
             String error = "Cannot store the transaction\n";
             LOG.error(error);
@@ -276,6 +265,10 @@ public abstract class Account {
             err.append(("The id cannot be null \n"));
         }
 
+        if (transaction.getType() != TransactionType.PAYMENT) {
+            err.append("Deposit operations must be" + TransactionType.PAYMENT + " type\n");
+        }
+
         if (transaction.getId().toString().length() == 0) {
             err.append(("The id size cannot be 0 \n"));
         }
@@ -292,19 +285,17 @@ public abstract class Account {
             err.append("Fail, wrong destination \n");
         }
 
-        if (transaction.getOrigin() == null) {
-            err.append("The origin cannot be null \n");
-        }
-
-        if (transaction.getAmount() <= 0) {
-            err.append("Fail, the amount must be greater than zero. For getting money call doWithdrawal method");
+        if (transaction.getAmount() < 0) {
+            err.append("Fail, the amount of money cannot be less than zero\n");
         }
 
         if (err.length() > 0) {
             LOG.error(err.toString());
             throw new TransactionException(err.toString());
         }
-        boolean success = this.history.addTransaction(transaction);
+        DetailedInformation extraInformation = new DetailedInformation();
+        AccountEntry accountEntry = new AccountEntry(transaction.getType(), transaction.getAmount(), transaction.getSubject(), transaction.getId(), transaction.getDate(), transaction.getEffectiveDate(), extraInformation);
+        boolean success = this.history.appendEntry(accountEntry);
         if (success) {
             this.balance += transaction.getAmount();
             transaction.setEffectiveDate(new Date(System.currentTimeMillis()));
@@ -329,8 +320,8 @@ public abstract class Account {
      *
      * @return (The transactions)
      */
-    public Collection<Transaction> getTransactions() {
-        return this.history.getTransactions();
+    public AccountHistory getHistory() {
+        return this.history;
     }
 
     /**

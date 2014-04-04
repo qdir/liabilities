@@ -21,9 +21,8 @@ public class GenericTransaction extends Transaction {
      * @param subject ( Transaction subject )
      * @param type (Transaction type)
      * @param destination
-     * @param origin
      */
-    public GenericTransaction(Handler id, double amount, Date date, String subject, TransactionType type, Handler destination, Handler origin) {
-        super(id, amount, date, subject, type, destination, origin);
+    public GenericTransaction(Handler id, double amount, Date date, String subject, TransactionType type, Handler destination) {
+        super(id, amount, date, subject, type, destination);
     }
 }

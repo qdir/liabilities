@@ -229,7 +229,7 @@ public class SightAccountTest {
         
         assertTrue(this.sightAccount.checkInconsistences());
         
-        doTransactions = this.sightAccount.getTransactions();
+        doTransactions = this.sightAccount.getHistory();
         
         assertEquals(doTransactions.size(), 3, 3);
         
