@@ -48,7 +48,7 @@ public class Bank {
         return false;
     }
 
-    public boolean removeBank(Handler office) {
+    public boolean removeOffice(Handler office) {
         boolean removed = false;
         if (office != null) {
             for (int i = 0; i < offices.size() && !removed; ++i) {
