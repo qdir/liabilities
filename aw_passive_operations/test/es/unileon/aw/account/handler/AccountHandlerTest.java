@@ -1150,6 +1150,9 @@ public class AccountHandlerTest {
         Handler handlerFromRaw = new AccountHandler(new GenericHandler(office.getID().toString() + bank.getID().toString() + this.dc + this.accountNumber)
         );
         assertEquals(this.accountHandler1.compareTo(handlerFromRaw), 0);
+
+        Handler generic = new GenericHandler(handler.toString());
+        assertEquals(this.accountHandler1.compareTo(generic), 0);
     }
 
     @Test
@@ -1163,6 +1166,8 @@ public class AccountHandlerTest {
         Handler handlerFromRaw = new AccountHandler(new GenericHandler(new GenericHandler("9999") + bank.getID().toString() + this.dc + this.accountNumber)
         );
         assertNotSame(this.accountHandler1.compareTo(handlerFromRaw), 0);
+        Handler generic = new GenericHandler(handler.toString() + ".");
+        assertNotSame(this.accountHandler1.compareTo(generic), 0);
     }
 
     @Test
