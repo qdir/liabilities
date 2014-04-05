@@ -43,22 +43,26 @@ public class Office {
     public void doTransaction(Transaction t) throws TransactionException, MalformedHandlerException {
         boolean finish = false;
         StringBuilder error = new StringBuilder();
-        AccountHandler handler = new AccountHandler(t.getDestination());
-        if (handler.getBankHandler().compareTo(this.bank.getID()) == 0 && handler.getOfficeHandler().compareTo(this.id) == 0) {
-            for (int i = 0; i < accounts.size() && !finish; i++) {
-                if (accounts.get(i).getID().compareTo(t.getDestination()) == 0) {
-                    if (t.getType() == TransactionType.CHARGE) {
-                        accounts.get(i).doWithdrawal(t);
-                    } else if (t.getType() == TransactionType.PAYMENT) {
-                        accounts.get(i).doDeposit(t);
-                    } else {
-                        error.append("Error, transaction not supported ").append(t.getType()).append("\n");
+        if (t != null && t.getDestination() != null) {
+            AccountHandler handler = new AccountHandler(t.getDestination());
+            if (handler.getBankHandler().compareTo(this.bank.getID()) == 0 && handler.getOfficeHandler().compareTo(this.id) == 0) {
+                for (int i = 0; i < accounts.size() && !finish; i++) {
+                    if (accounts.get(i).getID().compareTo(t.getDestination()) == 0) {
+                        if (t.getType() == TransactionType.CHARGE) {
+                            accounts.get(i).doWithdrawal(t);
+                        } else if (t.getType() == TransactionType.PAYMENT) {
+                            accounts.get(i).doDeposit(t);
+                        } else {
+                            error.append("Error, transaction not supported ").append(t.getType()).append("\n");
+                        }
+                        finish = true;
                     }
-                    finish = true;
                 }
+            } else {
+                this.bank.doTransaction(t);
             }
         } else {
-            this.bank.doTransaction(t);
+            error.append(("The transaction cannot be null or destination be null"));
         }
 
         if (error.length() > 0) {
