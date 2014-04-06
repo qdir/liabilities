@@ -204,7 +204,7 @@ public class ClientsGUI extends GUIOperations {
                         if(otherClient!=null){
                             //System.out.println(person.getName());
                             //otherClient.setText(personPanel.getName());
-                          accountWindow.getHolderText1().setText(personPanel.getNameText().getText());
+                          //accountWindow.getHolderText1().setText(personPanel.getNameText().getText());
                           accountWindow.repaint();
                         }
                     //Obtener fecha(PRUEBAS)
