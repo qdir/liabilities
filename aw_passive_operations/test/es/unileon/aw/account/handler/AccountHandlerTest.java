@@ -634,512 +634,556 @@ public class AccountHandlerTest {
      */
     @Test(expected = MalformedHandlerException.class)
     public void testMoreBankHandlerLengthParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00000000000000000000000"));
+        new AccountHandler(new GenericHandler("00000-0000-00-000000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreBankHandlerLengthWithCharacterIn1PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("a0000000000000000000000"));
+        new AccountHandler(new GenericHandler("a0000-0000-00-000000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreBankHandlerLengthWithCharacterIn2PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0a000000000000000000000"));
+        new AccountHandler(new GenericHandler("0a000-0000-00-000000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreBankHandlerLengthWithCharacterIn3PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00a00000000000000000000"));
+        new AccountHandler(new GenericHandler("00a00-0000-00-000000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreBankHandlerLengthWithCharacterIn4PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("000a0000000000000000000"));
+        new AccountHandler(new GenericHandler("000a0-0000-00-000000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreBankHandlerLengthWithCharacterIn5PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0000a000000000000000000"));
+        new AccountHandler(new GenericHandler("0000a-0000-00-000000000000"));
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testLessBankHandlerLengthParsingHandler() throws MalformedHandlerException {
+        new AccountHandler(new GenericHandler("00-0000-00-000000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessBankHandlerLengthWithCharacterIn1PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("a00000000000000000000"));
+        new AccountHandler(new GenericHandler("a00-0000-00-000000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessBankHandlerLengthWithCharacterIn2PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0a0000000000000000000"));
+        new AccountHandler(new GenericHandler("0a0-0000-00-000000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessBankHandlerLengthWithCharacterIn3PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00a000000000000000000"));
+        new AccountHandler(new GenericHandler("00a-0000-00-000000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreOfficeHandlerLengthParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("000000000000000000000000"));
+        new AccountHandler(new GenericHandler("0000-000000-00-000000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreOfficeHandlerLengthWithCharacterIn1PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0000a000000000000000000"));
+        new AccountHandler(new GenericHandler("0000-a0000-00-000000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreOfficeHandlerLengthWithCharacterIn2PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00000a00000000000000000"));
+        new AccountHandler(new GenericHandler("0000-0a000-00-000000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreOfficeHandlerLengthWithCharacterIn3PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("000000a0000000000000000"));
+        new AccountHandler(new GenericHandler("0000-00a00-00-000000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreOfficeHandlerLengthWithCharacterIn4PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0000000a000000000000000"));
+        new AccountHandler(new GenericHandler("0000-000a0-00-000000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreOfficeHandlerLengthWithCharacterIn5PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00000000a00000000000000"));
+        new AccountHandler(new GenericHandler("0000-0000a-00-000000000000"));
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testLessOfficeHandlerLengthParsingHandler() throws MalformedHandlerException {
+        new AccountHandler(new GenericHandler("0000-00-00-000000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessOfficeHandlerLengthWithCharacterIn1PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0000a0000000000000000"));
+        new AccountHandler(new GenericHandler("0000-a00-00-000000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessOfficeHandlerLengthWithCharacterIn2PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00000a000000000000000"));
+        new AccountHandler(new GenericHandler("0000-0a0-00-000000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessOfficeHandlerLengthWithCharacterIn3PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("000000a00000000000000"));
+        new AccountHandler(new GenericHandler("0000-00a-00-000000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerLengthParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0000000000000000000000"));
+        new AccountHandler(new GenericHandler("0000-0000-00-000000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerLengthWithCharacterIn1PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0000000000a0000000000"));
+        new AccountHandler(new GenericHandler("0000-0000-00-a0000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerLengthWithCharacterIn2PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00000000000a000000000"));
+        new AccountHandler(new GenericHandler("0000-0000-00-0a000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerLengthWithCharacterIn3PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("000000000000a00000000"));
+        new AccountHandler(new GenericHandler("0000-0000-00-00a00000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerLengthWithCharacterIn4PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0000000000000a0000000"));
+        new AccountHandler(new GenericHandler("0000-0000-00-000a0000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerLengthWithCharacterIn5PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00000000000000a000000"));
+        new AccountHandler(new GenericHandler("0000-0000-00-0000a000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerLengthWithCharacterIn6PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("000000000000000a00000"));
+        new AccountHandler(new GenericHandler("0000-0000-00-00000a00000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerLengthWithCharacterIn7PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0000000000000000a0000"));
+        new AccountHandler(new GenericHandler("0000-0000-00-000000a0000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerLengthWithCharacterIn8PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00000000000000000a000"));
+        new AccountHandler(new GenericHandler("0000-0000-00-0000000a000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerLengthWithCharacterIn9PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("000000000000000000a00"));
+        new AccountHandler(new GenericHandler("0000-0000-00-00000000a00"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerLengthWithCharacterIn10PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0000000000000000000a0"));
+        new AccountHandler(new GenericHandler("0000-0000-00-000000000a0"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerLengthWithCharacterIn11PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00000000000000000000a"));
+        new AccountHandler(new GenericHandler("0000-0000-00-0000000000a"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerLengthParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0000000000000000"));
+        new AccountHandler(new GenericHandler("0000-0000-00-000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerLengthWithCharacterIn1PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0000000000a00000000"));
+        new AccountHandler(new GenericHandler("0000-0000-00-a00000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerLengthWithCharacterIn2PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00000000000a0000000"));
+        new AccountHandler(new GenericHandler("0000-0000-00-0a0000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerLengthWithCharacterIn3PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("000000000000a000000"));
+        new AccountHandler(new GenericHandler("0000-0000-00-00a000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerLengthWithCharacterIn4PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0000000000000a00000"));
+        new AccountHandler(new GenericHandler("0000-0000-00-000a00000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerLengthWithCharacterIn5PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00000000000000a0000"));
+        new AccountHandler(new GenericHandler("0000-0000-00-0000a0000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerLengthWithCharacterIn6PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("000000000000000a000"));
+        new AccountHandler(new GenericHandler("0000-0000-00-00000a000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerLengthWithCharacterIn7PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0000000000000000a00"));
+        new AccountHandler(new GenericHandler("0000-0000-00-000000a00"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerLengthWithCharacterIn8PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00000000000000000a0"));
+        new AccountHandler(new GenericHandler("0000-0000-00-0000000a0"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerLengthWithCharacterIn9PositionParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("000000000000000000a"));
+        new AccountHandler(new GenericHandler("0000-0000-00-00000000a"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerLessOfficeHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00000000000000"));
+        new AccountHandler(new GenericHandler("000-0000-00-00000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessOfficeHandlerLessBankHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("000000000000000000"));
+        new AccountHandler(new GenericHandler("000-000-00-0000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessOfficeHandlerLessBankHandlerWithLetterParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0000a0000000000000"));
+        new AccountHandler(new GenericHandler("000-0a0-00-0000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessOfficeHandlerWithLetterLessBankHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0a0000000000000000"));
+        new AccountHandler(new GenericHandler("0a0-000-00-0000000000"));
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testMoreOfficeHandlerLessBankHandlerParsingHandler() throws MalformedHandlerException {
+        new AccountHandler(new GenericHandler("00000-000-00-0000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreOfficeHandlerLessBankHandlerWithLetterParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("000000a0000000000000"));
+        new AccountHandler(new GenericHandler("00000-0a0-00-0000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreOfficeHandlerWithLetterLessBankHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00000a0000000000000"));
+        new AccountHandler(new GenericHandler("0000-0a0-00-0000000000"));
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testLessOfficeHandlerMoreBankHandlerParsingHandler() throws MalformedHandlerException {
+        new AccountHandler(new GenericHandler("000-00000-00-0000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessOfficeHandlerMoreBankHandlerWithLetterParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0000a000000000000000"));
+        new AccountHandler(new GenericHandler("000-0a000-00-0000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessOfficeHandlerWithLetterMoreBankHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0a000000000000000000"));
+        new AccountHandler(new GenericHandler("0a0-00000-00-0000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerLessBankHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00000000000000"));
+        new AccountHandler(new GenericHandler("0000-000-00-00000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerLessBankHandlerWithLetterParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00000a00000000"));
+        new AccountHandler(new GenericHandler("0000-0a0-00-00000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerWithLetterLessBankHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00000000000a000"));
+        new AccountHandler(new GenericHandler("0000-000-00-00a000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerLessBankHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("000000000000000000000"));
+        new AccountHandler(new GenericHandler("0000-000-00-000000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerLessBankHandlerWithLetterParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00000a000000000000000"));
+        new AccountHandler(new GenericHandler("0000-0a0-00-000000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerWithLetterLessBankHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("000000000000000a00000"));
+        new AccountHandler(new GenericHandler("0000-000-00-000000a00000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerMoreBankHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0000000000000000"));
+        new AccountHandler(new GenericHandler("0000-00000-00-00000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerMoreBankHandlerWithLetterParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00000a0000000000"));
+        new AccountHandler(new GenericHandler("0000-0a000-00-00000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerWithLetterMoreBankHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0000000000000a000"));
+        new AccountHandler(new GenericHandler("0000-00000-00-00a000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerLessOfficeHandlerWithLetterParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0a000000000000"));
+        new AccountHandler(new GenericHandler("0a0-0000-00-00000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerWithLetterLessOfficeHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00000000000a000"));
+        new AccountHandler(new GenericHandler("000-0000-00-00a000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerLessOfficeHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("000000000000000000000"));
+        new AccountHandler(new GenericHandler("000-0000-00-000000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerLessOfficeHandlerWithLetterParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0a0000000000000000000"));
+        new AccountHandler(new GenericHandler("0a0-0000-00-000000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerWithLetterLessOfficeHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("000000000000000a00000"));
+        new AccountHandler(new GenericHandler("000-0000-00-000000a00000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerMoreOfficeHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0000000000000000"));
+        new AccountHandler(new GenericHandler("00000-0000-00-00000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerMoreOfficeHandlerWithLetterParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0a00000000000000"));
+        new AccountHandler(new GenericHandler("0a000-0000-00-00000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerWithLetterMoreOfficeHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0000000000000a000"));
+        new AccountHandler(new GenericHandler("00000-0000-00-00a000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerLessOfficeHandlerLessBankHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00000000000000"));
+        new AccountHandler(new GenericHandler("000-000-00-000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerLessOfficeHandlerLessBankHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0000000000000000000"));
+        new AccountHandler(new GenericHandler("000-000-00-00000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerMoreOfficeHandlerLessBankHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("000000000000000000000"));
+        new AccountHandler(new GenericHandler("00000-000-00-00000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerMoreOfficeHandlerMoreBankHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00000000000000000000000"));
+        new AccountHandler(new GenericHandler("00000-00000-00-00000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerMoreOfficeHandlerMoreBankHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("000000000000000000000"));
+        new AccountHandler(new GenericHandler("00000-00000-00-000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerWithLetterLessOfficeHandlerLessBankHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0000000000a000"));
+        new AccountHandler(new GenericHandler("000-000-00-00a000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerWithLetterLessOfficeHandlerLessBankHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("000000000000a000000"));
+        new AccountHandler(new GenericHandler("000-000-00-0000a000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerWithLetterMoreOfficeHandlerLessBankHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00000000000000a000000"));
+        new AccountHandler(new GenericHandler("00000-000-00-0000a000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerWithLetterMoreOfficeHandlerMoreBankHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00000000000000000a00000"));
+        new AccountHandler(new GenericHandler("00000-00000-00-00000a00000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerWithLetterMoreOfficeHandlerMoreBankHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00000000000000a000000"));
+        new AccountHandler(new GenericHandler("00000-00000-00-00a000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerLessOfficeHandlerWithLetterLessBankHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0a000000000000"));
+        new AccountHandler(new GenericHandler("0a0-000-00-000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerLessOfficeHandlerWithLetterLessBankHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0a00000000000000000"));
+        new AccountHandler(new GenericHandler("0a0-000-00-00000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerMoreOfficeHandlerWithLetterLessBankHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00a000000000000000000"));
+        new AccountHandler(new GenericHandler("00a00-000-00-00000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerMoreOfficeHandlerWithLetterMoreBankHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0a000000000000000000000"));
+        new AccountHandler(new GenericHandler("0a000-00000-00-00000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerMoreOfficeHandlerWithLetterMoreBankHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00a000000000000000000"));
+        new AccountHandler(new GenericHandler("00a00-00000-00-000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerLessOfficeHandlerLessBankHandlerWithLetterParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0000a000000000"));
+        new AccountHandler(new GenericHandler("000-0a0-00-000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerLessOfficeHandlerLessBankHandlerWithLetterParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0000a00000000000000"));
+        new AccountHandler(new GenericHandler("000-0a0-00-00000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerMoreOfficeHandlerLessBankHandlerWithLetterParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("000000a00000000000000"));
+        new AccountHandler(new GenericHandler("00000-0a0-00-00000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerMoreOfficeHandlerMoreBankHandlerWithLetterParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("000000a0000000000000000"));
+        new AccountHandler(new GenericHandler("00000-0a000-00-00000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerMoreOfficeHandlerMoreBankHandlerWithLetterParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("000000a00000000000000"));
+        new AccountHandler(new GenericHandler("00000-0a000-00-000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerWithLetterLessOfficeHandlerWithLetterLessBankHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0a0000000000a0"));
+        new AccountHandler(new GenericHandler("0a0-000-00-0000a0"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerWithLetterLessOfficeHandlerWithLetterLessBankHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0a000000000a0000000"));
+        new AccountHandler(new GenericHandler("0a0-000-00-000a0000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerWithLetterMoreOfficeHandlerWithLetterLessBankHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0a00000000000a0000000"));
+        new AccountHandler(new GenericHandler("0a000-000-00-000a0000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerWithLetterMoreOfficeHandlerWithLetterMoreBankHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00a0000000000a000000000"));
+        new AccountHandler(new GenericHandler("00a00-00000-00-0a000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerWithLetterMoreOfficeHandlerWithLetterMoreBankHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0a0000000000000a00000"));
+        new AccountHandler(new GenericHandler("0a000-00000-00-000a00000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerLessOfficeHandlerWithLetterLessBankHandlerWithLetterParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0a00a000000000"));
+        new AccountHandler(new GenericHandler("0a0-0a0-00-000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerLessOfficeHandlerWithLetterLessBankHandlerWithLetterParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0a0a000000000000000"));
+        new AccountHandler(new GenericHandler("0a0-a00-00-00000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerMoreOfficeHandlerWithLetterLessBankHandlerWithLetterParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0a0000a00000000000000"));
+        new AccountHandler(new GenericHandler("0a000-0a0-00-00000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerMoreOfficeHandlerWithLetterMoreBankHandlerWithLetterParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0a0000a0000000000000000"));
+        new AccountHandler(new GenericHandler("0a000-0a000-00-00000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerMoreOfficeHandlerWithLetterMoreBankHandlerWithLetterParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00a00a000000000000000"));
+        new AccountHandler(new GenericHandler("00a00-a0000-00-000000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerWithLetterLessOfficeHandlerLessBankHandlerWithLetterParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0000a000000a00"));
+        new AccountHandler(new GenericHandler("000-0a0-00-000a00"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerWithLetterLessOfficeHandlerLessBankHandlerWithLetterParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0000a000000a0000000"));
+        new AccountHandler(new GenericHandler("000-0a0-00-000a0000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerWithLetterMoreOfficeHandlerLessBankHandlerWithLetterParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00000a000000a00000000"));
+        new AccountHandler(new GenericHandler("00000-a00-00-00a00000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberHandlerWithLetterMoreOfficeHandlerMoreBankHandlerWithLetterParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("00000a000000000a0000000"));
+        new AccountHandler(new GenericHandler("00000-a0000-00-000a0000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberHandlerWithLetterMoreOfficeHandlerMoreBankHandlerWithLetterParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler("0000000a000000a000000"));
+        new AccountHandler(new GenericHandler("00000-00a00-00-00a000000"));
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testNullHandlerParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(null);
+    public void testParsingHandlerBadDCAllDigits() throws MalformedHandlerException {
+        new AccountHandler(new GenericHandler(this.bank.toString() + "-" + this.office.toString() + "99" + this.accountNumber));
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testNullHandlerContentParsingHandler() throws MalformedHandlerException {
-        new AccountHandler(new GenericHandler(null));
+    public void testParsingHandlerBadDCFirstDigit() throws MalformedHandlerException {
+        new AccountHandler(new GenericHandler(this.bank.toString() + "-" + this.office.toString() + "11" + this.accountNumber));
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testParsingHandlerBadDCLastDigit() throws MalformedHandlerException {
+        new AccountHandler(new GenericHandler(this.bank.toString() + "-" + this.office.toString() + "20" + this.accountNumber));
+    }
+
+    //Creating OK
+    @Test
+    public void testParsingHandlerOk() throws MalformedHandlerException {
+        AccountHandler ac = new AccountHandler(new GenericHandler(this.bank.getID().toString() + "-" + this.office.getID().toString() + "-" + this.dc + "-" + this.accountNumber));
+        assertTrue(ac.getBankHandler().toString().equals(this.bank.getID().toString()));
+        assertTrue(ac.getOfficeHandler().toString().equals(this.office.getID().toString()));
+        assertTrue(ac.getDC().toString().equals(this.dc.toString()));
+        assertTrue(ac.getNumber().toString().equals(this.accountNumber.toString()));
+    }
+
+    @Test
+    public void testCreateOK() throws MalformedHandlerException {
+        AccountHandler ac = new AccountHandler(this.office.getID(), this.bank.getID(), this.accountNumber);
+        assertTrue(ac.getBankHandler().toString().equals(this.bank.getID().toString()));
+        assertTrue(ac.getOfficeHandler().toString().equals(this.office.getID().toString()));
+        assertTrue(ac.getDC().toString().equals(this.dc.toString()));
+        assertTrue(ac.getNumber().toString().equals(this.accountNumber.toString()));
     }
 
     //Test compareTo
@@ -1163,7 +1207,7 @@ public class AccountHandlerTest {
         assertNotSame(handler.compareTo(this.accountHandler1), 0);
         handler = new AccountHandler(office.getID(), bank.getID(), "1234567899");
         assertNotSame(handler.compareTo(this.accountHandler1), 0);
-        Handler handlerFromRaw = new AccountHandler(new GenericHandler(new GenericHandler("9999") + bank.getID().toString() + this.dc + this.accountNumber)
+        Handler handlerFromRaw = new AccountHandler(new GenericHandler(new GenericHandler("9999") + bank.getID().toString() + "90" + this.accountNumber)
         );
         assertNotSame(this.accountHandler1.compareTo(handlerFromRaw), 0);
         Handler generic = new GenericHandler(handler.toString() + ".");
