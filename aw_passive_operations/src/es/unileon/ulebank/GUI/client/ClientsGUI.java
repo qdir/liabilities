@@ -219,25 +219,25 @@ public class ClientsGUI extends GUIOperations {
                     }
                 }
             });
-            /*deleteField.addActionListener(new ActionListener() {
+            deleteField.addActionListener(new ActionListener() {
 
              @Override
              public void actionPerformed(ActionEvent e) {
-             deleteFields(nameText);
-             deleteFields(surnameText);
-             deleteFields(addressText);
-             deleteFields(portalText);
-             deleteFields(numberText);
-             deleteFields(postalCodeText);
-             deleteFields(DNIText);
+             deleteFields(personPanel.getNameText());
+             deleteFields(personPanel.getSurnameText());
+             deleteFields(personPanel.getAddressText());
+             deleteFields(personPanel.getPortalText());
+             deleteFields(personPanel.getNumberText());
+             deleteFields(personPanel.getPostalCodeText());
+             deleteFields(personPanel.getDNIText());
              //deleteFields(birthdateText);
-             deleteFields(maritalStatusText);
-             deleteFields(phoneText1);
-             deleteFields(phoneText2);
-             deleteFields(localityText);
-             deleteFields(cityText);
+             deleteFields(personPanel.getMaritalStatusText());
+             deleteFields(personPanel.getPhoneText1());
+             deleteFields(personPanel.getPhoneText2());
+             deleteFields(personPanel.getLocalityText());
+             deleteFields(personPanel.getCityText());
              }
-             });*/
+             });
 
         //Accion al cerrar la ventana
             //this.setDefaultCloseOperation(EXIT_ON_CLOSE);
