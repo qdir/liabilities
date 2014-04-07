@@ -15,14 +15,12 @@ public class GenericTransaction extends Transaction {
     /**
      * Create a new generic transaction
      *
-     * @param id ( Transaction id )
      * @param amount ( Transaction amount )
      * @param date ( Transaction date )
      * @param subject ( Transaction subject )
      * @param type (Transaction type)
-     * @param destination
      */
-    public GenericTransaction(Handler id, double amount, Date date, String subject, TransactionType type, Handler destination) {
-        super(id, amount, date, subject, type, destination);
+    public GenericTransaction(double amount, Date date, String subject, TransactionType type) {
+        super(amount, date, subject, type);
     }
 }

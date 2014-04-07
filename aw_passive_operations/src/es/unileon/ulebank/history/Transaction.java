@@ -5,6 +5,7 @@
  */
 package es.unileon.ulebank.history;
 
+import es.unileon.ulebank.account.history.DetailedInformation;
 import es.unileon.ulebank.handler.Handler;
 import java.util.Date;
 
@@ -20,24 +21,20 @@ public abstract class Transaction {
     private Date effectiveDate;
     private final String subject;
     private final Enum<TransactionType> type;
-    private final Handler destination;
+    private DetailedInformation extraInformation;
 
-    public Transaction(Handler id, double amount, Date date, String subject, Enum<TransactionType> type, Handler destination) {
-        this.id = id;
+    public Transaction(double amount, Date date, String subject, Enum<TransactionType> type) {
+        this(amount, date, subject, type, new DetailedInformation(""));
+    }
+
+    public Transaction(double amount, Date date, String subject, Enum<TransactionType> type, DetailedInformation info) {
+        this.id = TransactionHandlerProvider.getTransactionHandler();
         this.amount = amount;
         this.date = date;
         this.subject = subject;
         this.type = type;
-        this.destination = destination;
-    }
-
-    /**
-     * The transaction destination
-     *
-     * @return ( the destination )
-     */
-    public Handler getDestination() {
-        return this.destination;
+        this.extraInformation = info;
+        this.extraInformation.doFinal();
     }
 
     /**

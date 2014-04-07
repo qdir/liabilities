@@ -40,14 +40,14 @@ public class Office {
         return this.id;
     }
 
-    public void doTransaction(Transaction t) throws TransactionException, MalformedHandlerException {
+    public void doTransaction(Transaction t, Handler destine) throws TransactionException, MalformedHandlerException {
         boolean finish = false;
         StringBuilder error = new StringBuilder();
-        if (t != null && t.getDestination() != null) {
-            AccountHandler handler = new AccountHandler(t.getDestination());
+        if (t != null && destine != null) {
+            AccountHandler handler = new AccountHandler(destine);
             if (handler.getBankHandler().compareTo(this.bank.getID()) == 0 && handler.getOfficeHandler().compareTo(this.id) == 0) {
                 for (int i = 0; i < accounts.size() && !finish; i++) {
-                    if (accounts.get(i).getID().compareTo(t.getDestination()) == 0) {
+                    if (accounts.get(i).getID().compareTo(destine) == 0) {
                         if (t.getType() == TransactionType.CHARGE) {
                             accounts.get(i).doWithdrawal(t);
                         } else if (t.getType() == TransactionType.PAYMENT) {
@@ -59,7 +59,7 @@ public class Office {
                     }
                 }
             } else {
-                this.bank.doTransaction(t);
+                this.bank.doTransaction(t, destine);
             }
         } else {
             error.append(("The transaction cannot be null or destination be null"));

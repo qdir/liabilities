@@ -61,10 +61,10 @@ public class Bank {
         return removed;
     }
 
-    public void doTransaction(Transaction t) throws MalformedHandlerException, TransactionException {
+    public void doTransaction(Transaction t, Handler destine) throws MalformedHandlerException, TransactionException {
         StringBuilder error = new StringBuilder();
-        if (t != null && t.getDestination() != null) {
-            AccountHandler handler = new AccountHandler(t.getDestination());
+        if (t != null && destine != null) {
+            AccountHandler handler = new AccountHandler(destine);
             Handler bank = handler.getBankHandler();
             if (this.bankID.compareTo(bank) == 0) {
                 Handler office = handler.getOfficeHandler();
@@ -72,14 +72,14 @@ public class Bank {
                 for (int i = 0; i < this.offices.size() && !found; i++) {
                     if (this.offices.get(i).getID().compareTo(office) == 0) {
                         found = true;
-                        this.offices.get(i).doTransaction(t);
+                        this.offices.get(i).doTransaction(t, destine);
                     }
                 }
                 if (!found) {
                     error.append("Error, office not found\n");
                 }
             } else {
-                this.manager.doTransaction(t);
+                this.manager.doTransaction(t,destine);
             }
         } else {
             error.append(("The transaction cannot be null or destination be null"));

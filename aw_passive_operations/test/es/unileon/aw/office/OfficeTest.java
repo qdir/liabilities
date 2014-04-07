@@ -85,9 +85,9 @@ public class OfficeTest {
         
         this.office.addAccount(account);
         
-        Transaction transaction = new GenericTransaction(new GenericHandler("e"), 2.0, new Date(), "Salary", TransactionType.PAYMENT, this.account.getID());
+        Transaction transaction = new GenericTransaction(2.0, new Date(), "Salary", TransactionType.PAYMENT);
         
-        this.office.doTransaction(transaction);
+        this.office.doTransaction(transaction,this.account.getID());
         
         assertEquals(this.account.getBalance(), 2.0, 2.0);
     }
@@ -100,7 +100,7 @@ public class OfficeTest {
         
         System.out.println("doTransactionNullTransaction");
   
-        this.office.doTransaction(null);
+        this.office.doTransaction(null,null);
     }
         
     /**
@@ -113,8 +113,8 @@ public class OfficeTest {
         
         this.office.addAccount(account);
         
-        Transaction transaction = new GenericTransaction(new GenericHandler("e"), 2.0, new Date(), "Salary", null, this.account.getID());
+        Transaction transaction = new GenericTransaction(2.0, new Date(), "Salary", null);
         
-        this.office.doTransaction(transaction);
+        this.office.doTransaction(transaction, this.account.getID());
     }
 }

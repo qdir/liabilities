@@ -120,9 +120,9 @@ public class TransactionManagerTest {
         CommercialAccount account = new CommercialAccount(office, this.bank, "1234567890");
         office.addAccount(account);
         
-        Transaction transaction = new GenericTransaction(new GenericHandler("e"), 2.0, new Date(), "Salary", TransactionType.PAYMENT, account.getID());
+        Transaction transaction = new GenericTransaction( 2.0, new Date(), "Salary", TransactionType.PAYMENT);
         
-        this.manager.doTransaction(transaction);
+        this.manager.doTransaction(transaction,account.getID());
         
         assertEquals(account.getBalance(), 2.0, 2.0);
     }
@@ -135,7 +135,7 @@ public class TransactionManagerTest {
         
         System.out.println("doTransactionNullTransaction");
   
-        this.manager.doTransaction(null);
+        this.manager.doTransaction(null,null);
     }
     
     /**
@@ -150,8 +150,8 @@ public class TransactionManagerTest {
         
         CommercialAccount account = new CommercialAccount(office, this.bank, "1234567890");
         
-        Transaction transaction = new GenericTransaction(new GenericHandler("e"), 2.0, new Date(), "Salary", TransactionType.PAYMENT, account.getID());
+        Transaction transaction = new GenericTransaction( 2.0, new Date(), "Salary", TransactionType.PAYMENT);
         
-        this.manager.doTransaction(transaction);
+        this.manager.doTransaction(transaction, account.getID());
     }
 }

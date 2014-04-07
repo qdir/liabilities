@@ -44,17 +44,26 @@ public class TransactionManager {
         return deleted;
     }
 
-    public void doTransaction(Transaction t) throws MalformedHandlerException, TransactionException {
-        Handler destination = new AccountHandler(t.getDestination()).getBankHandler();
-        boolean found = false;
-        for (int i = 0; i < banks.size() && !found; i++) {
-            if (banks.get(i).getID().compareTo(destination) == 0) {
-                banks.get(i).doTransaction(t);
-                found = true;
+    public void doTransaction(Transaction t, Handler destine) throws MalformedHandlerException, TransactionException {
+        StringBuilder error = new StringBuilder();
+        if (t != null && destine != null) {
+            Handler destination = new AccountHandler(destine).getBankHandler();
+            boolean found = false;
+            for (int i = 0; i < banks.size() && !found; i++) {
+                if (banks.get(i).getID().compareTo(destination) == 0) {
+                    banks.get(i).doTransaction(t, destine);
+                    found = true;
+                }
             }
+            if (!found) {
+                error.append("Cannot found the bank " + destination.toString() + " \n");
+            }
+        } else {
+            error.append("The transaction or destine cannot be null");
         }
-        if (!found) {
-            throw new TransactionException("Cannot found the bank " + destination.toString() + " \n");
+        if (error.length() > 0) {
+            throw new TransactionException(error.toString());
         }
     }
+      
 }

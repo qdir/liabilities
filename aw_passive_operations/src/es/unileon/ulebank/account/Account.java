@@ -2,9 +2,7 @@ package es.unileon.ulebank.account;
 
 import es.unileon.ulebank.account.exception.TransactionException;
 import es.unileon.ulebank.account.handler.AccountHandler;
-import es.unileon.ulebank.account.history.AccountEntry;
 import es.unileon.ulebank.account.history.AccountHistory;
-import es.unileon.ulebank.account.history.DetailedInformation;
 import es.unileon.ulebank.account.liquidation.LiquidationStrategy;
 import es.unileon.ulebank.bank.Bank;
 import es.unileon.ulebank.client.Client;
@@ -230,7 +228,7 @@ public abstract class Account {
      * @return ( True if the account is consistent, and false otherwise)
      */
     public boolean checkInconsistences() {
-        Iterator<AccountEntry> iterator = this.getHistory().getHistory().iterator();
+        Iterator<Transaction> iterator = this.getHistory().getTransactions().iterator();
         double balance = 0.0d;
         while (iterator.hasNext()) {
             balance += iterator.next().getAmount();
@@ -271,14 +269,6 @@ public abstract class Account {
             err.append("The date cannot be null \n");
         }
 
-        if (transaction.getDestination() == null) {
-            err.append("The destination account id cannot be null \n");
-        } else {
-            if (transaction.getDestination().compareTo(this.id) != 0) {
-                err.append("Fail, wrong destination \n");
-            }
-        }
-
         if (transaction.getAmount() < 0) {
             err.append("Fail, the amount of money cannot be less than zero\n");
         }
@@ -287,9 +277,7 @@ public abstract class Account {
             throw new TransactionException(err.toString());
         }
         transaction.setEffectiveDate(new Date(System.currentTimeMillis()));
-        DetailedInformation extraInformation = new DetailedInformation();
-        AccountEntry accountEntry = new AccountEntry(transaction.getType(), transaction.getAmount(), transaction.getSubject(), transaction.getId(), transaction.getDate(), transaction.getEffectiveDate(), extraInformation);
-        boolean success = this.history.appendEntry(accountEntry);
+        boolean success = this.history.addTransaction(transaction);
         if (success) {
             this.balance -= transaction.getAmount();
         } else {
@@ -334,14 +322,6 @@ public abstract class Account {
             err.append("The date cannot be null \n");
         }
 
-        if (transaction.getDestination() == null) {
-            err.append("The destination account id cannot be null \n");
-        } else {
-            if (transaction.getDestination().compareTo(this.id) != 0) {
-                err.append("Fail, wrong destination \n");
-            }
-        }
-
         if (transaction.getAmount() < 0) {
             err.append("Fail, the amount of money cannot be less than zero\n");
         }
@@ -350,10 +330,8 @@ public abstract class Account {
             LOG.error(err.toString());
             throw new TransactionException(err.toString());
         }
-        DetailedInformation extraInformation = new DetailedInformation();
         transaction.setEffectiveDate(new Date(System.currentTimeMillis()));
-        AccountEntry accountEntry = new AccountEntry(transaction.getType(), transaction.getAmount(), transaction.getSubject(), transaction.getId(), transaction.getDate(), transaction.getEffectiveDate(), extraInformation);
-        boolean success = this.history.appendEntry(accountEntry);
+        boolean success = this.history.addTransaction(transaction);
         if (success) {
             this.balance += transaction.getAmount();
         } else {
