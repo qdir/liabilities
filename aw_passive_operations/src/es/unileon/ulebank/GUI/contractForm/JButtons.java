@@ -1,6 +1,7 @@
 package es.unileon.ulebank.GUI.contractForm;
 
-import es.unileon.ulebank.GUI.tools.*;
+import es.unileon.ulebank.GUI.tools.JClientPanel;
+import es.unileon.ulebank.GUI.tools.JPicture;
 
 import java.awt.Cursor;
 import java.awt.Dimension;

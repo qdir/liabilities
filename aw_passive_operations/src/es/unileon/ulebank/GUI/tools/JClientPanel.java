@@ -162,27 +162,27 @@ public class JClientPanel extends JPanel{
 
                 JLabel lblName = new JLabel("Nombre(s):");
                 lblName.setFont(new Font("Tahoma", Font.PLAIN, 12));
-                lblName.setBounds(83, 11, 78, 14);
+                lblName.setBounds(80, 11, 78, 14);
                 this.add(lblName);
 
                 JLabel lblSurname = new JLabel("Apellido(s):");
                 lblSurname.setFont(new Font("Tahoma", Font.PLAIN, 12));
-                lblSurname.setBounds(83, 36, 78, 14);
+                lblSurname.setBounds(80, 36, 78, 14);
                 this.add(lblSurname);
 
                 JLabel lblBirthDate = new JLabel("Fecha Nacimiento:");
                 lblBirthDate.setFont(new Font("Tahoma", Font.PLAIN, 12));
-                lblBirthDate.setBounds(83, 61, 100, 14);
+                lblBirthDate.setBounds(80, 61, 150, 14);
                 this.add(lblBirthDate);
 
                 JLabel lblIDNum = new JLabel("NIF/NIE:");
                 lblIDNum.setFont(new Font("Tahoma", Font.PLAIN, 12));
-                lblIDNum.setBounds(83, 86, 111, 14);
+                lblIDNum.setBounds(80, 86, 111, 14);
                 this.add(lblIDNum);
 
                 JLabel lblMaritalStatus = new JLabel("Estado Civil:");
                 lblMaritalStatus.setFont(new Font("Tahoma", Font.PLAIN, 12));
-                lblMaritalStatus.setBounds(83, 111, 90, 14);
+                lblMaritalStatus.setBounds(80, 111, 90, 14);
                 this.add(lblMaritalStatus);
 
                 JLabel lblstreetAndNum = new JLabel("Calle:");

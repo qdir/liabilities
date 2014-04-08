@@ -331,7 +331,7 @@ public class ContractFormGUI {
                 currency = new JTextField();
 		currency.setEditable(false);
 		currency.setColumns(10);
-		currency.setBackground(SystemColor.menu);
+		currency.setBackground(contentPanel.getBackground());
 		currency.setBounds(180, 340, 159, 20);
 		contentPanel.add(currency);
 		currency.setHorizontalAlignment(SwingConstants.CENTER);
@@ -342,17 +342,19 @@ public class ContractFormGUI {
 		accNum.setFont(new Font("Tahoma", Font.BOLD, 16));
 		accNum.setText("2096 0059 56 3372541904");
 		accNum.setBackground(UIManager.getColor("Button.background"));
-		accNum.setBounds(65, 42, 222, 20);
+		accNum.setBounds(65, 42, 232, 20);
 		contentPanel.add(accNum);
-		accNum.setColumns(10);               
+		accNum.setColumns(10); 
+                accNum.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		iban = new JTextField();
 		iban.setEditable(false);
 		iban.setText("ES30 2096 0059 5633 7254 1904");
 		iban.setFont(new Font("Tahoma", Font.BOLD, 16));
 		iban.setColumns(10);
-		iban.setBackground(SystemColor.menu);
-		iban.setBounds(65, 73, 274, 20);
+		iban.setBackground(accNum.getBackground());
+		iban.setBounds(65, 73, 281, 20);
+                iban.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(iban);				
 		
                 calcAccNum();
@@ -360,7 +362,7 @@ public class ContractFormGUI {
 		accNum2 = new JTextField();
 		accNum2.setEditable(false);
 		accNum2.setBackground(UIManager.getColor("Button.background"));
-		accNum2.setBounds(180, 307, 159, 20);
+		accNum2.setBounds(180, 307, 170, 20);
 		contentPanel.add(accNum2);
 		accNum2.setColumns(10);
 		accNum2.setHorizontalAlignment(SwingConstants.CENTER);

@@ -47,7 +47,7 @@ public class JTextAreas {
 
         JTextArea txtArea1 = new JTextArea();
 	txtArea1.setEditable(false);
-	txtArea1.setBackground(UIManager.getColor("Button.background"));
+	txtArea1.setBackground(panelAuthorized.getBackground());
 	txtArea1.setLineWrap(true);
 	txtArea1.setWrapStyleWord(true);
         txtArea1.setText(fileText);
@@ -65,7 +65,7 @@ public class JTextAreas {
         txtArea3.setText(fileText);
 	txtArea3.setLineWrap(true);
 	txtArea3.setEditable(false);
-	txtArea3.setBackground(SystemColor.menu);
+	txtArea3.setBackground(panelAuthorized.getBackground());
 	txtArea3.setBounds(39, 826, 851, 119);
 	panelAuthorized.add(txtArea3);
         
@@ -80,7 +80,7 @@ public class JTextAreas {
         textArea2.setText(fileText);
 	textArea2.setLineWrap(true);
 	textArea2.setEditable(false);
-	textArea2.setBackground(SystemColor.menu);
+	textArea2.setBackground(panelAuthorized.getBackground());
 	textArea2.setBounds(39, 494, 851, 436);
 	panelAuthorized.add(textArea2);
         
@@ -95,7 +95,7 @@ public class JTextAreas {
         textArea12.setText(fileText);
         textArea12.setLineWrap(true);
         textArea12.setEditable(false);
-        textArea12.setBackground(SystemColor.menu);
+        textArea12.setBackground(panelAuthorized.getBackground());
         textArea12.setBounds(39, 2599, 851, 65);
         panelAuthorized.add(textArea12);
 
@@ -110,7 +110,7 @@ public class JTextAreas {
         textArea11.setText(fileText);
         textArea11.setLineWrap(true);
         textArea11.setEditable(false);
-        textArea11.setBackground(SystemColor.menu);
+        textArea11.setBackground(panelAuthorized.getBackground());
         textArea11.setBounds(39, 2476, 851, 87);
         panelAuthorized.add(textArea11);
 
@@ -125,7 +125,7 @@ public class JTextAreas {
         textArea10.setText(fileText);     
         textArea10.setLineWrap(true);
         textArea10.setEditable(false);
-        textArea10.setBackground(SystemColor.menu);
+        textArea10.setBackground(panelAuthorized.getBackground());
         textArea10.setBounds(39, 2315, 851, 153);
         panelAuthorized.add(textArea10);
 
@@ -140,7 +140,7 @@ public class JTextAreas {
         textArea9.setText(fileText);
         textArea9.setLineWrap(true);
         textArea9.setEditable(false);
-        textArea9.setBackground(SystemColor.menu);
+        textArea9.setBackground(panelAuthorized.getBackground());
         textArea9.setBounds(39, 2152, 851, 137);
         panelAuthorized.add(textArea9);
 
@@ -155,7 +155,7 @@ public class JTextAreas {
         textArea8.setText(fileText);
         textArea8.setLineWrap(true);
         textArea8.setEditable(false);
-        textArea8.setBackground(SystemColor.menu);
+        textArea8.setBackground(panelAuthorized.getBackground());
         textArea8.setBounds(39, 1943, 851, 227);
         panelAuthorized.add(textArea8);
 
@@ -170,7 +170,7 @@ public class JTextAreas {
         textArea7.setText(fileText);
         textArea7.setLineWrap(true);
         textArea7.setEditable(false);
-        textArea7.setBackground(SystemColor.menu);
+        textArea7.setBackground(panelAuthorized.getBackground());
         textArea7.setBounds(39, 1704, 851, 256);
         panelAuthorized.add(textArea7);
 
@@ -185,7 +185,7 @@ public class JTextAreas {
         txtArea6.setText(fileText);
         txtArea6.setLineWrap(true);
         txtArea6.setEditable(false);
-        txtArea6.setBackground(SystemColor.menu);
+        txtArea6.setBackground(panelAuthorized.getBackground());
         txtArea6.setBounds(39, 1483, 851, 211);
         panelAuthorized.add(txtArea6);
 
@@ -200,7 +200,7 @@ public class JTextAreas {
         textArea5.setText(fileText);
         textArea5.setLineWrap(true);
         textArea5.setEditable(false);
-        textArea5.setBackground(SystemColor.menu);
+        textArea5.setBackground(panelAuthorized.getBackground());
         textArea5.setBounds(39, 1265, 851, 227);
         panelAuthorized.add(textArea5);
 
@@ -215,7 +215,7 @@ public class JTextAreas {
         textArea4.setText(fileText);
         textArea4.setLineWrap(true);
         textArea4.setEditable(false);
-        textArea4.setBackground(SystemColor.menu);
+        textArea4.setBackground(panelAuthorized.getBackground());
         textArea4.setBounds(39, 965, 851, 369);
         panelAuthorized.add(textArea4);
 
@@ -230,7 +230,7 @@ public class JTextAreas {
         txtArea13.setText(fileText);
         txtArea13.setLineWrap(true);
         txtArea13.setEditable(false);
-        txtArea13.setBackground(SystemColor.menu);
+        txtArea13.setBackground(panelAuthorized.getBackground());
         txtArea13.setBounds(39, 3007, 851, 49);
         panelAuthorized.add(txtArea13);
 
@@ -245,7 +245,7 @@ public class JTextAreas {
         textArea15.setText(fileText);
         textArea15.setLineWrap(true);
         textArea15.setEditable(false);
-        textArea15.setBackground(SystemColor.menu);
+        textArea15.setBackground(panelAuthorized.getBackground());
         textArea15.setBounds(39, 3234, 851, 49);
         panelAuthorized.add(textArea15);
 
@@ -260,7 +260,7 @@ public class JTextAreas {
         textArea14.setText(fileText);
         textArea14.setLineWrap(true);
         textArea14.setEditable(false);
-        textArea14.setBackground(SystemColor.menu);
+        textArea14.setBackground(panelAuthorized.getBackground());
         textArea14.setBounds(39, 3096, 851, 119);
         panelAuthorized.add(textArea14);
 
@@ -275,7 +275,7 @@ public class JTextAreas {
         textArea17.setText(fileText);
         textArea17.setLineWrap(true);
         textArea17.setEditable(false);
-        textArea17.setBackground(SystemColor.menu);
+        textArea17.setBackground(panelAuthorized.getBackground());
         textArea17.setBounds(39, 3702, 851, 119);
         panelAuthorized.add(textArea17);
 
@@ -290,7 +290,7 @@ public class JTextAreas {
         textArea16.setText(fileText);
         textArea16.setLineWrap(true);
         textArea16.setEditable(false);
-        textArea16.setBackground(SystemColor.menu);
+        textArea16.setBackground(panelAuthorized.getBackground());
         textArea16.setBounds(39, 3419, 851, 270);
         panelAuthorized.add(textArea16);
 
@@ -306,7 +306,7 @@ public class JTextAreas {
         textArea18.setText(fileText);
         textArea18.setEditable(false);
         textArea18.setFont(new Font("Tahoma", Font.BOLD, 16));
-        textArea18.setBackground(UIManager.getColor("Button.background"));
+        textArea18.setBackground(panelAuthorized.getBackground());
         textArea18.setBounds(7, 2778, 507, 82);
         panelAuthorized.add(textArea18);
 
@@ -321,7 +321,7 @@ public class JTextAreas {
         txtArea18.setText(fileText);
 	txtArea18.setLineWrap(true);
 	txtArea18.setEditable(false);
-	txtArea18.setBackground(SystemColor.menu);
+	txtArea18.setBackground(panelAuthorized.getBackground());
 	txtArea18.setBounds(39, 4103, 851, 49);
 	panelAuthorized.add(txtArea18);
         
@@ -336,7 +336,7 @@ public class JTextAreas {
         txtArea19.setText(fileText);
 	txtArea19.setLineWrap(true);
 	txtArea19.setEditable(false);
-	txtArea19.setBackground(SystemColor.menu);
+	txtArea19.setBackground(panelAuthorized.getBackground());
 	txtArea19.setBounds(39, 4207, 851, 49);
 	panelAuthorized.add(txtArea19);
         
@@ -351,7 +351,7 @@ public class JTextAreas {
         textArea20.setText(fileText);
         textArea20.setLineWrap(true);
         textArea20.setEditable(false);
-        textArea20.setBackground(SystemColor.menu);
+        textArea20.setBackground(panelAuthorized.getBackground());
         textArea20.setBounds(39, 4258, 851, 894);
         panelAuthorized.add(textArea20);
 
@@ -367,8 +367,8 @@ public class JTextAreas {
         txtArea21.setLineWrap(true);
         txtArea21.setFont(new Font("Tahoma", Font.BOLD, 14));
         txtArea21.setEditable(false);
-        txtArea21.setBackground(SystemColor.menu);
-        txtArea21.setBounds(180, 5550, 592, 49);
+        txtArea21.setBackground(panelAuthorized.getBackground());
+        txtArea21.setBounds(180, 5550, 600, 49);
         panelAuthorized.add(txtArea21);
 
         try {
@@ -382,7 +382,7 @@ public class JTextAreas {
         textArea23.setText(fileText);
         textArea23.setLineWrap(true);
         textArea23.setEditable(false);
-        textArea23.setBackground(SystemColor.menu);
+        textArea23.setBackground(panelAuthorized.getBackground());
         textArea23.setBounds(39, 6700, 851, 467);
         panelAuthorized.add(textArea23);
 
@@ -397,7 +397,7 @@ public class JTextAreas {
         textArea22.setText(fileText);      
         textArea22.setLineWrap(true);
         textArea22.setEditable(false);
-        textArea22.setBackground(SystemColor.menu);
+        textArea22.setBackground(panelAuthorized.getBackground());
         textArea22.setBounds(39, 6501, 851, 193);
         panelAuthorized.add(textArea22);
         

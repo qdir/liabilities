@@ -40,7 +40,7 @@ public class JLabels {
         
         JLabel contratoApertura = new JLabel("CONTRATO DE APERTURA DE CUENTA CORRIENTE");
 	contratoApertura.setFont(new Font("Tahoma", Font.BOLD, 16));
-	contratoApertura.setBounds(10, 11, 429, 20);
+	contratoApertura.setBounds(10, 11, 479, 20);
 	contentPanel.add(contratoApertura);
 		
 	JLabel lblAccNum = new JLabel("N\u00BA");
@@ -55,27 +55,27 @@ public class JLabels {
          
         JLabel lblSections = new JLabel("APARTADOS");
 	lblSections.setFont(new Font("Times New Roman", Font.BOLD, 24));
-	lblSections.setBounds(388, 192, 147, 20);
+	lblSections.setBounds(388, 192, 180, 20);
 	contentPanel.add(lblSections);
 		
 	JLabel involvedParties = new JLabel("2 - INTERVENIENTES");
 	involvedParties.setFont(new Font("Tahoma", Font.BOLD, 13));
-	involvedParties.setBounds(39, 381, 130, 14);
+	involvedParties.setBounds(39, 381, 160, 14);
 	contentPanel.add(involvedParties);
 		
 	JLabel owners = new JLabel("TITULARES");
 	owners.setFont(new Font("Tahoma", Font.BOLD, 12));
-	owners.setBounds(83, 406, 76, 14);
+	owners.setBounds(80, 406, 76, 14);
 	contentPanel.add(owners);
 		
 	JLabel lblAccConf = new JLabel("1 - DATOS CUENTA");
 	lblAccConf.setFont(new Font("Tahoma", Font.BOLD, 13));
-	lblAccConf.setBounds(39, 273, 130, 14);
+	lblAccConf.setBounds(39, 273, 160, 14);
 	contentPanel.add(lblAccConf);
 		
 	JLabel lblaccNum2 = new JLabel("N\u00BA de Cuenta:");
 	lblaccNum2.setFont(new Font("Tahoma", Font.PLAIN, 12));
-	lblaccNum2.setBounds(83, 309, 87, 14);
+	lblaccNum2.setBounds(80, 309, 127, 14);
 	contentPanel.add(lblaccNum2);
 		
 	JLabel lblModality = new JLabel("Modalidad:");
@@ -90,27 +90,27 @@ public class JLabels {
 		
 	JLabel lblDisponibility = new JLabel("Disponibilidad:");
 	lblDisponibility.setFont(new Font("Tahoma", Font.PLAIN, 12));
-	lblDisponibility.setBounds(482, 340, 78, 14);
+	lblDisponibility.setBounds(482, 340, 100, 14);
 	contentPanel.add(lblDisponibility);
                 
         JLabel lblName = new JLabel("Nombre(s):");
 	lblName.setFont(new Font("Tahoma", Font.PLAIN, 12));
-	lblName.setBounds(83, 431, 78, 14);
+	lblName.setBounds(80, 431, 78, 14);
 	contentPanel.add(lblName);
 		
 	JLabel lblSurname = new JLabel("Apellido(s):");
 	lblSurname.setFont(new Font("Tahoma", Font.PLAIN, 12));
-	lblSurname.setBounds(83, 456, 78, 14);
+	lblSurname.setBounds(80, 456, 78, 14);
 	contentPanel.add(lblSurname);
 		
 	JLabel lblBirthDate = new JLabel("Fecha Nacimiento:");
 	lblBirthDate.setFont(new Font("Tahoma", Font.PLAIN, 12));
-	lblBirthDate.setBounds(83, 481, 100, 14);
+	lblBirthDate.setBounds(80, 481, 150, 14);
 	contentPanel.add(lblBirthDate);
 		
 	JLabel lblIDNum = new JLabel("NIF/NIE:");
 	lblIDNum.setFont(new Font("Tahoma", Font.PLAIN, 12));
-	lblIDNum.setBounds(83, 507, 111, 14);
+	lblIDNum.setBounds(80, 507, 111, 14);
 	contentPanel.add(lblIDNum);
 		
 	JLabel lblstreetAndNum = new JLabel("Calle:");
@@ -135,7 +135,7 @@ public class JLabels {
 	
 	JLabel lblMaritalStatus = new JLabel("Estado Civil:");
 	lblMaritalStatus.setFont(new Font("Tahoma", Font.PLAIN, 12));
-	lblMaritalStatus.setBounds(83, 534, 90, 14);
+	lblMaritalStatus.setBounds(80, 534, 90, 14);
 	contentPanel.add(lblMaritalStatus);
         
         JLabel lblPhoneNum = new JLabel("Tel\u00E9fono:");
@@ -151,27 +151,27 @@ public class JLabels {
 		
 	JLabel lblAuthorized = new JLabel("AUTORIZADOS");
 	lblAuthorized.setFont(new Font("Tahoma", Font.BOLD, 12));
-	lblAuthorized.setBounds(83, 37, 100, 14);
+	lblAuthorized.setBounds(80, 37, 100, 14);
 	panelOwners.add(lblAuthorized);
 		
 	JLabel lblNameAut = new JLabel("Nombre(s):");
 	lblNameAut.setFont(new Font("Tahoma", Font.PLAIN, 12));
-	lblNameAut.setBounds(83, 67, 78, 14);
+	lblNameAut.setBounds(80, 67, 78, 14);
 	panelOwners.add(lblNameAut);
 		
 	JLabel lblSurnameAut = new JLabel("Apellido(s):");
 	lblSurnameAut.setFont(new Font("Tahoma", Font.PLAIN, 12));
-	lblSurnameAut.setBounds(83, 92, 78, 14);
+	lblSurnameAut.setBounds(80, 92, 78, 14);
 	panelOwners.add(lblSurnameAut);
 		
 	JLabel lblBirthDateAut = new JLabel("Fecha Nacimiento:");
 	lblBirthDateAut.setFont(new Font("Tahoma", Font.PLAIN, 12));
-	lblBirthDateAut.setBounds(83, 117, 100, 14);
+	lblBirthDateAut.setBounds(80, 117, 150, 14);
 	panelOwners.add(lblBirthDateAut);
 		
 	JLabel lblIDNumAut = new JLabel("NIF/NIE:");
 	lblIDNumAut.setFont(new Font("Tahoma", Font.PLAIN, 12));
-	lblIDNumAut.setBounds(83, 141, 111, 14);
+	lblIDNumAut.setBounds(80, 141, 111, 14);
 	panelOwners.add(lblIDNumAut);
 		
 	JLabel lblstreetAndNumAut = new JLabel("Calle:");
@@ -196,7 +196,7 @@ public class JLabels {
         
         JLabel lblMaritalStatusAut = new JLabel("Estado Civil:");
 	lblMaritalStatusAut.setFont(new Font("Tahoma", Font.PLAIN, 12));
-	lblMaritalStatusAut.setBounds(83, 167, 90, 14);
+	lblMaritalStatusAut.setBounds(80, 167, 90, 14);
 	panelOwners.add(lblMaritalStatusAut);
         
         JLabel lblPhoneNumAut = new JLabel("Tel\u00E9fono:");
@@ -212,7 +212,7 @@ public class JLabels {
 		
 	JLabel lblFirstDeposit = new JLabel("3 - IMPORTE PRIMER INGRESO");
 	lblFirstDeposit.setFont(new Font("Tahoma", Font.BOLD, 13));
-	lblFirstDeposit.setBounds(39, 27, 200, 14);
+	lblFirstDeposit.setBounds(39, 27, 230, 14);
 	panelAuthorized.add(lblFirstDeposit);
         
         JLabel lblCurrency2 = new JLabel("");
@@ -223,7 +223,7 @@ public class JLabels {
 		
 	JLabel lblPeriodicidad = new JLabel("4 - PERIODICIDAD Y FECHAS DE LIQUIDACI\u00D3N");
 	lblPeriodicidad.setFont(new Font("Tahoma", Font.BOLD, 13));
-	lblPeriodicidad.setBounds(39, 103, 300, 14);
+	lblPeriodicidad.setBounds(39, 103, 350, 14);
 	panelAuthorized.add(lblPeriodicidad);
 		
 	JLabel lblPeriod = new JLabel("6 Mes(es)");
@@ -233,7 +233,7 @@ public class JLabels {
 		
 	JLabel lblInterestType = new JLabel("5 - TIPO DE INTERES");
 	lblInterestType.setFont(new Font("Tahoma", Font.BOLD, 13));
-	lblInterestType.setBounds(39, 176, 141, 14);
+	lblInterestType.setBounds(39, 176, 160, 14);
 	panelAuthorized.add(lblInterestType);
         
         JLabel lblCurrency3 = new JLabel("Euros");
@@ -247,22 +247,22 @@ public class JLabels {
         
         JLabel lblClausula = new JLabel("CL\u00C1USULAS");
 	lblClausula.setFont(new Font("Times New Roman", Font.BOLD, 24));
-	lblClausula.setBounds(388, 378, 147, 20);
+	lblClausula.setBounds(388, 378, 180, 20);
 	panelAuthorized.add(lblClausula);
         
         JLabel lblThirdClause = new JLabel("3 - FORMAS DE DISPOSICI\u00D3N");
 	lblThirdClause.setFont(new Font("Tahoma", Font.BOLD, 13));
-	lblThirdClause.setBounds(39, 925, 200, 14);
+	lblThirdClause.setBounds(39, 925, 220, 14);
 	panelAuthorized.add(lblThirdClause);
 		
 	JLabel lblSecondClause = new JLabel("2 - DOCUMENTOS DE PAGO");
 	lblSecondClause.setFont(new Font("Tahoma", Font.BOLD, 13));
-	lblSecondClause.setBounds(39, 786, 177, 14);
+	lblSecondClause.setBounds(39, 786, 200, 14);
 	panelAuthorized.add(lblSecondClause);
         
         JLabel lblFirstClause = new JLabel("1 - INGRESOS Y CARGOS");
 	lblFirstClause.setFont(new Font("Tahoma", Font.BOLD, 13));
-	lblFirstClause.setBounds(39, 453, 177, 14);
+	lblFirstClause.setBounds(39, 453, 200, 14);
 	panelAuthorized.add(lblFirstClause);
         
         JLabel lblFourthClause = new JLabel("4 - INTERESES ORDINARIOS");
@@ -283,12 +283,12 @@ public class JLabels {
         
         JLabel lblSixthClause = new JLabel("6 - MODIFICACI\u00D3N DE INTERESES, COMISIONES Y GASTOS");
 	lblSixthClause.setFont(new Font("Tahoma", Font.BOLD, 13));
-	lblSixthClause.setBounds(39, 1660, 367, 14);
+	lblSixthClause.setBounds(39, 1660, 420, 14);
 	panelAuthorized.add(lblSixthClause);
 		
 	JLabel lblSeventhClause = new JLabel("7 - DESCUBIERTOS EN CUENTA");
 	lblSeventhClause.setFont(new Font("Tahoma", Font.BOLD, 13));
-	lblSeventhClause.setBounds(39, 1898, 200, 14);
+	lblSeventhClause.setBounds(39, 1898, 240, 14);
 	panelAuthorized.add(lblSeventhClause);
         
         JLabel lblEigthClause = new JLabel("8 - COMPENSACI\u00D3N");
@@ -298,7 +298,7 @@ public class JLabels {
 		
 	JLabel lblNinthClause = new JLabel("9 - RESOLUCI\u00D3N DEL CONTRATO");
 	lblNinthClause.setFont(new Font("Tahoma", Font.BOLD, 13));
-	lblNinthClause.setBounds(39, 2265, 211, 14);
+	lblNinthClause.setBounds(39, 2265, 251, 14);
 	panelAuthorized.add(lblNinthClause);
 		
 	JLabel lblTenthClause = new JLabel("10 - DOMICILIOS");
@@ -308,7 +308,7 @@ public class JLabels {
 		
 	JLabel lblEleventhClause = new JLabel("11 - ENTREGA DE DOCUMENTOS");
 	lblEleventhClause.setFont(new Font("Tahoma", Font.BOLD, 13));
-	lblEleventhClause.setBounds(39, 2556, 200, 14);
+	lblEleventhClause.setBounds(39, 2556, 250, 14);
 	panelAuthorized.add(lblEleventhClause);
         
         JLabel lblCommonNotes = new JLabel("NOTAS COMUNES PARA TODOS LOS EPIGRAFES");
@@ -318,12 +318,12 @@ public class JLabels {
 		
 	JLabel lblNote1 = new JLabel("1 - NORMAS DE VALORACI\u00D3N");
 	lblNote1.setFont(new Font("Tahoma", Font.BOLD, 13));
-	lblNote1.setBounds(39, 2970, 200, 14);
+	lblNote1.setBounds(39, 2970, 250, 14);
 	panelAuthorized.add(lblNote1);
         
         JLabel lblNote2 = new JLabel("2 - \u00C1MBITO DE APLICACI\u00D3N");
 	lblNote2.setFont(new Font("Tahoma", Font.BOLD, 13));
-	lblNote2.setBounds(39, 3055, 200, 14);
+	lblNote2.setBounds(39, 3055, 250, 14);
 	panelAuthorized.add(lblNote2);
 		
 	JLabel lblNote3 = new JLabel("3 - GASTOS");
@@ -333,57 +333,57 @@ public class JLabels {
         
         JLabel lblEpigrafe8 = new JLabel("EP\u00CDGRAFE 8 - MANTENIMIENTO Y ADMINISTRACI\u00D3N DE CUENTAS");
 	lblEpigrafe8.setFont(new Font("Tahoma", Font.BOLD, 15));
-	lblEpigrafe8.setBounds(39, 3319, 607, 20);
+	lblEpigrafe8.setBounds(39, 3319, 657, 20);
 	panelAuthorized.add(lblEpigrafe8);
 		
 	JLabel lblEpigrafe1 = new JLabel("1 - COMISI\u00D3N DE MANTENIMIENTO");
 	lblEpigrafe1.setFont(new Font("Tahoma", Font.BOLD, 13));
-	lblEpigrafe1.setBounds(39, 3376, 248, 14);
+	lblEpigrafe1.setBounds(39, 3376, 298, 14);
 	panelAuthorized.add(lblEpigrafe1);
         
         JLabel lblEpigrafe2 = new JLabel("2 - COMISI\u00D3N DE ADMINISTRACI\u00D3N");
 	lblEpigrafe2.setFont(new Font("Tahoma", Font.BOLD, 13));
-	lblEpigrafe2.setBounds(39, 3660, 248, 14);
+	lblEpigrafe2.setBounds(39, 3660, 298, 14);
 	panelAuthorized.add(lblEpigrafe2);
         
         JLabel lblEpigrafe3 = new JLabel("3 - COMISI\u00D3N POR INFORMACI\u00D3N SOBRE MOVIMIENTOS DE LA CUENTA");
 	lblEpigrafe3.setFont(new Font("Tahoma", Font.BOLD, 13));
-	lblEpigrafe3.setBounds(39, 3782, 463, 14);
+	lblEpigrafe3.setBounds(39, 3782, 543, 14);
 	panelAuthorized.add(lblEpigrafe3);
         
         JLabel lblEpigrafe4 = new JLabel("4 - DESCUBIERTOS EN CUENTA");
 	lblEpigrafe4.setFont(new Font("Tahoma", Font.BOLD, 13));
-	lblEpigrafe4.setBounds(39, 4063, 200, 14);
+	lblEpigrafe4.setBounds(39, 4063, 230, 14);
 	panelAuthorized.add(lblEpigrafe4);
         
         JLabel lblEpigrafe5 = new JLabel("5 - GESTI\u00D3N DE RECLAMACI\u00D3N DE DESCUBIERTOS");
 	lblEpigrafe5.setFont(new Font("Tahoma", Font.BOLD, 13));
-	lblEpigrafe5.setBounds(39, 4168, 338, 14);
+	lblEpigrafe5.setBounds(39, 4168, 368, 14);
 	panelAuthorized.add(lblEpigrafe5);
         
         JLabel lblEpigrafe15 = new JLabel("EP\u00CDGRAFE 15 - OPERACIONES DE CUENTAS A LA VISTA");
 	lblEpigrafe15.setFont(new Font("Tahoma", Font.BOLD, 15));
-	lblEpigrafe15.setBounds(39, 4990, 429, 20);
+	lblEpigrafe15.setBounds(39, 4990, 479, 20);
 	panelAuthorized.add(lblEpigrafe15);
 		
 	JLabel lblOperation1 = new JLabel("1 - LIBRETAS DE AHORRO");
 	lblOperation1.setFont(new Font("Tahoma", Font.BOLD, 13));
-	lblOperation1.setBounds(39, 5057, 182, 14);
+	lblOperation1.setBounds(39, 5057, 222, 14);
 	panelAuthorized.add(lblOperation1);
         
         JLabel lblOperation2 = new JLabel("2 - CUENTAS CORRIENTES");
 	lblOperation2.setFont(new Font("Tahoma", Font.BOLD, 13));
-	lblOperation2.setBounds(39, 5354, 182, 14);
+	lblOperation2.setBounds(39, 5354, 222, 14);
 	panelAuthorized.add(lblOperation2);
         
         JLabel lblAuthorize = new JLabel("AUTORIZACIONES");
 	lblAuthorize.setFont(new Font("Tahoma", Font.BOLD, 13));
-	lblAuthorize.setBounds(39, 6459, 123, 14);
+	lblAuthorize.setBounds(39, 6459, 143, 14);
 	panelAuthorized.add(lblAuthorize);
 		
 	JLabel lblPersonalDataProcessing = new JLabel("TRATAMIENTO AUTOMATIZADO DE DATOS PERSONALES");
 	lblPersonalDataProcessing.setFont(new Font("Tahoma", Font.BOLD, 13));
-	lblPersonalDataProcessing.setBounds(39, 6650, 400, 14);
+	lblPersonalDataProcessing.setBounds(39, 6650, 500, 14);
 	panelAuthorized.add(lblPersonalDataProcessing);
                              
     }
