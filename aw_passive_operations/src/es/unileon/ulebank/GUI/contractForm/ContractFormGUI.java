@@ -23,6 +23,7 @@ import javax.swing.UIManager;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Color;
+import java.util.Properties;
 import java.util.Random;
 
 /**
@@ -272,7 +273,13 @@ public class ContractFormGUI {
         /**
          * Used to determined whether the Text Fields are activated or not
          */
-	private boolean flip = false;       
+	private boolean flip = false;
+        
+        /**
+         * System name boolean
+         */
+        
+        private boolean system;
 
 	public static void main(String[] args) {
 		
@@ -328,6 +335,10 @@ public class ContractFormGUI {
 		contentPanel.setPreferredSize(new Dimension(931, 7800));
 		contentPanel.setLayout(null);				
 		
+                getSystemName();
+                
+                System.out.println(system);
+                
                 currency = new JTextField();
 		currency.setEditable(false);
 		currency.setColumns(10);
@@ -854,5 +865,16 @@ public class ContractFormGUI {
             accNum = BANK + " " + OFFICE + " " + CONTROL + " " + accNum;
             this.accNum.setText(accNum);
             iban.setText(IBAN + " " + accNum);
+        }
+        
+        public void getSystemName(){
+            
+            Properties properties = System.getProperties();
+        
+            if(properties.getProperty("os.name").charAt(0) == 'W')
+                system = true;
+            else
+                system =false;
+            
         }
 }
