@@ -337,8 +337,6 @@ public class ContractFormGUI {
 		
                 getSystemName();
                 
-                System.out.println(system);
-                
                 currency = new JTextField();
 		currency.setEditable(false);
 		currency.setColumns(10);
