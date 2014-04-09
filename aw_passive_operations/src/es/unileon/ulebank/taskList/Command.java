@@ -10,10 +10,12 @@ import java.util.Date;
  * @author runix
  */
 public interface Command {
-    
+
     public Date getEffectiveDate();
-    
+
     public Handler getID();
 
     public void execute();
+
+    public void undo();
 }
