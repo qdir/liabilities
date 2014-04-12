@@ -373,7 +373,7 @@ public class ContractFormGUI {
 		accNum2 = new JTextField();
 		accNum2.setEditable(false);
 		accNum2.setBackground(UIManager.getColor("Button.background"));
-		accNum2.setBounds(180, 307, 170, 20);
+		accNum2.setBounds(180, 307, 169, 20);
 		contentPanel.add(accNum2);
 		accNum2.setColumns(10);
 		accNum2.setHorizontalAlignment(SwingConstants.CENTER);
@@ -597,7 +597,12 @@ public class ContractFormGUI {
 		administrationWage.setHorizontalAlignment(SwingConstants.CENTER);
 		administrationWage.setText("0,15");
 		administrationWage.setEditable(false);
-		administrationWage.setBounds(200, 1512, 45, 20);
+                
+                if(system)
+                    administrationWage.setBounds(200, 1512, 45, 20);
+                else
+                    administrationWage.setBounds(226, 1510, 45, 20);
+                    
 		panelAuthorized.add(administrationWage);
 		administrationWage.setColumns(10);
 		
@@ -605,7 +610,12 @@ public class ContractFormGUI {
 		unpaidWage.setText("0,00");
 		unpaidWage.setHorizontalAlignment(SwingConstants.CENTER);
 		unpaidWage.setEditable(false);
-		unpaidWage.setBounds(119, 1578, 45, 20);
+                
+                if(system)
+                    unpaidWage.setBounds(119, 1578, 45, 20);
+                else
+                    unpaidWage.setBounds(275, 1571, 45, 20);
+                    
 		panelAuthorized.add(unpaidWage);
 		unpaidWage.setColumns(10);				
 		
@@ -614,14 +624,18 @@ public class ContractFormGUI {
 		anualInterest.setHorizontalAlignment(SwingConstants.CENTER);
 		anualInterest.setEditable(false);
 		anualInterest.setColumns(10);
-		anualInterest.setBounds(746, 2038, 45, 20);
+                
+                if(system)
+                    anualInterest.setBounds(746, 2038, 45, 20);
+                else
+                    anualInterest.setBounds(742, 2047, 45, 20);
+                
 		panelAuthorized.add(anualInterest);																
 		
 		anualFee = new JTextField();
 		anualFee.setEditable(false);
 		anualFee.setText("30,00");
-		anualFee.setHorizontalAlignment(SwingConstants.CENTER);
-		anualFee.setBounds(236, 3432, 50, 20);
+		anualFee.setHorizontalAlignment(SwingConstants.CENTER);		
 		panelAuthorized.add(anualFee);
 		anualFee.setColumns(10);
 		
@@ -630,39 +644,60 @@ public class ContractFormGUI {
 		monthlyFeeFirm.setHorizontalAlignment(SwingConstants.CENTER);
 		monthlyFeeFirm.setEditable(false);
 		monthlyFeeFirm.setColumns(10);
-		monthlyFeeFirm.setBounds(263, 3513, 50, 20);
 		panelAuthorized.add(monthlyFeeFirm);
 		
 		monthlyFeeCartilla = new JTextField();
 		monthlyFeeCartilla.setText("4,00");
 		monthlyFeeCartilla.setHorizontalAlignment(SwingConstants.CENTER);
 		monthlyFeeCartilla.setEditable(false);
-		monthlyFeeCartilla.setColumns(10);
-		monthlyFeeCartilla.setBounds(263, 3545, 50, 20);
+		monthlyFeeCartilla.setColumns(10);		
 		panelAuthorized.add(monthlyFeeCartilla);
 		
 		monthlyFeePlus = new JTextField();
 		monthlyFeePlus.setText("3,00");
 		monthlyFeePlus.setHorizontalAlignment(SwingConstants.CENTER);
 		monthlyFeePlus.setEditable(false);
-		monthlyFeePlus.setColumns(10);
-		monthlyFeePlus.setBounds(263, 3577, 50, 20);
+		monthlyFeePlus.setColumns(10);		
 		panelAuthorized.add(monthlyFeePlus);
 		
 		trimestralFeePersonal = new JTextField();
 		trimestralFeePersonal.setText("10,00");
 		trimestralFeePersonal.setHorizontalAlignment(SwingConstants.CENTER);
 		trimestralFeePersonal.setEditable(false);
-		trimestralFeePersonal.setColumns(10);
-		trimestralFeePersonal.setBounds(266, 3609, 50, 20);
+		trimestralFeePersonal.setColumns(10);		
 		panelAuthorized.add(trimestralFeePersonal);				
 		
+                if(system){
+                    
+                  anualFee.setBounds(236, 3432, 50, 20);  
+                  monthlyFeeFirm.setBounds(263, 3513, 50, 20);
+                  monthlyFeeCartilla.setBounds(263, 3545, 50, 20);
+                  monthlyFeePlus.setBounds(263, 3577, 50, 20);
+                  trimestralFeePersonal.setBounds(266, 3609, 50, 20);
+                  
+                }
+                
+                else{
+                    
+                  anualFee.setBounds(270, 3432, 50, 20);  
+                  monthlyFeeFirm.setBounds(300, 3507, 50, 20);
+                  monthlyFeeCartilla.setBounds(300, 3536, 50, 20);
+                  monthlyFeePlus.setBounds(300, 3567, 50, 20);
+                  trimestralFeePersonal.setBounds(308, 3596, 50, 20); 
+                    
+                }
+                
 		administrationFee = new JTextField();
 		administrationFee.setText("0,25");
 		administrationFee.setHorizontalAlignment(SwingConstants.CENTER);
 		administrationFee.setEditable(false);
 		administrationFee.setColumns(10);
-		administrationFee.setBounds(327, 3700, 50, 20);
+                
+                if(system)
+                    administrationFee.setBounds(327, 3700, 50, 20);
+                else
+                    administrationFee.setBounds(377, 3699, 50, 20);
+                
 		panelAuthorized.add(administrationFee);										
 		
                 JPicture table1 = new JPicture("resources/es/unileon/ulebank/GUI/contractForm/table1.png");
@@ -707,7 +742,12 @@ public class ContractFormGUI {
 		negativeBallanceFee.setHorizontalAlignment(SwingConstants.CENTER);
 		negativeBallanceFee.setEditable(false);
 		negativeBallanceFee.setColumns(10);
-		negativeBallanceFee.setBounds(547, 4101, 50, 20);
+                
+                if(system)
+                    negativeBallanceFee.setBounds(547, 4101, 50, 20);
+                else
+                    negativeBallanceFee.setBounds(637, 4101, 50, 20);
+                
 		panelAuthorized.add(negativeBallanceFee);
 										
 		complaintFee = new JTextField();
@@ -715,24 +755,40 @@ public class ContractFormGUI {
 		complaintFee.setHorizontalAlignment(SwingConstants.CENTER);
 		complaintFee.setEditable(false);
 		complaintFee.setColumns(10);
-		complaintFee.setBounds(451, 4205, 50, 20);
+                
+                if(system)
+                    complaintFee.setBounds(451, 4205, 50, 20);
+                else
+                    complaintFee.setBounds(522, 4204, 50, 20);
+                
 		panelAuthorized.add(complaintFee);				
 		
 		buyingFee = new JTextField();
 		buyingFee.setText("5,00");
 		buyingFee.setHorizontalAlignment(SwingConstants.CENTER);
 		buyingFee.setEditable(false);
-		buyingFee.setColumns(10);
-		buyingFee.setBounds(108, 4929, 50, 20);
+		buyingFee.setColumns(10);		
 		panelAuthorized.add(buyingFee);
 		
 		buyingFeePercentage = new JTextField();
 		buyingFeePercentage.setText("0,18");
 		buyingFeePercentage.setHorizontalAlignment(SwingConstants.CENTER);
 		buyingFeePercentage.setEditable(false);
-		buyingFeePercentage.setColumns(10);
-		buyingFeePercentage.setBounds(305, 4929, 50, 20);
-		panelAuthorized.add(buyingFeePercentage);				
+		buyingFeePercentage.setColumns(10);		
+		panelAuthorized.add(buyingFeePercentage);
+                
+                if(system){
+                    
+                   buyingFee.setBounds(108, 4929, 50, 20);
+                   buyingFeePercentage.setBounds(305, 4929, 50, 20);
+                                 
+                }else{
+                    
+                   buyingFee.setBounds(306, 4902, 50, 20);
+                   buyingFeePercentage.setBounds(540, 4902, 50, 20);
+                    
+                }
+                
 		
 		JPicture table2 = new JPicture("resources/es/unileon/ulebank/GUI/contractForm/table2.png");
 		table2.setBounds(39, 5098, 851, 207);

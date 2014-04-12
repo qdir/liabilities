@@ -277,7 +277,12 @@ public class JLabels {
 		
 	JLabel lblInterest = new JLabel("18/03/2014");
 	lblInterest.setHorizontalAlignment(SwingConstants.CENTER);
-	lblInterest.setBounds(235, 1378, 36, 14);
+        
+        if(system)
+            lblInterest.setBounds(235, 1378, 36, 14);
+        else
+            lblInterest.setBounds(310, 1386, 36, 14);
+        
 	panelAuthorized.add(lblInterest);
 	lblInterest.setText(interest.getText());
 		
