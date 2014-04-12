@@ -143,6 +143,11 @@ public class ContractFormGUI {
 	private JTextField firstDeposit;
         
         /**
+         * Liquidation time period
+         */
+        private JTextField liqPeriod;
+        
+        /**
          * Interest charged for the account
          */
 	private JTextField interest;
@@ -536,7 +541,16 @@ public class ContractFormGUI {
 		firstDeposit.setColumns(10);
 		firstDeposit.setBackground(UIManager.getColor("Button.background"));
 		firstDeposit.setBounds(83, 62, 56, 20);
-		panelAuthorized.add(firstDeposit);															
+		panelAuthorized.add(firstDeposit);
+                
+                liqPeriod = new JTextField();
+		liqPeriod.setEditable(false);
+		liqPeriod.setText("6");
+		liqPeriod.setHorizontalAlignment(SwingConstants.CENTER);
+		liqPeriod.setColumns(10);
+		liqPeriod.setBackground(UIManager.getColor("Button.background"));
+		liqPeriod.setBounds(83, 137, 56, 20);
+		panelAuthorized.add(liqPeriod);
 		
 		interest = new JTextField();
 		interest.setBackground(UIManager.getColor("Button.background"));
@@ -801,6 +815,7 @@ public class ContractFormGUI {
 				if (!flip){
 					
 					firstDeposit.setEditable(true);
+                                        liqPeriod.setEditable(true);
 					interest.setEditable(true);
 					administrationWage.setEditable(true);
 					unpaidWage.setEditable(true);
@@ -829,6 +844,7 @@ public class ContractFormGUI {
 				else{
 					
 					firstDeposit.setEditable(false);
+                                        liqPeriod.setEditable(false);
 					interest.setEditable(false);
 					administrationWage.setEditable(false);
 					unpaidWage.setEditable(false);
