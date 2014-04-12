@@ -383,6 +383,7 @@ public class ContractFormGUI {
 		name.setBackground(UIManager.getColor("Button.highlight"));
 		name.setBounds(193, 431, 222, 20);
 		contentPanel.add(name);
+                name.setEditable(false);
 		
 		surname = new JTextField();
 		surname.setHorizontalAlignment(SwingConstants.CENTER);
@@ -390,6 +391,7 @@ public class ContractFormGUI {
 		surname.setBackground(UIManager.getColor("Button.highlight"));
 		surname.setBounds(193, 456, 222, 20);
 		contentPanel.add(surname);
+                surname.setEditable(false);
 		
 		birthDate = new JTextField();
 		birthDate.setText("dd/mm/aaaa");
@@ -398,6 +400,7 @@ public class ContractFormGUI {
 		birthDate.setBackground(UIManager.getColor("Button.highlight"));
 		birthDate.setBounds(193, 481, 111, 20);
 		contentPanel.add(birthDate);
+                birthDate.setEditable(false);
 		
 		birthDate.addMouseListener(new MouseAdapter() {
 			@Override
@@ -412,6 +415,7 @@ public class ContractFormGUI {
 		iDNum.setBackground(UIManager.getColor("Button.highlight"));
 		iDNum.setBounds(193, 506, 111, 20);
 		contentPanel.add(iDNum);
+                iDNum.setEditable(false);
 		
 		streetAndNum = new JTextField();
 		streetAndNum.setHorizontalAlignment(SwingConstants.CENTER);
@@ -419,6 +423,7 @@ public class ContractFormGUI {
 		streetAndNum.setBackground(UIManager.getColor("Button.highlight"));
 		streetAndNum.setBounds(546, 431, 244, 20);
 		contentPanel.add(streetAndNum);
+                streetAndNum.setEditable(false);
 		
 		town = new JTextField();
 		town.setHorizontalAlignment(SwingConstants.CENTER);
@@ -426,6 +431,7 @@ public class ContractFormGUI {
 		town.setBackground(UIManager.getColor("Button.highlight"));
 		town.setBounds(546, 456, 244, 20);
 		contentPanel.add(town);
+                town.setEditable(false);
 		
 		province = new JTextField();
 		province.setHorizontalAlignment(SwingConstants.CENTER);
@@ -433,13 +439,15 @@ public class ContractFormGUI {
 		province.setBackground(UIManager.getColor("Button.highlight"));
 		province.setBounds(546, 481, 244, 20);
 		contentPanel.add(province);
+                province.setEditable(false);
 		
 		cP = new JTextField();
 		cP.setHorizontalAlignment(SwingConstants.CENTER);
 		cP.setColumns(10);
 		cP.setBackground(UIManager.getColor("Button.highlight"));
 		cP.setBounds(546, 506, 100, 20);
-		contentPanel.add(cP);				
+		contentPanel.add(cP);
+                cP.setEditable(false);
 		
 		JPanel panelOwners = new JPanel();
 		panelOwners.setBackground(UIManager.getColor("Panel.background"));
@@ -458,6 +466,7 @@ public class ContractFormGUI {
 		nameAut.setBackground(UIManager.getColor("Button.highlight"));
 		nameAut.setBounds(193, 65, 222, 20);
 		panelOwners.add(nameAut);
+                nameAut.setEditable(false);
 		
 		surnameAut = new JTextField();
 		surnameAut.setHorizontalAlignment(SwingConstants.CENTER);
@@ -465,6 +474,7 @@ public class ContractFormGUI {
 		surnameAut.setBackground(UIManager.getColor("Button.highlight"));
 		surnameAut.setBounds(193, 90, 222, 20);
 		panelOwners.add(surnameAut);
+                surnameAut.setEditable(false);
 		
 		birthDateAut = new JTextField();
 		birthDateAut.setText("dd/mm/aaaa");
@@ -473,6 +483,7 @@ public class ContractFormGUI {
 		birthDateAut.setBackground(UIManager.getColor("Button.highlight"));
 		birthDateAut.setBounds(193, 115, 111, 20);
 		panelOwners.add(birthDateAut);
+                birthDateAut.setEditable(false);
 		
 		birthDateAut.addMouseListener(new MouseAdapter() {
 			@Override
@@ -487,6 +498,7 @@ public class ContractFormGUI {
 		iDNumAut.setBackground(UIManager.getColor("Button.highlight"));
 		iDNumAut.setBounds(193, 140, 111, 20);
 		panelOwners.add(iDNumAut);
+                iDNumAut.setEditable(false);
 		
 		streetAndNumAut = new JTextField();
 		streetAndNumAut.setHorizontalAlignment(SwingConstants.CENTER);
@@ -494,6 +506,7 @@ public class ContractFormGUI {
 		streetAndNumAut.setBackground(UIManager.getColor("Button.highlight"));
 		streetAndNumAut.setBounds(546, 65, 244, 20);
 		panelOwners.add(streetAndNumAut);
+                streetAndNumAut.setEditable(false);
 		
 		townAut = new JTextField();
 		townAut.setHorizontalAlignment(SwingConstants.CENTER);
@@ -501,6 +514,7 @@ public class ContractFormGUI {
 		townAut.setBackground(UIManager.getColor("Button.highlight"));
 		townAut.setBounds(546, 90, 244, 20);
 		panelOwners.add(townAut);
+                townAut.setEditable(false);
 		
 		provinceAut = new JTextField();
 		provinceAut.setHorizontalAlignment(SwingConstants.CENTER);
@@ -508,13 +522,15 @@ public class ContractFormGUI {
 		provinceAut.setBackground(UIManager.getColor("Button.highlight"));
 		provinceAut.setBounds(546, 115, 244, 20);
 		panelOwners.add(provinceAut);
+                provinceAut.setEditable(false);
 		
 		cPAut = new JTextField();
 		cPAut.setHorizontalAlignment(SwingConstants.CENTER);
 		cPAut.setColumns(10);
 		cPAut.setBackground(UIManager.getColor("Button.highlight"));
 		cPAut.setBounds(546, 140, 76, 20);
-		panelOwners.add(cPAut);				
+		panelOwners.add(cPAut);	
+                cPAut.setEditable(false);
 		
 		firstDeposit = new JTextField();
 		firstDeposit.setEditable(false);
@@ -537,30 +553,34 @@ public class ContractFormGUI {
 		maritalStatus = new JTextField();
 		maritalStatus.setHorizontalAlignment(SwingConstants.CENTER);
 		maritalStatus.setColumns(10);
-		maritalStatus.setBackground(Color.WHITE);
+		maritalStatus.setBackground(UIManager.getColor("Button.highlight"));
 		maritalStatus.setBounds(193, 531, 111, 20);
-		contentPanel.add(maritalStatus);				
+		contentPanel.add(maritalStatus);
+                maritalStatus.setEditable(false);
 		
 		phoneNum = new JTextField();
 		phoneNum.setHorizontalAlignment(SwingConstants.CENTER);
 		phoneNum.setColumns(10);
-		phoneNum.setBackground(Color.WHITE);
+		phoneNum.setBackground(UIManager.getColor("Button.highlight"));
 		phoneNum.setBounds(546, 532, 100, 20);
-		contentPanel.add(phoneNum);				
+		contentPanel.add(phoneNum);	
+                phoneNum.setEditable(false);
 		
 		maritalStatusAut = new JTextField();
 		maritalStatusAut.setHorizontalAlignment(SwingConstants.CENTER);
 		maritalStatusAut.setColumns(10);
-		maritalStatusAut.setBackground(Color.WHITE);
+		maritalStatusAut.setBackground(UIManager.getColor("Button.highlight"));
 		maritalStatusAut.setBounds(192, 165, 111, 20);
 		panelOwners.add(maritalStatusAut);
+                maritalStatusAut.setEditable(false);
 		
 		phoneNumAut = new JTextField();
 		phoneNumAut.setHorizontalAlignment(SwingConstants.CENTER);
 		phoneNumAut.setColumns(10);
-		phoneNumAut.setBackground(Color.WHITE);
+		phoneNumAut.setBackground(UIManager.getColor("Button.highlight"));
 		phoneNumAut.setBounds(546, 165, 100, 20);
-		panelOwners.add(phoneNumAut);																				
+		panelOwners.add(phoneNumAut);
+                phoneNumAut.setEditable(false);
 		
 		administrationWage = new JTextField();
 		administrationWage.setHorizontalAlignment(SwingConstants.CENTER);
@@ -738,7 +758,7 @@ public class ContractFormGUI {
 		table3.add(chequeFee);								
         
 		//INITIALIZE JLABELS HERE
-                new JLabels(contentPanel, currency, interest, panelOwners, panelAuthorized);
+                new JLabels(contentPanel, currency, interest, panelOwners, panelAuthorized, system);
 		//INITIALIZE JPICTURES HERE
                 new JPictures(contentPanel, panelAuthorized);
                 //INITIALIZE JTEXTAREAS HERE

@@ -23,9 +23,9 @@ public class JLabels {
      * @param interest interest for the contract
      */
     public JLabels(JPanel contentPanel, JTextField currency, JTextField interest,
-    									JPanel panelOwners, JPanel panelAuthorized){
+    					JPanel panelOwners, JPanel panelAuthorized, boolean system){
         
-        placeLabels(contentPanel, currency, interest, panelOwners, panelAuthorized);
+        placeLabels(contentPanel, currency, interest, panelOwners, panelAuthorized, system);
         
     }
     
@@ -36,7 +36,7 @@ public class JLabels {
      * @param interest interest for the contract
      */
     private void placeLabels(JPanel contentPanel,JTextField currency, JTextField interest,
-    											JPanel panelOwners, JPanel panelAuthorized){
+    						JPanel panelOwners, JPanel panelAuthorized,boolean system){
         
         JLabel contratoApertura = new JLabel("CONTRATO DE APERTURA DE CUENTA CORRIENTE");
 	contratoApertura.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -216,8 +216,8 @@ public class JLabels {
 	panelAuthorized.add(lblFirstDeposit);
         
         JLabel lblCurrency2 = new JLabel("");
-	lblCurrency2.setFont(new Font("Tahoma", Font.PLAIN, 12));
-	lblCurrency2.setBounds(149, 65, 90, 14);
+	lblCurrency2.setFont(new Font("Tahoma", Font.PLAIN, 12));             
+        lblCurrency2.setBounds(149, 65, 90, 14);     
 	panelAuthorized.add(lblCurrency2);
 	lblCurrency2.setText(currency.getText());
 		
@@ -226,9 +226,9 @@ public class JLabels {
 	lblPeriodicidad.setBounds(39, 103, 350, 14);
 	panelAuthorized.add(lblPeriodicidad);
 		
-	JLabel lblPeriod = new JLabel("6 Mes(es)");
+	JLabel lblPeriod = new JLabel("Mes(es)");
 	lblPeriod.setFont(new Font("Tahoma", Font.PLAIN, 12));
-	lblPeriod.setBounds(83, 140, 147, 14);
+	lblPeriod.setBounds(149, 140, 147, 14);
 	panelAuthorized.add(lblPeriod);
 		
 	JLabel lblInterestType = new JLabel("5 - TIPO DE INTERES");
@@ -242,7 +242,12 @@ public class JLabels {
 	panelAuthorized.add(lblCurrency3);
 		
 	JLabel lblDate = new JLabel(getDate());
-	lblDate.setBounds(103, 246, 182, 14);
+        
+        if(system)
+            lblDate.setBounds(103, 246, 182, 14);
+        else
+            lblDate.setBounds(115, 245, 182, 14);
+        
 	panelAuthorized.add(lblDate);
         
         JLabel lblClausula = new JLabel("CL\u00C1USULAS");
