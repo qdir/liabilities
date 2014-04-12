@@ -1,7 +1,6 @@
 package es.unileon.ulebank.GUI.contractForm;
 
 import java.awt.Font;
-import java.awt.SystemColor;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
@@ -12,7 +11,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.UIManager;
 
 /**
  * Class which contains all JTextArea components used in the main window

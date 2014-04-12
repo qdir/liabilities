@@ -1,6 +1,8 @@
 package es.unileon.ulebank.GUI.contractForm;
 
-import es.unileon.ulebank.GUI.tools.*;
+import es.unileon.ulebank.GUI.tools.JPicture;
+import es.unileon.ulebank.GUI.tools.JDraggable;
+import es.unileon.ulebank.GUI.tools.JDrawable;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
