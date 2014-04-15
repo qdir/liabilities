@@ -269,7 +269,7 @@ public class JButtons {
         acceptButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                         
-                    System.out.println(contract.checkFields());
+                    
                         if(contract.checkFields()){
                             
                             Toolkit.getDefaultToolkit().beep();
