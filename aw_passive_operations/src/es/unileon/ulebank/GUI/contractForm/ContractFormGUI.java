@@ -2,6 +2,7 @@ package es.unileon.ulebank.GUI.contractForm;
 
 import es.unileon.ulebank.GUI.tools.JPicture;
 import es.unileon.ulebank.GUI.tools.JDraggable;
+import java.awt.Color;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -22,6 +23,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Properties;
 import java.util.Random;
+import javax.swing.BorderFactory;
 
 /**
  * Class which represents the main window of the form with all its components
@@ -832,7 +834,7 @@ public class ContractFormGUI {
                 new JTextAreas(panelAuthorized);
                 //INITIALIZE JBUTTONS HERE
                 JButtons buttons = new JButtons(mainFrame, customTitleBar, contentPanel, picture,
-        													panelOwners, panelAuthorized);
+        					panelOwners, panelAuthorized, this);
                 //INITIALIZE JCOMBOBOXES HERE
 		Runnable task = new JComboBoxes(contentPanel, buttons.getAddOwnerButton(), buttons);
 		
@@ -963,5 +965,57 @@ public class ContractFormGUI {
             else
                 system =false;
             
+        }             
+        
+        public boolean validateField(JTextField field){
+            
+            boolean error = false;
+            if (field.getText().trim().length() == 0) {               
+                field.setBorder(BorderFactory.createLineBorder(Color.RED));
+                error = true;
+                
+            } else {                         
+                field.setBorder(BorderFactory.createLineBorder(null));
+            }
+        
+            return error;
         }
+        
+        public boolean checkFields(){
+            
+            boolean error = false;
+            
+            if(validateField(firstDeposit)                  
+                |validateField(liqPeriod)
+                |validateField(interest)
+                |validateField(administrationWage)
+                |validateField(unpaidWage)
+                |validateField(anualInterest)
+                |validateField(anualFee)
+                |validateField(monthlyFeeCartilla)
+                |validateField(monthlyFeeFirm)
+                |validateField(monthlyFeePlus)
+                |validateField(trimestralFeePersonal)
+                |validateField(administrationFee)
+                |validateField(negativeBallanceFee)
+                |validateField(complaintFee)
+                |validateField(buyingFee)
+                |validateField(buyingFeePercentage)
+                |validateField(withdrawFee)
+                |validateField(chequeFee)
+                |validateField(repaymentFee)
+                |validateField(depositOperationFee)
+                |validateField(magneticSupportFee)
+                |validateField(paperFee)
+                |validateField(terminalFee)
+                |validateField(buyingFeePercentage)){
+            
+                error = true;
+                
+            }
+          
+            return error;
+            
+        }
+        
 }

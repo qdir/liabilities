@@ -94,6 +94,8 @@ public class JButtons {
      */
     private ArrayList<JClientPanel> authorizedPanelList = new ArrayList<JClientPanel>();
     
+    private ContractFormGUI contract;
+    
     /**
      * Class constructor
      * @param mainFrame frame of the main window
@@ -102,12 +104,13 @@ public class JButtons {
      * @param picture background image for the main window
      */
     public JButtons(JFrame mainFrame, JPicture customTitleBar, JPanel contentPanel,
-    					JPicture picture,JPanel panelOwners, JPanel panelAuthorized){
+    					JPicture picture,JPanel panelOwners, JPanel panelAuthorized, ContractFormGUI contract){
         
         this.mainFrame = mainFrame;
         this.panelOwners = panelOwners;
         this.panelAuthorized = panelAuthorized;
         this.contentPanel = contentPanel;
+        this.contract = contract;
         placeButtons(customTitleBar, picture);
         
     }
@@ -265,10 +268,23 @@ public class JButtons {
         
         acceptButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-
-                        new SignatureFrame();
-                        terminateThread = true;
-                        worker.interrupt();
+                        
+                    System.out.println(contract.checkFields());
+                        if(contract.checkFields()){
+                            
+                            Toolkit.getDefaultToolkit().beep();
+                            JOptionPane.showMessageDialog(mainFrame,
+                                "Please fill in all the fields!",
+                                "Fields left in blank!",                               
+                                JOptionPane.ERROR_MESSAGE);
+                            
+                        }
+                        else{
+                            
+                            new SignatureFrame();
+                            terminateThread = true;
+                            worker.interrupt();
+                        }
 
                 }
         });

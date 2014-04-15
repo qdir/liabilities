@@ -70,11 +70,14 @@ public class JDrawable extends JPanel {
 	/**
 	 * Class constructor. Sets all the necessary listeners.
 	 */
+        
+        private boolean mousePressed = false;
+        
 	public JDrawable() {
 
 		enableEvents(AWTEvent.MOUSE_MOTION_EVENT_MASK
 				| AWTEvent.MOUSE_EVENT_MASK | AWTEvent.COMPONENT_EVENT_MASK);
-
+                
 	}
 
 	/**
@@ -118,6 +121,7 @@ public class JDrawable extends JPanel {
 			return;
 		lastX = event.getX();
 		lastY = event.getY();
+                mousePressed = true;
 
 	}
 
@@ -249,4 +253,12 @@ public class JDrawable extends JPanel {
 		repaint();
 
 	}
+        
+        public boolean getMousePressed(){
+         
+            
+            return mousePressed;
+            
+        }
+        
 }

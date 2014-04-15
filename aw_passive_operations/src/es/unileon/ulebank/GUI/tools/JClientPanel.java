@@ -81,7 +81,7 @@ public class JClientPanel extends JPanel{
 		
                 this.setSize(947, 135);
                 this.setLayout(null);
-
+                
                 name = new JTextField();
                 name.setHorizontalAlignment(SwingConstants.CENTER);
                 name.setColumns(10);

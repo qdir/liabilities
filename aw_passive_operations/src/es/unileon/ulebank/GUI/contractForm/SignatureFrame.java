@@ -27,6 +27,8 @@ public class SignatureFrame {
          * Represents the window's main frame
          */
 	private JFrame frame;
+        JDrawable drawable;
+        JDrawable drawable_1;
         
         /**
          * Class constructor
@@ -74,11 +76,11 @@ public class SignatureFrame {
 		lblBankSignature.setBounds(555, 61, 191, 14);
 		picture.add(lblBankSignature);
 		
-		JDrawable drawable = new JDrawable();
+		drawable = new JDrawable();
 		drawable.setBounds(10, 82, 381, 280);
 		picture.add(drawable);
 		
-		JDrawable drawable_1 = new JDrawable();
+		drawable_1 = new JDrawable();
 		drawable_1.setBounds(419, 82, 381, 280);
 		picture.add(drawable_1);
 		
@@ -93,6 +95,7 @@ public class SignatureFrame {
 		acceptButton.setBorderPainted(false);
 		acceptButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		acceptButton.setFocusPainted(false);
+                acceptButtonAction(acceptButton);
 		
 		JButton denyButton = new JButton(denyIcon);
 		denyButton.setBounds(767, 382, 33, 33);
@@ -124,6 +127,40 @@ public class SignatureFrame {
                                 JOptionPane.ERROR_MESSAGE);
 
                             frame.dispose();
+
+                    }
+            });
+            
+        }
+        
+        private void acceptButtonAction(JButton acceptButton){
+            
+            acceptButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+
+                        if(!drawable.getMousePressed()){
+                            
+                            Toolkit.getDefaultToolkit().beep();
+                            JOptionPane.showMessageDialog(frame,
+                                "The contract must be signed by both parties!",
+                                "Operation Failed!",
+                                JOptionPane.ERROR_MESSAGE);
+                            
+                        }else if(!drawable_1.getMousePressed()){
+                            
+                            Toolkit.getDefaultToolkit().beep();
+                            JOptionPane.showMessageDialog(frame,
+                                "The contract must be signed by both parties!",
+                                "Operation Failed!",                               
+                                JOptionPane.ERROR_MESSAGE);
+                            
+                        }
+                        
+                        else{
+                            
+                            frame.dispose();
+                            
+                        }
 
                     }
             });
