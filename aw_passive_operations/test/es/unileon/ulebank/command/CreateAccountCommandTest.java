@@ -4,6 +4,13 @@
  */
 package es.unileon.ulebank.command;
 
+import es.unileon.ulebank.account.handler.AccountHandler;
+import es.unileon.ulebank.account.types.AccountType;
+import es.unileon.ulebank.bank.Bank;
+import es.unileon.ulebank.handler.GenericHandler;
+import es.unileon.ulebank.handler.MalformedHandlerException;
+import es.unileon.ulebank.office.Office;
+import es.unileon.ulebank.transacionManager.TransactionManager;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,34 +25,33 @@ import static org.junit.Assert.*;
 
 public class CreateAccountCommandTest {
     
-    public CreateAccountCommandTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
+    private   Office office;
+    private   Bank bank;
+    private   AccountType accountType;
+    private TransactionManager manager;
+   
     @Before
-    public void setUp() {
+    public void setUp() throws MalformedHandlerException {
+
+        this.manager = new TransactionManager();
+        this.bank = new Bank(this.manager, new GenericHandler("1234"));
+        this.office = new Office(new GenericHandler("1234"), this.bank);
+        this.accountType = AccountType.COMMERCIAL;
     }
     
-    @After
-    public void tearDown() {
-    }
 
     /**
      * Test of execute method, of class CreateAccountCommand.
      */
     @Test
-    public void testExecute() {
-//        System.out.println("execute");
-//        CreateAccountCommand instance = new CreateAccountCommand();
-//        instance.execute();
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+    public void testExecute() throws MalformedHandlerException{
+        
+        System.out.println("execute");
+        
+        CreateAccountCommand command = new CreateAccountCommand(this.office, this.bank, this.accountType);
+        command.execute();
+ 
+        
+//        assertTrue(this.office.);
     }
 }

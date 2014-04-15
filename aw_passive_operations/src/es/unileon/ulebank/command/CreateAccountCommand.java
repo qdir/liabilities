@@ -5,7 +5,11 @@ package es.unileon.ulebank.command;
 
 import es.unileon.ulebank.account.Account;
 import es.unileon.ulebank.account.handler.AccountHandler;
+import es.unileon.ulebank.account.types.AccountType;
+import es.unileon.ulebank.account.types.CommercialAccount;
+import es.unileon.ulebank.account.types.SightAccount;
 import es.unileon.ulebank.bank.Bank;
+import es.unileon.ulebank.handler.MalformedHandlerException;
 import es.unileon.ulebank.office.Office;
 
 
@@ -15,30 +19,35 @@ import es.unileon.ulebank.office.Office;
  *
  * @author Paula
  */
-public abstract class CreateAccountCommand implements Command{
-    private AccountHandler accountNumber;
+public class CreateAccountCommand implements Command{
+    
     private Office office;
     private Bank bank;
-    private AccountHandler dc;
+    private AccountType accountType;
     
     
     
-    public CreateAccountCommand(AccountHandler dc, AccountHandler accountNumber, Office office, Bank bank){
-       this.accountNumber = accountNumber;
-       this.bank= bank;
-       this.office= office;
-       this.dc=dc;
-
+    public CreateAccountCommand(Office office, Bank bank, AccountType accountType){
+        
+       this.bank = bank;
+       this.office = office;
+       this.accountType = accountType;
     }
    
     @Override
-    public void execute() {
-     this.bank.getID();
-     this.office.getID();
-     
-     this.accountNumber.toString();
+    public void execute() throws MalformedHandlerException{
+        
+        Account account = null;
+        
+        if(this.accountType.equals(AccountType.COMMERCIAL)){
+            
+            account = new CommercialAccount(this.office, this.bank, this.office.getNewAccountNumber());
+        } else if(this.accountType.equals(AccountType.SIGHT)){
+            
+//            account = new SightAccount(office, bank, null, interest, administrationWage, anualInterest, administrationFee, negativeBallanceFee, complaintFee, buyingFee, withdrawFee, chequeFee, repaymentFee, depositOperationFee, magneticSuppportFee, paperFee, terminalFee, buyingFeePercentage)
+        }
+        
+        this.office.addAccount(account);
+        
     }
-
- 
-    
 }

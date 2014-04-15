@@ -96,11 +96,22 @@ public class OfficeTest {
     * Test throw of TransactionException in doTransaction method, of class Office.
     */
     @Test (expected = TransactionException.class)
-    public void testDoTransactionNullTransaction() throws TransactionException, MalformedHandlerException {
+    public void testDoTransactionNullTransactionNullDestination() throws TransactionException, MalformedHandlerException {
         
         System.out.println("doTransactionNullTransaction");
   
         this.office.doTransaction(null,null);
+    }
+    
+    /**
+    * Test throw of TransactionException in doTransaction method, of class Office.
+    */
+    @Test (expected = TransactionException.class)
+    public void testDoTransactionNullTransaction() throws TransactionException, MalformedHandlerException {
+        
+        System.out.println("doTransactionNullTransaction");
+  
+        this.office.doTransaction(null, this.account.getID());
     }
         
     /**
@@ -116,5 +127,159 @@ public class OfficeTest {
         Transaction transaction = new GenericTransaction(2.0, new Date(), "Salary", null);
         
         this.office.doTransaction(transaction, this.account.getID());
+    }
+    
+    @Test(expected = TransactionException.class)
+    public void testDoTransactionNegativeAmount() throws TransactionException, MalformedHandlerException {
+        this.office.addAccount(account);
+        Transaction transaction = new GenericTransaction(-1.0, new Date(), "Subject", TransactionType.CHARGE);
+        this.office.doTransaction(transaction, this.account.getID());
+    }
+
+    @Test(expected = TransactionException.class)
+    public void testDoWithdrawalNegativeAmountBadType() throws TransactionException, MalformedHandlerException{
+        this.office.addAccount(account);
+        Transaction transaction = new GenericTransaction(-1.0, new Date(), "Subject", TransactionType.PAYMENT);
+        this.office.doTransaction(transaction, this.account.getID());
+    }
+
+    @Test(expected = TransactionException.class)
+    public void testDoTransactionSubjectNull() throws TransactionException, MalformedHandlerException{
+        this.office.addAccount(account);
+        Transaction transaction = new GenericTransaction(0.0, new Date(), null, TransactionType.CHARGE);
+        this.office.doTransaction(transaction, this.account.getID());
+    }
+
+    @Test(expected = TransactionException.class)
+    public void testDoTransactionCreationDateNull() throws TransactionException, MalformedHandlerException {
+        this.office.addAccount(account);
+        Transaction transaction = new GenericTransaction(0.0, null, "subject", TransactionType.CHARGE);
+        this.office.doTransaction(transaction, this.account.getID());
+    }
+
+    @Test(expected = TransactionException.class)
+    public void testDoTransactionCreationDateSubjectNull() throws TransactionException, MalformedHandlerException {
+        this.office.addAccount(account);
+        Transaction transaction = new GenericTransaction(0.0, null, null, TransactionType.CHARGE);
+        this.office.doTransaction(transaction, this.account.getID());
+    }
+
+    @Test(expected = TransactionException.class)
+    public void testDoTransactionNegativeAmountSubjectNull() throws TransactionException, MalformedHandlerException {
+        this.office.addAccount(account);
+        Transaction transaction = new GenericTransaction(-1.0, new Date(), null, TransactionType.CHARGE);
+        this.office.doTransaction(transaction, this.account.getID());
+    }
+
+    @Test(expected = TransactionException.class)
+    public void testDoTransactionNegativeAmountCreationDateNull() throws TransactionException, MalformedHandlerException {
+        this.office.addAccount(account);
+        Transaction transaction = new GenericTransaction(-1.0, null, "subject", TransactionType.CHARGE);
+        this.office.doTransaction(transaction, this.account.getID());
+    }
+
+    @Test(expected = TransactionException.class)
+    public void testDoTransactionNegativeAmountCreationDateSubjectNull() throws TransactionException, MalformedHandlerException {
+        this.office.addAccount(account);
+        Transaction transaction = new GenericTransaction(-1.0, null, null, TransactionType.CHARGE);
+        this.office.doTransaction(transaction, this.account.getID());
+    }
+
+    @Test(expected = TransactionException.class)
+    public void testDoTransactionPositiveAmountSubjectNull() throws TransactionException, MalformedHandlerException {
+        this.office.addAccount(account);
+        Transaction transaction = new GenericTransaction(1.0, new Date(), null, TransactionType.CHARGE);
+        this.office.doTransaction(transaction, this.account.getID());
+    }
+
+    @Test(expected = TransactionException.class)
+    public void testDoTransactionPositiveAmountCreationDateNull() throws TransactionException, MalformedHandlerException {
+        this.office.addAccount(account);
+        Transaction transaction = new GenericTransaction(1.0, null, "subject", TransactionType.CHARGE);
+        this.office.doTransaction(transaction, this.account.getID());
+    }
+
+    @Test(expected = TransactionException.class)
+    public void testDoTransactionPositiveAmountCreationDateSubjectNull() throws TransactionException, MalformedHandlerException {
+        this.office.addAccount(account);
+        Transaction transaction = new GenericTransaction(1.0, null, null, TransactionType.CHARGE);
+        this.office.doTransaction(transaction, this.account.getID());
+    }
+
+    @Test(expected = TransactionException.class)
+    public void testDoTransactionBadTypeSubjectNull() throws TransactionException, MalformedHandlerException {
+        this.office.addAccount(account);
+        Transaction transaction = new GenericTransaction(0.0, new Date(), null, TransactionType.PAYMENT);
+        this.office.doTransaction(transaction, this.account.getID());
+    }
+
+    @Test(expected = TransactionException.class)
+    public void testDoTransactionBadTypeCreationDateNull() throws TransactionException, MalformedHandlerException {
+        this.office.addAccount(account);
+        Transaction transaction = new GenericTransaction(0.0, null, "subject", TransactionType.PAYMENT);
+        this.office.doTransaction(transaction, this.account.getID());
+    }
+
+    @Test(expected = TransactionException.class)
+    public void testDoTransactionBadTypeCreationDateSubjectNull() throws TransactionException, MalformedHandlerException {
+        this.office.addAccount(account);
+        Transaction transaction = new GenericTransaction(0.0, null, null, TransactionType.PAYMENT);
+        this.office.doTransaction(transaction, this.account.getID());
+    }
+
+    @Test(expected = TransactionException.class)
+    public void testDoTransactionBadTypeNegativeAmountSubjectNull() throws TransactionException, MalformedHandlerException {
+        this.office.addAccount(account);
+        Transaction transaction = new GenericTransaction(-1.0, new Date(), null, TransactionType.PAYMENT);
+        this.office.doTransaction(transaction, this.account.getID());
+    }
+
+    @Test(expected = TransactionException.class)
+    public void testDoTransactionBadTypeNegativeAmountCreationDateNull() throws TransactionException, MalformedHandlerException {
+        this.office.addAccount(account);
+        Transaction transaction = new GenericTransaction(-1.0, null, "subject", TransactionType.PAYMENT);
+        this.office.doTransaction(transaction, this.account.getID());
+    }
+
+    @Test(expected = TransactionException.class)
+    public void testDoTransactionBadTypeNegativeAmountCreationDateSubjectNull() throws TransactionException, MalformedHandlerException {
+        this.office.addAccount(account);
+        Transaction transaction = new GenericTransaction(-1.0, null, null, TransactionType.PAYMENT);
+        this.office.doTransaction(transaction, this.account.getID());
+    }
+
+    @Test(expected = TransactionException.class)
+    public void testDoTransactionBadTypePositiveAmountSubjectNull() throws TransactionException, MalformedHandlerException {
+        this.office.addAccount(account);
+        Transaction transaction = new GenericTransaction(1.0, new Date(), null, TransactionType.PAYMENT);
+        this.office.doTransaction(transaction, this.account.getID());
+    }
+
+    @Test(expected = TransactionException.class)
+    public void testDoTransactionBadTypePositiveAmountCreationDateNull() throws TransactionException, MalformedHandlerException {
+        this.office.addAccount(account);
+        Transaction transaction = new GenericTransaction(1.0, null, "subject", TransactionType.PAYMENT);
+        this.office.doTransaction(transaction, this.account.getID());
+    }
+
+    @Test(expected = TransactionException.class)
+    public void testDoTransactionBadTypePositiveAmountCreationDateSubjectNull() throws TransactionException, MalformedHandlerException {
+        this.office.addAccount(account);
+        Transaction transaction = new GenericTransaction(1.0, null, null, TransactionType.PAYMENT);
+        this.office.doTransaction(transaction, this.account.getID());
+    }
+
+    @Test(expected = TransactionException.class)
+    public void testDoTransactionNegativeAmountBadType() throws TransactionException, MalformedHandlerException {
+        this.office.addAccount(account);
+        Transaction transaction = new GenericTransaction(-1.0, new Date(), "Subject", TransactionType.PAYMENT);
+        this.office.doTransaction(transaction, this.account.getID());
+    }
+    
+    @Test
+    public void testLastNumberAccount() throws TransactionException, MalformedHandlerException {
+        this.office.addAccount(account);
+        assertTrue(this.office.getNewAccountNumber().equals("1234567891"));
+        
     }
 }
