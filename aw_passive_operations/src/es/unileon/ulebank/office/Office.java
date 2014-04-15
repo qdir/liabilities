@@ -70,4 +70,20 @@ public class Office {
             throw new TransactionException(error.toString());
         }
     }
+    
+    public synchronized String getNewAccountNumber(){
+        
+        String lastAccountNumber;
+        
+        if(this.accounts.isEmpty()){
+            
+            lastAccountNumber = "0000000000";
+        }else{
+            
+            lastAccountNumber = ((AccountHandler) this.accounts.get(this.accounts.size()-1).getID()).getNumber();
+            lastAccountNumber = String.format("%10d", Integer.valueOf(lastAccountNumber) + 1);
+        }
+        
+        return lastAccountNumber;
+    }
 }
