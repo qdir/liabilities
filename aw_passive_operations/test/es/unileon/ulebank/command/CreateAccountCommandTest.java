@@ -50,8 +50,9 @@ public class CreateAccountCommandTest {
         
         CreateAccountCommand command = new CreateAccountCommand(this.office, this.bank, this.accountType);
         command.execute();
+        command.execute();
  
-        
-//        assertTrue(this.office.);
+        assertEquals(((AccountHandler)this.office.getAccounts().get(0).getID()).getNumber(),"0000000000","0000000000");
+        assertEquals(((AccountHandler)this.office.getAccounts().get(0).getID()).getNumber(),"0000000001","0000000001");
     }
 }

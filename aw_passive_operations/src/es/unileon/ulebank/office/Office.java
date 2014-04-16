@@ -6,7 +6,6 @@ import es.unileon.ulebank.account.Account;
 import es.unileon.ulebank.account.exception.TransactionException;
 import es.unileon.ulebank.account.handler.AccountHandler;
 import es.unileon.ulebank.bank.Bank;
-import es.unileon.ulebank.handler.GenericHandler;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
 import es.unileon.ulebank.history.Transaction;
@@ -81,9 +80,13 @@ public class Office {
         }else{
             
             lastAccountNumber = ((AccountHandler) this.accounts.get(this.accounts.size()-1).getID()).getNumber();
-            lastAccountNumber = String.format("%10d", Integer.valueOf(lastAccountNumber) + 1);
+            lastAccountNumber = String.format("%010d", Integer.parseInt(lastAccountNumber) + 1);
         }
         
         return lastAccountNumber;
+    }
+    
+    public List<Account> getAccounts(){
+        return this.accounts;
     }
 }

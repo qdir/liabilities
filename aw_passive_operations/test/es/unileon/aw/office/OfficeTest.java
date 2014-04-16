@@ -4,6 +4,7 @@
 package es.unileon.aw.office;
 
 import es.unileon.ulebank.account.exception.TransactionException;
+import es.unileon.ulebank.account.handler.AccountHandler;
 import es.unileon.ulebank.account.types.CommercialAccount;
 import es.unileon.ulebank.bank.Bank;
 import es.unileon.ulebank.office.Office;
@@ -278,8 +279,9 @@ public class OfficeTest {
     
     @Test
     public void testLastNumberAccount() throws TransactionException, MalformedHandlerException {
-        this.office.addAccount(account);
-        assertTrue(this.office.getNewAccountNumber().equals("1234567891"));
         
+        this.office.addAccount(account);
+        
+        assertEquals(this.office.getNewAccountNumber(),"1234567891","1234567891");
     }
 }
