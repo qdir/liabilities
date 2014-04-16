@@ -117,6 +117,28 @@ public class GUIOperations extends JFrame {
         }
     }
 
+    public static int getSelectedOption(String field){
+        Character firstChar = null;
+        int result = -1;
+        firstChar = field.charAt(0);
+        System.out.println("Lo primero es: " + firstChar );
+        if(firstChar.isLetter(firstChar)){
+        //Puede ser DNI Extranjero o CIF
+            if(firstChar.equals('X') ||firstChar.equals('Y')||firstChar.equals('Z') ){
+                //DNI extranjero
+                 System.out.println("Es un DNI extranjero: "+field );
+                 result = 1;
+            }else{
+                //CIF
+                System.out.println("Es un CIF: "+field );
+                result = 2;
+            }
+        }else{
+        //Es DNI
+            result = 0;
+        }
+        return result ;
+    }
     public static void main(String[] args) {
         FindClientGUI fClients = new FindClientGUI();
         //AccountGUI gui = new AccountGUI();
