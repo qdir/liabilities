@@ -4,6 +4,7 @@ package es.unileon.ulebank.GUI.client;
 
 import com.toedter.calendar.JDateChooser;
 import es.unileon.ulebank.GUI.account.AccountGUI;
+import es.unileon.ulebank.GUI.operations.HistoricalOperations;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import javax.swing.BorderFactory;
@@ -140,7 +141,8 @@ public class GUIOperations extends JFrame {
         return result ;
     }
     public static void main(String[] args) {
-        FindClientGUI fClients = new FindClientGUI();
+        HistoricalOperations ho = new HistoricalOperations();
+           //FindClientGUI fClients = new FindClientGUI();
         //AccountGUI gui = new AccountGUI();
         //ContractFormGUI contractGui = new ContractFormGUI();
     }
