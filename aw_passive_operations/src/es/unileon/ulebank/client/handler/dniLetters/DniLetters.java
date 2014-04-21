@@ -47,7 +47,7 @@ public class DniLetters {
     public boolean isDniValid(int dniNumber, char dniLetter){
         boolean result = false;
         int dniRest = dniNumber % 23;
-        if(dniRest<23 && dniLetters[dniRest]==dniLetter)
+        if(dniRest<23 && dniLetters[dniRest]==dniLetter && Integer.toString(dniNumber).length()<=8)
             result=true;
         return result;
     }

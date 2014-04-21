@@ -62,6 +62,10 @@ public class Person extends Client{
         phoneNumbers = new int[2];
     }
 
+     public Person(char foreingLetter, int dniNumber, char dniLetter) throws MalformedHandlerException{
+        super(new PersonHandler(foreingLetter, dniNumber, dniLetter));
+        phoneNumbers = new int[2];
+    }
     /**
      * Creates a new Person with all the data
      * @param name
@@ -78,6 +82,19 @@ public class Person extends Client{
      */
     public Person(String name, String surnames, Address address, String civilState, int phoneNumber1, int phoneNumber2, String profession, int dniNumber, char dniLetter, Date birthDate) throws MalformedHandlerException {
         super(new PersonHandler(dniNumber, dniLetter));
+        this.name = name;
+        this.surnames = surnames;
+        this.address = address;
+        this.civilState = civilState;
+        this.phoneNumbers = new int[2];
+        this.phoneNumbers[0]=phoneNumber1;
+        this.phoneNumbers[1]=phoneNumber2;
+        this.profession = profession;
+        this.birthDate = birthDate;
+    }
+    
+    public Person(String name, String surnames, Address address, String civilState, int phoneNumber1, int phoneNumber2, String profession,Date birthDate,char foreingLetter, int dniNumber, char dniLetter) throws MalformedHandlerException {
+        super(new PersonHandler(foreingLetter, dniNumber, dniLetter));
         this.name = name;
         this.surnames = surnames;
         this.address = address;
