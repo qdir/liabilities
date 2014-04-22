@@ -3,13 +3,20 @@
 package es.unileon.ulebank.GUI.client;
 
 import com.toedter.calendar.JDateChooser;
-import es.unileon.ulebank.GUI.account.AccountGUI;
-import es.unileon.ulebank.GUI.operations.HistoricalOperations;
+import es.unileon.ulebank.account.history.AccountHistory;
+import es.unileon.ulebank.history.Transaction;
+import es.unileon.ulebank.temporary.TemporaryAccountHistory;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.text.ParseException;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Iterator;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * All the operations that the clients interface could use.
@@ -140,10 +147,72 @@ public class GUIOperations extends JFrame {
         }
         return result ;
     }
-    public static void main(String[] args) {
-        HistoricalOperations ho = new HistoricalOperations();
-           //FindClientGUI fClients = new FindClientGUI();
+    
+    public static JTable createTable(Object[][] data) {
+        DefaultTableModel tableModel;
+        String[] columnNames = {"Fecha operación",
+            "Fecha valor",
+            "Tipo",
+            "concepto",
+            "Importe",
+            "Saldo"};
+
+        JTable resultTable = new JTable(data, columnNames);
+        tableModel = new DefaultTableModel(data, columnNames) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        resultTable.setModel(tableModel);
+
+        return resultTable;
+    }
+    
+   
+    public static Object[][] getData(AccountHistory history, Date startDate, Date endDate, int option ){
+        Double amount = 1000.000;
+        Object[][] transactionData = null;
+        Collection<Transaction> tr = null;
+        switch (option){
+            case 1:
+                //Falta metodo para elegir las de una fecha determinada
+                tr = history.getTransactions();
+                break;
+            case 2:
+                tr = history.getTransactionsBetween(startDate, endDate);
+                break;
+            case 3:
+                tr = history.getTransactionsFrom(startDate);
+                break;
+            default:
+                tr = history.getTransactions();
+                break;
+                
+        }
+        
+        transactionData = new Object [tr.size()][6];
+        Iterator<Transaction> iterator=tr.iterator();
+        int i = 0;
+        while(iterator.hasNext()){
+            Transaction t = iterator.next();
+            transactionData[i][0] = t.getDate();
+            transactionData[i][1] =t.getEffectiveDate();
+            transactionData[i][2] =t.getType();
+            transactionData[i][3] =t.getSubject();
+            transactionData[i][4] =t.getAmount();
+            transactionData[i][5] = (amount-t.getAmount());
+            i++;
+        }
+       
+    return transactionData;    
+    }
+   
+    public static void main(String[] args) throws ParseException {
+        //HistoricalOperations ho = new HistoricalOperations();
+        //FindClientGUI fClients = new FindClientGUI();
         //AccountGUI gui = new AccountGUI();
         //ContractFormGUI contractGui = new ContractFormGUI();
+        TemporaryAccountHistory temporal = new TemporaryAccountHistory();
     }
 }
