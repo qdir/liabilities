@@ -29,30 +29,12 @@ public abstract class History<T extends Transaction> {
         return this.transactions.add(transaction);
     }
 
-    public Collection<T> getTransactionsFrom(Date beginning) {
-        Collection<T> transactions = new ArrayList<>();
-        if (beginning != null) {
-            for (T actual : this.transactions) {
-                if (beginning.before(actual.getDate())) {
-                    transactions.add(actual);
-                }
-            }
-        }
-        return transactions;
-    }
-
-    public Collection<T> getTransactionsBetween(Date beginning, Date end) {
-        Collection<T> transactions = new ArrayList<>();
-        if (beginning != null) {
-            for (T actual : this.transactions) {
-                if (beginning.before(actual.getDate()) && end.after(actual.getDate())) {
-                    transactions.add(actual);
-                }
-            }
-        }
-        return transactions;
-    }
-
+    /**
+     *
+     * @param args
+     * @return
+     * @author runix
+     */
     public Iterator<T> getIterator(String[] args) {
         int i = 0;
         final List<Condition<T>> conditions = new ArrayList<>();
@@ -85,6 +67,30 @@ public abstract class History<T extends Transaction> {
                     malformed = true;
                 }
 
+            } else if (args[i].equals("from")) {
+                if (i + 1 < args.length) {
+                    matcher = numberPattern.matcher(args[i + 1]);
+                    if (matcher.find()) {
+                        conditions.add(new ConditionTransactionBetweenTwoDates<T>(new Date(Long.parseLong(args[i + 1])), new Date(Long.MAX_VALUE), true));
+                        i += 2;
+                    } else {
+                        malformed = true;
+                    }
+                } else {
+                    malformed = true;
+                }
+            } else if (args[i].equals("after")) {
+                if (i + 1 < args.length) {
+                    matcher = numberPattern.matcher(args[i + 1]);
+                    if (matcher.find()) {
+                        conditions.add(new ConditionTransactionBetweenTwoDates<T>(new Date(Long.MIN_VALUE), new Date(Long.parseLong(args[i + 1])), true));
+                        i += 2;
+                    } else {
+                        malformed = true;
+                    }
+                } else {
+                    malformed = true;
+                }
             } else if (args[i].equals("between")) {
                 if (i + 2 < args.length) {
                     matcher = numberPattern.matcher(args[i + 1]);
@@ -94,7 +100,7 @@ public abstract class History<T extends Transaction> {
                         if (matcher.find()) {
                             Date high = new Date(Long.parseLong(args[i + 2]));
                             conditions.add(new ConditionTransactionBetweenTwoDates<T>(low, high, true));
-                            i+=3;
+                            i += 3;
                         } else {
                             malformed = true;
                         }
@@ -113,7 +119,7 @@ public abstract class History<T extends Transaction> {
                         if (matcher.find()) {
                             Date high = new Date(Long.parseLong(args[i + 2]));
                             conditions.add(new ConditionTransactionBetweenTwoDates<T>(low, high, false));
-                            i+=3;
+                            i += 3;
                         } else {
                             malformed = true;
                         }
@@ -130,7 +136,7 @@ public abstract class History<T extends Transaction> {
         return new ConditionalIterator<>(conditions, this.getTransactions());
     }
 
-    public static final String[] correctArgs(String[] args) {
+    private static final String[] correctArgs(String[] args) {
         for (int i = 0; i < args.length; i++) {
             args[i] = args[i].trim();
         }

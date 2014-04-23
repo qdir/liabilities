@@ -15,4 +15,10 @@ public interface Condition<T> {
      * @return true if is valid, otherwise false
      */
     boolean test(T t);
+
+    /**
+     *
+     * @return
+     */
+    boolean isExclusive();
 }

@@ -28,4 +28,9 @@ public class ConditionTransactionBetweenTwoDates<T extends Transaction> implemen
         return (this.timestampLess <= timestamp && timestamp <= this.timestampHigher) == isValid;
     }
 
+    @Override
+    public boolean isExclusive() {
+        return !this.isValid;
+    }
+
 }

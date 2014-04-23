@@ -2,6 +2,7 @@
  group.*/
 package es.unileon.ulebank.iterator;
 
+import es.unileon.ulebank.history.Transaction;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -40,9 +41,21 @@ public class ConditionalIterator<T> implements Iterator<T> {
         while (this.elementsIterator.hasNext() && !done) {
             T actual = this.elementsIterator.next();
             boolean valid = true;
-            for (int i = 0; i < this.conditions.size() && valid; i++) {
-                if (!this.conditions.get(i).test(actual)) {
-                    valid = false;
+            boolean end = false;
+            boolean excluyent = false;
+            for (int i = 0; i < this.conditions.size() && !end; i++) {
+                Condition<T> condition = this.conditions.get(i);
+                if (!condition.isExclusive()) {
+                    if (!excluyent) {
+                        valid = false;
+                    }
+                    valid |= condition.test(actual);
+                    excluyent = true;
+                } else {
+                    if (!this.conditions.get(i).test(actual)) {
+                        end = true;
+                        valid = false;
+                    }
                 }
             }
             if (valid) {

@@ -5,13 +5,12 @@ package es.unileon.ulebank.history.iterator;
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.iterator.Condition;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 /**
  *
  * @author runix
+ * @param <T>
  */
 public class ConditionOneDay<T extends Transaction> implements Condition<T> {
 
@@ -33,11 +32,11 @@ public class ConditionOneDay<T extends Transaction> implements Condition<T> {
         final int year = getYear(effective);
         final int month = getMonth(effective);
         final int day = getDay(effective);
-        if (isValidDay) {
-            return (this.year == year) == (this.month == month) == (this.day == day);
+        if (this.isValidDay) {
+            return (this.year == year) && (this.month == month) && (this.day == day);
         }
         if (this.year == year && this.month == month) {
-            return ((this.day != day));
+            return (this.day != day);
         }
         return true;
     }
@@ -55,5 +54,10 @@ public class ConditionOneDay<T extends Transaction> implements Condition<T> {
     public static int getDay(Date date) {
         SimpleDateFormat format = new SimpleDateFormat("dd");
         return Integer.parseInt(format.format(date));
+    }
+
+    @Override
+    public boolean isExclusive() {
+        return !this.isValidDay;
     }
 }
