@@ -24,11 +24,14 @@ public class Office {
     private Handler id;
     private final Bank bank;
     private static final Logger LOG = Logger.getLogger(Account.class.getName());
+    private long nextAccountNumber;
+    public static final long MAX_ACCOUNT_NUMBER = 1000000000l - 1;
 
     public Office(Handler id, Bank bank) {
         this.accounts = new ArrayList<>();
         this.id = id;
         this.bank = bank;
+        this.nextAccountNumber = 0;
     }
 
     public boolean addAccount(Account account) {
@@ -69,24 +72,18 @@ public class Office {
             throw new TransactionException(error.toString());
         }
     }
-    
-    public synchronized String getNewAccountNumber(){
-        
-        String lastAccountNumber;
-        
-        if(this.accounts.isEmpty()){
-            
-            lastAccountNumber = "0000000000";
-        }else{
-            
-            lastAccountNumber = ((AccountHandler) this.accounts.get(this.accounts.size()-1).getID()).getNumber();
-            lastAccountNumber = String.format("%010d", Integer.parseInt(lastAccountNumber) + 1);
+
+    public synchronized String getNewAccountNumber() {
+        String accountNumber;
+        if (this.nextAccountNumber == MAX_ACCOUNT_NUMBER) {
+            accountNumber = "";
+        } else {
+            accountNumber = String.format("%010d", this.nextAccountNumber++);
         }
-        
-        return lastAccountNumber;
+        return accountNumber;
     }
-    
-    public List<Account> getAccounts(){
+
+    public List<Account> getAccounts() {
         return this.accounts;
     }
 }
