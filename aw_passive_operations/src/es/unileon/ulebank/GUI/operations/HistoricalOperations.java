@@ -154,7 +154,7 @@ public class HistoricalOperations extends GUIOperations {
             
             @Override
             public void actionPerformed(ActionEvent e) {
-                table = createTable(getData(historyAccount,null, null, 1));
+                //table = createTable(getData(historyAccount,null, null, 1));
                switch (options.getSelectedItem()){
                        case "Fecha":
                         //Mostrar los elementos de esa fecha

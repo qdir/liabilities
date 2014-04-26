@@ -9,6 +9,7 @@ import es.unileon.ulebank.temporary.TemporaryAccountHistory;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
@@ -174,28 +175,57 @@ public class GUIOperations extends JFrame {
         Double amount = 1000.000;
         Object[][] transactionData = null;
         Collection<Transaction> tr = null;
+        es.unileon.ulebank.iterator.Iterator<Transaction> iterator  = null;
         switch (option){
             case 1:
-                //Falta metodo para elegir las de una fecha determinada
-                tr = history.getTransactions();
+                //Historical from one day only
+                System.out.println("Fecha:"+startDate.toString());
+                String options1[] = {"from",startDate.getTime()+""};
+                iterator= history.getIterator(options1);
+                tr = new ArrayList<>();
+                while(iterator.hasNext()){
+                    tr.add(iterator.next());
+                }
+                System.out.println("Opcion 1");
                 break;
             case 2:
-                tr = history.getTransactionsBetween(startDate, endDate);
+                //Historical from a period of time
+                String options2[] = {"between",startDate.getTime()+"", endDate.getTime()+""};
+                iterator= history.getIterator(options2);
+                tr = new ArrayList<>();
+                while(iterator.hasNext()){
+                    tr.add(iterator.next());
+                }
+                                System.out.println("Opcion 2");
+
                 break;
             case 3:
-                tr = history.getTransactionsFrom(startDate);
+                //Historical after a date
+                String options3[] = {"after",startDate.getTime()+""};
+                iterator= history.getIterator(options3);
+                tr = new ArrayList<>();
+                while(iterator.hasNext()){
+                    tr.add(iterator.next());
+                }
                 break;
+                //Pueden añadirse excluyendo una fecha o incluyendo una fecha.
             default:
-                tr = history.getTransactions();
+                iterator= history.getIterator(null);
+                tr = new ArrayList<>();
+                while(iterator.hasNext()){
+                    tr.add(iterator.next());
+                }
+               
                 break;
                 
         }
         
         transactionData = new Object [tr.size()][6];
-        Iterator<Transaction> iterator=tr.iterator();
+        Iterator<Transaction> iteratorTrans=tr.iterator();
         int i = 0;
-        while(iterator.hasNext()){
-            Transaction t = iterator.next();
+        System.out.println("Longitud tabla:"+ tr.size());
+        while(iteratorTrans.hasNext()){
+            Transaction t = iteratorTrans.next();
             transactionData[i][0] = t.getDate();
             transactionData[i][1] =t.getEffectiveDate();
             transactionData[i][2] =t.getType();
