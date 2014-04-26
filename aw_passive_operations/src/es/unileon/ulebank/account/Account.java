@@ -23,8 +23,6 @@ import org.apache.log4j.Logger;
  */
 public abstract class Account {
 
-    //TODO, need to add liquidation frequency
-    //and a method to perform the liquidation 
     /**
      * The logger of the class
      */
@@ -113,7 +111,9 @@ public abstract class Account {
 
     /**
      *
-     * Add a new titular
+     * Add a new titular. The client cannot be repeated, that is, two titulars
+     * cannot have the same id, because its id is unique. If we try to add a
+     * person that is already added the method return false.
      *
      * @param client ( client to add)
      *
@@ -133,11 +133,14 @@ public abstract class Account {
 
     /**
      *
-     * Delete a titular
+     * Delete a titular. If the titular hadn't been added, the method return
+     * false.
+     *
+     * @see es.unileon.ulebank.handler.Handler}.
      *
      * @param id ( The client id )
      *
-     * @return ( true if success, else false )
+     * @return ( true if success, false otherwise )
      */
     public boolean deleteTitular(Handler id) {
         for (int i = 0; i < this.titulars.size(); i++) {
@@ -153,7 +156,10 @@ public abstract class Account {
 
     /**
      *
-     * Add a new authorized
+     * Add a new authorized. The authorized cannot be repeated, that is, two
+     * titulars cannot have the same id, because its id is unique.If we try to
+     * add a person that is already added the method return false.
+     *
      *
      * @param authorized ( authorized to add)
      *
@@ -172,7 +178,10 @@ public abstract class Account {
 
     /**
      *
-     * Delete a titular
+     * Delete a authorized. If the authorized hadn't been added, the method
+     * return false.
+     *
+     * @see es.unileon.ulebank.handler.Handler}.
      *
      * @param id ( The authorized id )
      *
@@ -220,23 +229,6 @@ public abstract class Account {
     }
 
     /**
-     * Check if there are incosistences. If the program crash when a transaction
-     * was being doing maybe the account balance not be the same as the sum of
-     * all transactions. So, if the method return false imply that a transaction
-     * hadn't been finished.
-     *
-     * @return ( True if the account is consistent, and false otherwise)
-     */
-    public boolean checkInconsistences() {
-        Iterator<Transaction> iterator = this.getHistory().getTransactions().iterator();
-        double balance = 0.0d;
-        while (iterator.hasNext()) {
-            balance += iterator.next().getAmount();
-        }
-        return balance == this.balance;
-    }
-
-    /**
      * Withdraw money from the account.
      *
      * @param transaction ( transaction to do )
@@ -272,11 +264,14 @@ public abstract class Account {
         if (transaction.getAmount() < 0) {
             err.append("Fail, the amount of money cannot be less than zero\n");
         }
+
+        if (transaction.getEffectiveDate() == null) {
+            err.append("The effective date cannot be null \n");
+        }
         if (err.length() > 0) {
             LOG.error(err.toString());
             throw new TransactionException(err.toString());
         }
-        transaction.setEffectiveDate(new Date(System.currentTimeMillis()));
         boolean success = this.history.addTransaction(transaction);
         if (success) {
             this.balance -= transaction.getAmount();
@@ -326,11 +321,14 @@ public abstract class Account {
             err.append("Fail, the amount of money cannot be less than zero\n");
         }
 
+        if (transaction.getEffectiveDate() == null) {
+            err.append("The effective date cannot be null \n");
+        }
         if (err.length() > 0) {
             LOG.error(err.toString());
             throw new TransactionException(err.toString());
         }
-        transaction.setEffectiveDate(new Date(System.currentTimeMillis()));
+        
         boolean success = this.history.addTransaction(transaction);
         if (success) {
             this.balance += transaction.getAmount();

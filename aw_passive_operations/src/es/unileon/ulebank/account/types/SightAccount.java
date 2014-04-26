@@ -4,7 +4,6 @@ package es.unileon.ulebank.account.types;
 
 import es.unileon.ulebank.account.Account;
 import es.unileon.ulebank.bank.Bank;
-import es.unileon.ulebank.fees.FeeStrategy;
 import es.unileon.ulebank.handler.MalformedHandlerException;
 import es.unileon.ulebank.office.Office;
 

@@ -88,7 +88,7 @@ public abstract class Transaction {
      */
     public void setEffectiveDate(Date effectiveDate) {
         if (this.effectiveDate == null) {
-            this.effectiveDate = date;
+            this.effectiveDate = effectiveDate;
         }
     }
 
