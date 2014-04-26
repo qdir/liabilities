@@ -18,15 +18,15 @@ import java.util.Date;
 public class TemporaryAccountHistory {
     public TemporaryAccountHistory() throws ParseException{
     AccountHistory history = new AccountHistory();
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     
-    Date date1 = sdf.parse("01/05/2014");
-    Date edat1 = sdf.parse("05/05/2014");
+    Date date1 = sdf.parse("01/03/2014");
+    Date edat1 = sdf.parse("05/03/2014");
     GenericTransaction tr1 = new GenericTransaction(20.0, date1, edat1,"prueba1", CHARGE) {
     };
     
-    Date date2 = sdf.parse("10/05/2014");
-    Date edat2 = sdf.parse("15/05/2014");
+    Date date2 = sdf.parse("10/04/2014");
+    Date edat2 = sdf.parse("15/04/2014");
     GenericTransaction tr2 = new GenericTransaction(25.0, date2, edat2, "prueba1", PAYMENT) {
     };
     

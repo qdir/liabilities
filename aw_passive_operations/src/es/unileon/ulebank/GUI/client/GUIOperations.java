@@ -166,7 +166,6 @@ public class GUIOperations extends JFrame {
             }
         };
         resultTable.setModel(tableModel);
-
         return resultTable;
     }
     
@@ -178,9 +177,10 @@ public class GUIOperations extends JFrame {
         es.unileon.ulebank.iterator.Iterator<Transaction> iterator  = null;
         switch (option){
             case 1:
+                 System.out.println("Dentro del switch, option 1");
                 //Historical from one day only
                 System.out.println("Fecha:"+startDate.toString());
-                String options1[] = {"from",startDate.getTime()+""};
+                String options1[] = {"include",startDate.getTime()+""};
                 iterator= history.getIterator(options1);
                 tr = new ArrayList<>();
                 while(iterator.hasNext()){
@@ -189,6 +189,7 @@ public class GUIOperations extends JFrame {
                 System.out.println("Opcion 1");
                 break;
             case 2:
+                System.out.println("Dentro del switch, option 2");
                 //Historical from a period of time
                 String options2[] = {"between",startDate.getTime()+"", endDate.getTime()+""};
                 iterator= history.getIterator(options2);
@@ -200,16 +201,20 @@ public class GUIOperations extends JFrame {
 
                 break;
             case 3:
+                System.out.println("Dentro del switch, option 3");
                 //Historical after a date
                 String options3[] = {"after",startDate.getTime()+""};
                 iterator= history.getIterator(options3);
                 tr = new ArrayList<>();
+                //tr = history.getTransactions();
                 while(iterator.hasNext()){
                     tr.add(iterator.next());
+                   System.out.println("Añadido");
                 }
                 break;
                 //Pueden añadirse excluyendo una fecha o incluyendo una fecha.
             default:
+                System.out.println("Dentro del switch, defualt");
                 iterator= history.getIterator(null);
                 tr = new ArrayList<>();
                 while(iterator.hasNext()){
@@ -223,9 +228,10 @@ public class GUIOperations extends JFrame {
         transactionData = new Object [tr.size()][6];
         Iterator<Transaction> iteratorTrans=tr.iterator();
         int i = 0;
-        System.out.println("Longitud tabla:"+ tr.size());
+        System.out.println("Longitud tabla 1:"+ tr.size());
         while(iteratorTrans.hasNext()){
             Transaction t = iteratorTrans.next();
+            System.out.println(t.getDate().toString());
             transactionData[i][0] = t.getDate();
             transactionData[i][1] =t.getEffectiveDate();
             transactionData[i][2] =t.getType();

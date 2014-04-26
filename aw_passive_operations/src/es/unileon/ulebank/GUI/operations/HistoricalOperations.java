@@ -18,7 +18,6 @@ import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -54,6 +53,7 @@ public class HistoricalOperations extends GUIOperations {
     private JTextField findArea;
 
     private JTable table;
+    JScrollPane spTable ;
     
     private com.toedter.calendar.JDateChooser startCalendar;
     private com.toedter.calendar.JDateChooser finishCalendar;
@@ -91,47 +91,48 @@ public class HistoricalOperations extends GUIOperations {
         options.addItem("opcion5");
         
        
+        //Menu desplegable
         options.addItemListener(new ItemListener() {
 
             @Override
             public void itemStateChanged(ItemEvent e) {
-               fieldsPanel.removeAll();
-               switch (e.getItem().toString()){
-                   case  "Fecha": 
-                    startCalendar = new JDateChooser();
-                    startCalendar.setMaxSelectableDate(new Date());
-                    fieldsPanel.add(startCalendar);
-                    fieldsPanel.validate();
-                    break;
-                    
-                   case "Entre fechas":
-                    startCalendar = new JDateChooser();
-                    startCalendar.setMaxSelectableDate(new Date());
-                    fieldsPanel.add(startCalendar);
-                    finishCalendar = new JDateChooser();
-                    finishCalendar.setMaxSelectableDate(startCalendar.getDate());
-                    fieldsPanel.add(finishCalendar);
-                    fieldsPanel.validate();
-                    break;
-                   
-                   case "Desde fecha":
-                    startCalendar = new JDateChooser();
-                    startCalendar.setMaxSelectableDate(new Date());
-                    fieldsPanel.add(startCalendar);
-                    fieldsPanel.validate(); 
-                    //TODO falta metodo
-                    break;
-                      
-                   default:
-                 
+                fieldsPanel.removeAll();
+                switch (e.getItem().toString()) {
+                    case "Fecha":
+                        startCalendar = new JDateChooser();
+                        startCalendar.setMaxSelectableDate(new Date());
+                        fieldsPanel.add(startCalendar);
+                        fieldsPanel.validate();
+                        break;
+
+                    case "Entre fechas":
+                        startCalendar = new JDateChooser();
+                        startCalendar.setMaxSelectableDate(new Date());
+                        fieldsPanel.add(startCalendar);
+                        finishCalendar = new JDateChooser();
+                        finishCalendar.setMaxSelectableDate(startCalendar.getDate());
+                        fieldsPanel.add(finishCalendar);
+                        fieldsPanel.validate();
+                        break;
+
+                    case "Desde fecha":
+                        startCalendar = new JDateChooser();
+                        startCalendar.setMaxSelectableDate(new Date());
+                        fieldsPanel.add(startCalendar);
+                        fieldsPanel.validate();
+                        //TODO falta metodo
+                        break;
+
+                    default:
+
                 }
-                        
-                        optionsPanel.validate();
+
+                optionsPanel.validate();
             }
-            
+
         });
-      
-        
+
+        //Area para escribir
         findArea.addFocusListener(new FocusListener() {
 
             //Methods to clean the field
@@ -149,29 +150,52 @@ public class HistoricalOperations extends GUIOperations {
                 }
             }
         });
+
+        //Boton buscar
         findTransaction = new JButton("Buscar");
         findTransaction.addActionListener(new ActionListener() {
-            
+
             @Override
             public void actionPerformed(ActionEvent e) {
-                //table = createTable(getData(historyAccount,null, null, 1));
-               switch (options.getSelectedItem()){
-                       case "Fecha":
+                table = createTable(getData(historyAccount,null, null, 0));
+                switch (options.getSelectedItem()) {
+                    case "Fecha":
+                        System.out.println("Creamos la tabla en fecha");
                         //Mostrar los elementos de esa fecha
-                        table = createTable(getData(historyAccount,startCalendar.getDate(), null, 1));
+                        centerPanel.removeAll();
+                            table = createTable(getData(historyAccount, startCalendar.getDate(), null, 1));
+                            spTable = new JScrollPane(table);
+                            spTable.setViewportView(table);
+                            centerPanel.add(spTable);
+                            System.out.println("Tabla añadida");
+                        centerPanel.validate();
                         break;
-                       case "Entre fechas":
+                    case "Entre fechas":
+                        System.out.println("Creamos la tabla entre fecha");
                         //Muestra los elementos entre dos fechas
-                        table = createTable(getData(historyAccount,startCalendar.getDate(), finishCalendar.getDate(),2));    
-                           break;
-                       case "Desde fecha":
-                        table = createTable(getData(historyAccount,startCalendar.getDate(), null,3));
+                        centerPanel.removeAll();
+                            table = createTable(getData(historyAccount, startCalendar.getDate(), finishCalendar.getDate(), 2));
+                            spTable = new JScrollPane(table);
+                            spTable.setViewportView(table);
+                            centerPanel.add(spTable);
+                            System.out.println("Tabla añadida");
+                        centerPanel.validate();
                         break;
-                       default:
-               }  
+                    case "Desde fecha":
+                        centerPanel.removeAll();
+                        System.out.println("Creamos la tabla desde fecha");
+                            table = createTable(getData(historyAccount, startCalendar.getDate(), null, 3));
+                            spTable = new JScrollPane(table);
+                            spTable.setViewportView(table);
+                            centerPanel.add(spTable);
+                        System.out.println("Tabla añadida");
+                        break;
+                    default:
+                }
             }
         });
       
+        //Añadimos
         optionsPanel.add(find);
         optionsPanel.add(find, LEFT_ALIGNMENT);
           
@@ -185,18 +209,15 @@ public class HistoricalOperations extends GUIOperations {
         optionsPanel.add(findTransaction);
 
         mainPanel.add(optionsPanel, BorderLayout.NORTH);
-
-        ////////////////////////////////////////
-         /*SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
-    Date date1 = sdf.parse("01/05/2014");
-    Date edat1 = sdf.parse("05/05/2014");
-        table = createTable(getData(historyAccount,date1, edat1,2));*/
-        //////////////////////////////////////////////
         
-        JScrollPane spTable = new JScrollPane(table);
+        /*table = createTable(getData(historyAccount, null, null, 0));
+        System.out.println("Tabla inicial");*/
+        
+        
+        /*JScrollPane spTable = new JScrollPane(table);
         spTable.setViewportView(table);
         centerPanel.add(spTable);
-        System.out.println("Tabla añadida");
+        System.out.println("Tabla añadida");*/
         mainPanel.add(centerPanel, BorderLayout.CENTER);
 
         
