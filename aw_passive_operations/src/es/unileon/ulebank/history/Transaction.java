@@ -79,16 +79,9 @@ public abstract class Transaction {
         return type;
     }
 
-    /**
-     * Set the effective date of the transaction This date, can be set only
-     * once. So, if you set the date once, you can modify it.
-     *
-     * @param effectiveDate ( Date to set )
-     */
+
     public void setEffectiveDate(Date effectiveDate) {
-        if (this.effectiveDate == null) {
             this.effectiveDate = effectiveDate;
-        }
     }
 
     @Override
