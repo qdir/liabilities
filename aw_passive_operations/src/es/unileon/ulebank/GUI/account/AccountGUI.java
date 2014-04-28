@@ -203,7 +203,7 @@ public AccountGUI()  {
             
             addAuthorized.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent e){  
-                    newAuthorizedPanel();S
+                    newAuthorizedPanel();
                     constraints.gridx = 0;
                     constraints.gridy = countAuthorized;
                     constraints.gridwidth = 5;
