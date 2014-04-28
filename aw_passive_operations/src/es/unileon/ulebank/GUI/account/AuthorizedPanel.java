@@ -24,14 +24,19 @@ public class AuthorizedPanel extends JPanel {
     private JTextField DNIText; 
     private JLabel blanco;
     private JButton delete;
+    private JButton add;
+    private AccountGUI accountPanel;
+    private JPanel currentPanel;
     
-    public AuthorizedPanel() {
+    public AuthorizedPanel(AccountGUI accountPanelPass) {
+        currentPanel=this;
         authorized = new JLabel("Nombre: ");
         authorizedText = new JTextField(20);
         DNI = new JLabel("NIF-CIF: ");
         DNIText = new JTextField(10);
         blanco = new JLabel("          ");
         delete = new JButton("Eliminar");
+        add = new JButton("Anadir");
         
         this.setLayout(new GridBagLayout());
 
@@ -58,10 +63,22 @@ public class AuthorizedPanel extends JPanel {
         constra.gridx = 5;
         this.add(delete, constra);
         
+        constra.gridy = 1;
+        constra.gridx = 0;
+        this.add(add, constra);
+        
         
         delete.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                   
+                   accountPanel.deleteAuthorized();
+                   delete.setVisible(false);
+                   currentPanel.getParent().remove(currentPanel);
+                }
+        });
+        
+        add.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                   add.setVisible(false);
                 }
         });
     }

@@ -1,30 +1,29 @@
 package es.unileon.ulebank.GUI.contractForm;
 
-import es.unileon.ulebank.GUI.tools.*;
+import es.unileon.ulebank.GUI.tools.JPicture;
+import es.unileon.ulebank.GUI.tools.JDraggable;
+import java.awt.Color;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JTextField;
-import java.awt.SystemColor;
 import javax.swing.UIManager;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.Color;
 import java.util.Properties;
 import java.util.Random;
+import javax.swing.BorderFactory;
 
 /**
  * Class which represents the main window of the form with all its components
@@ -144,6 +143,11 @@ public class ContractFormGUI {
          * Amount deposited when the account is opened
          */
 	private JTextField firstDeposit;
+        
+        /**
+         * Liquidation time period
+         */
+        private JTextField liqPeriod;
         
         /**
          * Interest charged for the account
@@ -371,7 +375,7 @@ public class ContractFormGUI {
 		accNum2 = new JTextField();
 		accNum2.setEditable(false);
 		accNum2.setBackground(UIManager.getColor("Button.background"));
-		accNum2.setBounds(180, 307, 170, 20);
+		accNum2.setBounds(180, 307, 169, 20);
 		contentPanel.add(accNum2);
 		accNum2.setColumns(10);
 		accNum2.setHorizontalAlignment(SwingConstants.CENTER);
@@ -383,6 +387,7 @@ public class ContractFormGUI {
 		name.setBackground(UIManager.getColor("Button.highlight"));
 		name.setBounds(193, 431, 222, 20);
 		contentPanel.add(name);
+                name.setEditable(false);
 		
 		surname = new JTextField();
 		surname.setHorizontalAlignment(SwingConstants.CENTER);
@@ -390,6 +395,7 @@ public class ContractFormGUI {
 		surname.setBackground(UIManager.getColor("Button.highlight"));
 		surname.setBounds(193, 456, 222, 20);
 		contentPanel.add(surname);
+                surname.setEditable(false);
 		
 		birthDate = new JTextField();
 		birthDate.setText("dd/mm/aaaa");
@@ -398,6 +404,7 @@ public class ContractFormGUI {
 		birthDate.setBackground(UIManager.getColor("Button.highlight"));
 		birthDate.setBounds(193, 481, 111, 20);
 		contentPanel.add(birthDate);
+                birthDate.setEditable(false);
 		
 		birthDate.addMouseListener(new MouseAdapter() {
 			@Override
@@ -412,6 +419,7 @@ public class ContractFormGUI {
 		iDNum.setBackground(UIManager.getColor("Button.highlight"));
 		iDNum.setBounds(193, 506, 111, 20);
 		contentPanel.add(iDNum);
+                iDNum.setEditable(false);
 		
 		streetAndNum = new JTextField();
 		streetAndNum.setHorizontalAlignment(SwingConstants.CENTER);
@@ -419,6 +427,7 @@ public class ContractFormGUI {
 		streetAndNum.setBackground(UIManager.getColor("Button.highlight"));
 		streetAndNum.setBounds(546, 431, 244, 20);
 		contentPanel.add(streetAndNum);
+                streetAndNum.setEditable(false);
 		
 		town = new JTextField();
 		town.setHorizontalAlignment(SwingConstants.CENTER);
@@ -426,6 +435,7 @@ public class ContractFormGUI {
 		town.setBackground(UIManager.getColor("Button.highlight"));
 		town.setBounds(546, 456, 244, 20);
 		contentPanel.add(town);
+                town.setEditable(false);
 		
 		province = new JTextField();
 		province.setHorizontalAlignment(SwingConstants.CENTER);
@@ -433,13 +443,15 @@ public class ContractFormGUI {
 		province.setBackground(UIManager.getColor("Button.highlight"));
 		province.setBounds(546, 481, 244, 20);
 		contentPanel.add(province);
+                province.setEditable(false);
 		
 		cP = new JTextField();
 		cP.setHorizontalAlignment(SwingConstants.CENTER);
 		cP.setColumns(10);
 		cP.setBackground(UIManager.getColor("Button.highlight"));
 		cP.setBounds(546, 506, 100, 20);
-		contentPanel.add(cP);				
+		contentPanel.add(cP);
+                cP.setEditable(false);
 		
 		JPanel panelOwners = new JPanel();
 		panelOwners.setBackground(UIManager.getColor("Panel.background"));
@@ -458,6 +470,7 @@ public class ContractFormGUI {
 		nameAut.setBackground(UIManager.getColor("Button.highlight"));
 		nameAut.setBounds(193, 65, 222, 20);
 		panelOwners.add(nameAut);
+                nameAut.setEditable(false);
 		
 		surnameAut = new JTextField();
 		surnameAut.setHorizontalAlignment(SwingConstants.CENTER);
@@ -465,6 +478,7 @@ public class ContractFormGUI {
 		surnameAut.setBackground(UIManager.getColor("Button.highlight"));
 		surnameAut.setBounds(193, 90, 222, 20);
 		panelOwners.add(surnameAut);
+                surnameAut.setEditable(false);
 		
 		birthDateAut = new JTextField();
 		birthDateAut.setText("dd/mm/aaaa");
@@ -473,6 +487,7 @@ public class ContractFormGUI {
 		birthDateAut.setBackground(UIManager.getColor("Button.highlight"));
 		birthDateAut.setBounds(193, 115, 111, 20);
 		panelOwners.add(birthDateAut);
+                birthDateAut.setEditable(false);
 		
 		birthDateAut.addMouseListener(new MouseAdapter() {
 			@Override
@@ -487,6 +502,7 @@ public class ContractFormGUI {
 		iDNumAut.setBackground(UIManager.getColor("Button.highlight"));
 		iDNumAut.setBounds(193, 140, 111, 20);
 		panelOwners.add(iDNumAut);
+                iDNumAut.setEditable(false);
 		
 		streetAndNumAut = new JTextField();
 		streetAndNumAut.setHorizontalAlignment(SwingConstants.CENTER);
@@ -494,6 +510,7 @@ public class ContractFormGUI {
 		streetAndNumAut.setBackground(UIManager.getColor("Button.highlight"));
 		streetAndNumAut.setBounds(546, 65, 244, 20);
 		panelOwners.add(streetAndNumAut);
+                streetAndNumAut.setEditable(false);
 		
 		townAut = new JTextField();
 		townAut.setHorizontalAlignment(SwingConstants.CENTER);
@@ -501,6 +518,7 @@ public class ContractFormGUI {
 		townAut.setBackground(UIManager.getColor("Button.highlight"));
 		townAut.setBounds(546, 90, 244, 20);
 		panelOwners.add(townAut);
+                townAut.setEditable(false);
 		
 		provinceAut = new JTextField();
 		provinceAut.setHorizontalAlignment(SwingConstants.CENTER);
@@ -508,13 +526,15 @@ public class ContractFormGUI {
 		provinceAut.setBackground(UIManager.getColor("Button.highlight"));
 		provinceAut.setBounds(546, 115, 244, 20);
 		panelOwners.add(provinceAut);
+                provinceAut.setEditable(false);
 		
 		cPAut = new JTextField();
 		cPAut.setHorizontalAlignment(SwingConstants.CENTER);
 		cPAut.setColumns(10);
 		cPAut.setBackground(UIManager.getColor("Button.highlight"));
 		cPAut.setBounds(546, 140, 76, 20);
-		panelOwners.add(cPAut);				
+		panelOwners.add(cPAut);	
+                cPAut.setEditable(false);
 		
 		firstDeposit = new JTextField();
 		firstDeposit.setEditable(false);
@@ -523,7 +543,16 @@ public class ContractFormGUI {
 		firstDeposit.setColumns(10);
 		firstDeposit.setBackground(UIManager.getColor("Button.background"));
 		firstDeposit.setBounds(83, 62, 56, 20);
-		panelAuthorized.add(firstDeposit);															
+		panelAuthorized.add(firstDeposit);
+                
+                liqPeriod = new JTextField();
+		liqPeriod.setEditable(false);
+		liqPeriod.setText("6");
+		liqPeriod.setHorizontalAlignment(SwingConstants.CENTER);
+		liqPeriod.setColumns(10);
+		liqPeriod.setBackground(UIManager.getColor("Button.background"));
+		liqPeriod.setBounds(83, 137, 56, 20);
+		panelAuthorized.add(liqPeriod);
 		
 		interest = new JTextField();
 		interest.setBackground(UIManager.getColor("Button.background"));
@@ -537,36 +566,45 @@ public class ContractFormGUI {
 		maritalStatus = new JTextField();
 		maritalStatus.setHorizontalAlignment(SwingConstants.CENTER);
 		maritalStatus.setColumns(10);
-		maritalStatus.setBackground(Color.WHITE);
+		maritalStatus.setBackground(UIManager.getColor("Button.highlight"));
 		maritalStatus.setBounds(193, 531, 111, 20);
-		contentPanel.add(maritalStatus);				
+		contentPanel.add(maritalStatus);
+                maritalStatus.setEditable(false);
 		
 		phoneNum = new JTextField();
 		phoneNum.setHorizontalAlignment(SwingConstants.CENTER);
 		phoneNum.setColumns(10);
-		phoneNum.setBackground(Color.WHITE);
+		phoneNum.setBackground(UIManager.getColor("Button.highlight"));
 		phoneNum.setBounds(546, 532, 100, 20);
-		contentPanel.add(phoneNum);				
+		contentPanel.add(phoneNum);	
+                phoneNum.setEditable(false);
 		
 		maritalStatusAut = new JTextField();
 		maritalStatusAut.setHorizontalAlignment(SwingConstants.CENTER);
 		maritalStatusAut.setColumns(10);
-		maritalStatusAut.setBackground(Color.WHITE);
+		maritalStatusAut.setBackground(UIManager.getColor("Button.highlight"));
 		maritalStatusAut.setBounds(192, 165, 111, 20);
 		panelOwners.add(maritalStatusAut);
+                maritalStatusAut.setEditable(false);
 		
 		phoneNumAut = new JTextField();
 		phoneNumAut.setHorizontalAlignment(SwingConstants.CENTER);
 		phoneNumAut.setColumns(10);
-		phoneNumAut.setBackground(Color.WHITE);
+		phoneNumAut.setBackground(UIManager.getColor("Button.highlight"));
 		phoneNumAut.setBounds(546, 165, 100, 20);
-		panelOwners.add(phoneNumAut);																				
+		panelOwners.add(phoneNumAut);
+                phoneNumAut.setEditable(false);
 		
 		administrationWage = new JTextField();
 		administrationWage.setHorizontalAlignment(SwingConstants.CENTER);
 		administrationWage.setText("0,15");
 		administrationWage.setEditable(false);
-		administrationWage.setBounds(200, 1512, 45, 20);
+                
+                if(system)
+                    administrationWage.setBounds(200, 1512, 45, 20);
+                else
+                    administrationWage.setBounds(226, 1510, 45, 20);
+                    
 		panelAuthorized.add(administrationWage);
 		administrationWage.setColumns(10);
 		
@@ -574,7 +612,12 @@ public class ContractFormGUI {
 		unpaidWage.setText("0,00");
 		unpaidWage.setHorizontalAlignment(SwingConstants.CENTER);
 		unpaidWage.setEditable(false);
-		unpaidWage.setBounds(119, 1578, 45, 20);
+                
+                if(system)
+                    unpaidWage.setBounds(119, 1578, 45, 20);
+                else
+                    unpaidWage.setBounds(275, 1571, 45, 20);
+                    
 		panelAuthorized.add(unpaidWage);
 		unpaidWage.setColumns(10);				
 		
@@ -583,14 +626,18 @@ public class ContractFormGUI {
 		anualInterest.setHorizontalAlignment(SwingConstants.CENTER);
 		anualInterest.setEditable(false);
 		anualInterest.setColumns(10);
-		anualInterest.setBounds(746, 2038, 45, 20);
+                
+                if(system)
+                    anualInterest.setBounds(746, 2038, 45, 20);
+                else
+                    anualInterest.setBounds(742, 2047, 45, 20);
+                
 		panelAuthorized.add(anualInterest);																
 		
 		anualFee = new JTextField();
 		anualFee.setEditable(false);
 		anualFee.setText("30,00");
-		anualFee.setHorizontalAlignment(SwingConstants.CENTER);
-		anualFee.setBounds(236, 3432, 50, 20);
+		anualFee.setHorizontalAlignment(SwingConstants.CENTER);		
 		panelAuthorized.add(anualFee);
 		anualFee.setColumns(10);
 		
@@ -599,39 +646,60 @@ public class ContractFormGUI {
 		monthlyFeeFirm.setHorizontalAlignment(SwingConstants.CENTER);
 		monthlyFeeFirm.setEditable(false);
 		monthlyFeeFirm.setColumns(10);
-		monthlyFeeFirm.setBounds(263, 3513, 50, 20);
 		panelAuthorized.add(monthlyFeeFirm);
 		
 		monthlyFeeCartilla = new JTextField();
 		monthlyFeeCartilla.setText("4,00");
 		monthlyFeeCartilla.setHorizontalAlignment(SwingConstants.CENTER);
 		monthlyFeeCartilla.setEditable(false);
-		monthlyFeeCartilla.setColumns(10);
-		monthlyFeeCartilla.setBounds(263, 3545, 50, 20);
+		monthlyFeeCartilla.setColumns(10);		
 		panelAuthorized.add(monthlyFeeCartilla);
 		
 		monthlyFeePlus = new JTextField();
 		monthlyFeePlus.setText("3,00");
 		monthlyFeePlus.setHorizontalAlignment(SwingConstants.CENTER);
 		monthlyFeePlus.setEditable(false);
-		monthlyFeePlus.setColumns(10);
-		monthlyFeePlus.setBounds(263, 3577, 50, 20);
+		monthlyFeePlus.setColumns(10);		
 		panelAuthorized.add(monthlyFeePlus);
 		
 		trimestralFeePersonal = new JTextField();
 		trimestralFeePersonal.setText("10,00");
 		trimestralFeePersonal.setHorizontalAlignment(SwingConstants.CENTER);
 		trimestralFeePersonal.setEditable(false);
-		trimestralFeePersonal.setColumns(10);
-		trimestralFeePersonal.setBounds(266, 3609, 50, 20);
+		trimestralFeePersonal.setColumns(10);		
 		panelAuthorized.add(trimestralFeePersonal);				
 		
+                if(system){
+                    
+                  anualFee.setBounds(236, 3432, 50, 20);  
+                  monthlyFeeFirm.setBounds(263, 3513, 50, 20);
+                  monthlyFeeCartilla.setBounds(263, 3545, 50, 20);
+                  monthlyFeePlus.setBounds(263, 3577, 50, 20);
+                  trimestralFeePersonal.setBounds(266, 3609, 50, 20);
+                  
+                }
+                
+                else{
+                    
+                  anualFee.setBounds(270, 3432, 50, 20);  
+                  monthlyFeeFirm.setBounds(300, 3507, 50, 20);
+                  monthlyFeeCartilla.setBounds(300, 3536, 50, 20);
+                  monthlyFeePlus.setBounds(300, 3567, 50, 20);
+                  trimestralFeePersonal.setBounds(308, 3596, 50, 20); 
+                    
+                }
+                
 		administrationFee = new JTextField();
 		administrationFee.setText("0,25");
 		administrationFee.setHorizontalAlignment(SwingConstants.CENTER);
 		administrationFee.setEditable(false);
 		administrationFee.setColumns(10);
-		administrationFee.setBounds(327, 3700, 50, 20);
+                
+                if(system)
+                    administrationFee.setBounds(327, 3700, 50, 20);
+                else
+                    administrationFee.setBounds(377, 3699, 50, 20);
+                
 		panelAuthorized.add(administrationFee);										
 		
                 JPicture table1 = new JPicture("resources/es/unileon/ulebank/GUI/contractForm/table1.png");
@@ -676,7 +744,12 @@ public class ContractFormGUI {
 		negativeBallanceFee.setHorizontalAlignment(SwingConstants.CENTER);
 		negativeBallanceFee.setEditable(false);
 		negativeBallanceFee.setColumns(10);
-		negativeBallanceFee.setBounds(547, 4101, 50, 20);
+                
+                if(system)
+                    negativeBallanceFee.setBounds(547, 4101, 50, 20);
+                else
+                    negativeBallanceFee.setBounds(637, 4101, 50, 20);
+                
 		panelAuthorized.add(negativeBallanceFee);
 										
 		complaintFee = new JTextField();
@@ -684,24 +757,40 @@ public class ContractFormGUI {
 		complaintFee.setHorizontalAlignment(SwingConstants.CENTER);
 		complaintFee.setEditable(false);
 		complaintFee.setColumns(10);
-		complaintFee.setBounds(451, 4205, 50, 20);
+                
+                if(system)
+                    complaintFee.setBounds(451, 4205, 50, 20);
+                else
+                    complaintFee.setBounds(522, 4204, 50, 20);
+                
 		panelAuthorized.add(complaintFee);				
 		
 		buyingFee = new JTextField();
 		buyingFee.setText("5,00");
 		buyingFee.setHorizontalAlignment(SwingConstants.CENTER);
 		buyingFee.setEditable(false);
-		buyingFee.setColumns(10);
-		buyingFee.setBounds(108, 4929, 50, 20);
+		buyingFee.setColumns(10);		
 		panelAuthorized.add(buyingFee);
 		
 		buyingFeePercentage = new JTextField();
 		buyingFeePercentage.setText("0,18");
 		buyingFeePercentage.setHorizontalAlignment(SwingConstants.CENTER);
 		buyingFeePercentage.setEditable(false);
-		buyingFeePercentage.setColumns(10);
-		buyingFeePercentage.setBounds(305, 4929, 50, 20);
-		panelAuthorized.add(buyingFeePercentage);				
+		buyingFeePercentage.setColumns(10);		
+		panelAuthorized.add(buyingFeePercentage);
+                
+                if(system){
+                    
+                   buyingFee.setBounds(108, 4929, 50, 20);
+                   buyingFeePercentage.setBounds(305, 4929, 50, 20);
+                                 
+                }else{
+                    
+                   buyingFee.setBounds(306, 4902, 50, 20);
+                   buyingFeePercentage.setBounds(540, 4902, 50, 20);
+                    
+                }
+                
 		
 		JPicture table2 = new JPicture("resources/es/unileon/ulebank/GUI/contractForm/table2.png");
 		table2.setBounds(39, 5098, 851, 207);
@@ -738,14 +827,14 @@ public class ContractFormGUI {
 		table3.add(chequeFee);								
         
 		//INITIALIZE JLABELS HERE
-                new JLabels(contentPanel, currency, interest, panelOwners, panelAuthorized);
+                new JLabels(contentPanel, currency, interest, panelOwners, panelAuthorized, system);
 		//INITIALIZE JPICTURES HERE
                 new JPictures(contentPanel, panelAuthorized);
                 //INITIALIZE JTEXTAREAS HERE
                 new JTextAreas(panelAuthorized);
                 //INITIALIZE JBUTTONS HERE
                 JButtons buttons = new JButtons(mainFrame, customTitleBar, contentPanel, picture,
-        													panelOwners, panelAuthorized);
+        					panelOwners, panelAuthorized, this);
                 //INITIALIZE JCOMBOBOXES HERE
 		Runnable task = new JComboBoxes(contentPanel, buttons.getAddOwnerButton(), buttons);
 		
@@ -784,6 +873,7 @@ public class ContractFormGUI {
 				if (!flip){
 					
 					firstDeposit.setEditable(true);
+                                        liqPeriod.setEditable(true);
 					interest.setEditable(true);
 					administrationWage.setEditable(true);
 					unpaidWage.setEditable(true);
@@ -812,6 +902,7 @@ public class ContractFormGUI {
 				else{
 					
 					firstDeposit.setEditable(false);
+                                        liqPeriod.setEditable(false);
 					interest.setEditable(false);
 					administrationWage.setEditable(false);
 					unpaidWage.setEditable(false);
@@ -874,5 +965,57 @@ public class ContractFormGUI {
             else
                 system =false;
             
+        }             
+        
+        public boolean validateField(JTextField field){
+            
+            boolean error = false;
+            if (field.getText().trim().length() == 0) {               
+                field.setBorder(BorderFactory.createLineBorder(Color.RED));
+                error = true;
+                
+            } else {                         
+                field.setBorder(BorderFactory.createLineBorder(null));
+            }
+        
+            return error;
         }
+        
+        public boolean checkFields(){
+            
+            boolean error = false;
+            
+            if(validateField(firstDeposit)                  
+                |validateField(liqPeriod)
+                |validateField(interest)
+                |validateField(administrationWage)
+                |validateField(unpaidWage)
+                |validateField(anualInterest)
+                |validateField(anualFee)
+                |validateField(monthlyFeeCartilla)
+                |validateField(monthlyFeeFirm)
+                |validateField(monthlyFeePlus)
+                |validateField(trimestralFeePersonal)
+                |validateField(administrationFee)
+                |validateField(negativeBallanceFee)
+                |validateField(complaintFee)
+                |validateField(buyingFee)
+                |validateField(buyingFeePercentage)
+                |validateField(withdrawFee)
+                |validateField(chequeFee)
+                |validateField(repaymentFee)
+                |validateField(depositOperationFee)
+                |validateField(magneticSupportFee)
+                |validateField(paperFee)
+                |validateField(terminalFee)
+                |validateField(buyingFeePercentage)){
+            
+                error = true;
+                
+            }
+          
+            return error;
+            
+        }
+        
 }

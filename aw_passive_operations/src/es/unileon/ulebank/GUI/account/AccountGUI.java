@@ -4,6 +4,13 @@ import es.unileon.ulebank.GUI.client.ClientsGUI;
 import es.unileon.ulebank.GUI.client.FindClientGUI;
 import es.unileon.ulebank.GUI.client.GUIOperations;
 import es.unileon.ulebank.GUI.client.PersonPanel;
+import es.unileon.ulebank.account.Account;
+import es.unileon.ulebank.account.types.AccountType;
+import static es.unileon.ulebank.account.types.AccountType.COMMERCIAL;
+import es.unileon.ulebank.bank.Bank;
+import es.unileon.ulebank.command.CreateAccountCommand;
+import es.unileon.ulebank.handler.MalformedHandlerException;
+import es.unileon.ulebank.office.Office;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -19,6 +26,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 
 public class AccountGUI extends GUIOperations {
@@ -46,7 +54,8 @@ public class AccountGUI extends GUIOperations {
         private AccountGUI window;
         private boolean one = true;
         
-public AccountGUI() {
+        
+public AccountGUI()  {
             
             contentPaneUno = new JPanel();            
             accountData = new JLabel("DATOS DE LA CUENTA");          
@@ -60,6 +69,8 @@ public AccountGUI() {
             modeButton.addItem("Cuenta Personal");  
             coin = new JLabel("Moneda de la Cuenta: ");
             coinText = new JTextField(20);  
+            coinText.setHorizontalAlignment(SwingConstants.CENTER);
+            coinText.setText("Euros");
             availability = new JLabel("Disponibilidad: ");
             availabilityButton = new JComboBox();
             availabilityButton.addItem("Independiente");
@@ -74,7 +85,7 @@ public AccountGUI() {
             countHolder = 5;
             countAuthorized = 52;
             
-
+            
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             int width = this.getToolkit().getScreenSize().width;
             int height = this.getToolkit().getScreenSize().height;
@@ -89,7 +100,6 @@ public AccountGUI() {
             contentPaneUno.setLayout(layout);
 
             final GridBagConstraints constraints =new GridBagConstraints();
-
 
             constraints.gridx = 0; 
             constraints.gridy = 0;  
@@ -163,17 +173,20 @@ public AccountGUI() {
                 public void actionPerformed(ActionEvent e) {
                     if (availabilityButton.getSelectedItem().toString() == "Mancomunada") {
                         one = false;
+                        addHolder.setVisible(true);
                     } else if (availabilityButton.getSelectedItem().toString() == "Independiente") {
                         one = true;
+                        //Comprobar numero de paneles
                     } else if (availabilityButton.getSelectedItem().toString() == "Indistinta") {
                         one = false;
+                        addHolder.setVisible(true);
                     }
                 }
             });
                     
-            addHolder.addActionListener(new ActionListener(){
+            addHolder.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e){
-                    holderPanel = new HolderPanel();
+                    newHolderPanel();
                     constraints.gridx = 0;
                     constraints.gridy = countHolder;
                     constraints.gridwidth = 5;
@@ -190,13 +203,14 @@ public AccountGUI() {
             
             addAuthorized.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent e){  
-                    authorizedPanel = new AuthorizedPanel();
+                    newAuthorizedPanel();
                     constraints.gridx = 0;
                     constraints.gridy = countAuthorized;
                     constraints.gridwidth = 5;
                     contentPaneUno.add(authorizedPanel, constraints);
                     validate();
                     countAuthorized++;
+                    
                 }
             });
            
@@ -207,7 +221,30 @@ public AccountGUI() {
                 }
             });       
         }
+
+        public void downCountHolder() {
+            countHolder--;
+            addHolder.setVisible(true);
+        }
+        
+        public JPanel newHolderPanel() {
+            holderPanel = new HolderPanel(this);
+            return holderPanel;
+        }
+        
+        public JPanel newAuthorizedPanel() {
+            authorizedPanel = new AuthorizedPanel(this);
+            return authorizedPanel;
+        }
    
+        public void deleteHolder() {
+            //borrar el holder de la lista
+        }
+        
+        public void deleteAuthorized() {
+            //borrar el authorized de la lista
+        }         
+        
         public static void main(String[] args) {
             AccountGUI gui = new AccountGUI();
         }

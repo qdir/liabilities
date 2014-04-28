@@ -2,6 +2,7 @@
  group.*/
 package es.unileon.ulebank.taskList;
 
+import es.unileon.ulebank.handler.Handler;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -66,6 +67,16 @@ public class TaskList {
         return delete;
     }
 
+    public void undoCommand(Handler id) {
+        for (int i = 0; i < this.tasksDone.size(); i++) {
+            Command c = this.tasksDone.get(i);
+            if(c.getID().compareTo(id) == 0){
+               c.undo();
+               this.tasksDone.remove(i);
+            }
+        }
+    }
+
     public void setTime(long timestamp) {
         this.date.setTime(timestamp);
     }
@@ -89,7 +100,7 @@ public class TaskList {
     public void forwardDays(int days) {
         if (days > 0) {
             //days * hours* minutes* seconds * milliseconds
-            long timeToForward = (long)  (days) * 24 * 60 * 60 * 1000;
+            long timeToForward = (long) (days) * 24 * 60 * 60 * 1000;
             this.date.setTime(timeToForward + this.date.getTime());
             this.executeTasks();
         }

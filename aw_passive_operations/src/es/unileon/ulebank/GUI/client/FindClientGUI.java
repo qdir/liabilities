@@ -26,11 +26,8 @@ import javax.swing.*;
 public class FindClientGUI extends GUIOperations {
 
     private final JPanel buttonPanel;
-    private final JPanel selectionPanel;
-    private final ButtonGroup buttonSelection;
-    private final JRadioButton DNIButton;
-    private final JRadioButton CIFButton;
     private final JTextField dniFinder;
+    private final JLabel label;
     private final JButton find;
     private TemporaryClients temporalC;
     private final String startField ="Introduce el identificador del cliente";
@@ -42,9 +39,10 @@ public class FindClientGUI extends GUIOperations {
         this.setTitle("ULE BANK");
         //Variables
         dniFinder = new JTextField(startField, 20);
-        dniFinder.setEditable(false);
-        selectionPanel = new JPanel();
-
+        dniFinder.setEditable(true);
+        
+        
+        
         this.setBounds(0, 0, 300, 200);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -52,41 +50,22 @@ public class FindClientGUI extends GUIOperations {
         this.setLayout(new GridBagLayout());
         GridBagConstraints cstr = new GridBagConstraints();
 
+        label = new JLabel("INTRODUCE EL IDENTIFICADOR DEL CLIENTE", JLabel.CENTER);
+        
         //Creation of the selection for DNI or CIF
-        DNIButton = new JRadioButton("DNI", false);
-        CIFButton = new JRadioButton("CIF", false);
-        buttonSelection = new ButtonGroup();
-        buttonSelection.add(DNIButton);
-        buttonSelection.add(CIFButton);
-        selectionPanel.setLayout(new FlowLayout());
-        selectionPanel.add(DNIButton);
-        selectionPanel.add(CIFButton);
+        
 
         buttonPanel = new JPanel();
         find = new JButton("CONTINUAR");
 
         //DNI-CIF panel
         cstr.fill = GridBagConstraints.HORIZONTAL;
-        cstr.insets = new Insets(0, 0, 10, 0);
+        cstr.insets = new Insets(0, 0, 25, 0);
         cstr.gridwidth = GridBagConstraints.REMAINDER;
-        this.add(selectionPanel, cstr);
 
-        DNIButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dniFinder.setEditable(true);
-            }
-        });
-
-        CIFButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dniFinder.setEditable(true);
-            }
-        });
-
+        this.add(label, cstr);
+        
+         cstr.insets = new Insets(0, 0, 10, 0);
         //DNI field
         this.add(dniFinder, cstr);
         //Buttons
@@ -126,11 +105,14 @@ public class FindClientGUI extends GUIOperations {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int option = -1;
+                int selection = -1;
                 if (dniFinder.getText().compareToIgnoreCase(startField) == 0) {
                     System.out.println("No has introducido ningun DNI");
                 } else {
-                    if (DNIButton.isSelected()) {
+                    selection = getSelectedOption(dniFinder.getText());
+                    if (selection == 0) {
                         try {
+                            //DNI
                             option = 0;
                             System.out.println(option);
                             System.out.println("El dni introducido es: " + dniFinder.getText());
@@ -141,7 +123,22 @@ public class FindClientGUI extends GUIOperations {
                         } catch (MalformedHandlerException ex) {
                             Logger.getLogger(FindClientGUI.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                    }else if(CIFButton.isSelected()){
+
+                    } else if (selection == 1) {
+                        try {
+                            //DNI Extranjero
+                            option = 0;
+                            System.out.println(option);
+                            System.out.println("El dni introducido es: " + dniFinder.getText());
+                            //Sacamos la letra
+                            Character caracter = dniFinder.getText().charAt(dniFinder.getText().length() - 1);
+                            Client client = temporalC.findClient(removeLetter(dniFinder.getText()), caracter);
+                            ClientsGUI cgui = new ClientsGUI(client, option);
+                        } catch (MalformedHandlerException ex) {
+                            Logger.getLogger(FindClientGUI.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    } else if (selection == 2) {
+                        //CIF
                         option = 1;
                         ClientsGUI egui = new ClientsGUI(null, option);
                         System.out.println("Es una empresa");

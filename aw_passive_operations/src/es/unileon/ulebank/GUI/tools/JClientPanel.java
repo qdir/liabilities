@@ -1,6 +1,5 @@
 package es.unileon.ulebank.GUI.tools;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -8,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
 /**
  * Class which represents the owner panel with all its corresponding personal info fields
@@ -81,28 +81,31 @@ public class JClientPanel extends JPanel{
 		
                 this.setSize(947, 135);
                 this.setLayout(null);
-
+                
                 name = new JTextField();
                 name.setHorizontalAlignment(SwingConstants.CENTER);
                 name.setColumns(10);
-                name.setBackground(Color.WHITE);
+                name.setBackground(UIManager.getColor("Button.highlight"));
                 name.setBounds(193, 11, 222, 20);
                 this.add(name);
+                name.setEditable(false);               
 
                 surname = new JTextField();
                 surname.setHorizontalAlignment(SwingConstants.CENTER);
                 surname.setColumns(10);
-                surname.setBackground(Color.WHITE);
+                surname.setBackground(UIManager.getColor("Button.highlight"));
                 surname.setBounds(193, 36, 222, 20);
                 this.add(surname);
+                surname.setEditable(false);
 
                 birthDate = new JTextField();
                 birthDate.setText("dd/mm/aaaa");
                 birthDate.setHorizontalAlignment(SwingConstants.CENTER);
                 birthDate.setColumns(10);
-                birthDate.setBackground(Color.WHITE);
+                birthDate.setBackground(UIManager.getColor("Button.highlight"));
                 birthDate.setBounds(193, 61, 111, 20);
                 this.add(birthDate);
+                birthDate.setEditable(false);
 
                 birthDate.addMouseListener(new MouseAdapter() {
                                 @Override
@@ -114,51 +117,58 @@ public class JClientPanel extends JPanel{
                 dNI = new JTextField();
                 dNI.setHorizontalAlignment(SwingConstants.CENTER);
                 dNI.setColumns(10);
-                dNI.setBackground(Color.WHITE);
+                dNI.setBackground(UIManager.getColor("Button.highlight"));
                 dNI.setBounds(193, 86, 111, 20);
                 this.add(dNI);
+                dNI.setEditable(false);
 
                 maritalStatus = new JTextField();
                 maritalStatus.setHorizontalAlignment(SwingConstants.CENTER);
                 maritalStatus.setColumns(10);
-                maritalStatus.setBackground(Color.WHITE);
+                maritalStatus.setBackground(UIManager.getColor("Button.highlight"));
                 maritalStatus.setBounds(193, 111, 111, 20);
                 this.add(maritalStatus);
+                maritalStatus.setEditable(false);
 
                 streetAndNum = new JTextField();
                 streetAndNum.setHorizontalAlignment(SwingConstants.CENTER);
                 streetAndNum.setColumns(10);
-                streetAndNum.setBackground(Color.WHITE);
+                streetAndNum.setBackground(UIManager.getColor("Button.highlight"));
                 streetAndNum.setBounds(546, 11, 244, 20);
                 this.add(streetAndNum);
+                streetAndNum.setEditable(false);
 
                 town = new JTextField();
                 town.setHorizontalAlignment(SwingConstants.CENTER);
                 town.setColumns(10);
-                town.setBackground(Color.WHITE);
+                town.setBackground(UIManager.getColor("Button.highlight"));
                 town.setBounds(546, 36, 244, 20);
                 this.add(town);
+                town.setEditable(false);
 
                 province = new JTextField();
                 province.setHorizontalAlignment(SwingConstants.CENTER);
                 province.setColumns(10);
-                province.setBackground(Color.WHITE);
+                province.setBackground(UIManager.getColor("Button.highlight"));
                 province.setBounds(546, 61, 244, 20);
                 this.add(province);
-
+                province.setEditable(false);
+                
                 zipCode = new JTextField();
                 zipCode.setHorizontalAlignment(SwingConstants.CENTER);
                 zipCode.setColumns(10);
-                zipCode.setBackground(Color.WHITE);
+                zipCode.setBackground(UIManager.getColor("Button.highlight"));
                 zipCode.setBounds(546, 86, 100, 20);
-                this.add(zipCode);
+                this.add(zipCode);                
+                zipCode.setEditable(false);
 
                 phoneNumber = new JTextField();
                 phoneNumber.setHorizontalAlignment(SwingConstants.CENTER);
                 phoneNumber.setColumns(10);
-                phoneNumber.setBackground(Color.WHITE);
+                phoneNumber.setBackground(UIManager.getColor("Button.highlight"));
                 phoneNumber.setBounds(546, 111, 100, 20);
                 this.add(phoneNumber);
+                phoneNumber.setEditable(false);
 
                 JLabel lblName = new JLabel("Nombre(s):");
                 lblName.setFont(new Font("Tahoma", Font.PLAIN, 12));

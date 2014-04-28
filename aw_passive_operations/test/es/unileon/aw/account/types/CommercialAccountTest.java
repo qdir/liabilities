@@ -505,10 +505,11 @@ public class CommercialAccountTest {
     public void testDoDeposit() throws TransactionException {
         double amount = 10.0;
         Transaction t = new GenericTransaction(amount, new Date(), "Salary", TransactionType.PAYMENT);
+        t.setEffectiveDate(new Date(System.currentTimeMillis()));
         this.commercialAccount.doDeposit(t);
         assertEquals(amount, this.commercialAccount.getBalance(), EPSILON);
-
         t = new GenericTransaction(amount, new Date(), "Salary", TransactionType.PAYMENT);
+        t.setEffectiveDate(new Date(System.currentTimeMillis()));
         this.commercialAccount.doDeposit(t);
         assertEquals(2 * amount, this.commercialAccount.getBalance(), EPSILON);
     }
@@ -517,10 +518,11 @@ public class CommercialAccountTest {
     public void testDoWithdrawal() throws TransactionException {
         double amount = 10.0;
         Transaction t = new GenericTransaction(amount, new Date(), "Salary", TransactionType.CHARGE);
+        t.setEffectiveDate(new Date(System.currentTimeMillis()));
         this.commercialAccount.doWithdrawal(t);
         assertEquals(-amount, this.commercialAccount.getBalance(), EPSILON);
-
         t = new GenericTransaction(amount, new Date(), "Salary", TransactionType.CHARGE);
+        t.setEffectiveDate(new Date(System.currentTimeMillis()));
         this.commercialAccount.doWithdrawal(t);
         assertEquals(-2 * amount, this.commercialAccount.getBalance(), EPSILON);
     }
@@ -535,10 +537,12 @@ public class CommercialAccountTest {
     public void testAccountHistory() throws TransactionException {
         double amount = 10.0;
         Transaction t = new GenericTransaction(amount, new Date(), "Salary", TransactionType.CHARGE);
+         t.setEffectiveDate(new Date(System.currentTimeMillis()));
         this.commercialAccount.doWithdrawal(t);
         assertEquals(-amount, this.commercialAccount.getBalance(), EPSILON);
 
         Transaction t2 = new GenericTransaction(amount, new Date(), "Salary", TransactionType.PAYMENT);
+        t2.setEffectiveDate(new Date(System.currentTimeMillis()));
         this.commercialAccount.doDeposit(t2);
         assertEquals(0.0, this.commercialAccount.getBalance(), EPSILON);
 

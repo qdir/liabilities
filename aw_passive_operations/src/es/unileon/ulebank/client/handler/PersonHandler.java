@@ -16,13 +16,14 @@ public class PersonHandler implements Handler{
     /**
      * DNI number
      */
-    int dni;
+    private int dni;
     
     /**
      * DNI letter
      */
-    char letter;
+    private char letter;
     
+    private char foreingLetter;
     /**
      * Creates the handler of the person with the dni data
      * @param dni
@@ -30,13 +31,41 @@ public class PersonHandler implements Handler{
      * @throws MalformedHandlerException if the letter doesn't match with the dni number
      */
     public PersonHandler(int dni, char letter) throws MalformedHandlerException{
+        letter = Character.toUpperCase(letter);
         if(DniLetters.getInstance().isDniValid(dni, letter)){
             this.dni=dni;
             this.letter=letter;
+            this.foreingLetter=' ';
         }else{
             throw new MalformedHandlerException("Incorrect DNI");
         }
     }
+    
+    public PersonHandler (char foreingLetter, int dni, char letter) throws MalformedHandlerException{
+        foreingLetter = Character.toUpperCase(foreingLetter);
+        letter = Character.toUpperCase(letter);
+        int addFactor=0;
+        switch (foreingLetter){
+            case 'X':
+                break;
+            case 'Y':
+                addFactor=10000000;
+                break;
+            case 'Z':
+                addFactor=20000000;
+                break;
+            default:
+                throw new MalformedHandlerException("Incorrect NIE");
+        }
+        if(DniLetters.getInstance().isDniValid(addFactor+dni, letter)){
+            this.foreingLetter = foreingLetter;
+            this.dni = dni;
+            this.letter=letter;
+        }else{
+            throw new MalformedHandlerException("Invalid NIE");
+        }
+    }
+    
     
     @Override
     public int compareTo(Handler another) {
@@ -45,7 +74,11 @@ public class PersonHandler implements Handler{
     
     @Override
     public String toString(){
-        return Integer.toString(dni)+letter;
+        String result="";
+        if(foreingLetter!=' ')
+            result+=foreingLetter;
+        result += Integer.toString(dni)+letter;
+        return result;
     }
     
 }

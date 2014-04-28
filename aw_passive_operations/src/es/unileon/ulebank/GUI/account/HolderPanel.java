@@ -26,11 +26,14 @@ public class HolderPanel extends JPanel {
     private JTextField DNIText; 
     private JLabel blanco;
     private JButton delete;
+    private JPanel currentPanel;
+    private AccountGUI accountPanel;
     
-    public HolderPanel() {
+    public HolderPanel(AccountGUI accountPanelPass){
         
         super();
-        
+        accountPanel = accountPanelPass;
+        currentPanel=this;
         holder = new JLabel("Nombre: ");
         holderText = new JTextField(20);
         DNI = new JLabel("NIF-CIF: ");
@@ -65,7 +68,10 @@ public class HolderPanel extends JPanel {
         
         delete.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    
+                    accountPanel.downCountHolder();
+                    accountPanel.deleteHolder();
+                    delete.setVisible(false);
+                    currentPanel.getParent().remove(currentPanel);
                 }
         });
     }

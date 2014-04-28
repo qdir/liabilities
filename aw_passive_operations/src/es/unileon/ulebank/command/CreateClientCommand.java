@@ -7,7 +7,9 @@ package es.unileon.ulebank.command;
 
 import es.unileon.ulebank.client.handler.PersonHandler;
 import es.unileon.ulebank.client.types.Person;
+import es.unileon.ulebank.client.types.data.Address;
 import es.unileon.ulebank.handler.MalformedHandlerException;
+import java.util.Date;
 
 
 
@@ -18,22 +20,25 @@ import es.unileon.ulebank.handler.MalformedHandlerException;
  */
 public class CreateClientCommand implements Command{
    
-    private Person name;
-    private Person surnames;
-    private Person civilState;
-    private Person address;
-    private Person profession;
-    private PersonHandler nif;
-    private Person birthDate;
-    private Person phoneNumber1, phoneNumber2;
+    private String name;
+    private String surnames;
+    private String civilState;
+    private Address address;
+    private String profession;
+    private char foreingLetter;
+    private int dniNumber;
+    private char dniLetter;
+    private Date birthDate;
+    private int phoneNumber1, phoneNumber2;
+   
    
     
-    public CreateClientCommand(Person name, Person surnames, Person civilState,Person phoneNumber1, Person phoneNumber2, Person profession, Person address, PersonHandler nif,Person birthDate, int dni, char letter) throws MalformedHandlerException {
+    public CreateClientCommand(String name, String surnames, Address address, String civilState, int phoneNumber1, int phoneNumber2, String profession,Date birthDate,char foreingLetter, int dniNumber, char dniLetter) throws MalformedHandlerException {
+ 
     this.name=name;
     this.surnames=surnames;
     this.address= address;
     this.civilState=civilState;
-    this.nif= new PersonHandler(dni, letter);
     this.phoneNumber1=phoneNumber1;
     this.phoneNumber2=phoneNumber2;
     this.profession=profession;
@@ -43,16 +48,10 @@ public class CreateClientCommand implements Command{
     }
     
     @Override
-    public void execute() {
-       this.name.getName();
-       this.surnames.getSurnames();
-       this.address.getAddress();
-       this.birthDate.getBirthDate();
-       this.civilState.getCivilState();
-       this.profession.getProfession();
-       this.phoneNumber1.getPhoneNumber(1);
-       this.phoneNumber2.getPhoneNumber(2);
-       this.nif.toString();
+    public void execute() throws MalformedHandlerException {
+        Person client = null;
+       
+       client = new Person(this.name, this.surnames, this.address, this.civilState, this.phoneNumber1, this.phoneNumber2, this.profession, this.birthDate,this.foreingLetter, this.dniNumber, this.dniLetter);
        
     }
 

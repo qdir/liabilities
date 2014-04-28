@@ -6,7 +6,6 @@ import es.unileon.ulebank.account.Account;
 import es.unileon.ulebank.account.exception.TransactionException;
 import es.unileon.ulebank.account.handler.AccountHandler;
 import es.unileon.ulebank.bank.Bank;
-import es.unileon.ulebank.handler.GenericHandler;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
 import es.unileon.ulebank.history.Transaction;
@@ -25,11 +24,14 @@ public class Office {
     private Handler id;
     private final Bank bank;
     private static final Logger LOG = Logger.getLogger(Account.class.getName());
+    private long nextAccountNumber;
+    public static final long MAX_ACCOUNT_NUMBER = 1000000000l - 1;
 
     public Office(Handler id, Bank bank) {
         this.accounts = new ArrayList<>();
         this.id = id;
         this.bank = bank;
+        this.nextAccountNumber = 0;
     }
 
     public boolean addAccount(Account account) {
@@ -69,5 +71,19 @@ public class Office {
             LOG.error("Office id " + this.id + " error : " + error.toString());
             throw new TransactionException(error.toString());
         }
+    }
+
+    public synchronized String getNewAccountNumber() {
+        String accountNumber;
+        if (this.nextAccountNumber == MAX_ACCOUNT_NUMBER) {
+            accountNumber = "";
+        } else {
+            accountNumber = String.format("%010d", this.nextAccountNumber++);
+        }
+        return accountNumber;
+    }
+
+    public List<Account> getAccounts() {
+        return this.accounts;
     }
 }
