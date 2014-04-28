@@ -79,6 +79,8 @@ public class AuthorizedPanel extends JPanel {
         add.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                    add.setVisible(false);
+                   //crear un cliente pasandole el nombre y el dni
+                   //addAuthorized(cliente)
                 }
         });
     }
