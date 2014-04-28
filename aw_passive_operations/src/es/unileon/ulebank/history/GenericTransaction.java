@@ -20,7 +20,7 @@ public class GenericTransaction extends Transaction {
      * @param subject ( Transaction subject )
      * @param type (Transaction type)
      */
-    public GenericTransaction(double amount, Date date,Date effectiveDate, String subject, TransactionType type) {
-        super(amount, date, effectiveDate, subject, type);
+    public GenericTransaction(double amount, Date date, String subject, TransactionType type) {
+        super(amount, date,subject, type);
     }
 }
