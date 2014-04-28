@@ -2,6 +2,7 @@ package es.unileon.ulebank.GUI.contractForm;
 
 import es.unileon.ulebank.GUI.tools.JPicture;
 import es.unileon.ulebank.GUI.tools.JDraggable;
+import es.unileon.ulebank.client.Client;
 import java.awt.Color;
 
 import java.awt.Cursor;
@@ -287,21 +288,21 @@ public class ContractFormGUI {
 
 	public static void main(String[] args) {
 		
-		new ContractFormGUI();
+		new ContractFormGUI(null);
 		
 	}
 
         /**
          * Class constructor which represents the main window
          */
-	public ContractFormGUI() {
-		launchWindow();
+	public ContractFormGUI(Client client) {
+		launchWindow(client);
 	}
 
         /**
          * Method which handles all the components of the main window and displays them
          */
-	private void launchWindow() {
+	private void launchWindow(Client client) {
 		
 		mainFrame = new JFrame();
 		
