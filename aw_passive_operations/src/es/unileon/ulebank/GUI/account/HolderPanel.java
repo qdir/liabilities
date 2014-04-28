@@ -69,7 +69,7 @@ public class HolderPanel extends JPanel {
         delete.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     accountPanel.downCountHolder();
-                    accountPanel.deleteHolder();
+                    accountPanel.deleteHolder(); //pasandole el id
                     delete.setVisible(false);
                     currentPanel.getParent().remove(currentPanel);
                 }

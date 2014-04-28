@@ -73,6 +73,7 @@ public AccountGUI()  {
             accountData = new JLabel("DATOS DE LA CUENTA");          
             accountNumber = new JLabel("Numero de Cuenta: ");
             accountNumberText = new JTextField(20);    
+            accountNumberText.setEditable(false);
             mode = new JLabel("Modalidad: ");
             modeButton = new JComboBox();
             modeButton.addItem("La Cartilla");
@@ -83,6 +84,7 @@ public AccountGUI()  {
             coinText = new JTextField(20);  
             coinText.setHorizontalAlignment(SwingConstants.CENTER);
             coinText.setText("Euros");
+            coinText.setEditable(false);
             availability = new JLabel("Disponibilidad: ");
             availabilityButton = new JComboBox();
             availabilityButton.addItem("Independiente");
@@ -134,11 +136,11 @@ public AccountGUI()  {
             constraints.gridx = 2; 
             contentPaneUno.add(blanco, constraints);
 
-            constraints.gridx = 3; 
-            contentPaneUno.add(mode, constraints);
+            //constraints.gridx = 3; 
+            //contentPaneUno.add(mode, constraints);
 
-            constraints.gridx = 4; 
-            contentPaneUno.add(modeButton, constraints);                        
+            //constraints.gridx = 4; 
+            //contentPaneUno.add(modeButton, constraints);                        
 
             constraints.gridx = 0; 
             constraints.gridy = 2;  
@@ -211,7 +213,7 @@ public AccountGUI()  {
                         addHolder.setVisible(false);
                     }
                     //ClientsGUI cgui = new ClientsGUI(null, 0, holderText1,window);
-                    //listHolders.add(null);
+                    //addHolder(cliente);
                 }
             });
             
@@ -252,20 +254,20 @@ public AccountGUI()  {
             return authorizedPanel;
         }
         
-        public void addHolder() {
-            //añadir holder a la lista
+        public void addHolder(Client client) {
+            //listHolders.add(client);
         }
             
         public void addAuthorized(Client client) {
-            
+            //listAuthorized.add(client);
         }
    
         public void deleteHolder() {
-            //borrar el holder de la lista
+            //le paso el id del holder, lo busco y lo elimino de la lista
         }
         
         public void deleteAuthorized() {
-            //borrar el authorized de la lista
+            //le paso el id del authorized, lo busco y lo borro de la lista
         }         
         
         public static void main(String[] args) {

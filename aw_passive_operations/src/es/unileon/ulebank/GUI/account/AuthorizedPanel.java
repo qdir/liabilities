@@ -68,14 +68,6 @@ public class AuthorizedPanel extends JPanel {
         this.add(add, constra);
         
         
-        delete.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                   accountPanel.deleteAuthorized();
-                   delete.setVisible(false);
-                   currentPanel.getParent().remove(currentPanel);
-                }
-        });
-        
         add.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                    add.setVisible(false);
@@ -83,6 +75,15 @@ public class AuthorizedPanel extends JPanel {
                    //addAuthorized(cliente)
                 }
         });
+        
+        delete.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                   //accountPanel.deleteAuthorized(); //pasandole el id
+                   delete.setVisible(false);
+                   currentPanel.getParent().remove(currentPanel);
+                }
+        });
+        
     }
     
     
