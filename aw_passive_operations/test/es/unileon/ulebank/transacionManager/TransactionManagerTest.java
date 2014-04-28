@@ -121,6 +121,7 @@ public class TransactionManagerTest {
         office.addAccount(account);
         
         Transaction transaction = new GenericTransaction( 2.0, new Date(), "Salary", TransactionType.PAYMENT);
+        transaction.setEffectiveDate(new Date());
         
         this.manager.doTransaction(transaction,account.getID());
         

@@ -6,6 +6,7 @@ import es.unileon.ulebank.iterator.Condition;
 import es.unileon.ulebank.iterator.ConditionalIterator;
 import es.unileon.ulebank.iterator.Iterator;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -56,97 +57,21 @@ public abstract class History<T extends Transaction> {
             final Pattern numberPattern = Pattern.compile("^[0-9]*$");
             Matcher matcher;
             while (i < args.length && !malformed) {
-                if (args[i].equals("include")) {
-                    if (i + 1 < args.length) {
-                        matcher = numberPattern.matcher(args[i + 1]);
-                        if (matcher.find()) {
-                            conditions.add(new ConditionOneDay<T>(new Date(Long.parseLong(args[i + 1])), true));
-                            i += 2;
-                        } else {
-                            malformed = true;
-                        }
-                    } else {
-                        malformed = true;
+                if (args[i++].startsWith("-")) {
+                    final int leftPivot = i - 1;
+                    while (i < args.length && !args[i].startsWith("-")) {
+                        ++i;
                     }
-                } else if (args[i].equals("exclude")) {
-                    if (i + 1 < args.length) {
-                        matcher = numberPattern.matcher(args[i + 1]);
-                        if (matcher.find()) {
-                            conditions.add(new ConditionOneDay<T>(new Date(Long.parseLong(args[i + 1])), false));
-                            i += 2;
-                        } else {
-                            malformed = true;
-                        }
-                    } else {
-                        malformed = true;
-                    }
-
-                } else if (args[i].equals("from")) {
-                    if (i + 1 < args.length) {
-                        matcher = numberPattern.matcher(args[i + 1]);
-                        if (matcher.find()) {
-                            conditions.add(new ConditionTransactionBetweenTwoDates<T>(new Date(Long.parseLong(args[i + 1])), new Date(Long.MAX_VALUE), true));
-                            i += 2;
-                        } else {
-                            malformed = true;
-                        }
-                    } else {
-                        malformed = true;
-                    }
-                } else if (args[i].equals("after")) {
-                    if (i + 1 < args.length) {
-                        matcher = numberPattern.matcher(args[i + 1]);
-                        if (matcher.find()) {
-                            conditions.add(new ConditionTransactionBetweenTwoDates<T>(new Date(Long.MIN_VALUE), new Date(Long.parseLong(args[i + 1])), true));
-                            i += 2;
-                        } else {
-                            malformed = true;
-                        }
-                    } else {
-                        malformed = true;
-                    }
-                } else if (args[i].equals("between")) {
-                    if (i + 2 < args.length) {
-                        matcher = numberPattern.matcher(args[i + 1]);
-                        if (matcher.find()) {
-                            Date low = new Date(Long.parseLong(args[i + 1]));
-                            matcher = numberPattern.matcher(args[i + 2]);
-                            if (matcher.find()) {
-                                Date high = new Date(Long.parseLong(args[i + 2]));
-                                conditions.add(new ConditionTransactionBetweenTwoDates<T>(low, high, true));
-                                i += 3;
-                            } else {
-                                malformed = true;
-                            }
-                        } else {
-                            malformed = true;
-                        }
-                    } else {
-                        malformed = true;
-                    }
-                } else if (args[i].equals("notBetween")) {
-                    if (i + 2 < args.length) {
-                        matcher = numberPattern.matcher(args[i + 1]);
-                        if (matcher.find()) {
-                            Date low = new Date(Long.parseLong(args[i + 1]));
-                            matcher = numberPattern.matcher(args[i + 2]);
-                            if (matcher.find()) {
-                                Date high = new Date(Long.parseLong(args[i + 2]));
-                                conditions.add(new ConditionTransactionBetweenTwoDates<T>(low, high, false));
-                                i += 3;
-                            } else {
-                                malformed = true;
-                            }
-                        } else {
-                            malformed = true;
-                        }
-                    } else {
-                        malformed = true;
-                    }
+                    String[] arg = new String[i - leftPivot];
+                    System.arraycopy(args, leftPivot, arg, 0, i - leftPivot);
+//                    conditions.add(ConditionFactory.getCondition(arg))
                 } else {
                     malformed = true;
                 }
             }
+        }
+        if (malformed) {
+            conditions.clear();
         }
         return new ConditionalIterator<>(conditions, this.getTransactions());
     }
@@ -155,7 +80,7 @@ public abstract class History<T extends Transaction> {
      * Delete the spaces in the iterator args
      *
      * @param args ( arguments to trim )
-     * 
+     *
      * @return
      */
     private static String[] correctArgs(String[] args) {

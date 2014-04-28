@@ -23,15 +23,14 @@ public abstract class Transaction {
     private final Enum<TransactionType> type;
     private DetailedInformation extraInformation;
 
-    public Transaction(double amount, Date date, Date effectiveDate, String subject, Enum<TransactionType> type) {
-        this(amount, date, effectiveDate, subject, type, new DetailedInformation(""));
+    public Transaction(double amount, Date date, String subject, Enum<TransactionType> type) {
+        this(amount, date, subject,type, new DetailedInformation(""));
     }
 
-    public Transaction(double amount, Date date,Date effectiveDate, String subject, Enum<TransactionType> type, DetailedInformation info) {
+    public Transaction(double amount, Date date, String subject, Enum<TransactionType> type, DetailedInformation info) {
         this.id = TransactionHandlerProvider.getTransactionHandler();
         this.amount = amount;
         this.date = date;
-        this.effectiveDate = effectiveDate;
         this.subject = subject;
         this.type = type;
         this.extraInformation = info;
@@ -80,16 +79,9 @@ public abstract class Transaction {
         return type;
     }
 
-    /**
-     * Set the effective date of the transaction This date, can be set only
-     * once. So, if you set the date once, you can modify it.
-     *
-     * @param effectiveDate ( Date to set )
-     */
+
     public void setEffectiveDate(Date effectiveDate) {
-        if (this.effectiveDate == null) {
             this.effectiveDate = effectiveDate;
-        }
     }
 
     @Override

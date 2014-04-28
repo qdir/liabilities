@@ -88,6 +88,8 @@ public class OfficeTest {
         
         Transaction transaction = new GenericTransaction(2.0, new Date(), "Salary", TransactionType.PAYMENT);
         
+        transaction.setEffectiveDate(new Date());
+        
         this.office.doTransaction(transaction,this.account.getID());
         
         assertEquals(this.account.getBalance(), 2.0, 2.0);
