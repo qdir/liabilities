@@ -3,7 +3,7 @@
 package es.unileon.ulebank.GUI.client;
 
 import com.toedter.calendar.JDateChooser;
-import es.unileon.ulebank.account.history.AccountHistory;
+import es.unileon.ulebank.account.AccountHistory;
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.temporary.TemporaryAccountHistory;
 import java.awt.Color;

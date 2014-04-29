@@ -2,7 +2,7 @@
 package es.unileon.ulebank.command;
 
 import es.unileon.ulebank.account.Account;
-import es.unileon.ulebank.account.handler.AccountHandler;
+import es.unileon.ulebank.account.AccountHandler;
 import es.unileon.ulebank.account.types.AccountType;
 import es.unileon.ulebank.account.types.CommercialAccount;
 import es.unileon.ulebank.account.types.SightAccount;
@@ -15,7 +15,7 @@ import java.util.Date;
 
 
 import es.unileon.ulebank.account.Account;
-import es.unileon.ulebank.account.handler.AccountHandler;
+import es.unileon.ulebank.account.AccountHandler;
 import es.unileon.ulebank.account.types.AccountType;
 import es.unileon.ulebank.account.types.CommercialAccount;
 import es.unileon.ulebank.account.types.SightAccount;

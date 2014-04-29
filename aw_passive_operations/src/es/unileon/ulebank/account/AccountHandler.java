@@ -1,6 +1,6 @@
 /* Application developed for AW subject, belonging to passive operations
  group.*/
-package es.unileon.ulebank.account.handler;
+package es.unileon.ulebank.account;
 
 import es.unileon.ulebank.handler.GenericHandler;
 import es.unileon.ulebank.handler.Handler;
@@ -68,7 +68,6 @@ public class AccountHandler implements Handler {
     public AccountHandler(Handler office, Handler bank, String accountNumber) throws MalformedHandlerException {
         StringBuilder errors = new StringBuilder();
         Pattern numberPattern = Pattern.compile("^[0-9]*$");
-
         if (office != null && office.toString() != null && bank != null && bank.toString() != null && accountNumber != null) {
             Matcher matcher = numberPattern.matcher(accountNumber);
             if (!matcher.find()) {

@@ -2,7 +2,6 @@
  group.*/
 package es.unileon.ulebank.iterator;
 
-import es.unileon.ulebank.history.Transaction;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

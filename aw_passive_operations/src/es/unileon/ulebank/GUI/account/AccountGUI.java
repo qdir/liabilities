@@ -5,7 +5,7 @@ import es.unileon.ulebank.GUI.client.FindClientGUI;
 import es.unileon.ulebank.GUI.client.GUIOperations;
 import es.unileon.ulebank.GUI.client.PersonPanel;
 import es.unileon.ulebank.account.Account;
-import es.unileon.ulebank.account.handler.AccountHandler;
+import es.unileon.ulebank.account.AccountHandler;
 import es.unileon.ulebank.account.types.AccountType;
 import es.unileon.ulebank.account.types.CommercialAccount;
 import es.unileon.ulebank.bank.Bank;

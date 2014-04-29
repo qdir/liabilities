@@ -4,7 +4,7 @@
 package es.unileon.ulebank.temporary;
 
 import es.unileon.ulebank.GUI.operations.HistoricalOperations;
-import es.unileon.ulebank.account.history.AccountHistory;
+import es.unileon.ulebank.account.AccountHistory;
 import es.unileon.ulebank.history.GenericTransaction;
 import static es.unileon.ulebank.history.TransactionType.*;
 import java.text.ParseException;

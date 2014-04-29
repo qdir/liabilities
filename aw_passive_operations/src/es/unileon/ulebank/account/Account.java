@@ -1,8 +1,5 @@
 package es.unileon.ulebank.account;
 
-import es.unileon.ulebank.account.exception.TransactionException;
-import es.unileon.ulebank.account.handler.AccountHandler;
-import es.unileon.ulebank.account.history.AccountHistory;
 import es.unileon.ulebank.account.liquidation.LiquidationStrategy;
 import es.unileon.ulebank.bank.Bank;
 import es.unileon.ulebank.client.Client;
@@ -13,7 +10,6 @@ import es.unileon.ulebank.history.TransactionType;
 import es.unileon.ulebank.office.Office;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import org.apache.log4j.Logger;
 
@@ -101,8 +97,8 @@ public abstract class Account {
      * @return (true if success, false if the param is negative or zero)
      */
     public boolean setLiquidationFrecuency(int liquidationFrecuency) {
-        LOG.info("Change liquidation frecuency to " + liquidationFrecuency);
         if (liquidationFrecuency >= 1) {
+            LOG.info("Change liquidation frecuency to " + liquidationFrecuency);
             this.liquidationFrecuency = liquidationFrecuency;
             return true;
         }
@@ -328,7 +324,7 @@ public abstract class Account {
             LOG.error(err.toString());
             throw new TransactionException(err.toString());
         }
-        
+
         boolean success = this.history.addTransaction(transaction);
         if (success) {
             this.balance += transaction.getAmount();
@@ -337,15 +333,6 @@ public abstract class Account {
             LOG.error(error);
             throw new TransactionException(error);
         }
-    }
-
-    /**
-     * Set the strategy to liquidate the account
-     *
-     * @param strategy ( The strategy )
-     */
-    public void setLiquidationStrategy(LiquidationStrategy strategy) {
-        this.strategy = strategy;
     }
 
     /**

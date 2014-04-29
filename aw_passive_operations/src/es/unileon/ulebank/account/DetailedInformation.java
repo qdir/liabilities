@@ -1,6 +1,6 @@
 /* Application developed for AW subject, belonging to passive operations
  group.*/
-package es.unileon.ulebank.account.history;
+package es.unileon.ulebank.account;
 
 /**
  *

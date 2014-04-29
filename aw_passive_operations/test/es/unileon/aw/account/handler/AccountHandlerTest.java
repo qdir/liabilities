@@ -2,7 +2,7 @@
  group.*/
 package es.unileon.aw.account.handler;
 
-import es.unileon.ulebank.account.handler.AccountHandler;
+import es.unileon.ulebank.account.AccountHandler;
 import es.unileon.ulebank.bank.Bank;
 import es.unileon.ulebank.handler.GenericHandler;
 import es.unileon.ulebank.handler.Handler;

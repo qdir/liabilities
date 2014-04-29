@@ -1,14 +1,10 @@
 package es.unileon.ulebank.history;
 
-import es.unileon.ulebank.history.iterator.ConditionOneDay;
-import es.unileon.ulebank.history.iterator.ConditionTransactionBetweenTwoDates;
 import es.unileon.ulebank.iterator.Condition;
 import es.unileon.ulebank.iterator.ConditionalIterator;
 import es.unileon.ulebank.iterator.Iterator;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -56,6 +52,7 @@ public abstract class History<T extends Transaction> {
         if (args != null) {
             final Pattern numberPattern = Pattern.compile("^[0-9]*$");
             Matcher matcher;
+            args = correctArgs(args);
             while (i < args.length && !malformed) {
                 if (args[i++].startsWith("-")) {
                     final int leftPivot = i - 1;

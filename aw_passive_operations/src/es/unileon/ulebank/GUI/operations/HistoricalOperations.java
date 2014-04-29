@@ -6,7 +6,7 @@ import com.toedter.calendar.JDateChooser;
 import es.unileon.ulebank.GUI.client.GUIOperations;
 import static es.unileon.ulebank.GUI.client.GUIOperations.createTable;
 import static es.unileon.ulebank.GUI.client.GUIOperations.getData;
-import es.unileon.ulebank.account.history.AccountHistory;
+import es.unileon.ulebank.account.AccountHistory;
 import java.awt.BorderLayout;
 import java.awt.Choice;
 import java.awt.Color;

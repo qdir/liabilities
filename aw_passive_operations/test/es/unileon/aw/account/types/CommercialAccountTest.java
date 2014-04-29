@@ -3,9 +3,9 @@
 package es.unileon.aw.account.types;
 
 import es.unileon.ulebank.account.Account;
-import es.unileon.ulebank.account.exception.TransactionException;
-import es.unileon.ulebank.account.handler.AccountHandler;
-import es.unileon.ulebank.account.history.AccountHistory;
+import es.unileon.ulebank.account.TransactionException;
+import es.unileon.ulebank.account.AccountHandler;
+import es.unileon.ulebank.account.AccountHistory;
 import es.unileon.ulebank.account.types.CommercialAccount;
 import es.unileon.ulebank.bank.Bank;
 import es.unileon.ulebank.client.Client;

@@ -1,6 +1,6 @@
 /* Application developed for AW subject, belonging to passive operations
  group.*/
-package es.unileon.ulebank.bank.handler;
+package es.unileon.ulebank.bank;
 
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;

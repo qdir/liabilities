@@ -2,6 +2,7 @@
  group.*/
 package es.unileon.ulebank.account.history;
 
+import es.unileon.ulebank.account.AccountHistory;
 import es.unileon.ulebank.handler.GenericHandler;
 import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.Transaction;

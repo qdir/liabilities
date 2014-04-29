@@ -2,7 +2,7 @@
  group.*/
 package es.unileon.aw.bank;
 
-import es.unileon.ulebank.account.exception.TransactionException;
+import es.unileon.ulebank.account.TransactionException;
 import es.unileon.ulebank.account.types.CommercialAccount;
 import es.unileon.ulebank.bank.Bank;
 import es.unileon.ulebank.handler.GenericHandler;
