@@ -5,12 +5,17 @@ import es.unileon.ulebank.GUI.client.FindClientGUI;
 import es.unileon.ulebank.GUI.client.GUIOperations;
 import es.unileon.ulebank.GUI.client.PersonPanel;
 import es.unileon.ulebank.account.Account;
+import es.unileon.ulebank.account.handler.AccountHandler;
 import es.unileon.ulebank.account.types.AccountType;
-import static es.unileon.ulebank.account.types.AccountType.COMMERCIAL;
+import es.unileon.ulebank.account.types.CommercialAccount;
 import es.unileon.ulebank.bank.Bank;
+import es.unileon.ulebank.client.Client;
 import es.unileon.ulebank.command.CreateAccountCommand;
+import es.unileon.ulebank.handler.GenericHandler;
+import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
 import es.unileon.ulebank.office.Office;
+import es.unileon.ulebank.transacionManager.TransactionManager;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -18,6 +23,9 @@ import java.awt.Insets;
 import java.awt.Scrollbar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -27,6 +35,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.xml.ws.Holder;
 
 
 public class AccountGUI extends GUIOperations {
@@ -53,6 +62,9 @@ public class AccountGUI extends GUIOperations {
         private int countAuthorized;
         private AccountGUI window;
         private boolean one = true;
+        List<Client> listHolders;
+        List<Client> listAuthorized;
+        
         
         
 public AccountGUI()  {
@@ -61,6 +73,7 @@ public AccountGUI()  {
             accountData = new JLabel("DATOS DE LA CUENTA");          
             accountNumber = new JLabel("Numero de Cuenta: ");
             accountNumberText = new JTextField(20);    
+            accountNumberText.setEditable(false);
             mode = new JLabel("Modalidad: ");
             modeButton = new JComboBox();
             modeButton.addItem("La Cartilla");
@@ -71,6 +84,7 @@ public AccountGUI()  {
             coinText = new JTextField(20);  
             coinText.setHorizontalAlignment(SwingConstants.CENTER);
             coinText.setText("Euros");
+            coinText.setEditable(false);
             availability = new JLabel("Disponibilidad: ");
             availabilityButton = new JComboBox();
             availabilityButton.addItem("Independiente");
@@ -84,7 +98,8 @@ public AccountGUI()  {
             blanco = new JLabel("          ");
             countHolder = 5;
             countAuthorized = 52;
-            
+            listHolders = null;
+            listAuthorized = null;
             
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             int width = this.getToolkit().getScreenSize().width;
@@ -121,11 +136,11 @@ public AccountGUI()  {
             constraints.gridx = 2; 
             contentPaneUno.add(blanco, constraints);
 
-            constraints.gridx = 3; 
-            contentPaneUno.add(mode, constraints);
+            //constraints.gridx = 3; 
+            //contentPaneUno.add(mode, constraints);
 
-            constraints.gridx = 4; 
-            contentPaneUno.add(modeButton, constraints);                        
+            //constraints.gridx = 4; 
+            //contentPaneUno.add(modeButton, constraints);                        
 
             constraints.gridx = 0; 
             constraints.gridy = 2;  
@@ -185,6 +200,7 @@ public AccountGUI()  {
             });
                     
             addHolder.addActionListener(new ActionListener() {
+                private JTextField holderText1;
                 public void actionPerformed(ActionEvent e){
                     newHolderPanel();
                     constraints.gridx = 0;
@@ -197,6 +213,7 @@ public AccountGUI()  {
                         addHolder.setVisible(false);
                     }
                     //ClientsGUI cgui = new ClientsGUI(null, 0, holderText1,window);
+                    //addHolder(cliente);
                 }
             });
             
@@ -236,13 +253,21 @@ public AccountGUI()  {
             authorizedPanel = new AuthorizedPanel(this);
             return authorizedPanel;
         }
+        
+        public void addHolder(Client client) {
+            //listHolders.add(client);
+        }
+            
+        public void addAuthorized(Client client) {
+            //listAuthorized.add(client);
+        }
    
         public void deleteHolder() {
-            //borrar el holder de la lista
+            //le paso el id del holder, lo busco y lo elimino de la lista
         }
         
         public void deleteAuthorized() {
-            //borrar el authorized de la lista
+            //le paso el id del authorized, lo busco y lo borro de la lista
         }         
         
         public static void main(String[] args) {

@@ -68,19 +68,22 @@ public class AuthorizedPanel extends JPanel {
         this.add(add, constra);
         
         
+        add.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                   add.setVisible(false);
+                   //crear un cliente pasandole el nombre y el dni
+                   //addAuthorized(cliente)
+                }
+        });
+        
         delete.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                   accountPanel.deleteAuthorized();
+                   //accountPanel.deleteAuthorized(); //pasandole el id
                    delete.setVisible(false);
                    currentPanel.getParent().remove(currentPanel);
                 }
         });
         
-        add.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                   add.setVisible(false);
-                }
-        });
     }
     
     
