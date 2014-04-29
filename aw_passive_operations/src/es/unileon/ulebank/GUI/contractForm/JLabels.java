@@ -244,7 +244,7 @@ public class JLabels {
 	JLabel lblDate = new JLabel(getDate());
         
         if(system)
-            lblDate.setBounds(103, 246, 182, 14);
+            lblDate.setBounds(195, 246, 182, 14);
         else
             lblDate.setBounds(115, 245, 182, 14);
         

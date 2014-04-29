@@ -155,6 +155,12 @@ public class ContractFormGUI {
          */
 	private JTextField interest;
         
+        /*
+        * Town where the contract was created and signed
+        */
+        
+        private JTextField contractLocation;
+        
         /**
          * Owner's marital status
          */
@@ -562,7 +568,27 @@ public class ContractFormGUI {
 		interest.setText("0");
 		interest.setBounds(83, 205, 56, 20);
 		panelAuthorized.add(interest);
-		interest.setColumns(10); 
+		interest.setColumns(10);
+                
+                contractLocation = new JTextField("ej. Madrid");
+		contractLocation.setHorizontalAlignment(SwingConstants.CENTER);
+		contractLocation.setColumns(10);
+		contractLocation.setBackground(UIManager.getColor("Button.highlight"));
+                
+                if(system)
+                    contractLocation.setBounds(62, 243, 111, 20);
+                else
+                    contractLocation.setBounds(115, 245, 111, 20);
+                
+		panelAuthorized.add(contractLocation);
+                contractLocation.setEditable(true);
+                
+                contractLocation.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				contractLocation.setText("");
+			}
+		});
 		
 		maritalStatus = new JTextField();
 		maritalStatus.setHorizontalAlignment(SwingConstants.CENTER);
@@ -876,6 +902,7 @@ public class ContractFormGUI {
 					firstDeposit.setEditable(true);
                                         liqPeriod.setEditable(true);
 					interest.setEditable(true);
+                                        contractLocation.setEditable(true);
 					administrationWage.setEditable(true);
 					unpaidWage.setEditable(true);
 					anualInterest.setEditable(true);
@@ -905,6 +932,7 @@ public class ContractFormGUI {
 					firstDeposit.setEditable(false);
                                         liqPeriod.setEditable(false);
 					interest.setEditable(false);
+                                        contractLocation.setEditable(false);
 					administrationWage.setEditable(false);
 					unpaidWage.setEditable(false);
 					anualInterest.setEditable(false);
@@ -1017,6 +1045,6 @@ public class ContractFormGUI {
           
             return error;
             
-        }
+        }      
         
 }
