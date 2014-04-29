@@ -22,22 +22,22 @@ public class TemporaryAccountHistory {
     
     Date date1 = sdf.parse("01/03/2014");
     Date edat1 = sdf.parse("05/03/2014");
-    GenericTransaction tr1 = new GenericTransaction(20.0, date1, edat1,"prueba1", CHARGE) {
+    GenericTransaction tr1 = new GenericTransaction(20.0, edat1,"prueba1", CHARGE) {
     };
     
     Date date2 = sdf.parse("10/04/2014");
     Date edat2 = sdf.parse("15/04/2014");
-    GenericTransaction tr2 = new GenericTransaction(25.0, date2, edat2, "prueba1", PAYMENT) {
+    GenericTransaction tr2 = new GenericTransaction(25.0, edat2, "prueba1", PAYMENT) {
     };
     
     Date date3 = sdf.parse("01/04/2013");
     Date edat3 = sdf.parse("05/04/2013");
-     GenericTransaction tr3 = new GenericTransaction(5.0, date3,edat3, "prueba1", CHARGE) {
+     GenericTransaction tr3 = new GenericTransaction(5.0,edat3, "prueba1", CHARGE) {
     };
     
      Date date4 = sdf.parse("01/05/2009");
      Date edat4 = sdf.parse("05/05/2009");
-    GenericTransaction tr4 = new GenericTransaction(10.0, date4,edat4, "prueba1", PAYMENT) {
+    GenericTransaction tr4 = new GenericTransaction(10.0,edat4, "prueba1", PAYMENT) {
     };
     
     history.addTransaction(tr1);
