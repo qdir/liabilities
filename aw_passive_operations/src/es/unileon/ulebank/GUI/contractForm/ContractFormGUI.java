@@ -655,9 +655,9 @@ public class ContractFormGUI {
 		anualInterest.setColumns(10);
                 
                 if(system)
-                    anualInterest.setBounds(746, 2038, 45, 20);
+                    anualInterest.setBounds(755, 2038, 45, 20);
                 else
-                    anualInterest.setBounds(742, 2047, 45, 20);
+                    anualInterest.setBounds(751, 2047, 45, 20);
                 
 		panelAuthorized.add(anualInterest);																
 		
@@ -808,13 +808,13 @@ public class ContractFormGUI {
                 
                 if(system){
                     
-                   buyingFee.setBounds(108, 4929, 50, 20);
-                   buyingFeePercentage.setBounds(305, 4929, 50, 20);
+                   buyingFee.setBounds(108, 4912, 50, 20);
+                   buyingFeePercentage.setBounds(305, 4912, 50, 20);
                                  
                 }else{
                     
-                   buyingFee.setBounds(306, 4902, 50, 20);
-                   buyingFeePercentage.setBounds(540, 4902, 50, 20);
+                   buyingFee.setBounds(306, 4985, 50, 20);
+                   buyingFeePercentage.setBounds(540, 4985, 50, 20);
                     
                 }
                 
