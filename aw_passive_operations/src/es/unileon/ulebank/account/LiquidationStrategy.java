@@ -2,8 +2,9 @@
  group.*/
 package es.unileon.ulebank.account;
 
+import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.history.Transaction;
-import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -21,5 +22,12 @@ public interface LiquidationStrategy {
      *
      * @return (The amount of money to pay )
      */
-    public double doLiquidation(Collection<Transaction> transactions, int months);
+    public Transaction doLiquidation(List<Transaction> transactions, int months);
+
+    /**
+     * The liquidation strategy id.
+     *
+     * @return (the id)
+     */
+    public Handler getID();
 }

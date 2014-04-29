@@ -44,10 +44,6 @@ public abstract class Account {
      */
     private final AccountHistory history;
     /**
-     * The strategy to liquidate the account
-     */
-    private LiquidationStrategy strategy;
-    /**
      * The last liquidation
      */
     private Date lastLiquidation;
@@ -55,6 +51,8 @@ public abstract class Account {
      * The liquidation frequency in months
      */
     private int liquidationFrecuency;
+
+    private List<LiquidationStrategy> liquidationStrategies;
 
     /**
      * The default liquidation frecuency
@@ -81,6 +79,7 @@ public abstract class Account {
         this.authorizeds = new ArrayList<>();
         this.lastLiquidation = new Date(System.currentTimeMillis());
         this.liquidationFrecuency = DEFAULT_LIQUIDATION_FREQUENCY;
+        this.liquidationStrategies = new ArrayList<>();
         LOG.info("Create a new account with number " + accountnumber + " office " + office.getID().toString() + " bank " + bank.getID());
     }
 
@@ -241,7 +240,7 @@ public abstract class Account {
             }
         }
 
-        if (transaction.getType() != TransactionType.CHARGE) {
+        if (transaction.getType() != TransactionType.CHARGE || transaction.getType() != TransactionType.SALARY) {
             err = err.append("Withdrawal operations must be ").append(TransactionType.CHARGE).append(" type\n");
         }
 
@@ -283,7 +282,7 @@ public abstract class Account {
      *
      * @param transaction ( transaction to do )
      *
-     * @throws es.unileon.ulebank.account.exception.TransactionException (if
+     * @throws TransactionException (if
      * there are some null fields in the transaction)
      */
     public synchronized void doDeposit(Transaction transaction) throws TransactionException {
@@ -296,7 +295,7 @@ public abstract class Account {
             }
         }
 
-        if (transaction.getType() != TransactionType.PAYMENT) {
+        if (transaction.getType() != TransactionType.PAYMENT || transaction.getType() != TransactionType.PAYROLL) {
             err = err.append("Deposit operations must be").append(TransactionType.PAYMENT).append(" type\n");
         }
 
@@ -331,6 +330,46 @@ public abstract class Account {
             String error = "Cannot store the transaction\n";
             LOG.error(error);
             throw new TransactionException(error);
+        }
+    }
+
+    public boolean addLiquidationStrategy(LiquidationStrategy strategy) {
+        int i = 0;
+        boolean found = false;
+        while (i < this.liquidationStrategies.size() && !found) {
+            if (this.liquidationStrategies.get(i).getID().compareTo(strategy.getID()) == 0) {
+                found = true;
+            }
+        }
+        if (!found) {
+            this.liquidationStrategies.add(strategy);
+        }
+        return !found;
+    }
+
+    public boolean deleteLiquidationStrategy(Handler id) {
+        int i = 0;
+        boolean found = false;
+        while (i < this.liquidationStrategies.size() && !found) {
+            if (this.liquidationStrategies.get(i).getID().compareTo(id) == 0) {
+                this.liquidationStrategies.remove(i);
+                found = true;
+            }
+        }
+        return found;
+    }
+
+    public void doLiquidation(Office office) {
+        StringBuilder err = new StringBuilder();
+        try {
+            AccountHandler ah = new AccountHandler(this.id);
+            if (office.getID().compareTo(ah) == 0) {
+
+            } else {
+                err.append("Wrong office\n");
+            }
+        } catch (MalformedHandlerException e) {
+            err.append("Error while parsing handler\n");
         }
     }
 
