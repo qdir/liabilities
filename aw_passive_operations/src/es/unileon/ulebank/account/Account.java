@@ -16,7 +16,7 @@ import org.apache.log4j.Logger;
  *
  * @author runix
  */
-public abstract class Account {
+public class Account {
 
     /**
      * The logger of the class
@@ -240,7 +240,7 @@ public abstract class Account {
             }
         }
 
-        if (transaction.getType() != TransactionType.CHARGE || transaction.getType() != TransactionType.SALARY) {
+        if (transaction.getType() != TransactionType.CHARGE && transaction.getType() != TransactionType.SALARY) {
             err = err.append("Withdrawal operations must be ").append(TransactionType.CHARGE).append(" type\n");
         }
 
@@ -282,8 +282,8 @@ public abstract class Account {
      *
      * @param transaction ( transaction to do )
      *
-     * @throws TransactionException (if
-     * there are some null fields in the transaction)
+     * @throws TransactionException (if there are some null fields in the
+     * transaction)
      */
     public synchronized void doDeposit(Transaction transaction) throws TransactionException {
         StringBuilder err = new StringBuilder();
@@ -295,7 +295,7 @@ public abstract class Account {
             }
         }
 
-        if (transaction.getType() != TransactionType.PAYMENT || transaction.getType() != TransactionType.PAYROLL) {
+        if (transaction.getType() != TransactionType.PAYMENT && transaction.getType() != TransactionType.PAYROLL) {
             err = err.append("Deposit operations must be").append(TransactionType.PAYMENT).append(" type\n");
         }
 

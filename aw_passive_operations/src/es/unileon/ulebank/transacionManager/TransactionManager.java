@@ -25,10 +25,14 @@ public class TransactionManager {
 
     public boolean addBank(Bank bank) {
         boolean repeated = false;
-        for (int i = 0; i < banks.size() && !repeated; i++) {
-            if (this.banks.get(i).getID().compareTo(bank.getID()) == 0) {
-                repeated = true;
+        if (bank != null) {
+            for (int i = 0; i < banks.size() && !repeated; i++) {
+                if (this.banks.get(i).getID().compareTo(bank.getID()) == 0) {
+                    repeated = true;
+                }
             }
+        } else {
+            repeated = true;
         }
         return !repeated && this.banks.add(bank);
     }
@@ -65,5 +69,5 @@ public class TransactionManager {
             throw new TransactionException(error.toString());
         }
     }
-      
+
 }

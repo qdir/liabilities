@@ -42,15 +42,15 @@ public class CommandTest {
     @Test
     public void testExecute() {
         System.out.println("execute");
-        Command instance = new CommandImpl();
+//        Command instance = new CommandImpl();
 //        instance.execute();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-
-    public class CommandImpl implements Command {
-
-        public void execute() {
-        }
-    }
+//
+//    public class CommandImpl implements Command {
+//
+//        public void execute() {
+//        }
+//    }
 }
