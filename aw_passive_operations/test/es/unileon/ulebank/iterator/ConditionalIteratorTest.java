@@ -7,6 +7,7 @@ import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.history.TransactionType;
 import es.unileon.ulebank.history.conditions.ConditionTransactionBetweenTwoDates;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Date;
 import java.util.List;
 import org.junit.Before;

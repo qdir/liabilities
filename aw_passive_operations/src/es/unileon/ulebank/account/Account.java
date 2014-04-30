@@ -60,6 +60,11 @@ public class Account {
     private static final int DEFAULT_LIQUIDATION_FREQUENCY = 6;
 
     /**
+     * The max account's overdraft ( in positive )
+     */
+    private float maxOverdraft;
+
+    /**
      * Create a new account
      *
      * @param office (The office of the account)
@@ -80,6 +85,7 @@ public class Account {
         this.lastLiquidation = new Date(System.currentTimeMillis());
         this.liquidationFrecuency = DEFAULT_LIQUIDATION_FREQUENCY;
         this.liquidationStrategies = new ArrayList<>();
+        this.maxOverdraft = 0;
         LOG.info("Create a new account with number " + accountnumber + " office " + office.getID().toString() + " bank " + bank.getID());
     }
 
@@ -98,6 +104,21 @@ public class Account {
         if (liquidationFrecuency >= 1) {
             LOG.info("Change liquidation frecuency to " + liquidationFrecuency);
             this.liquidationFrecuency = liquidationFrecuency;
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Set the max account's overdraft
+     *
+     * @param maxOverdraft ( the account's overdraft ( in positive ))
+     * @return ( true if succes, false otherwise)
+     */
+    public boolean setMaxOverdraft(float maxOverdraft) {
+        if (maxOverdraft >= 0) {
+            LOG.info("Change max overdraft to " + maxOverdraft + "\n");
+            this.maxOverdraft = maxOverdraft;
             return true;
         }
         return false;
@@ -212,7 +233,7 @@ public class Account {
     }
 
     /**
-     * Get the account balance
+     * Get the account's balance
      *
      * @return (the balance)
      *
@@ -223,12 +244,21 @@ public class Account {
     }
 
     /**
+     * Get the max account's overdraft
+     * 
+     * @return (the account's overdraft )
+     */
+    public final double getMaxOverdraft() {
+        return this.maxOverdraft;
+    }
+    /**
      * Withdraw money from the account.
      *
      * @param transaction ( transaction to do )
      *
-     * @throws es.unileon.ulebank.account.exception.TransactionException (if
-     * there are some null fields in the transaction)
+     * @throws TransactionException
+     * es.unileon.ulebank.account.exception.TransactionException (if there are
+     * some null fields in the transaction)
      */
     public synchronized void doWithdrawal(Transaction transaction) throws TransactionException {
         StringBuilder err = new StringBuilder();
@@ -262,6 +292,11 @@ public class Account {
         if (transaction.getEffectiveDate() == null) {
             err.append("The effective date cannot be null \n");
         }
+
+        if (balance - transaction.getAmount() < -this.maxOverdraft) {
+            err.append("Cannot withdrawal money, max overdraft reached. Max overdraft = ").append(this.maxOverdraft).append("\n");
+        }
+
         if (err.length() > 0) {
             LOG.error(err.toString());
             throw new TransactionException(err.toString());

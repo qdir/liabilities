@@ -5,6 +5,7 @@ package es.unileon.ulebank.iterator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Iterator;
 
 public class ConditionalIterator<T> implements Iterator<T> {
 
@@ -62,5 +63,10 @@ public class ConditionalIterator<T> implements Iterator<T> {
                 done = true;
             }
         }
+    }
+
+    @Override
+    public void remove() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

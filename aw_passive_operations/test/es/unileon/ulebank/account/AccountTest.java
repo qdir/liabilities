@@ -60,7 +60,6 @@ public class AccountTest {
 
     }
 
-
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberLength() throws MalformedHandlerException {
         this.commercialAccount = new Account(this.office, this.bank, "000000000000");
@@ -507,15 +506,20 @@ public class AccountTest {
 
     @Test
     public void testDoWithdrawal() throws TransactionException {
-        double amount = 10.0;
-        Transaction t = new GenericTransaction(amount, new Date(), "Salary", TransactionType.CHARGE);
+        double amountAdded = 100.0;
+        Transaction t = new GenericTransaction(amountAdded, new Date(), "Salary", TransactionType.PAYMENT);
         t.setEffectiveDate(new Date(System.currentTimeMillis()));
-        this.commercialAccount.doWithdrawal(t);
-        assertEquals(-amount, this.commercialAccount.getBalance(), EPSILON);
+        this.commercialAccount.doDeposit(t);
+
+        double amount = 10;
         t = new GenericTransaction(amount, new Date(), "Salary", TransactionType.CHARGE);
         t.setEffectiveDate(new Date(System.currentTimeMillis()));
         this.commercialAccount.doWithdrawal(t);
-        assertEquals(-2 * amount, this.commercialAccount.getBalance(), EPSILON);
+        assertEquals(-amount + amountAdded, this.commercialAccount.getBalance(), EPSILON);
+        t = new GenericTransaction(amount, new Date(), "Salary", TransactionType.CHARGE);
+        t.setEffectiveDate(new Date(System.currentTimeMillis()));
+        this.commercialAccount.doWithdrawal(t);
+        assertEquals(-2 * amount + amountAdded, this.commercialAccount.getBalance(), EPSILON);
     }
 
     @Test
@@ -527,21 +531,22 @@ public class AccountTest {
     @Test
     public void testAccountHistory() throws TransactionException {
         double amount = 10.0;
-        Transaction t = new GenericTransaction(amount, new Date(), "Salary", TransactionType.CHARGE);
-         t.setEffectiveDate(new Date(System.currentTimeMillis()));
-        this.commercialAccount.doWithdrawal(t);
-        assertEquals(-amount, this.commercialAccount.getBalance(), EPSILON);
 
         Transaction t2 = new GenericTransaction(amount, new Date(), "Salary", TransactionType.PAYMENT);
         t2.setEffectiveDate(new Date(System.currentTimeMillis()));
         this.commercialAccount.doDeposit(t2);
+        assertEquals(amount, this.commercialAccount.getBalance(), EPSILON);
+
+        Transaction t = new GenericTransaction(amount, new Date(), "Salary", TransactionType.CHARGE);
+        t.setEffectiveDate(new Date(System.currentTimeMillis()));
+        this.commercialAccount.doWithdrawal(t);
         assertEquals(0.0, this.commercialAccount.getBalance(), EPSILON);
 
-        AccountHistory history = this.commercialAccount.getHistory();
-        Collection<Transaction> entries = history.getTransactions();
-        Iterator<Transaction> it = entries.iterator();
-        this.compareEntryAndTransactionsWithAsserts(t, it.next());
+        AccountHistory history = this.commercialAccount.getHistory();;
+        Iterator<Transaction> it = history.getIterator(null);
         this.compareEntryAndTransactionsWithAsserts(t2, it.next());
+        this.compareEntryAndTransactionsWithAsserts(t, it.next());
+
     }
 
     public void compareEntryAndTransactionsWithAsserts(Transaction t, Transaction entry) {

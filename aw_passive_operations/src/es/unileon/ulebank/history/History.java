@@ -2,7 +2,7 @@ package es.unileon.ulebank.history;
 
 import es.unileon.ulebank.iterator.Condition;
 import es.unileon.ulebank.iterator.ConditionalIterator;
-import es.unileon.ulebank.iterator.Iterator;
+import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -70,7 +70,7 @@ public abstract class History<T extends Transaction> {
         if (malformed) {
             conditions.clear();
         }
-        return new ConditionalIterator<>(conditions, this.getTransactions());
+        return new ConditionalIterator<>(conditions, new ArrayList<>(this.transactions));
     }
 
     /**
@@ -89,9 +89,5 @@ public abstract class History<T extends Transaction> {
 
     public boolean remove(T t) {
         return this.transactions.remove(t);
-    }
-
-    public Collection<T> getTransactions() {
-        return new ArrayList<>(this.transactions);
     }
 }

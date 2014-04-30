@@ -100,11 +100,11 @@ public class HistoryTest {
 
         System.out.println("getTransactions");
 
-        Transaction transaction = new GenericTransaction( 10.5d, new Date(), "Imposicion", TransactionType.CHARGE);
+        Transaction transaction = new GenericTransaction(10.5d, new Date(), "Imposicion", TransactionType.CHARGE);
 
         this.accountHistory.addTransaction(transaction);
-
-        assertEquals(this.accountHistory.getTransactions().size(), 1);
+        fail("ERROR, TO DO");
+//        assertEquals(this.accountHistory.getTransactions().size(), 1);
     }
 
 }
