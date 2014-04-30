@@ -1,5 +1,7 @@
 package es.unileon.ulebank.history;
 
+import es.unileon.ulebank.history.conditions.ConditionFactory;
+import es.unileon.ulebank.history.conditions.WrongArgsException;
 import es.unileon.ulebank.iterator.Condition;
 import es.unileon.ulebank.iterator.ConditionalIterator;
 import java.util.Iterator;
@@ -17,9 +19,11 @@ import java.util.regex.Pattern;
 public abstract class History<T extends Transaction> {
 
     private final Collection<T> transactions;
+    private ConditionFactory<T> conditionFactory;
 
     public History() {
         this.transactions = new ArrayList();
+        this.conditionFactory = new ConditionFactory();
     }
 
     public boolean addTransaction(T transaction) {
@@ -33,10 +37,12 @@ public abstract class History<T extends Transaction> {
      * in millis } {notBetween, date in millis, date in millis } {from, date in
      * millis } {after, date in millis }
      *
+     * Note, all commands start with - , example -include, -exclude..
+     * 
      * The args can be combined, for example if we want the dates between 0 and
      * 100000000 and exclude the day 3000000.
      *
-     * {"between","0","100000000","exclude",3000000}
+     * {"-between","0","100000000","-exclude",3000000}
      *
      * If we only want to iterate for all elements we can specify {} args or
      * null
@@ -55,13 +61,17 @@ public abstract class History<T extends Transaction> {
             args = correctArgs(args);
             while (i < args.length && !malformed) {
                 if (args[i++].startsWith("-")) {
-                    final int leftPivot = i - 1;
+                    final int leftPivot = i;
                     while (i < args.length && !args[i].startsWith("-")) {
                         ++i;
                     }
                     String[] arg = new String[i - leftPivot];
                     System.arraycopy(args, leftPivot, arg, 0, i - leftPivot);
-//                    conditions.add(ConditionFactory.getCondition(arg))
+                    try {
+                        conditions.add(this.conditionFactory.getCondition(args[leftPivot - 1], arg));
+                    } catch (WrongArgsException w) {
+                        malformed = true;
+                    }
                 } else {
                     malformed = true;
                 }
