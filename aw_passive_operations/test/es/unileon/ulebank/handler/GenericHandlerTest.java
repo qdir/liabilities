@@ -26,14 +26,16 @@ public class GenericHandlerTest {
      * Test of compareTo method, of class GenericHandler.
      */
     @Test
-    public void testCompareTo() {
-
-        System.out.println("compareTo");
-
+    public void testCompareToOk() {
         assertEquals(genericHandler1.compareTo(genericHandler1), 0);
         assertEquals(genericHandler1.compareTo(new GenericHandler("0000")), 0);
-        assertFalse(genericHandler1.compareTo(new GenericHandler("0010")) == 0);
-        assertTrue(genericHandler1.toString().compareTo(genericHandler2.toString()) != 0);
+        assertEquals(genericHandler1.compareTo(new GenericHandler(genericHandler1.toString())), 0);
+    }
+
+    @Test
+    public void testCompareNotOk() {
+        assertFalse(genericHandler1.compareTo(genericHandler2) == 0);
+        assertFalse(genericHandler2.compareTo(genericHandler1) == 0);
     }
 
     /**
@@ -41,9 +43,6 @@ public class GenericHandlerTest {
      */
     @Test
     public void testToString() {
-
-        System.out.println("toString");
-
         assertEquals(genericHandler1.toString(), "0000");
     }
 }

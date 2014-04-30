@@ -1,6 +1,6 @@
 /* Application developed for AW subject, belonging to passive operations
  group.*/
-package es.unileon.ulebank.history.iterator;
+package es.unileon.ulebank.history.condition;
 
 import es.unileon.ulebank.history.conditions.ConditionTransactionBetweenTwoDates;
 import es.unileon.ulebank.history.GenericTransaction;
