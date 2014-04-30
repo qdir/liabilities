@@ -5,9 +5,9 @@ package es.unileon.ulebank.command;
 
 
 
-import es.unileon.ulebank.client.handler.PersonHandler;
-import es.unileon.ulebank.client.types.Person;
-import es.unileon.ulebank.client.types.data.Address;
+import es.unileon.ulebank.client.PersonHandler;
+import es.unileon.ulebank.client.Person;
+import es.unileon.ulebank.client.Address;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
 import java.util.Date;
@@ -68,6 +68,11 @@ public class CreateClientCommand implements Command{
 
     @Override
     public void undo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void redo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -1,7 +1,7 @@
 /* Application developed for AW subject, belonging to passive operations
  group.*/
 
-package es.unileon.ulebank.client.types.data;
+package es.unileon.ulebank.client;
 
 /**
  * Class that implements an address

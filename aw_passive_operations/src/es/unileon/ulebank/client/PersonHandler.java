@@ -1,9 +1,9 @@
 /* Application developed for AW subject, belonging to passive operations
  group.*/
 
-package es.unileon.ulebank.client.handler;
+package es.unileon.ulebank.client;
 
-import es.unileon.ulebank.client.handler.dniLetters.DniLetters;
+import es.unileon.ulebank.utils.DniLetters;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
 

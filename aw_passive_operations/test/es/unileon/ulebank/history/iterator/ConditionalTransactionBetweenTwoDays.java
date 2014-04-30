@@ -2,6 +2,7 @@
  group.*/
 package es.unileon.ulebank.history.iterator;
 
+import es.unileon.ulebank.history.conditions.ConditionTransactionBetweenTwoDates;
 import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.history.TransactionType;

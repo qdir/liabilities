@@ -20,5 +20,7 @@ public interface Command {
     public void execute() throws MalformedHandlerException;
 
     public void undo();
+    
+    public void redo();
    
 }

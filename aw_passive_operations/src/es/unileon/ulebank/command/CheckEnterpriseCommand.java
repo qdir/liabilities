@@ -3,7 +3,7 @@
 
 package es.unileon.ulebank.command;
 
-import es.unileon.ulebank.client.handler.EnterpriseHandler;
+import es.unileon.ulebank.client.EnterpriseHandler;
 import es.unileon.ulebank.handler.Handler;
 import java.util.Date;
 
@@ -39,6 +39,11 @@ public class CheckEnterpriseCommand implements Command{
 
     @Override
     public void undo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void redo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

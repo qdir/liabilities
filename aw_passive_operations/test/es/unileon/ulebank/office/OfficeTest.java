@@ -3,11 +3,9 @@
 
 package es.unileon.ulebank.office;
 
+import es.unileon.ulebank.account.Account;
 import es.unileon.ulebank.account.TransactionException;
-import es.unileon.ulebank.account.AccountHandler;
-import es.unileon.ulebank.account.types.CommercialAccount;
 import es.unileon.ulebank.bank.Bank;
-import es.unileon.ulebank.office.Office;
 import es.unileon.ulebank.handler.GenericHandler;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
@@ -28,7 +26,7 @@ public class OfficeTest {
     
     private Office office;
     private Bank bank;
-    private CommercialAccount account;
+    private Account account;
     private TransactionManager manager;
     
     @Before
@@ -37,7 +35,7 @@ public class OfficeTest {
         this.manager = new TransactionManager();
         this.bank = new Bank(this.manager, new GenericHandler("1234"));
         this.office = new Office(new GenericHandler("1234"), this.bank);
-        this.account = new CommercialAccount(office, bank, "1234567890");
+        this.account = new Account(office, bank, "1234567890");
     }
 
      /**

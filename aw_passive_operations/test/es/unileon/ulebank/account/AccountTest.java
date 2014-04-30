@@ -2,8 +2,6 @@
  group.*/
 package es.unileon.ulebank.account;
 
-
-import es.unileon.ulebank.account.types.CommercialAccount;
 import es.unileon.ulebank.bank.Bank;
 import es.unileon.ulebank.client.Client;
 import es.unileon.ulebank.handler.GenericHandler;
@@ -46,7 +44,7 @@ public class AccountTest {
         this.manager = new TransactionManager();
         this.bank = new Bank(manager, new GenericHandler("1234"));
         this.office = new Office(new GenericHandler("1234"), this.bank);
-        this.commercialAccount = new CommercialAccount(this.office, this.bank, accountNumber);
+        this.commercialAccount = new Account(this.office, this.bank, accountNumber);
         this.titularHandler1 = new GenericHandler("Paco");
         this.titularHandler2 = new GenericHandler("Manuel");
         this.authorizedHandler1 = new GenericHandler("Miguel");
@@ -62,178 +60,174 @@ public class AccountTest {
 
     }
 
-    /**
-     * Test of expected MalformedHandlerException throw for all cases.
-     *
-     * @throws es.unileon.aw.handler.MalformedHandlerException
-     */
+
     @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberLength() throws MalformedHandlerException {
-        this.commercialAccount = new CommercialAccount(this.office, this.bank, "000000000000");
+        this.commercialAccount = new Account(this.office, this.bank, "000000000000");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberLength() throws MalformedHandlerException {
-        this.commercialAccount = new CommercialAccount(this.office, this.bank, "000000");
+        this.commercialAccount = new Account(this.office, this.bank, "000000");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testCorrectAccountnumberLengthInterspersedLetters() throws MalformedHandlerException {
-        this.commercialAccount = new CommercialAccount(this.office, this.bank, "00aa00aa00");
+        this.commercialAccount = new Account(this.office, this.bank, "00aa00aa00");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testCorrectLengthWithLetterIn1Character() throws MalformedHandlerException {
-        new CommercialAccount(this.office, this.bank, "a000000000");
+        new Account(this.office, this.bank, "a000000000");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testCorrectLengthWithLetterIn2Character() throws MalformedHandlerException {
-        new CommercialAccount(this.office, this.bank, "0a00000000");
+        new Account(this.office, this.bank, "0a00000000");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testCorrectLengthWithLetterIn3Character() throws MalformedHandlerException {
-        new CommercialAccount(this.office, this.bank, "00a0000000");
+        new Account(this.office, this.bank, "00a0000000");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testCorrectLengthWithLetterIn4Character() throws MalformedHandlerException {
-        new CommercialAccount(this.office, this.bank, "000a000000");
+        new Account(this.office, this.bank, "000a000000");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testCorrectLengthWithLetterIn5Character() throws MalformedHandlerException {
-        new CommercialAccount(this.office, this.bank, "0000a00000");
+        new Account(this.office, this.bank, "0000a00000");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testCorrectLengthWithLetterIn6Character() throws MalformedHandlerException {
-        new CommercialAccount(this.office, this.bank, "00000a0000");
+        new Account(this.office, this.bank, "00000a0000");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testCorrectLengthWithLetterIn7Character() throws MalformedHandlerException {
-        new CommercialAccount(this.office, this.bank, "000000a000");
+        new Account(this.office, this.bank, "000000a000");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testCorrectLengthWithLetterIn8Character() throws MalformedHandlerException {
-        new CommercialAccount(this.office, this.bank, "0000000a00");
+        new Account(this.office, this.bank, "0000000a00");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testCorrectLengthWithLetterIn9Character() throws MalformedHandlerException {
-        new CommercialAccount(this.office, this.bank, "00000000a0");
+        new Account(this.office, this.bank, "00000000a0");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testCorrectLengthWithLetterIn10Character() throws MalformedHandlerException {
-        new CommercialAccount(this.office, this.bank, "000000000a");
+        new Account(this.office, this.bank, "000000000a");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreLengthWithLetterIn1Character() throws MalformedHandlerException {
-        new CommercialAccount(this.office, this.bank, "a0000000000");
+        new Account(this.office, this.bank, "a0000000000");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreLengthWithLetterIn2Character() throws MalformedHandlerException {
-        new CommercialAccount(this.office, this.bank, "0a000000000");
+        new Account(this.office, this.bank, "0a000000000");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreLengthWithLetterIn3Character() throws MalformedHandlerException {
-        new CommercialAccount(this.office, this.bank, "00a00000000");
+        new Account(this.office, this.bank, "00a00000000");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreLengthWithLetterIn4Character() throws MalformedHandlerException {
-        new CommercialAccount(this.office, this.bank, "000a0000000");
+        new Account(this.office, this.bank, "000a0000000");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreLengthWithLetterIn5Character() throws MalformedHandlerException {
-        new CommercialAccount(this.office, this.bank, "0000a000000");
+        new Account(this.office, this.bank, "0000a000000");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreLengthWithLetterIn6Character() throws MalformedHandlerException {
-        new CommercialAccount(this.office, this.bank, "00000a00000");
+        new Account(this.office, this.bank, "00000a00000");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreLengthWithLetterIn7Character() throws MalformedHandlerException {
-        new CommercialAccount(this.office, this.bank, "000000a0000");
+        new Account(this.office, this.bank, "000000a0000");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreLengthWithLetterIn8Character() throws MalformedHandlerException {
-        new CommercialAccount(this.office, this.bank, "0000000a000");
+        new Account(this.office, this.bank, "0000000a000");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreLengthWithLetterIn9Character() throws MalformedHandlerException {
-        new CommercialAccount(this.office, this.bank, "00000000a00");
+        new Account(this.office, this.bank, "00000000a00");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreLengthWithLetterIn10Character() throws MalformedHandlerException {
-        new CommercialAccount(this.office, this.bank, "000000000a0");
+        new Account(this.office, this.bank, "000000000a0");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreLengthWithLetterIn11Character() throws MalformedHandlerException {
-        new CommercialAccount(this.office, this.bank, "0000000000a");
+        new Account(this.office, this.bank, "0000000000a");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessLengthWithLetterIn2Character() throws MalformedHandlerException {
-        new CommercialAccount(this.office, this.bank, "a00000000");
+        new Account(this.office, this.bank, "a00000000");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessLengthWithLetterIn3Character() throws MalformedHandlerException {
-        new CommercialAccount(this.office, this.bank, "0a0000000");
+        new Account(this.office, this.bank, "0a0000000");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessLengthWithLetterIn4Character() throws MalformedHandlerException {
-        new CommercialAccount(this.office, this.bank, "00a000000");
+        new Account(this.office, this.bank, "00a000000");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessLengthWithLetterIn5Character() throws MalformedHandlerException {
-        new CommercialAccount(this.office, this.bank, "000a00000");
+        new Account(this.office, this.bank, "000a00000");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessLengthWithLetterIn6Character() throws MalformedHandlerException {
-        new CommercialAccount(this.office, this.bank, "0000a0000");
+        new Account(this.office, this.bank, "0000a0000");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessLengthWithLetterIn7Character() throws MalformedHandlerException {
-        new CommercialAccount(this.office, this.bank, "00000a000");
+        new Account(this.office, this.bank, "00000a000");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessLengthWithLetterIn8Character() throws MalformedHandlerException {
-        new CommercialAccount(this.office, this.bank, "000000a00");
+        new Account(this.office, this.bank, "000000a00");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessLengthWithLetterIn9Character() throws MalformedHandlerException {
-        new CommercialAccount(this.office, this.bank, "0000000a0");
+        new Account(this.office, this.bank, "0000000a0");
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessLengthWithLetterIn10Character() throws MalformedHandlerException {
-        new CommercialAccount(this.office, this.bank, "00000000a");
+        new Account(this.office, this.bank, "00000000a");
     }
 
     /**
-     * Test of getBalance method, of class CommercialAccount.
+     * Test of getBalance method, of class Account.
      */
     @Test
     public void testGetBalance() {

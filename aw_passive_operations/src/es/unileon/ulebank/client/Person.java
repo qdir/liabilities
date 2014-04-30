@@ -1,11 +1,10 @@
 /* Application developed for AW subject, belonging to passive operations
  group.*/
 
-package es.unileon.ulebank.client.types;
+package es.unileon.ulebank.client;
 
 import es.unileon.ulebank.client.Client;
-import es.unileon.ulebank.client.handler.PersonHandler;
-import es.unileon.ulebank.client.types.data.Address;
+import es.unileon.ulebank.client.PersonHandler;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
 import java.util.Date;
