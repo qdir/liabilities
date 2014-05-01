@@ -52,17 +52,48 @@ public abstract class History<T extends Transaction> {
 
     /**
      * Get the iterator for the history. With the args we can specify conditions
-     * for include or exclude dates. The available args are : {include day, date
-     * in millis } {exclude day, date in millis } {between, date in millis, date
-     * in millis } {notBetween, date in millis, date in millis } {from, date in
-     * millis } {after, date in millis }
+     * for include or exclude dates, subjects and amounts.
      *
-     * Note, all commands start with - , example -include, -exclude..
+     * Note, all commands start with - , After the command goes _ and the type.
      *
-     * The args can be combined, for example if we want the dates between 0 and
-     * 100000000 and exclude the day 3000000.
+     * The available commands are :
      *
-     * {"-between","0","100000000","-exclude",3000000}
+     * For dates :
+     *
+     * date_include .........; example => {"-date_include","110000"}
+     *
+     * date_exclude .........; example => {"-date_exclude","110000"}
+     *
+     * date_from ............; example => {"-date_from","110000"}
+     *
+     * date_until ...........; example => {"-date_until","110000"}
+     *
+     * date_between .........; example => {"-date_between","110000","210000"}
+     *
+     * date_notBetween ......; example => {"-date_notBetween","110000","210000"}
+     *
+     * For amounts :
+     *
+     * amount_from ..........; example => {"-amount_from","110000"}
+     *
+     * amount_until .........; example => {"-amount_until","110000"}
+     *
+     * amount_between .......; example => {"-amount_between","110000","210000"}
+     *
+     * amount_notBetween ....; example => {"-amount_notBetween","1100","210000"}
+     *
+     * For subjects :
+     *
+     * subject_contains ......; example => {"-subject_contains","aA"}. with
+     * multiple words {"subject_contains","aA","Bbbbbb"}
+     *
+     * subject_notContains ...; example => {"-subject_contains","asdasd"}
+     *
+     *
+     * The args can be combined, for example :
+     *
+     * {"-amount_notBetween","1100","210000",
+     * "-subject_contains","asdasd","-date_include","110000"}
      *
      * If we only want to iterate for all elements we can specify {} args or
      * null
@@ -83,10 +114,10 @@ public abstract class History<T extends Transaction> {
                     while (i < args.length && !args[i].startsWith("-")) {
                         i++;
                     }
-                    String[] arg = new String[i - leftPivot];
+                    final String[] arg = new String[i - leftPivot];
                     System.arraycopy(args, leftPivot, arg, 0, i - leftPivot);
                     try {
-                        Condition<T> condition = this.conditionFactory.getCondition(args[leftPivot - 1], arg);
+                        final Condition<T> condition = this.conditionFactory.getCondition(args[leftPivot - 1], arg);
                         if (condition != null) {
                             conditions.add(condition);
                         } else {

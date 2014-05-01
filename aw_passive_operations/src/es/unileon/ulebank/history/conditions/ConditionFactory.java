@@ -14,10 +14,17 @@ import java.util.regex.Pattern;
  */
 public class ConditionFactory<T extends Transaction> {
 
+    /**
+     * Singleton instance
+     */
     private static ConditionFactory instance;
+    /**
+     * Pattern for detecting letters in a String
+     */
     private static Pattern numberPattern;
 
     /**
+     * Return a class' instance
      *
      * @return
      */
@@ -28,11 +35,17 @@ public class ConditionFactory<T extends Transaction> {
         return instance;
     }
 
+    /**
+     * Private constructor.
+     */
     private ConditionFactory() {
         numberPattern = Pattern.compile("^[0-9]*$");
     }
 
     /**
+     * Get the condition specified with the param (condition). The args will be
+     * used for creating the condition. If there are too args or less, or these
+     * args be incorrect a WrongArgsException will be throw
      *
      * @param condition
      * @param args
@@ -75,7 +88,7 @@ public class ConditionFactory<T extends Transaction> {
                     result = new ConditionTransactionBetweenTwoDates<>(new Date(Long.parseLong(args[0])), new Date(Long.MAX_VALUE), true);
                 }
                 break;
-            case "after":
+            case "until":
                 if (checkArgsNumber(args, 1) && onlyNumbers(args)) {
                     result = new ConditionTransactionBetweenTwoDates<>(new Date(0), new Date(Long.parseLong(args[0])), true);
                 }

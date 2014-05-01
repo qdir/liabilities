@@ -14,13 +14,28 @@ import java.util.List;
  * @author runix
  */
 public class TaskList {
-    
+
+    /**
+     *
+     */
     private final List<Command> tasks;
+    /**
+     *
+     */
     private final List<Command> tasksDone;
+    /**
+     *
+     */
     private final CommandDateComparator comparator;
+    /**
+     *
+     */
     private final Date date;
+    /**
+     *
+     */
     private final Date updatedTime;
-    
+
     /**
      *
      */
@@ -31,7 +46,7 @@ public class TaskList {
         this.date = new Date(System.currentTimeMillis());
         this.updatedTime = new Date(System.currentTimeMillis());
     }
-    
+
     /**
      *
      * @param command
@@ -50,7 +65,7 @@ public class TaskList {
         }
         return add;
     }
-    
+
     /**
      *
      * @return
@@ -58,7 +73,7 @@ public class TaskList {
     public Date getDate() {
         return this.date;
     }
-    
+
     /**
      *
      * @return
@@ -66,7 +81,7 @@ public class TaskList {
     public List<Command> getTaskList() {
         return new ArrayList<>(this.tasks);
     }
-    
+
     /**
      *
      * @return
@@ -74,7 +89,7 @@ public class TaskList {
     public List<Command> getTasksListDone() {
         return new ArrayList<>(this.tasksDone);
     }
-    
+
     /**
      *
      * @param command
@@ -93,7 +108,7 @@ public class TaskList {
         }
         return delete;
     }
-    
+
     /**
      *
      * @param id
@@ -119,7 +134,7 @@ public class TaskList {
             this.tasksDone.add(c);
             ++i;
         }
-        
+
         this.sort();;
     }
 
@@ -131,7 +146,7 @@ public class TaskList {
         this.date.setTime(timestamp);
         this.updatedTime.setTime(System.currentTimeMillis());
     }
-    
+
     /**
      *
      * @param date
@@ -139,7 +154,7 @@ public class TaskList {
     public void setTime(Date date) {
         this.setTime(date.getTime());
     }
-    
+
     /**
      *
      * @param days
@@ -153,7 +168,7 @@ public class TaskList {
             this.executeTasks();
         }
     }
-    
+
     /**
      *
      * @param days
@@ -165,12 +180,12 @@ public class TaskList {
             this.updatedTime.setTime(System.currentTimeMillis());
         }
     }
-    
+
     private void sort() {
         Collections.sort(this.tasks, this.comparator);
         Collections.sort(this.tasksDone, this.comparator);
     }
-    
+
     /**
      *
      */

@@ -20,17 +20,32 @@ import org.apache.log4j.Logger;
  * @author runix
  */
 public class Office {
+
     private static final Logger LOG = Logger.getLogger(Account.class.getName());
 
     /**
      *
      */
     public static final long MAX_ACCOUNT_NUMBER = 1000000000l - 1;
-
+    /**
+     *
+     */
     private final List<Account> accounts;
+    /**
+     *
+     */
     private final List<Client> clients;
+    /**
+     *
+     */
     private final Handler id;
+    /**
+     *
+     */
     private final Bank bank;
+    /**
+     *
+     */
     private long nextAccountNumber;
 
     /**
