@@ -8,8 +8,6 @@ import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  *
@@ -19,11 +17,11 @@ import java.util.regex.Pattern;
 public abstract class History<T extends Transaction> {
 
     private final Collection<T> transactions;
-    private ConditionFactory<T> conditionFactory;
+    private final ConditionFactory<T> conditionFactory;
 
     public History() {
         this.transactions = new ArrayList();
-        this.conditionFactory = new ConditionFactory();
+        this.conditionFactory = ConditionFactory.getInstance();
     }
 
     public boolean addTransaction(T transaction) {
@@ -38,7 +36,7 @@ public abstract class History<T extends Transaction> {
      * millis } {after, date in millis }
      *
      * Note, all commands start with - , example -include, -exclude..
-     * 
+     *
      * The args can be combined, for example if we want the dates between 0 and
      * 100000000 and exclude the day 3000000.
      *
@@ -56,19 +54,22 @@ public abstract class History<T extends Transaction> {
         final List<Condition<T>> conditions = new ArrayList<>();
         boolean malformed = false;
         if (args != null) {
-            final Pattern numberPattern = Pattern.compile("^[0-9]*$");
-            Matcher matcher;
             args = correctArgs(args);
             while (i < args.length && !malformed) {
                 if (args[i++].startsWith("-")) {
                     final int leftPivot = i;
                     while (i < args.length && !args[i].startsWith("-")) {
-                        ++i;
+                        i++;
                     }
                     String[] arg = new String[i - leftPivot];
                     System.arraycopy(args, leftPivot, arg, 0, i - leftPivot);
                     try {
-                        conditions.add(this.conditionFactory.getCondition(args[leftPivot - 1], arg));
+                        Condition<T> condition = this.conditionFactory.getCondition(args[leftPivot - 1], arg);
+                        if (condition != null) {
+                            conditions.add(condition);
+                        } else {
+                            malformed = true;
+                        }
                     } catch (WrongArgsException w) {
                         malformed = true;
                     }

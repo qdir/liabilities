@@ -16,9 +16,12 @@ public class ConditionTransactionBetweenTwoDates<T extends Transaction> implemen
     private final long timestampHigher;
     private final boolean isValid;
 
-    public ConditionTransactionBetweenTwoDates(Date less, Date high, boolean isValid) {
+    public ConditionTransactionBetweenTwoDates(Date less, Date high, boolean isValid) throws WrongArgsException {
         this.timestampLess = less.getTime();
         this.timestampHigher = high.getTime();
+        if(this.timestampLess > this.timestampHigher) {
+            throw new WrongArgsException("Less date is higher than the high");
+        }
         this.isValid = isValid;
     }
 
