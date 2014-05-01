@@ -85,7 +85,7 @@ public abstract class History<T extends Transaction> {
      * For subjects :
      *
      * subject_contains ......; example => {"-subject_contains","aA"}. with
-     * multiple words {"subject_contains","aA","Bbbbbb"}
+     * multiple words {"-subject_contains","aA","Bbbbbb"}
      *
      * subject_notContains ...; example => {"-subject_contains","asdasd"}
      *
