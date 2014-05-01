@@ -6,6 +6,8 @@ import es.unileon.ulebank.account.Account;
 import es.unileon.ulebank.bank.Bank;
 import es.unileon.ulebank.handler.MalformedHandlerException;
 import es.unileon.ulebank.office.Office;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * **SIN ACABAR***
@@ -20,6 +22,7 @@ public class CreateAccountCommand implements Command {
     private final Bank bank;
     private final Handler commandID;
     private final Date effectiveDate;
+    private Account account;
 
     public CreateAccountCommand(Office office, Bank bank, Date effectiveDate, Handler commandId) {
         this.bank = bank;
@@ -29,11 +32,13 @@ public class CreateAccountCommand implements Command {
     }
 
     @Override
-    public void execute() throws MalformedHandlerException {
-        Account account = null;
-        account = new Account(this.office, this.bank, this.office.getNewAccountNumber());
-        this.office.addAccount(account);
-
+    public void execute() {
+        try {
+            this.account = new Account(this.office, this.bank, this.office.getNewAccountNumber());
+            this.office.addAccount(account);
+        } catch (MalformedHandlerException ex) {
+            Logger.getLogger(CreateAccountCommand.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -48,13 +53,16 @@ public class CreateAccountCommand implements Command {
 
     @Override
     public void undo() {
-        //TODO remove account
-//        this.office.
+        if (this.account != null) {
+            this.office.deleteAccount(this.account.getID());
+        }
     }
 
     @Override
     public void redo() {
-        //TODO add account
+        if (this.account != null) {
+            this.office.addAccount(this.account);
+        }
     }
 
 }

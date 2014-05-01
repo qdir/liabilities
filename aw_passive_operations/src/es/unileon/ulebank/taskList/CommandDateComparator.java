@@ -2,6 +2,7 @@
  group.*/
 package es.unileon.ulebank.taskList;
 
+import es.unileon.ulebank.command.Command;
 import java.util.Comparator;
 
 /**

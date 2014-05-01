@@ -2,6 +2,7 @@
  group.*/
 package es.unileon.ulebank.taskList;
 
+import es.unileon.ulebank.command.Command;
 import es.unileon.ulebank.handler.Handler;
 import java.util.ArrayList;
 import java.util.Collections;

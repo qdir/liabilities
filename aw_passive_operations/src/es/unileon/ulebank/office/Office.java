@@ -6,6 +6,7 @@ import es.unileon.ulebank.account.Account;
 import es.unileon.ulebank.account.TransactionException;
 import es.unileon.ulebank.account.AccountHandler;
 import es.unileon.ulebank.bank.Bank;
+import es.unileon.ulebank.client.Client;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
 import es.unileon.ulebank.history.Transaction;
@@ -21,6 +22,7 @@ import org.apache.log4j.Logger;
 public class Office {
 
     private final List<Account> accounts;
+    private final List<Client> clients;
     private Handler id;
     private final Bank bank;
     private static final Logger LOG = Logger.getLogger(Account.class.getName());
@@ -29,13 +31,73 @@ public class Office {
 
     public Office(Handler id, Bank bank) {
         this.accounts = new ArrayList<>();
+        this.clients = new ArrayList<>();
         this.id = id;
         this.bank = bank;
         this.nextAccountNumber = 0;
     }
 
     public boolean addAccount(Account account) {
-        return this.accounts.add(account);
+        if (account != null) {
+            int i = 0;
+            boolean found = false;
+            while (i < this.accounts.size() && !found) {
+                if (accounts.get(i).getID().compareTo(account.getID()) == 0) {
+                    found = true;
+                }
+                ++i;
+            }
+            if (!found) {
+                return this.accounts.add(account);
+            }
+        }
+        return false;
+    }
+
+    public synchronized boolean addClient(Client client) {
+        if (client != null) {
+            int i = 0;
+            boolean found = false;
+            while (i < this.clients.size() && !found) {
+                found = clients.get(i).getId().compareTo(client.getId()) == 0;
+                ++i;
+            }
+            if (!found) {
+                return this.clients.add(client);
+            }
+        }
+        return false;
+    }
+
+    public synchronized boolean deleteClient(Handler id) {
+        int i = 0;
+        boolean found = false;
+        while (i < this.clients.size() && !found) {
+            if (clients.get(i).getId().compareTo(id) == 0) {
+                //TODO perform account liquidation
+                clients.remove(i);
+                found = true;
+            }
+            ++i;
+        }
+        return found;
+    }
+
+    public synchronized boolean deleteAccount(Handler id) {
+        int i = 0;
+        boolean found = false;
+        while (i < this.accounts.size() && !found) {
+            if (accounts.get(i).getID().compareTo(id) == 0) {
+                accounts.remove(i);
+                found = true;
+            }
+            ++i;
+        }
+        return found;
+    }
+
+    public List<Client> getClients() {
+        return new ArrayList<>(this.clients);
     }
 
     public Handler getID() {
