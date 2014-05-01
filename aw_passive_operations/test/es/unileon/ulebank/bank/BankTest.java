@@ -3,7 +3,7 @@
 package es.unileon.ulebank.bank;
 
 import es.unileon.ulebank.account.Account;
-import es.unileon.ulebank.account.TransactionException;
+import es.unileon.ulebank.exceptions.TransactionException;
 import es.unileon.ulebank.handler.GenericHandler;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;

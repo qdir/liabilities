@@ -1,5 +1,6 @@
 package es.unileon.ulebank.account;
 
+import es.unileon.ulebank.exceptions.TransactionException;
 import es.unileon.ulebank.bank.Bank;
 import es.unileon.ulebank.client.Client;
 import es.unileon.ulebank.handler.Handler;

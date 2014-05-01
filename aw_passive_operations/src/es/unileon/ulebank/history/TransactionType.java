@@ -10,19 +10,25 @@ public enum TransactionType {
      *
      */
     CHARGE,
-
     /**
      *
      */
     PAYMENT,
-
     /**
      *
      */
     PAYROLL,
-
     /**
      *
      */
-    SALARY
+    SALARY,
+    /**
+     *
+     */
+    IN,
+    /**
+     *
+     */
+    OUT,
+
 }
