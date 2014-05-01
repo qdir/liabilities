@@ -22,10 +22,15 @@ public class Account {
      * The logger of the class
      */
     private static final Logger LOG = Logger.getLogger(Account.class.getName());
+
+    /**
+     * The default liquidation frecuency
+     */
+    private static final int DEFAULT_LIQUIDATION_FREQUENCY = 6;
     /**
      * The account identifier
      */
-    private Handler id;
+    private final Handler id;
 
     /**
      * The account balance
@@ -52,12 +57,7 @@ public class Account {
      */
     private int liquidationFrecuency;
 
-    private List<LiquidationStrategy> liquidationStrategies;
-
-    /**
-     * The default liquidation frecuency
-     */
-    private static final int DEFAULT_LIQUIDATION_FREQUENCY = 6;
+    private final List<LiquidationStrategy> liquidationStrategies;
 
     /**
      * The max account's overdraft ( in positive )
@@ -368,6 +368,11 @@ public class Account {
         }
     }
 
+    /**
+     *
+     * @param strategy
+     * @return
+     */
     public boolean addLiquidationStrategy(LiquidationStrategy strategy) {
         int i = 0;
         boolean found = false;
@@ -382,6 +387,11 @@ public class Account {
         return !found;
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public boolean deleteLiquidationStrategy(Handler id) {
         int i = 0;
         boolean found = false;
@@ -394,6 +404,10 @@ public class Account {
         return found;
     }
 
+    /**
+     *
+     * @param office
+     */
     public void doLiquidation(Office office) {
         StringBuilder err = new StringBuilder();
         try {

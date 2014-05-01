@@ -8,6 +8,10 @@ package es.unileon.ulebank.account;
  */
 public class TransactionException extends Exception{
 
+    /**
+     *
+     * @param msg
+     */
     public TransactionException(String msg) {
         super(msg);
     }

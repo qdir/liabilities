@@ -23,10 +23,25 @@ public abstract class Transaction {
     private final Enum<TransactionType> type;
     private DetailedInformation extraInformation;
 
+    /**
+     *
+     * @param amount
+     * @param date
+     * @param subject
+     * @param type
+     */
     public Transaction(double amount, Date date, String subject, Enum<TransactionType> type) {
         this(amount, date, subject,type, new DetailedInformation(""));
     }
 
+    /**
+     *
+     * @param amount
+     * @param date
+     * @param subject
+     * @param type
+     * @param info
+     */
     public Transaction(double amount, Date date, String subject, Enum<TransactionType> type, DetailedInformation info) {
         this.id = TransactionHandlerProvider.getTransactionHandler();
         this.amount = amount;
@@ -79,11 +94,18 @@ public abstract class Transaction {
         return type;
     }
 
-
+    /**
+     *
+     * @param effectiveDate
+     */
     public void setEffectiveDate(Date effectiveDate) {
             this.effectiveDate = effectiveDate;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "Transaction " + "id=" + id + ", amount=" + amount + ", date=" + date + ", effectiveDate=" + effectiveDate + ", subject=" + subject;

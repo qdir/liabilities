@@ -3,16 +3,13 @@
 package es.unileon.ulebank.history;
 
 import es.unileon.ulebank.account.AccountHistory;
-import es.unileon.ulebank.handler.GenericHandler;
-import es.unileon.ulebank.history.GenericTransaction;
-import es.unileon.ulebank.history.Transaction;
-import es.unileon.ulebank.history.TransactionType;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -43,6 +40,7 @@ public class HistoryTest {
 
     /**
      * Test of getTransactionsFrom method, of class AccountHistory.
+     * @throws java.text.ParseException
      */
     @Test
     public void testGetTransactionsFrom() throws ParseException {
@@ -68,6 +66,7 @@ public class HistoryTest {
 
     /**
      * Test of getTransactionsBetween method, of class AccountHistory.
+     * @throws java.text.ParseException
      */
     @Test
     public void testGetTransactionsBetween() throws ParseException {

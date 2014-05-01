@@ -7,12 +7,14 @@ import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.history.TransactionType;
 import es.unileon.ulebank.history.conditions.ConditionTransactionBetweenTwoDates;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -108,12 +110,12 @@ public class ConditionalIteratorTest {
     }
 
     @Test
-    public void testWithRealConditions() {
+    public void testWithRealConditions() throws Exception{
         Iterator<Transaction> it;
         List<Condition<Transaction>> conditions = new ArrayList<>();
         Date low = new Date(1);
         Date high = new Date(5);
-        conditions.add(new ConditionTransactionBetweenTwoDates<Transaction>(low, high, true));
+        conditions.add(new ConditionTransactionBetweenTwoDates<>(low, high, true));
         List<Transaction> elements = new ArrayList<>();
         elements.add(getTransaction(new Date(0)));
         elements.add(getTransaction(new Date(4)));

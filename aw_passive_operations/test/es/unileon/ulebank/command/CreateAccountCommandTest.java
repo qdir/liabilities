@@ -11,12 +11,9 @@ import es.unileon.ulebank.handler.MalformedHandlerException;
 import es.unileon.ulebank.office.Office;
 import es.unileon.ulebank.transacionManager.TransactionManager;
 import java.util.Date;
-import org.junit.After;
-import org.junit.AfterClass;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -30,7 +27,6 @@ public class CreateAccountCommandTest {
 
     @Before
     public void setUp() throws MalformedHandlerException {
-
         this.manager = new TransactionManager();
         this.bank = new Bank(this.manager, new GenericHandler("1234"));
         this.office = new Office(new GenericHandler("1234"), this.bank);
@@ -38,11 +34,10 @@ public class CreateAccountCommandTest {
 
     /**
      * Test of execute method, of class CreateAccountCommand.
+     * @throws es.unileon.ulebank.handler.MalformedHandlerException
      */
     @Test
     public void testExecute() throws MalformedHandlerException {
-
-        System.out.println("execute");
 
         CreateAccountCommand command = new CreateAccountCommand(this.office, this.bank, new Date(System.currentTimeMillis()), new GenericHandler(""));
         command.execute();

@@ -17,10 +17,10 @@ public class ConditionFactory<T extends Transaction> {
     private static ConditionFactory instance;
     private static Pattern numberPattern;
 
-    private ConditionFactory() {
-        numberPattern = Pattern.compile("^[0-9]*$");
-    }
-
+    /**
+     *
+     * @return
+     */
     public static ConditionFactory getInstance() {
         if (instance == null) {
             instance = new ConditionFactory();
@@ -28,15 +28,25 @@ public class ConditionFactory<T extends Transaction> {
         return instance;
     }
 
+    private ConditionFactory() {
+        numberPattern = Pattern.compile("^[0-9]*$");
+    }
+
+    /**
+     *
+     * @param condition
+     * @param args
+     * @return
+     * @throws WrongArgsException
+     */
     public Condition<T> getCondition(String condition, String[] args) throws WrongArgsException {
         Condition<T> result = null;
-        boolean isNegated = false;
         if (condition.startsWith("date_")) {
-            result = this.getDateCondition(condition.substring(condition.indexOf("_") + 1), args);
+            result = this.getDateCondition(condition.substring(condition.indexOf('_') + 1), args);
         } else if (condition.startsWith("amount_")) {
-            result = this.getAmountCondition(condition.substring(condition.indexOf("_") + 1), args);
+            result = this.getAmountCondition(condition.substring(condition.indexOf('_') + 1), args);
         } else if (condition.startsWith("subject_")) {
-            result = this.getSubjectCondition(condition.substring(condition.indexOf("_") + 1), args);
+            result = this.getSubjectCondition(condition.substring(condition.indexOf('_') + 1), args);
         }
         return result;
     }

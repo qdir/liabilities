@@ -12,10 +12,15 @@ import java.util.regex.Pattern;
  * @author runix
  */
 public class BankHandler implements Handler {
-
-    private final String number;
     private static final int BANK_NUMBER_DIGITS = 0b100;
 
+    private final String number;
+
+    /**
+     *
+     * @param number
+     * @throws MalformedHandlerException
+     */
     public BankHandler(String number) throws MalformedHandlerException {
         Pattern numberPattern = Pattern.compile("^[0-9]*$");
         Matcher matcher = numberPattern.matcher(number);
@@ -32,6 +37,11 @@ public class BankHandler implements Handler {
         return this.toString().compareTo(another.toString());
     }
 
+    /**
+     *
+     * @return
+     */
+    @Override
     public String toString() {
         return this.number;
     }

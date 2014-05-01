@@ -3,9 +3,9 @@
 
 package es.unileon.ulebank.client;
 
-import es.unileon.ulebank.utils.DniLetters;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
+import es.unileon.ulebank.utils.DniLetters;
 
 /**
  * Identifies a person with the dni
@@ -41,6 +41,13 @@ public class PersonHandler implements Handler{
         }
     }
     
+    /**
+     *
+     * @param foreingLetter
+     * @param dni
+     * @param letter
+     * @throws MalformedHandlerException
+     */
     public PersonHandler (char foreingLetter, int dni, char letter) throws MalformedHandlerException{
         foreingLetter = Character.toUpperCase(foreingLetter);
         letter = Character.toUpperCase(letter);
@@ -72,6 +79,10 @@ public class PersonHandler implements Handler{
         return this.toString().compareTo(another.toString());
     }
     
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString(){
         String result="";

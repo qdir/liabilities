@@ -15,8 +15,11 @@ public interface Handler {
      * @return (0 if are equals, != 0 otherwise )
      */
     public int compareTo(Handler another);
-    
-    
+
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString();
 }

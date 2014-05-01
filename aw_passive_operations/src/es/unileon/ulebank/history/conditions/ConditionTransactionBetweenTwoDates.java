@@ -9,6 +9,7 @@ import java.util.Date;
 /**
  *
  * @author runix
+ * @param <T>
  */
 public class ConditionTransactionBetweenTwoDates<T extends Transaction> implements Condition<T> {
 
@@ -16,6 +17,13 @@ public class ConditionTransactionBetweenTwoDates<T extends Transaction> implemen
     private final long timestampHigher;
     private final boolean isValid;
 
+    /**
+     *
+     * @param less
+     * @param high
+     * @param isValid
+     * @throws WrongArgsException
+     */
     public ConditionTransactionBetweenTwoDates(Date less, Date high, boolean isValid) throws WrongArgsException {
         this.timestampLess = less.getTime();
         this.timestampHigher = high.getTime();

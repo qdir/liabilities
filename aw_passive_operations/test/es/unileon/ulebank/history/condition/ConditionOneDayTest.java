@@ -2,14 +2,14 @@
  group.*/
 package es.unileon.ulebank.history.condition;
 
-import es.unileon.ulebank.history.conditions.ConditionOneDay;
 import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.history.TransactionType;
+import es.unileon.ulebank.history.conditions.ConditionOneDay;
 import java.util.Date;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -17,13 +17,13 @@ import static org.junit.Assert.*;
  */
 public class ConditionOneDayTest {
 
+    private static final long DAY_TIMESTAMP = 1000 * 24 * 60 * 60;
+
     private ConditionOneDay<Transaction> oneDay;
 
     private ConditionOneDay<Transaction> oneDayExclusive;
 
     private Date date;
-
-    private static final long DAY_TIMESTAMP = 1000 * 24 * 60 * 60;
 
     @Before
     public void setup() {

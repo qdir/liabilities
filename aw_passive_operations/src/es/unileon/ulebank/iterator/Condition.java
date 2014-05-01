@@ -7,6 +7,7 @@ package es.unileon.ulebank.iterator;
  * if a class(T) can be added or not.
  *
  * @author runix
+ * @param <T>
  */
 public interface Condition<T> {
 

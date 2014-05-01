@@ -12,7 +12,7 @@ public class GenericHandler implements Handler {
     /**
      * Generic id
      */
-    private String id;
+    private final String id;
 
     /**
      * Create a new Generic Handler
@@ -29,6 +29,10 @@ public class GenericHandler implements Handler {
         return this.id.compareTo(another.toString());
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return this.id;

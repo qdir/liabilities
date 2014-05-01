@@ -3,8 +3,8 @@
 package es.unileon.ulebank.office;
 
 import es.unileon.ulebank.account.Account;
-import es.unileon.ulebank.account.TransactionException;
 import es.unileon.ulebank.account.AccountHandler;
+import es.unileon.ulebank.account.TransactionException;
 import es.unileon.ulebank.bank.Bank;
 import es.unileon.ulebank.client.Client;
 import es.unileon.ulebank.handler.Handler;
@@ -20,15 +20,24 @@ import org.apache.log4j.Logger;
  * @author runix
  */
 public class Office {
+    private static final Logger LOG = Logger.getLogger(Account.class.getName());
+
+    /**
+     *
+     */
+    public static final long MAX_ACCOUNT_NUMBER = 1000000000l - 1;
 
     private final List<Account> accounts;
     private final List<Client> clients;
-    private Handler id;
+    private final Handler id;
     private final Bank bank;
-    private static final Logger LOG = Logger.getLogger(Account.class.getName());
     private long nextAccountNumber;
-    public static final long MAX_ACCOUNT_NUMBER = 1000000000l - 1;
 
+    /**
+     *
+     * @param id
+     * @param bank
+     */
     public Office(Handler id, Bank bank) {
         this.accounts = new ArrayList<>();
         this.clients = new ArrayList<>();
@@ -37,6 +46,11 @@ public class Office {
         this.nextAccountNumber = 0;
     }
 
+    /**
+     *
+     * @param account
+     * @return
+     */
     public boolean addAccount(Account account) {
         if (account != null) {
             int i = 0;
@@ -54,6 +68,11 @@ public class Office {
         return false;
     }
 
+    /**
+     *
+     * @param client
+     * @return
+     */
     public synchronized boolean addClient(Client client) {
         if (client != null) {
             int i = 0;
@@ -69,6 +88,11 @@ public class Office {
         return false;
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public synchronized boolean deleteClient(Handler id) {
         int i = 0;
         boolean found = false;
@@ -83,6 +107,11 @@ public class Office {
         return found;
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public synchronized boolean deleteAccount(Handler id) {
         int i = 0;
         boolean found = false;
@@ -96,14 +125,29 @@ public class Office {
         return found;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Client> getClients() {
         return new ArrayList<>(this.clients);
     }
 
+    /**
+     *
+     * @return
+     */
     public Handler getID() {
         return this.id;
     }
 
+    /**
+     *
+     * @param t
+     * @param destine
+     * @throws TransactionException
+     * @throws MalformedHandlerException
+     */
     public void doTransaction(Transaction t, Handler destine) throws TransactionException, MalformedHandlerException {
         boolean finish = false;
         StringBuilder error = new StringBuilder();
@@ -135,6 +179,10 @@ public class Office {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public synchronized String getNewAccountNumber() {
         String accountNumber;
         if (this.nextAccountNumber == MAX_ACCOUNT_NUMBER) {
@@ -145,6 +193,10 @@ public class Office {
         return accountNumber;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Account> getAccounts() {
         return this.accounts;
     }

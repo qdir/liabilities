@@ -6,19 +6,16 @@ package es.unileon.ulebank.command;
 
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
  * @author Tania Pérez
  */
 public class CommandTest {
-    
-    public CommandTest() {
-    }
     
     @BeforeClass
     public static void setUpClass() {
@@ -27,6 +24,9 @@ public class CommandTest {
     @AfterClass
     public static void tearDownClass() {
     }
+    
+        public CommandTest() {
+        }
     
     @Before
     public void setUp() {

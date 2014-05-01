@@ -19,10 +19,11 @@ public final class TransactionHandlerProvider {
     private static String lastTimestamp = "";
     private static long currentId = 0;
     
-    private TransactionHandlerProvider() {
-    }
-
-    public synchronized static Handler getTransactionHandler() {
+    /**
+     *
+     * @return
+     */
+    public static synchronized Handler getTransactionHandler() {
         String timestamp = format.format(new Date());
         if (timestamp.compareTo(TransactionHandlerProvider.lastTimestamp) != 0) {
             TransactionHandlerProvider.lastTimestamp = timestamp;
@@ -30,5 +31,8 @@ public final class TransactionHandlerProvider {
         }
 
         return new TransactionHandler(++TransactionHandlerProvider.currentId, TransactionHandlerProvider.lastTimestamp);
+    }
+
+    private TransactionHandlerProvider() {
     }
 }

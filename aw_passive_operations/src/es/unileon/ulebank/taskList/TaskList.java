@@ -21,6 +21,9 @@ public class TaskList {
     private final Date date;
     private final Date updatedTime;
     
+    /**
+     *
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
         this.tasksDone = new ArrayList<>();
@@ -29,6 +32,11 @@ public class TaskList {
         this.updatedTime = new Date(System.currentTimeMillis());
     }
     
+    /**
+     *
+     * @param command
+     * @return
+     */
     public synchronized boolean addTask(Command command) {
         boolean add = true;
         if (command != null) {
@@ -43,18 +51,35 @@ public class TaskList {
         return add;
     }
     
+    /**
+     *
+     * @return
+     */
     public Date getDate() {
         return this.date;
     }
     
+    /**
+     *
+     * @return
+     */
     public List<Command> getTaskList() {
         return new ArrayList<>(this.tasks);
     }
     
+    /**
+     *
+     * @return
+     */
     public List<Command> getTasksListDone() {
         return new ArrayList<>(this.tasksDone);
     }
     
+    /**
+     *
+     * @param command
+     * @return
+     */
     public boolean deleteCommand(Command command) {
         boolean delete = false;
         if (command != null) {
@@ -69,6 +94,10 @@ public class TaskList {
         return delete;
     }
     
+    /**
+     *
+     * @param id
+     */
     public void undoCommand(Handler id) {
         for (int i = 0; i < this.tasksDone.size(); i++) {
             Command c = this.tasksDone.get(i);
@@ -78,7 +107,9 @@ public class TaskList {
         }
     }
 
-    
+    /**
+     *
+     */
     public void executeTasks() {
         int i = 0;
         while (this.tasks.get(i).getEffectiveDate().getTime() <= this.date.getTime()) {
@@ -91,17 +122,28 @@ public class TaskList {
         
         this.sort();;
     }
-    
-        
+
+    /**
+     *
+     * @param timestamp
+     */
     public void setTime(long timestamp) {
         this.date.setTime(timestamp);
         this.updatedTime.setTime(System.currentTimeMillis());
     }
     
+    /**
+     *
+     * @param date
+     */
     public void setTime(Date date) {
         this.setTime(date.getTime());
     }
     
+    /**
+     *
+     * @param days
+     */
     public void forwardDays(int days) {
         if (days > 0) {
             //days * hours* minutes* seconds * milliseconds
@@ -112,6 +154,10 @@ public class TaskList {
         }
     }
     
+    /**
+     *
+     * @param days
+     */
     public void backwardDays(int days) {
         if (days > 0) {
             long timeToForward = (long) (-days) * 24 * 60 * 60 * 1000;
@@ -125,6 +171,9 @@ public class TaskList {
         Collections.sort(this.tasksDone, this.comparator);
     }
     
+    /**
+     *
+     */
     public void updateTime() {
         long timestamp = this.updatedTime.getTime();
         this.updatedTime.setTime(System.currentTimeMillis());

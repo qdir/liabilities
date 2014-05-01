@@ -4,7 +4,6 @@ package es.unileon.ulebank.bank;
 
 import es.unileon.ulebank.account.Account;
 import es.unileon.ulebank.account.TransactionException;
-import es.unileon.ulebank.bank.Bank;
 import es.unileon.ulebank.handler.GenericHandler;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
@@ -14,9 +13,12 @@ import es.unileon.ulebank.history.TransactionType;
 import es.unileon.ulebank.office.Office;
 import es.unileon.ulebank.transacionManager.TransactionManager;
 import java.util.Date;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -122,6 +124,7 @@ public class BankTest {
 
     /**
      * Test of doTransaction method, of class Bank.
+     * @throws es.unileon.ulebank.handler.MalformedHandlerException
      */
     @Test
     public void testDoTransaction() throws TransactionException, MalformedHandlerException {
@@ -143,6 +146,7 @@ public class BankTest {
     /**
      * Test throw of TransactionException in doTransaction method, of class
      * Bank.
+     * @throws es.unileon.ulebank.handler.MalformedHandlerException
      */
     @Test(expected = TransactionException.class)
     public void testDoTransactionNullTransaction() throws TransactionException, MalformedHandlerException {
@@ -155,6 +159,7 @@ public class BankTest {
     /**
      * Test throw of TransactionException in doTransaction method, of class
      * Bank.
+     * @throws es.unileon.ulebank.handler.MalformedHandlerException
      */
     @Test(expected = TransactionException.class)
     public void testDoTransactionNullDestination() throws TransactionException, MalformedHandlerException {
@@ -172,6 +177,7 @@ public class BankTest {
     /**
      * Test throw of TransactionException in doTransaction method, of class
      * Bank.
+     * @throws es.unileon.ulebank.handler.MalformedHandlerException
      */
     @Test(expected = TransactionException.class)
     public void testDoTransactionNotFoundOffice() throws TransactionException, MalformedHandlerException {

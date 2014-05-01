@@ -3,9 +3,9 @@
 
 package es.unileon.ulebank.client;
 
-import java.util.ArrayList;
 import es.unileon.ulebank.account.Account;
 import es.unileon.ulebank.handler.Handler;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
@@ -31,7 +31,7 @@ public class Client {
      * @param clientHandler 
      */
     public Client(Handler clientHandler){
-        accounts = new ArrayList<Account>();
+        accounts = new ArrayList<>();
         this.id=clientHandler;
     }
     

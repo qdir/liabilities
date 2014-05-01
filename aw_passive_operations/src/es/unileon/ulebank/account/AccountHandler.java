@@ -13,22 +13,6 @@ import java.util.regex.Pattern;
  * @author runix
  */
 public class AccountHandler implements Handler {
-
-    /**
-     * The account number, the number of digits of this number is given by {
-     *
-     * @see ACCOUNT_NUMBER_LENGHT}
-     */
-    private final String accountNumber;
-
-    /**
-     * The office identifier
-     */
-    private final Handler officeHandler;
-    /**
-     * The bank identifier
-     */
-    private final Handler bankHandler;
     /**
      * the number of digits ( account number )
      */
@@ -45,77 +29,11 @@ public class AccountHandler implements Handler {
      * number of fields
      */
     private static final int NUMBER_OF_FIELDS = 0b100;
-    /**
-     * The control digits
-     */
-    private final String dc;
 
     /**
      * Separator of the fields
      */
     private final static String SEPARATOR = "-";
-
-    /**
-     * Create a new AccountHandler
-     *
-     * @param office ( the office id )
-     * @param bank ( the bank id )
-     * @param accountNumber ( the account number )
-     * @author runix
-     * @throws MalformedHandlerException ( If the account number, office
-     * handler, or bank handler aren't correct )
-     */
-    public AccountHandler(Handler office, Handler bank, String accountNumber) throws MalformedHandlerException {
-        StringBuilder errors = new StringBuilder();
-        Pattern numberPattern = Pattern.compile("^[0-9]*$");
-        if (office != null && office.toString() != null && bank != null && bank.toString() != null && accountNumber != null) {
-            Matcher matcher = numberPattern.matcher(accountNumber);
-            if (!matcher.find()) {
-                errors.append("The accountNumber can only have numbers\n");
-            }
-
-            if (accountNumber.length() != ACCOUNT_NUMBER_LENGTH) {
-                errors.append("The accountNumber length must be " + ACCOUNT_NUMBER_LENGTH + "\n");
-            }
-
-            matcher = numberPattern.matcher(office.toString());
-            if (!matcher.find()) {
-                errors.append("The office id can only have numbers\n");
-            }
-            if (office.toString().length() != OFFICE_NUMBER_LENGTH) {
-                errors.append("The office id length must be " + OFFICE_NUMBER_LENGTH + " \n");
-            }
-
-            matcher = numberPattern.matcher(bank.toString());
-            if (!matcher.find()) {
-                errors.append("The bank id can only have numbers\n");
-            }
-
-            if (bank.toString().length() != BANK_NUMBER_LENGTH) {
-                errors.append("The bank id length must be " + BANK_NUMBER_LENGTH + " \n");
-            }
-        } else {
-            errors.append("Error, there are null fields or the toString method return a null String");
-        }
-        if (errors.length() > 1) {
-            throw new MalformedHandlerException(errors.toString());
-        }
-        this.officeHandler = office;
-        this.bankHandler = bank;
-        this.accountNumber = accountNumber;
-        this.dc = calculateDC(office.toString(), bank.toString(), accountNumber + "");
-    }
-
-    public AccountHandler(Handler another) throws MalformedHandlerException {
-        this(getField(another, 1, SEPARATOR), getField(another, 0, SEPARATOR), getField(another, 3, SEPARATOR).toString());
-        StringBuilder error = new StringBuilder();
-        if (!getField(another, 2, SEPARATOR).toString().equals(this.dc)) {
-            error.append("Wrong control digits");
-        }
-        if (error.length() > 0) {
-            throw new MalformedHandlerException(error.toString());
-        }
-    }
 
     private static Handler getField(Handler another, int number, String separator) throws MalformedHandlerException {
 
@@ -179,22 +97,6 @@ public class AccountHandler implements Handler {
         return String.valueOf(calculateDigit("00" + bank.toString() + office.toString())) + String.valueOf(calculateDigit(accountNumber + ""));
     }
 
-    public Handler getBankHandler() {
-        return this.bankHandler;
-    }
-
-    public Handler getOfficeHandler() {
-        return this.officeHandler;
-    }
-
-    public String getNumber() {
-        return this.accountNumber;
-    }
-
-    public String getDC() {
-        return this.dc;
-    }
-
     /**
      * Calculate the control digit. The length of the string must be 10
      *
@@ -219,11 +121,134 @@ public class AccountHandler implements Handler {
         return digit;
     }
 
+    /**
+     * The account number, the number of digits of this number is given by {
+     *
+     * @see ACCOUNT_NUMBER_LENGHT}
+     */
+    private final String accountNumber;
+
+    /**
+     * The office identifier
+     */
+    private final Handler officeHandler;
+    /**
+     * The bank identifier
+     */
+    private final Handler bankHandler;
+    /**
+     * The control digits
+     */
+    private final String dc;
+
+    /**
+     * Create a new AccountHandler
+     *
+     * @param office ( the office id )
+     * @param bank ( the bank id )
+     * @param accountNumber ( the account number )
+     * @author runix
+     * @throws MalformedHandlerException ( If the account number, office
+     * handler, or bank handler aren't correct )
+     */
+    public AccountHandler(Handler office, Handler bank, String accountNumber) throws MalformedHandlerException {
+        StringBuilder errors = new StringBuilder();
+        Pattern numberPattern = Pattern.compile("^[0-9]*$");
+        if (office != null && office.toString() != null && bank != null && bank.toString() != null && accountNumber != null) {
+            Matcher matcher = numberPattern.matcher(accountNumber);
+            if (!matcher.find()) {
+                errors.append("The accountNumber can only have numbers\n");
+            }
+            
+            if (accountNumber.length() != ACCOUNT_NUMBER_LENGTH) {
+                errors.append("The accountNumber length must be " + ACCOUNT_NUMBER_LENGTH + "\n");
+            }
+            
+            matcher = numberPattern.matcher(office.toString());
+            if (!matcher.find()) {
+                errors.append("The office id can only have numbers\n");
+            }
+            if (office.toString().length() != OFFICE_NUMBER_LENGTH) {
+                errors.append("The office id length must be " + OFFICE_NUMBER_LENGTH + " \n");
+            }
+            
+            matcher = numberPattern.matcher(bank.toString());
+            if (!matcher.find()) {
+                errors.append("The bank id can only have numbers\n");
+            }
+            
+            if (bank.toString().length() != BANK_NUMBER_LENGTH) {
+                errors.append("The bank id length must be " + BANK_NUMBER_LENGTH + " \n");
+            }
+        } else {
+            errors.append("Error, there are null fields or the toString method return a null String");
+        }
+        if (errors.length() > 1) {
+            throw new MalformedHandlerException(errors.toString());
+        }
+        this.officeHandler = office;
+        this.bankHandler = bank;
+        this.accountNumber = accountNumber;
+        this.dc = calculateDC(office.toString(), bank.toString(), accountNumber + "");
+    }
+
+    /**
+     *
+     * @param another
+     * @throws MalformedHandlerException
+     */
+    public AccountHandler(Handler another) throws MalformedHandlerException {
+        this(getField(another, 1, SEPARATOR), getField(another, 0, SEPARATOR), getField(another, 3, SEPARATOR).toString());
+        StringBuilder error = new StringBuilder();
+        if (!getField(another, 2, SEPARATOR).toString().equals(this.dc)) {
+            error.append("Wrong control digits");
+        }
+        if (error.length() > 0) {
+            throw new MalformedHandlerException(error.toString());
+        }
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Handler getBankHandler() {
+        return this.bankHandler;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Handler getOfficeHandler() {
+        return this.officeHandler;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getNumber() {
+        return this.accountNumber;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getDC() {
+        return this.dc;
+    }
+
     @Override
     public int compareTo(Handler another) {
         return this.toString().compareTo(another.toString());
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return bankHandler.toString() + SEPARATOR + officeHandler.toString() + SEPARATOR + dc + SEPARATOR + accountNumber;

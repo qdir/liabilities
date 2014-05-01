@@ -39,6 +39,10 @@ public class EnterpriseHandler implements Handler{
         return toString().compareTo(another.toString());
     }
     
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString(){
         return letter + Integer.toString(cif);

@@ -2,15 +2,15 @@
  group.*/
 package es.unileon.ulebank.history.condition;
 
-import es.unileon.ulebank.history.conditions.ConditionTransactionBetweenTwoDates;
 import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.history.TransactionType;
+import es.unileon.ulebank.history.conditions.ConditionTransactionBetweenTwoDates;
 import java.util.Date;
-import org.junit.After;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -27,7 +27,7 @@ public class ConditionalTransactionBetweenTwoDays {
     private Date high;
 
     @Before
-    public void setup() {
+    public void setup() throws Exception{
         this.low = new Date(DAY_TIMESTAMP * 10 - DAY_TIMESTAMP / 2);
         this.high = new Date(DAY_TIMESTAMP * 20 + DAY_TIMESTAMP / 2);
         this.conditionBetween = new ConditionTransactionBetweenTwoDates<>(low, high, true);

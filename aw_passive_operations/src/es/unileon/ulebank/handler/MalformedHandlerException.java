@@ -9,6 +9,10 @@ package es.unileon.ulebank.handler;
  */
 public class MalformedHandlerException extends Exception{
     
+    /**
+     *
+     * @param msg
+     */
     public MalformedHandlerException(String msg) {
         super(msg);
     }

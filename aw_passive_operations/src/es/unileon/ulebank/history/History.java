@@ -4,9 +4,9 @@ import es.unileon.ulebank.history.conditions.ConditionFactory;
 import es.unileon.ulebank.history.conditions.WrongArgsException;
 import es.unileon.ulebank.iterator.Condition;
 import es.unileon.ulebank.iterator.ConditionalIterator;
-import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -16,14 +16,36 @@ import java.util.List;
  */
 public abstract class History<T extends Transaction> {
 
+    /**
+     * Delete the spaces in the iterator args
+     *
+     * @param args ( arguments to trim )
+     *
+     * @return
+     */
+    private static String[] correctArgs(String[] args) {
+        for (int i = 0; i < args.length; i++) {
+            args[i] = args[i].trim();
+        }
+        return args;
+    }
+
     private final Collection<T> transactions;
     private final ConditionFactory<T> conditionFactory;
 
+    /**
+     *
+     */
     public History() {
         this.transactions = new ArrayList();
         this.conditionFactory = ConditionFactory.getInstance();
     }
 
+    /**
+     *
+     * @param transaction
+     * @return
+     */
     public boolean addTransaction(T transaction) {
         return this.transactions.add(transaction);
     }
@@ -85,19 +107,10 @@ public abstract class History<T extends Transaction> {
     }
 
     /**
-     * Delete the spaces in the iterator args
      *
-     * @param args ( arguments to trim )
-     *
+     * @param t
      * @return
      */
-    private static String[] correctArgs(String[] args) {
-        for (int i = 0; i < args.length; i++) {
-            args[i] = args[i].trim();
-        }
-        return args;
-    }
-
     public boolean remove(T t) {
         return this.transactions.remove(t);
     }

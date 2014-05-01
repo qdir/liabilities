@@ -2,7 +2,7 @@
  group.*/
 package es.unileon.ulebank.command;
 
-import es.unileon.ulebank.handler.*;
+import es.unileon.ulebank.handler.Handler;
 import java.util.Date;
 
 /**
@@ -11,13 +11,30 @@ import java.util.Date;
  */
 public interface Command {
 
+    /**
+     *
+     * @return
+     */
     public Date getEffectiveDate();
 
+    /**
+     *
+     * @return
+     */
     public Handler getID();
 
+    /**
+     *
+     */
     public void execute();
 
+    /**
+     *
+     */
     public void undo();
 
+    /**
+     *
+     */
     public void redo();
 }

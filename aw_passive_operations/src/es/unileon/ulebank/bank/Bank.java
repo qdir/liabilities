@@ -3,8 +3,8 @@
 package es.unileon.ulebank.bank;
 
 import es.unileon.ulebank.account.Account;
-import es.unileon.ulebank.account.TransactionException;
 import es.unileon.ulebank.account.AccountHandler;
+import es.unileon.ulebank.account.TransactionException;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
 import es.unileon.ulebank.history.Transaction;
@@ -19,22 +19,37 @@ import org.apache.log4j.Logger;
  * @author runix
  */
 public class Bank {
-
-    private final List<Office> offices;
-    private Handler bankID;
-    private final TransactionManager manager;
     private static final Logger LOG = Logger.getLogger(Account.class.getName());
 
+    private final List<Office> offices;
+    private final Handler bankID;
+    private final TransactionManager manager;
+
+    /**
+     *
+     * @param manager
+     * @param bankID
+     * @throws MalformedHandlerException
+     */
     public Bank(TransactionManager manager, Handler bankID) throws MalformedHandlerException {
         this.bankID = new BankHandler(bankID.toString());
         this.offices = new ArrayList<>();
         this.manager = manager;
     }
 
+    /**
+     *
+     * @return
+     */
     public Handler getID() {
         return this.bankID;
     }
 
+    /**
+     *
+     * @param office
+     * @return
+     */
     public boolean addOffice(Office office) {
         if (office != null) {
             for (int i = 0; i < offices.size(); ++i) {
@@ -47,6 +62,11 @@ public class Bank {
         return false;
     }
 
+    /**
+     *
+     * @param office
+     * @return
+     */
     public boolean removeOffice(Handler office) {
         boolean removed = false;
         if (office != null) {
@@ -60,6 +80,13 @@ public class Bank {
         return removed;
     }
 
+    /**
+     *
+     * @param t
+     * @param destine
+     * @throws MalformedHandlerException
+     * @throws TransactionException
+     */
     public void doTransaction(Transaction t, Handler destine) throws MalformedHandlerException, TransactionException {
         StringBuilder error = new StringBuilder();
         if (t != null && destine != null) {

@@ -13,9 +13,11 @@ import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.history.TransactionType;
 import es.unileon.ulebank.office.Office;
 import java.util.Date;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -92,6 +94,7 @@ public class TransactionManagerTest {
     
      /**
      * Test of deleteBank method, of class TransactionManager.
+     * @throws es.unileon.ulebank.handler.MalformedHandlerException
      */
     @Test
     public void testDeleteBankNotFoundBank() throws MalformedHandlerException {
@@ -106,6 +109,7 @@ public class TransactionManagerTest {
     
     /**
      * Test of doTransaction method, of class TransactionManager.
+     * @throws java.lang.Exception
      */
     @Test
     public void testDoTransaction() throws Exception {
@@ -130,6 +134,7 @@ public class TransactionManagerTest {
     
     /**
     * Test throw of TransactionException in doTransaction method, of class TransactionManager.
+     * @throws es.unileon.ulebank.handler.MalformedHandlerException
     */
     @Test (expected = TransactionException.class)
     public void testDoTransactionNullTransaction() throws TransactionException, MalformedHandlerException {
@@ -141,6 +146,7 @@ public class TransactionManagerTest {
     
     /**
     * Test throw of TransactionException in doTransaction method, of class TransactionManager.
+     * @throws es.unileon.ulebank.handler.MalformedHandlerException
     */
     @Test (expected = TransactionException.class)
     public void testDoTransactionBankNotFound() throws TransactionException, MalformedHandlerException {

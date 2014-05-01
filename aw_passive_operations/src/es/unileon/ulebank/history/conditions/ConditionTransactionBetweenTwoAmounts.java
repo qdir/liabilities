@@ -16,6 +16,13 @@ public class ConditionTransactionBetweenTwoAmounts<T extends Transaction> implem
     private long high;
     private boolean exclusive;
 
+    /**
+     *
+     * @param low
+     * @param high
+     * @param isValid
+     * @throws WrongArgsException
+     */
     public ConditionTransactionBetweenTwoAmounts(long low, long high, boolean isValid) throws WrongArgsException {
         if (low > high) {
             throw new WrongArgsException("Low param is higher than high param\n");

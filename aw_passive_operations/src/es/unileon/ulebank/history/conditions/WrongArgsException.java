@@ -9,6 +9,10 @@ package es.unileon.ulebank.history.conditions;
  */
 public class WrongArgsException extends Exception{
     
+    /**
+     *
+     * @param msg
+     */
     public WrongArgsException(String msg) {
         super(msg);
     }

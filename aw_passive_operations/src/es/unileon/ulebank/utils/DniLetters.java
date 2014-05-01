@@ -15,20 +15,6 @@ public class DniLetters {
     private static DniLetters instance = null;
 
     /**
-     * dni letters table
-     */
-    private char[] dniLetters;
-
-    /**
-     * Constructos that create the dni letters table.
-     */
-    private DniLetters() {
-
-        char[] dniLetters = {'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'};
-        this.dniLetters = dniLetters;
-    }
-
-    /**
      * Gets the unique instance of the class, if it doesn't exists, the instance
      * is created
      *
@@ -39,6 +25,20 @@ public class DniLetters {
             instance = new DniLetters();
         }
         return instance;
+    }
+
+    /**
+     * dni letters table
+     */
+    private final char[] dniLetters;
+
+    /**
+     * Constructos that create the dni letters table.
+     */
+    private DniLetters() {
+
+        char[] dniLetters = {'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'};
+        this.dniLetters = dniLetters;
     }
 
     /**

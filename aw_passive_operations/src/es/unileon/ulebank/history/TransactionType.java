@@ -5,5 +5,24 @@ package es.unileon.ulebank.history;
  * @author roobre
  */
 public enum TransactionType {
-    CHARGE, PAYMENT, PAYROLL, SALARY
+
+    /**
+     *
+     */
+    CHARGE,
+
+    /**
+     *
+     */
+    PAYMENT,
+
+    /**
+     *
+     */
+    PAYROLL,
+
+    /**
+     *
+     */
+    SALARY
 }

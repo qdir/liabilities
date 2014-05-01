@@ -2,8 +2,8 @@
  group.*/
 package es.unileon.ulebank.transacionManager;
 
-import es.unileon.ulebank.account.TransactionException;
 import es.unileon.ulebank.account.AccountHandler;
+import es.unileon.ulebank.account.TransactionException;
 import es.unileon.ulebank.bank.Bank;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
@@ -19,10 +19,18 @@ public class TransactionManager {
 
     private final List<Bank> banks;
 
+    /**
+     *
+     */
     public TransactionManager() {
         this.banks = new ArrayList<>();
     }
 
+    /**
+     *
+     * @param bank
+     * @return
+     */
     public boolean addBank(Bank bank) {
         boolean repeated = false;
         if (bank != null) {
@@ -37,6 +45,11 @@ public class TransactionManager {
         return !repeated && this.banks.add(bank);
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public boolean deleteBank(Handler id) {
         boolean deleted = false;
         for (int i = 0; i < banks.size() && !deleted; i++) {
@@ -48,6 +61,13 @@ public class TransactionManager {
         return deleted;
     }
 
+    /**
+     *
+     * @param t
+     * @param destine
+     * @throws MalformedHandlerException
+     * @throws TransactionException
+     */
     public void doTransaction(Transaction t, Handler destine) throws MalformedHandlerException, TransactionException {
         StringBuilder error = new StringBuilder();
         if (t != null && destine != null) {

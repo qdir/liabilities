@@ -3,8 +3,6 @@
 
 package es.unileon.ulebank.client;
 
-import es.unileon.ulebank.client.Client;
-import es.unileon.ulebank.client.EnterpriseHandler;
 import es.unileon.ulebank.handler.Handler;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -38,7 +36,7 @@ public class Enterprise extends Client{
      */
     public Enterprise(char cifLetter, int cifNumber) {
         super(new EnterpriseHandler(cifLetter, cifNumber));
-        authorizedPersons = new ArrayList<Person>();
+        authorizedPersons = new ArrayList<>();
     }
     
     /**
@@ -50,7 +48,7 @@ public class Enterprise extends Client{
      */
     public Enterprise(char cifLetter, int cifNumber, String enterpriseName, Address address) {
         super(new EnterpriseHandler(cifLetter, cifNumber));
-        authorizedPersons = new ArrayList<Person>();
+        authorizedPersons = new ArrayList<>();
         this.enterpriseName=enterpriseName;
         this.address = address;
     }

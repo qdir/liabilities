@@ -12,15 +12,16 @@ import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.history.TransactionType;
 import es.unileon.ulebank.office.Office;
 import es.unileon.ulebank.transacionManager.TransactionManager;
-import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
 public class AccountTest {
+    private static final double EPSILON = 0.00001;
 
     private Account commercialAccount;
     private Office office;
@@ -33,7 +34,6 @@ public class AccountTest {
     private Handler titularHandler2;
     private Handler authorizedHandler1;
     private Handler authorizedHandler2;
-    private static final double EPSILON = 0.00001;
 
     private TransactionManager manager;
 

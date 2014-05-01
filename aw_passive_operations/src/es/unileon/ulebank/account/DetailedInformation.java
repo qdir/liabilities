@@ -11,15 +11,26 @@ public class DetailedInformation {
     private final StringBuffer info;
     private boolean nonEditable;
 
+    /**
+     *
+     * @param information
+     */
     public DetailedInformation(String information) {
         this.info = new StringBuffer(information);
         this.nonEditable = false;
     }
 
+    /**
+     *
+     */
     public DetailedInformation() {
         this("");
     }
 
+    /**
+     *
+     * @param information
+     */
     public void appendInformation(String information) {
         if (!this.nonEditable) {
             this.info.append(information);
@@ -29,14 +40,25 @@ public class DetailedInformation {
         }
     }
 
+    /**
+     *
+     * @param information
+     */
     public void appendInformaton(StringBuffer information) {
         this.appendInformation(information.toString());
     }
 
+    /**
+     *
+     */
     public void doFinal() {
         this.nonEditable = true;
     }
     
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return this.info.toString();

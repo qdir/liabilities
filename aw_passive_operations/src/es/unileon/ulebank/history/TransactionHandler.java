@@ -11,11 +11,20 @@ public class TransactionHandler implements Handler {
     private final long id;
     private final String timestamp;
 
+    /**
+     *
+     * @param id
+     * @param timestamp
+     */
     public TransactionHandler(long id, String timestamp) {
         this.id = id;
         this.timestamp = timestamp;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return timestamp + "." + Long.toString(id);

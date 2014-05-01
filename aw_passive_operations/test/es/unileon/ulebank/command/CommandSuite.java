@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package src.es.unileon.ulebank.command;
+package es.unileon.ulebank.command;
 
 import org.junit.After;
 import org.junit.AfterClass;

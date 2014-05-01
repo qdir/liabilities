@@ -4,8 +4,8 @@ package es.unileon.ulebank.iterator;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * This iterator allow to iterate for a list of elements and include those that

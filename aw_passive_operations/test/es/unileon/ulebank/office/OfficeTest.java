@@ -13,9 +13,11 @@ import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.history.TransactionType;
 import es.unileon.ulebank.transacionManager.TransactionManager;
 import java.util.Date;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -76,6 +78,7 @@ public class OfficeTest {
 
     /**
      * Test of doTransaction method, of class Office.
+     * @throws es.unileon.ulebank.handler.MalformedHandlerException
      */
     @Test
     public void testDoTransaction() throws TransactionException, MalformedHandlerException {
@@ -96,6 +99,7 @@ public class OfficeTest {
     /**
      * Test throw of TransactionException in doTransaction method, of class
      * Office.
+     * @throws es.unileon.ulebank.handler.MalformedHandlerException
      */
     @Test(expected = TransactionException.class)
     public void testDoTransactionNullTransactionNullDestination() throws TransactionException, MalformedHandlerException {
@@ -108,6 +112,7 @@ public class OfficeTest {
     /**
      * Test throw of TransactionException in doTransaction method, of class
      * Office.
+     * @throws es.unileon.ulebank.handler.MalformedHandlerException
      */
     @Test(expected = TransactionException.class)
     public void testDoTransactionNullTransaction() throws TransactionException, MalformedHandlerException {
@@ -120,6 +125,7 @@ public class OfficeTest {
     /**
      * Test throw of TransactionException in doTransaction method, of class
      * Office.
+     * @throws es.unileon.ulebank.handler.MalformedHandlerException
      */
     @Test(expected = TransactionException.class)
     public void testDoTransactionNullType() throws TransactionException, MalformedHandlerException {

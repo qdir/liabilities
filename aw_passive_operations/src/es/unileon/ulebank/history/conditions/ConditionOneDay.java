@@ -14,11 +14,46 @@ import java.util.Date;
  */
 public class ConditionOneDay<T extends Transaction> implements Condition<T> {
 
+    /**
+     *
+     * @param date
+     * @return
+     */
+    public static int getYear(Date date) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy");
+        return Integer.parseInt(format.format(date));
+    }
+
+    /**
+     *
+     * @param date
+     * @return
+     */
+    public static int getMonth(Date date) {
+        SimpleDateFormat format = new SimpleDateFormat("MM");
+        return Integer.parseInt(format.format(date));
+    }
+
+    /**
+     *
+     * @param date
+     * @return
+     */
+    public static int getDay(Date date) {
+        SimpleDateFormat format = new SimpleDateFormat("dd");
+        return Integer.parseInt(format.format(date));
+    }
+
     private final int year;
     private final int month;
     private final int day;
     private final boolean isValidDay;
 
+    /**
+     *
+     * @param date
+     * @param isValidDay
+     */
     public ConditionOneDay(Date date, boolean isValidDay) {
         this.year = getYear(date);
         this.month = getMonth(date);
@@ -39,21 +74,6 @@ public class ConditionOneDay<T extends Transaction> implements Condition<T> {
             return (this.day != day);
         }
         return true;
-    }
-
-    public static int getYear(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy");
-        return Integer.parseInt(format.format(date));
-    }
-
-    public static int getMonth(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("MM");
-        return Integer.parseInt(format.format(date));
-    }
-
-    public static int getDay(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("dd");
-        return Integer.parseInt(format.format(date));
     }
 
     @Override

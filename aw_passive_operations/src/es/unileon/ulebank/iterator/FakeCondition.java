@@ -2,13 +2,12 @@
  group.*/
 package es.unileon.ulebank.iterator;
 
-import es.unileon.ulebank.iterator.Condition;
-
 /**
  * This class is a empty condition. This condition only return the values that
  * you set in the constructor.
  *
  * @author runix
+ * @param <T>
  */
 public class FakeCondition<T> implements Condition<T> {
 
