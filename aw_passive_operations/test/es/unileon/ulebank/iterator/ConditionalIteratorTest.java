@@ -2,7 +2,6 @@
  group.*/
 package es.unileon.ulebank.iterator;
 
-import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.history.TransactionType;
 import es.unileon.ulebank.history.conditions.ConditionTransactionBetweenTwoDates;
@@ -128,7 +127,7 @@ public class ConditionalIteratorTest {
     }
 
     public final Transaction getTransaction(Date date) {
-        Transaction t = new GenericTransaction(0, date, "", TransactionType.CHARGE);
+        Transaction t = new Transaction(0, date, "", TransactionType.CHARGE);
         t.setEffectiveDate(date);
         return t;
     }

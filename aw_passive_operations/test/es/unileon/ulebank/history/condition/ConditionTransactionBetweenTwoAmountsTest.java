@@ -2,7 +2,6 @@
  group.*/
 package es.unileon.ulebank.history.condition;
 
-import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.history.TransactionType;
 import es.unileon.ulebank.history.conditions.ConditionTransactionBetweenTwoAmounts;
@@ -60,7 +59,7 @@ public class ConditionTransactionBetweenTwoAmountsTest {
     }
 
     public final Transaction getTransaction(double amount) {
-        Transaction t = new GenericTransaction(amount, null, "", TransactionType.CHARGE);
+        Transaction t = new Transaction(amount, null, "", TransactionType.CHARGE);
         return t;
     }
 }

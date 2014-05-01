@@ -13,7 +13,7 @@ import java.util.Date;
  *
  * @author roobre
  */
-public abstract class Transaction {
+public class Transaction {
 
     private final Handler id;
     private final double amount;
@@ -31,7 +31,7 @@ public abstract class Transaction {
      * @param type
      */
     public Transaction(double amount, Date date, String subject, Enum<TransactionType> type) {
-        this(amount, date, subject,type, new DetailedInformation(""));
+        this(amount, date, subject, type, new DetailedInformation(""));
     }
 
     /**
@@ -99,7 +99,7 @@ public abstract class Transaction {
      * @param effectiveDate
      */
     public void setEffectiveDate(Date effectiveDate) {
-            this.effectiveDate = effectiveDate;
+        this.effectiveDate = effectiveDate;
     }
 
     /**

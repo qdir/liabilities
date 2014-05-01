@@ -12,24 +12,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The transaction manager allow to do transactions between banks. We only need
+ * to be register in it.
  *
  * @author runix
  */
 public class TransactionManager {
 
+    /**
+     * The list of banks
+     */
     private final List<Bank> banks;
 
     /**
-     *
+     * Create a new Transaction manager
      */
     public TransactionManager() {
         this.banks = new ArrayList<>();
     }
 
     /**
+     * Add a new bank. The bank cannot be repeated.
      *
-     * @param bank
-     * @return
+     * @param bank ( bank to add)
+     *
+     * @return ( true if succes, false otherwise )
      */
     public boolean addBank(Bank bank) {
         boolean repeated = false;
@@ -46,9 +53,12 @@ public class TransactionManager {
     }
 
     /**
+     * Delete a bank. If the bank doesn't exists the method retuns false and if
+     * the bank exists remove it and return true.
      *
-     * @param id
-     * @return
+     * @param id ( The bank's id)
+     *
+     * @return ( true if sucess, false otherwise)
      */
     public boolean deleteBank(Handler id) {
         boolean deleted = false;
@@ -62,11 +72,17 @@ public class TransactionManager {
     }
 
     /**
+     * Forward the transaction to the bank or return TransactionException if
+     * there isn't a bank with that id.
      *
-     * @param t
-     * @param destine
-     * @throws MalformedHandlerException
-     * @throws TransactionException
+     * @param t ( transaction to forward )
+     *
+     * @param destine ( destine for the transaction )
+     *
+     * @throws MalformedHandlerException (If the destine handler isn't valid )
+     *
+     * @throws TransactionException (If the bank isn't found or there are
+     * problems with the transaction ).
      */
     public void doTransaction(Transaction t, Handler destine) throws MalformedHandlerException, TransactionException {
         StringBuilder error = new StringBuilder();
@@ -80,7 +96,7 @@ public class TransactionManager {
                 }
             }
             if (!found) {
-                error.append("Cannot found the bank " + destination.toString() + " \n");
+                error.append("Cannot found the bank ").append(destination.toString()).append(" \n");
             }
         } else {
             error.append("The transaction or destine cannot be null");

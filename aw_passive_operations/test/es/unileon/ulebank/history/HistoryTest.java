@@ -33,7 +33,7 @@ public class HistoryTest {
 
         System.out.println("addTransaction");
 
-        Transaction transaction = new GenericTransaction(10.5d, new Date(), "Imposicion", TransactionType.CHARGE);
+        Transaction transaction = new Transaction(10.5d, new Date(), "Imposicion", TransactionType.CHARGE);
 
         assertTrue(this.accountHistory.addTransaction(transaction));
     }
@@ -53,9 +53,9 @@ public class HistoryTest {
         Date date3 = sdf.parse("01/03/2014");
         Date date4 = sdf.parse("20/01/2014");
 
-        Transaction transaction1 = new GenericTransaction(10.5d, date1, "Imposicion", TransactionType.CHARGE);
-        Transaction transaction2 = new GenericTransaction(10.5d, date2, "Imposicion", TransactionType.CHARGE);
-        Transaction transaction3 = new GenericTransaction(10.5d, date3, "Imposicion", TransactionType.CHARGE);
+        Transaction transaction1 = new Transaction(10.5d, date1, "Imposicion", TransactionType.CHARGE);
+        Transaction transaction2 = new Transaction(10.5d, date2, "Imposicion", TransactionType.CHARGE);
+        Transaction transaction3 = new Transaction(10.5d, date3, "Imposicion", TransactionType.CHARGE);
 
         this.accountHistory.addTransaction(transaction1);
         this.accountHistory.addTransaction(transaction2);
@@ -80,9 +80,9 @@ public class HistoryTest {
         Date date4 = sdf.parse("20/01/2014");
         Date date5 = sdf.parse("30/04/2014");
 
-        Transaction transaction1 = new GenericTransaction(10.5d, date1, "Imposicion", TransactionType.CHARGE);
-        Transaction transaction2 = new GenericTransaction(10.5d, date2, "Imposicion", TransactionType.CHARGE);
-        Transaction transaction3 = new GenericTransaction(10.5d, date3, "Imposicion", TransactionType.CHARGE);
+        Transaction transaction1 = new Transaction(10.5d, date1, "Imposicion", TransactionType.CHARGE);
+        Transaction transaction2 = new Transaction(10.5d, date2, "Imposicion", TransactionType.CHARGE);
+        Transaction transaction3 = new Transaction(10.5d, date3, "Imposicion", TransactionType.CHARGE);
 
         this.accountHistory.addTransaction(transaction1);
         this.accountHistory.addTransaction(transaction2);
@@ -99,7 +99,7 @@ public class HistoryTest {
 
         System.out.println("getTransactions");
 
-        Transaction transaction = new GenericTransaction(10.5d, new Date(), "Imposicion", TransactionType.CHARGE);
+        Transaction transaction = new Transaction(10.5d, new Date(), "Imposicion", TransactionType.CHARGE);
 
         this.accountHistory.addTransaction(transaction);
         fail("ERROR, TO DO");

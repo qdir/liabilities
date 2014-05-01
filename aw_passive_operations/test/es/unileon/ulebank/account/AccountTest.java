@@ -7,7 +7,6 @@ import es.unileon.ulebank.client.Client;
 import es.unileon.ulebank.handler.GenericHandler;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
-import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.history.TransactionType;
 import es.unileon.ulebank.office.Office;
@@ -253,252 +252,252 @@ public class AccountTest {
 
     @Test(expected = TransactionException.class)
     public void testDoWithdrawalNegativeAmount() throws TransactionException {
-        Transaction t = new GenericTransaction(-1.0, new Date(), "Subject", TransactionType.CHARGE);
+        Transaction t = new Transaction(-1.0, new Date(), "Subject", TransactionType.CHARGE);
         this.commercialAccount.doWithdrawal(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoWithdrawalNegativeAmountBadType() throws TransactionException {
-        Transaction t = new GenericTransaction(-1.0, new Date(), "Subject", TransactionType.PAYMENT);
+        Transaction t = new Transaction(-1.0, new Date(), "Subject", TransactionType.PAYMENT);
         this.commercialAccount.doWithdrawal(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoWithdrawalSubjectNull() throws TransactionException {
-        Transaction t = new GenericTransaction(0.0, new Date(), null, TransactionType.CHARGE);
+        Transaction t = new Transaction(0.0, new Date(), null, TransactionType.CHARGE);
         this.commercialAccount.doWithdrawal(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoWithdrawalCreationDateNull() throws TransactionException {
-        Transaction t = new GenericTransaction(0.0, null, "subject", TransactionType.CHARGE);
+        Transaction t = new Transaction(0.0, null, "subject", TransactionType.CHARGE);
         this.commercialAccount.doWithdrawal(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoWithdrawalCreationDateSubjectNull() throws TransactionException {
-        Transaction t = new GenericTransaction(0.0, null, null, TransactionType.CHARGE);
+        Transaction t = new Transaction(0.0, null, null, TransactionType.CHARGE);
         this.commercialAccount.doWithdrawal(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoWithdrawalNegativeAmountSubjectNull() throws TransactionException {
-        Transaction t = new GenericTransaction(-1.0, new Date(), null, TransactionType.CHARGE);
+        Transaction t = new Transaction(-1.0, new Date(), null, TransactionType.CHARGE);
         this.commercialAccount.doWithdrawal(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoWithdrawalNegativeAmountCreationDateNull() throws TransactionException {
-        Transaction t = new GenericTransaction(-1.0, null, "subject", TransactionType.CHARGE);
+        Transaction t = new Transaction(-1.0, null, "subject", TransactionType.CHARGE);
         this.commercialAccount.doWithdrawal(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoWithdrawalNegativeAmountCreationDateSubjectNull() throws TransactionException {
-        Transaction t = new GenericTransaction(-1.0, null, null, TransactionType.CHARGE);
+        Transaction t = new Transaction(-1.0, null, null, TransactionType.CHARGE);
         this.commercialAccount.doWithdrawal(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoWithdrawalPositiveAmountSubjectNull() throws TransactionException {
-        Transaction t = new GenericTransaction(1.0, new Date(), null, TransactionType.CHARGE);
+        Transaction t = new Transaction(1.0, new Date(), null, TransactionType.CHARGE);
         this.commercialAccount.doWithdrawal(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoWithdrawalPositiveAmountCreationDateNull() throws TransactionException {
-        Transaction t = new GenericTransaction(1.0, null, "subject", TransactionType.CHARGE);
+        Transaction t = new Transaction(1.0, null, "subject", TransactionType.CHARGE);
         this.commercialAccount.doWithdrawal(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoWithdrawalPositiveAmountCreationDateSubjectNull() throws TransactionException {
-        Transaction t = new GenericTransaction(1.0, null, null, TransactionType.CHARGE);
+        Transaction t = new Transaction(1.0, null, null, TransactionType.CHARGE);
         this.commercialAccount.doWithdrawal(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoWithdrawalBadTypeSubjectNull() throws TransactionException {
-        Transaction t = new GenericTransaction(0.0, new Date(), null, TransactionType.PAYMENT);
+        Transaction t = new Transaction(0.0, new Date(), null, TransactionType.PAYMENT);
         this.commercialAccount.doWithdrawal(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoWithdrawalBadTypeCreationDateNull() throws TransactionException {
-        Transaction t = new GenericTransaction(0.0, null, "subject", TransactionType.PAYMENT);
+        Transaction t = new Transaction(0.0, null, "subject", TransactionType.PAYMENT);
         this.commercialAccount.doWithdrawal(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoWithdrawalBadTypeCreationDateSubjectNull() throws TransactionException {
-        Transaction t = new GenericTransaction(0.0, null, null, TransactionType.PAYMENT);
+        Transaction t = new Transaction(0.0, null, null, TransactionType.PAYMENT);
         this.commercialAccount.doWithdrawal(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoWithdrawalBadTypeNegativeAmountSubjectNull() throws TransactionException {
-        Transaction t = new GenericTransaction(-1.0, new Date(), null, TransactionType.PAYMENT);
+        Transaction t = new Transaction(-1.0, new Date(), null, TransactionType.PAYMENT);
         this.commercialAccount.doWithdrawal(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoWithdrawalBadTypeNegativeAmountCreationDateNull() throws TransactionException {
-        Transaction t = new GenericTransaction(-1.0, null, "subject", TransactionType.PAYMENT);
+        Transaction t = new Transaction(-1.0, null, "subject", TransactionType.PAYMENT);
         this.commercialAccount.doWithdrawal(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoWithdrawalBadTypeNegativeAmountCreationDateSubjectNull() throws TransactionException {
-        Transaction t = new GenericTransaction(-1.0, null, null, TransactionType.PAYMENT);
+        Transaction t = new Transaction(-1.0, null, null, TransactionType.PAYMENT);
         this.commercialAccount.doWithdrawal(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoWithdrawalBadTypePositiveAmountSubjectNull() throws TransactionException {
-        Transaction t = new GenericTransaction(1.0, new Date(), null, TransactionType.PAYMENT);
+        Transaction t = new Transaction(1.0, new Date(), null, TransactionType.PAYMENT);
         this.commercialAccount.doWithdrawal(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoWithdrawalBadTypePositiveAmountCreationDateNull() throws TransactionException {
-        Transaction t = new GenericTransaction(1.0, null, "subject", TransactionType.PAYMENT);
+        Transaction t = new Transaction(1.0, null, "subject", TransactionType.PAYMENT);
         this.commercialAccount.doWithdrawal(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoWithdrawalBadTypePositiveAmountCreationDateSubjectNull() throws TransactionException {
-        Transaction t = new GenericTransaction(1.0, null, null, TransactionType.PAYMENT);
+        Transaction t = new Transaction(1.0, null, null, TransactionType.PAYMENT);
         this.commercialAccount.doWithdrawal(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoDepositSubjectNull() throws TransactionException {
-        Transaction t = new GenericTransaction(0.0, new Date(), null, TransactionType.PAYMENT);
+        Transaction t = new Transaction(0.0, new Date(), null, TransactionType.PAYMENT);
         this.commercialAccount.doDeposit(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoDepositCreationDateNull() throws TransactionException {
-        Transaction t = new GenericTransaction(0.0, null, "subject", TransactionType.PAYMENT);
+        Transaction t = new Transaction(0.0, null, "subject", TransactionType.PAYMENT);
         this.commercialAccount.doDeposit(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoDepositCreationDateSubjectNull() throws TransactionException {
-        Transaction t = new GenericTransaction(0.0, null, null, TransactionType.PAYMENT);
+        Transaction t = new Transaction(0.0, null, null, TransactionType.PAYMENT);
         this.commercialAccount.doDeposit(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoDepositNegativeAmountSubjectNull() throws TransactionException {
-        Transaction t = new GenericTransaction(-1.0, new Date(), null, TransactionType.PAYMENT);
+        Transaction t = new Transaction(-1.0, new Date(), null, TransactionType.PAYMENT);
         this.commercialAccount.doDeposit(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoDepositNegativeAmountCreationDateNull() throws TransactionException {
-        Transaction t = new GenericTransaction(-1.0, null, "subject", TransactionType.PAYMENT);
+        Transaction t = new Transaction(-1.0, null, "subject", TransactionType.PAYMENT);
         this.commercialAccount.doDeposit(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoDepositNegativeAmountCreationDateSubjectNull() throws TransactionException {
-        Transaction t = new GenericTransaction(-1.0, null, null, TransactionType.PAYMENT);
+        Transaction t = new Transaction(-1.0, null, null, TransactionType.PAYMENT);
         this.commercialAccount.doDeposit(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoDepositPositiveAmountSubjectNull() throws TransactionException {
-        Transaction t = new GenericTransaction(1.0, new Date(), null, TransactionType.PAYMENT);
+        Transaction t = new Transaction(1.0, new Date(), null, TransactionType.PAYMENT);
         this.commercialAccount.doDeposit(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoDepositPositiveAmountCreationDateNull() throws TransactionException {
-        Transaction t = new GenericTransaction(1.0, null, "subject", TransactionType.PAYMENT);
+        Transaction t = new Transaction(1.0, null, "subject", TransactionType.PAYMENT);
         this.commercialAccount.doDeposit(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoDepositPositiveAmountCreationDateSubjectNull() throws TransactionException {
-        Transaction t = new GenericTransaction(1.0, null, null, TransactionType.PAYMENT);
+        Transaction t = new Transaction(1.0, null, null, TransactionType.PAYMENT);
         this.commercialAccount.doDeposit(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoDepositBadTypeSubjectNull() throws TransactionException {
-        Transaction t = new GenericTransaction(0.0, new Date(), null, TransactionType.CHARGE);
+        Transaction t = new Transaction(0.0, new Date(), null, TransactionType.CHARGE);
         this.commercialAccount.doDeposit(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoDepositBadTypeCreationDateNull() throws TransactionException {
-        Transaction t = new GenericTransaction(0.0, null, "subject", TransactionType.CHARGE);
+        Transaction t = new Transaction(0.0, null, "subject", TransactionType.CHARGE);
         this.commercialAccount.doDeposit(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoDepositBadTypeCreationDateSubjectNull() throws TransactionException {
-        Transaction t = new GenericTransaction(0.0, null, null, TransactionType.CHARGE);
+        Transaction t = new Transaction(0.0, null, null, TransactionType.CHARGE);
         this.commercialAccount.doDeposit(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoDepositBadTypeNegativeAmountSubjectNull() throws TransactionException {
-        Transaction t = new GenericTransaction(-1.0, new Date(), null, TransactionType.CHARGE);
+        Transaction t = new Transaction(-1.0, new Date(), null, TransactionType.CHARGE);
         this.commercialAccount.doDeposit(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoDepositBadTypeNegativeAmountCreationDateNull() throws TransactionException {
-        Transaction t = new GenericTransaction(-1.0, null, "subject", TransactionType.CHARGE);
+        Transaction t = new Transaction(-1.0, null, "subject", TransactionType.CHARGE);
         this.commercialAccount.doDeposit(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoDepositBadTypeNegativeAmountCreationDateSubjectNull() throws TransactionException {
-        Transaction t = new GenericTransaction(-1.0, null, null, TransactionType.CHARGE);
+        Transaction t = new Transaction(-1.0, null, null, TransactionType.CHARGE);
         this.commercialAccount.doDeposit(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoDepositBadTypePositiveAmountSubjectNull() throws TransactionException {
-        Transaction t = new GenericTransaction(1.0, new Date(), null, TransactionType.CHARGE);
+        Transaction t = new Transaction(1.0, new Date(), null, TransactionType.CHARGE);
         this.commercialAccount.doDeposit(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoDepositBadTypePositiveAmountCreationDateNull() throws TransactionException {
-        Transaction t = new GenericTransaction(1.0, null, "subject", TransactionType.CHARGE);
+        Transaction t = new Transaction(1.0, null, "subject", TransactionType.CHARGE);
         this.commercialAccount.doDeposit(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoDepositBadTypePositiveAmountCreationDateSubjectNull() throws TransactionException {
-        Transaction t = new GenericTransaction(1.0, null, null, TransactionType.CHARGE);
+        Transaction t = new Transaction(1.0, null, null, TransactionType.CHARGE);
         this.commercialAccount.doDeposit(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoDepositNegativeAmount() throws TransactionException {
-        Transaction t = new GenericTransaction(-1.0, new Date(), "Subject", TransactionType.CHARGE);
+        Transaction t = new Transaction(-1.0, new Date(), "Subject", TransactionType.CHARGE);
         this.commercialAccount.doDeposit(t);
     }
 
     @Test(expected = TransactionException.class)
     public void testDoDepositNegativeAmountBadType() throws TransactionException {
-        Transaction t = new GenericTransaction(-1.0, new Date(), "Subject", TransactionType.PAYMENT);
+        Transaction t = new Transaction(-1.0, new Date(), "Subject", TransactionType.PAYMENT);
         this.commercialAccount.doDeposit(t);
     }
 
     @Test
     public void testDoDeposit() throws TransactionException {
         double amount = 10.0;
-        Transaction t = new GenericTransaction(amount, new Date(), "Salary", TransactionType.PAYMENT);
+        Transaction t = new Transaction(amount, new Date(), "Salary", TransactionType.PAYMENT);
         t.setEffectiveDate(new Date(System.currentTimeMillis()));
         this.commercialAccount.doDeposit(t);
         assertEquals(amount, this.commercialAccount.getBalance(), EPSILON);
-        t = new GenericTransaction(amount, new Date(), "Salary", TransactionType.PAYMENT);
+        t = new Transaction(amount, new Date(), "Salary", TransactionType.PAYMENT);
         t.setEffectiveDate(new Date(System.currentTimeMillis()));
         this.commercialAccount.doDeposit(t);
         assertEquals(2 * amount, this.commercialAccount.getBalance(), EPSILON);
@@ -507,16 +506,16 @@ public class AccountTest {
     @Test
     public void testDoWithdrawal() throws TransactionException {
         double amountAdded = 100.0;
-        Transaction t = new GenericTransaction(amountAdded, new Date(), "Salary", TransactionType.PAYMENT);
+        Transaction t = new Transaction(amountAdded, new Date(), "Salary", TransactionType.PAYMENT);
         t.setEffectiveDate(new Date(System.currentTimeMillis()));
         this.commercialAccount.doDeposit(t);
 
         double amount = 10;
-        t = new GenericTransaction(amount, new Date(), "Salary", TransactionType.CHARGE);
+        t = new Transaction(amount, new Date(), "Salary", TransactionType.CHARGE);
         t.setEffectiveDate(new Date(System.currentTimeMillis()));
         this.commercialAccount.doWithdrawal(t);
         assertEquals(-amount + amountAdded, this.commercialAccount.getBalance(), EPSILON);
-        t = new GenericTransaction(amount, new Date(), "Salary", TransactionType.CHARGE);
+        t = new Transaction(amount, new Date(), "Salary", TransactionType.CHARGE);
         t.setEffectiveDate(new Date(System.currentTimeMillis()));
         this.commercialAccount.doWithdrawal(t);
         assertEquals(-2 * amount + amountAdded, this.commercialAccount.getBalance(), EPSILON);
@@ -532,12 +531,12 @@ public class AccountTest {
     public void testAccountHistory() throws TransactionException {
         double amount = 10.0;
 
-        Transaction t2 = new GenericTransaction(amount, new Date(), "Salary", TransactionType.PAYMENT);
+        Transaction t2 = new Transaction(amount, new Date(), "Salary", TransactionType.PAYMENT);
         t2.setEffectiveDate(new Date(System.currentTimeMillis()));
         this.commercialAccount.doDeposit(t2);
         assertEquals(amount, this.commercialAccount.getBalance(), EPSILON);
 
-        Transaction t = new GenericTransaction(amount, new Date(), "Salary", TransactionType.CHARGE);
+        Transaction t = new Transaction(amount, new Date(), "Salary", TransactionType.CHARGE);
         t.setEffectiveDate(new Date(System.currentTimeMillis()));
         this.commercialAccount.doWithdrawal(t);
         assertEquals(0.0, this.commercialAccount.getBalance(), EPSILON);
