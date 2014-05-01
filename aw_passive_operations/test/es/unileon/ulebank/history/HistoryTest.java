@@ -2,7 +2,7 @@
  group.*/
 package es.unileon.ulebank.history;
 
-import es.unileon.ulebank.account.AccountHistory;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,29 +17,30 @@ import org.junit.Test;
  */
 public class HistoryTest {
 
-    private AccountHistory accountHistory;
+    private History accountHistory;
 
     @Before
     public void setUp() {
 
-        this.accountHistory = new AccountHistory();
+        this.accountHistory = new History();
     }
 
     /**
-     * Test of addTransaction method, of class AccountHistory.
+     * Test of add method, of class AccountHistory.
      */
     @Test
     public void testAddTransaction() {
 
-        System.out.println("addTransaction");
+        System.out.println("add");
 
         Transaction transaction = new Transaction(10.5d, new Date(), "Imposicion", TransactionType.CHARGE);
 
-        assertTrue(this.accountHistory.addTransaction(transaction));
+        assertTrue(this.accountHistory.add(transaction));
     }
 
     /**
      * Test of getTransactionsFrom method, of class AccountHistory.
+     *
      * @throws java.text.ParseException
      */
     @Test
@@ -57,15 +58,16 @@ public class HistoryTest {
         Transaction transaction2 = new Transaction(10.5d, date2, "Imposicion", TransactionType.CHARGE);
         Transaction transaction3 = new Transaction(10.5d, date3, "Imposicion", TransactionType.CHARGE);
 
-        this.accountHistory.addTransaction(transaction1);
-        this.accountHistory.addTransaction(transaction2);
-        this.accountHistory.addTransaction(transaction3);
+        this.accountHistory.add(transaction1);
+        this.accountHistory.add(transaction2);
+        this.accountHistory.add(transaction3);
 
 //        assertEquals(this.accountHistory.getTransactionsFrom(date4).size(), 2);
     }
 
     /**
      * Test of getTransactionsBetween method, of class AccountHistory.
+     *
      * @throws java.text.ParseException
      */
     @Test
@@ -84,9 +86,9 @@ public class HistoryTest {
         Transaction transaction2 = new Transaction(10.5d, date2, "Imposicion", TransactionType.CHARGE);
         Transaction transaction3 = new Transaction(10.5d, date3, "Imposicion", TransactionType.CHARGE);
 
-        this.accountHistory.addTransaction(transaction1);
-        this.accountHistory.addTransaction(transaction2);
-        this.accountHistory.addTransaction(transaction3);
+        this.accountHistory.add(transaction1);
+        this.accountHistory.add(transaction2);
+        this.accountHistory.add(transaction3);
 
 //        assertEquals(this.accountHistory.getTransactionsBetween(date4, date5).size(), 2);
     }
@@ -101,7 +103,7 @@ public class HistoryTest {
 
         Transaction transaction = new Transaction(10.5d, new Date(), "Imposicion", TransactionType.CHARGE);
 
-        this.accountHistory.addTransaction(transaction);
+        this.accountHistory.add(transaction);
         fail("ERROR, TO DO");
 //        assertEquals(this.accountHistory.getTransactions().size(), 1);
     }

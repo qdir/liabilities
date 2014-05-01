@@ -96,7 +96,7 @@ public class BankTest {
         System.out.println("removeOffice");
 
         this.bank.addOffice(office);
-        assertTrue(this.bank.removeOffice(office.getID()));
+        assertTrue(this.bank.removeOffice(office.getIdOffice()));
     }
 
     /**
@@ -118,7 +118,7 @@ public class BankTest {
 
         System.out.println("removeOfficeNotBelongsTheBank");
 
-        assertFalse(this.bank.removeOffice(office.getID()));
+        assertFalse(this.bank.removeOffice(office.getIdOffice()));
     }
 
     /**

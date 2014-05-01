@@ -14,7 +14,7 @@ import java.util.List;
  * @author roobre
  * @param <T>
  */
-public abstract class History<T extends Transaction> {
+public class History<T extends Transaction> {
 
     /**
      * Delete the spaces in the iterator args
@@ -46,7 +46,7 @@ public abstract class History<T extends Transaction> {
      * @param transaction
      * @return
      */
-    public boolean addTransaction(T transaction) {
+    public boolean add(T transaction) {
         return this.transactions.add(transaction);
     }
 

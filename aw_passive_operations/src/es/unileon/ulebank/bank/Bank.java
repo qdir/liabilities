@@ -53,7 +53,7 @@ public class Bank {
     public boolean addOffice(Office office) {
         if (office != null) {
             for (int i = 0; i < offices.size(); ++i) {
-                if (offices.get(i).getID().compareTo(office.getID()) == 0) {
+                if (offices.get(i).getIdOffice().compareTo(office.getIdOffice()) == 0) {
                     return false;
                 }
             }
@@ -71,7 +71,7 @@ public class Bank {
         boolean removed = false;
         if (office != null) {
             for (int i = 0; i < offices.size() && !removed; ++i) {
-                if (offices.get(i).getID().compareTo(office) == 0) {
+                if (offices.get(i).getIdOffice().compareTo(office) == 0) {
                     this.offices.remove(i);
                     removed = true;
                 }
@@ -96,7 +96,7 @@ public class Bank {
                 Handler office = handler.getOfficeHandler();
                 boolean found = false;
                 for (int i = 0; i < this.offices.size() && !found; i++) {
-                    if (this.offices.get(i).getID().compareTo(office) == 0) {
+                    if (this.offices.get(i).getIdOffice().compareTo(office) == 0) {
                         found = true;
                         this.offices.get(i).doTransaction(t, destine);
                     }

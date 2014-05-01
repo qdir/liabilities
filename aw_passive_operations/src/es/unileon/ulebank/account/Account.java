@@ -4,6 +4,7 @@ import es.unileon.ulebank.bank.Bank;
 import es.unileon.ulebank.client.Client;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
+import es.unileon.ulebank.history.History;
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.history.TransactionType;
 import es.unileon.ulebank.office.Office;
@@ -47,7 +48,7 @@ public class Account {
     /**
      * The history of the account
      */
-    private final AccountHistory history;
+    private final History history;
     /**
      * The last liquidation
      */
@@ -77,8 +78,8 @@ public class Account {
      *
      */
     public Account(Office office, Bank bank, String accountnumber) throws MalformedHandlerException {
-        this.id = new AccountHandler(office.getID(), bank.getID(), accountnumber);
-        this.history = new AccountHistory();
+        this.id = new AccountHandler(office.getIdOffice(), bank.getID(), accountnumber);
+        this.history = new History<>();
         this.balance = 0.0d;
         this.titulars = new ArrayList<>();
         this.authorizeds = new ArrayList<>();
@@ -86,7 +87,7 @@ public class Account {
         this.liquidationFrecuency = DEFAULT_LIQUIDATION_FREQUENCY;
         this.liquidationStrategies = new ArrayList<>();
         this.maxOverdraft = 0;
-        LOG.info("Create a new account with number " + accountnumber + " office " + office.getID().toString() + " bank " + bank.getID());
+        LOG.info("Create a new account with number " + accountnumber + " office " + office.getIdOffice().toString() + " bank " + bank.getID());
     }
 
     /**
@@ -245,12 +246,13 @@ public class Account {
 
     /**
      * Get the max account's overdraft
-     * 
+     *
      * @return (the account's overdraft )
      */
     public final double getMaxOverdraft() {
         return this.maxOverdraft;
     }
+
     /**
      * Withdraw money from the account.
      *
@@ -301,7 +303,7 @@ public class Account {
             LOG.error(err.toString());
             throw new TransactionException(err.toString());
         }
-        boolean success = this.history.addTransaction(transaction);
+        boolean success = this.history.add(transaction);
         if (success) {
             this.balance -= transaction.getAmount();
         } else {
@@ -358,7 +360,7 @@ public class Account {
             throw new TransactionException(err.toString());
         }
 
-        boolean success = this.history.addTransaction(transaction);
+        boolean success = this.history.add(transaction);
         if (success) {
             this.balance += transaction.getAmount();
         } else {
@@ -412,7 +414,7 @@ public class Account {
         StringBuilder err = new StringBuilder();
         try {
             AccountHandler ah = new AccountHandler(this.id);
-            if (office.getID().compareTo(ah) == 0) {
+            if (office.getIdOffice().compareTo(ah) == 0) {
 
             } else {
                 err.append("Wrong office\n");
@@ -427,7 +429,7 @@ public class Account {
      *
      * @return (The transactions)
      */
-    public AccountHistory getHistory() {
+    public History getHistory() {
         return this.history;
     }
 

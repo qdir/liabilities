@@ -30,28 +30,28 @@ public class AccountHandlerTest {
         this.bank = new Bank(null, new GenericHandler("1234"));
         this.office = new Office(new GenericHandler("1234"), this.bank);
         this.accountNumber = "1234567891";
-        this.accountHandler1 = new AccountHandler(office.getID(), bank.getID(), accountNumber);
+        this.accountHandler1 = new AccountHandler(office.getIdOffice(), bank.getID(), accountNumber);
         this.dc = "10";
     }
 
     @Test
     public void testHandlerFromAnother() throws MalformedHandlerException {
-        Handler another = new GenericHandler(this.bank.getID().toString() + this.office.getID().toString() + this.dc + this.accountNumber
+        Handler another = new GenericHandler(this.bank.getID().toString() + this.office.getIdOffice().toString() + this.dc + this.accountNumber
         );
         AccountHandler parsed = new AccountHandler(another);
         assertTrue(this.bank.getID().compareTo(parsed.getBankHandler()) == 0);
-        assertTrue(this.office.getID().compareTo(parsed.getOfficeHandler()) == 0);
+        assertTrue(this.office.getIdOffice().compareTo(parsed.getOfficeHandler()) == 0);
         assertTrue(this.accountNumber.equals(parsed.getNumber()));
         assertTrue(this.dc.equals(this.dc));
     }
 
     @Test
     public void testHandlerFromAnotherWithSymbols() throws MalformedHandlerException {
-        Handler another = new GenericHandler(this.bank.getID().toString() + "-" + this.office.getID().toString() + "-" + this.dc + "-" + this.accountNumber
+        Handler another = new GenericHandler(this.bank.getID().toString() + "-" + this.office.getIdOffice().toString() + "-" + this.dc + "-" + this.accountNumber
         );
         AccountHandler parsed = new AccountHandler(another);
         assertTrue(this.bank.getID().compareTo(parsed.getBankHandler()) == 0);
-        assertTrue(this.office.getID().compareTo(parsed.getOfficeHandler()) == 0);
+        assertTrue(this.office.getIdOffice().compareTo(parsed.getOfficeHandler()) == 0);
         assertTrue(this.accountNumber.equals(parsed.getNumber()));
         assertTrue(this.dc.equals(this.dc));
     }
@@ -1171,18 +1171,18 @@ public class AccountHandlerTest {
     //Creating OK
     @Test
     public void testParsingHandlerOk() throws MalformedHandlerException {
-        AccountHandler ac = new AccountHandler(new GenericHandler(this.bank.getID().toString() + "-" + this.office.getID().toString() + "-" + this.dc + "-" + this.accountNumber));
+        AccountHandler ac = new AccountHandler(new GenericHandler(this.bank.getID().toString() + "-" + this.office.getIdOffice().toString() + "-" + this.dc + "-" + this.accountNumber));
         assertTrue(ac.getBankHandler().toString().equals(this.bank.getID().toString()));
-        assertTrue(ac.getOfficeHandler().toString().equals(this.office.getID().toString()));
+        assertTrue(ac.getOfficeHandler().toString().equals(this.office.getIdOffice().toString()));
         assertTrue(ac.getDC().toString().equals(this.dc.toString()));
         assertTrue(ac.getNumber().toString().equals(this.accountNumber.toString()));
     }
 
     @Test
     public void testCreateOK() throws MalformedHandlerException {
-        AccountHandler ac = new AccountHandler(this.office.getID(), this.bank.getID(), this.accountNumber);
+        AccountHandler ac = new AccountHandler(this.office.getIdOffice(), this.bank.getID(), this.accountNumber);
         assertTrue(ac.getBankHandler().toString().equals(this.bank.getID().toString()));
-        assertTrue(ac.getOfficeHandler().toString().equals(this.office.getID().toString()));
+        assertTrue(ac.getOfficeHandler().toString().equals(this.office.getIdOffice().toString()));
         assertTrue(ac.getDC().toString().equals(this.dc.toString()));
         assertTrue(ac.getNumber().toString().equals(this.accountNumber.toString()));
     }
@@ -1190,9 +1190,9 @@ public class AccountHandlerTest {
     //Test compareTo
     @Test
     public void testCompareToOK() throws MalformedHandlerException {
-        Handler handler = new AccountHandler(office.getID(), bank.getID(), accountNumber);
+        Handler handler = new AccountHandler(office.getIdOffice(), bank.getID(), accountNumber);
         assertEquals(handler.compareTo(this.accountHandler1), 0);
-        Handler handlerFromRaw = new AccountHandler(new GenericHandler(office.getID().toString() + bank.getID().toString() + this.dc + this.accountNumber)
+        Handler handlerFromRaw = new AccountHandler(new GenericHandler(office.getIdOffice().toString() + bank.getID().toString() + this.dc + this.accountNumber)
         );
         assertEquals(this.accountHandler1.compareTo(handlerFromRaw), 0);
 
@@ -1204,9 +1204,9 @@ public class AccountHandlerTest {
     public void testCompareToNotOK() throws MalformedHandlerException {
         Handler handler = new AccountHandler(new GenericHandler("1999"), bank.getID(), accountNumber);
         assertNotSame(handler.compareTo(this.accountHandler1), 0);
-        handler = new AccountHandler(office.getID(), new GenericHandler("1999"), accountNumber);
+        handler = new AccountHandler(office.getIdOffice(), new GenericHandler("1999"), accountNumber);
         assertNotSame(handler.compareTo(this.accountHandler1), 0);
-        handler = new AccountHandler(office.getID(), bank.getID(), "1234567899");
+        handler = new AccountHandler(office.getIdOffice(), bank.getID(), "1234567899");
         assertNotSame(handler.compareTo(this.accountHandler1), 0);
         Handler handlerFromRaw = new AccountHandler(new GenericHandler(new GenericHandler("9999") + bank.getID().toString() + "90" + this.accountNumber)
         );
@@ -1217,7 +1217,7 @@ public class AccountHandlerTest {
 
     @Test
     public void testTostring() {
-        String exp = this.bank.getID().toString() + "-" + this.office.getID().toString() + "-" + this.dc + "-" + this.accountNumber;
+        String exp = this.bank.getID().toString() + "-" + this.office.getIdOffice().toString() + "-" + this.dc + "-" + this.accountNumber;
         assertTrue(exp.equals(this.accountHandler1.toString()));
     }
 }

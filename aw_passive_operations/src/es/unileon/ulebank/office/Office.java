@@ -11,6 +11,7 @@ import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.history.TransactionType;
+import es.unileon.ulebank.Employee;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
@@ -47,7 +48,38 @@ public class Office {
      *
      */
     private long nextAccountNumber;
+    /**
+     * The costs of the local of the office
+     */
+    private int localCost;
+    /**
+     * The costs of the light, water and gas of the office
+     */
+    private int utilitiesCost;
+    /**
+     * The expenses in the salaries of the employees
+     */
+    private int employeeCost;
+    /**
+     * The total expenses or costs of the office
+     */
+    private int totalExpenses;
+    /**
+     * The total income of the office
+     */
+    private int totalIncome;
+    /**
+     * The total balance of the office
+     */
+    private int balance;
+    /**
+     * The list of employees of this office
+     */
+    private ArrayList<Employee> employeeList;
 
+    /**
+     * The list of accounts of this office
+     */
     /**
      *
      * @param id
@@ -59,6 +91,7 @@ public class Office {
         this.id = id;
         this.bank = bank;
         this.nextAccountNumber = 0;
+        this.employeeList = new ArrayList<>();
     }
 
     /**
@@ -152,7 +185,7 @@ public class Office {
      *
      * @return
      */
-    public Handler getID() {
+    public Handler getIdOffice() {
         return this.id;
     }
 
@@ -214,5 +247,92 @@ public class Office {
      */
     public List<Account> getAccounts() {
         return this.accounts;
+    }
+
+    /**
+     * Returns the expenses of the office
+     */
+    public int getExpenses() {
+        return totalExpenses;
+    }
+
+    /**
+     * Sets the total expenses of the office
+     */
+    public void setExpenses(int localCost, int utilitiesCost, int employeeCost) {
+
+        this.localCost = localCost;
+        this.utilitiesCost = utilitiesCost;
+        this.employeeCost = employeeCost;
+
+        this.totalExpenses = this.localCost + this.utilitiesCost
+                + this.employeeCost;
+    }
+
+    /**
+     * Returns the income of the office
+     */
+    public int getTotalIncome() {
+        return totalIncome;
+    }
+
+    /**
+     * Sets the total income of the office
+     */
+    public void setTotalIncome(int totalIncome) {
+        // Addition of the types of incomes.
+        this.totalIncome = totalIncome;
+    }
+
+    /**
+     * Returns the balance of the office
+     */
+    public int getBalance() {
+        return balance;
+    }
+
+    /**
+     * Sets the total balance of the office
+     */
+    public void setBalance() {
+        this.balance = this.totalIncome - this.totalExpenses;
+    }
+
+    /**
+     * Returns a copy of the list of employees of the office
+     */
+    public ArrayList<Employee> getEmployeeList() {
+        return new ArrayList<Employee>(employeeList);
+    }
+
+    /**
+     * Sets the list of employees of the office
+     */
+    public void setEmployeeList(ArrayList<Employee> employeeList) {
+        this.employeeList = employeeList;
+    }
+
+    /**
+     * Returns the list of accounts of the office
+     */
+    public List<Account> getAccountList() {
+        return this.accounts;
+    }
+
+    /**
+     * Adds an employee to the list of employees
+     */
+    public boolean addEmployee(Employee employee) {
+        return employeeList.add(employee);
+    }
+
+    /**
+     * Deletes an employee to the list of employees
+     *
+     * @param employee
+     * @return
+     */
+    public boolean deleteEmployee(Employee employee) {
+        return employeeList.remove(employee);
     }
 }

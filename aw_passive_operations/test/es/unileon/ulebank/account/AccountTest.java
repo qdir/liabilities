@@ -11,6 +11,7 @@ import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.history.TransactionType;
 import es.unileon.ulebank.office.Office;
 import es.unileon.ulebank.transacionManager.TransactionManager;
+import es.unileon.ulebank.history.History;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -20,6 +21,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class AccountTest {
+
     private static final double EPSILON = 0.00001;
 
     private Account commercialAccount;
@@ -523,7 +525,7 @@ public class AccountTest {
 
     @Test
     public void testGetID() throws MalformedHandlerException {
-        Handler accountNumber = new AccountHandler(office.getID(), bank.getID(), this.accountNumber);
+        Handler accountNumber = new AccountHandler(office.getIdOffice(), bank.getID(), this.accountNumber);
         assertTrue(accountNumber.compareTo(this.commercialAccount.getID()) == 0);
     }
 
@@ -541,7 +543,7 @@ public class AccountTest {
         this.commercialAccount.doWithdrawal(t);
         assertEquals(0.0, this.commercialAccount.getBalance(), EPSILON);
 
-        AccountHistory history = this.commercialAccount.getHistory();;
+        History history = this.commercialAccount.getHistory();;
         Iterator<Transaction> it = history.getIterator(null);
         this.compareEntryAndTransactionsWithAsserts(t2, it.next());
         this.compareEntryAndTransactionsWithAsserts(t, it.next());

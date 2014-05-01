@@ -71,7 +71,7 @@ public class OfficeTest {
 
         Handler expResult = new GenericHandler("1234");
 
-        assertEquals(this.office.getID().compareTo(expResult), 0);
+        assertEquals(this.office.getIdOffice().compareTo(expResult), 0);
 
     }
 
