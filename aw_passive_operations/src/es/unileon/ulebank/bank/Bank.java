@@ -19,10 +19,13 @@ import org.apache.log4j.Logger;
  * @author runix
  */
 public class Bank {
-    private static final Logger LOG = Logger.getLogger(Account.class.getName());
+
+    private static final Logger LOG = Logger.getLogger(Bank.class.getName());
 
     private final List<Office> offices;
+
     private final Handler bankID;
+
     private final TransactionManager manager;
 
     /**
@@ -81,11 +84,15 @@ public class Bank {
     }
 
     /**
+     * Forward transaction to the correct account or throw a exception
+     * otherwise.
      *
-     * @param t
-     * @param destine
-     * @throws MalformedHandlerException
-     * @throws TransactionException
+     * @param t ( Transaction to forward )
+     * @param destine ( The transaction destine )
+     *
+     * @throws es.unileon.ulebank.handler.MalformedHandlerException( If the
+     * destine isn't well-formed )
+     * @throws TransactionException ( If the transaction cannot be deliver )
      */
     public void doTransaction(Transaction t, Handler destine) throws MalformedHandlerException, TransactionException {
         StringBuilder error = new StringBuilder();
@@ -105,7 +112,7 @@ public class Bank {
                     error.append("Error, office not found\n");
                 }
             } else {
-                this.manager.doTransaction(t,destine);
+                this.manager.doTransaction(t, destine);
             }
         } else {
             error.append(("The transaction cannot be null or destination be null"));

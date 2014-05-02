@@ -26,6 +26,10 @@ public class TaskList {
     /**
      *
      */
+    private final List<Command> deletedCommands;
+    /**
+     *
+     */
     private final CommandDateComparator comparator;
     /**
      *
@@ -42,6 +46,7 @@ public class TaskList {
     public TaskList() {
         this.tasks = new ArrayList<>();
         this.tasksDone = new ArrayList<>();
+        this.deletedCommands = new ArrayList<>();
         this.comparator = new CommandDateComparator();
         this.date = new Date(System.currentTimeMillis());
         this.updatedTime = new Date(System.currentTimeMillis());
@@ -76,22 +81,6 @@ public class TaskList {
 
     /**
      *
-     * @return
-     */
-    public List<Command> getTaskList() {
-        return new ArrayList<>(this.tasks);
-    }
-
-    /**
-     *
-     * @return
-     */
-    public List<Command> getTasksListDone() {
-        return new ArrayList<>(this.tasksDone);
-    }
-
-    /**
-     *
      * @param command
      * @return
      */
@@ -100,7 +89,9 @@ public class TaskList {
         if (command != null) {
             for (int i = 0; i < tasks.size() && !delete; i++) {
                 if (command.getID().compareTo(this.tasks.get(i).getID()) == 0) {
+                    Command c = this.tasks.get(i);
                     this.tasks.remove(i);
+                    this.deletedCommands.add(c);
                     delete = true;
                 }
             }
@@ -134,7 +125,6 @@ public class TaskList {
             this.tasksDone.add(c);
             ++i;
         }
-
         this.sort();;
     }
 
@@ -195,4 +185,29 @@ public class TaskList {
         long diff = this.updatedTime.getTime() - timestamp;
         this.date.setTime(this.date.getTime() + diff);
     }
+
+    /**
+     *
+     * @return
+     */
+    public List<Command> getDeleteCommands() {
+        return new ArrayList<>(this.deletedCommands);
+    }
+
+    /**
+     *
+     * @return
+     */
+    public List<Command> getTaskList() {
+        return new ArrayList<>(this.tasks);
+    }
+
+    /**
+     *
+     * @return
+     */
+    public List<Command> getTasksListDone() {
+        return new ArrayList<>(this.tasksDone);
+    }
+
 }

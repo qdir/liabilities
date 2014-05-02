@@ -16,6 +16,9 @@ import java.util.List;
  */
 public class History<T extends Transaction> {
 
+    private final Collection<T> transactions;
+    private final ConditionFactory<T> conditionFactory;
+
     /**
      * Delete the spaces in the iterator args
      *
@@ -29,9 +32,6 @@ public class History<T extends Transaction> {
         }
         return args;
     }
-
-    private final Collection<T> transactions;
-    private final ConditionFactory<T> conditionFactory;
 
     /**
      *
