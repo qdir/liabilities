@@ -30,6 +30,8 @@ public class CreateClientCommand implements Command {
     private final int phoneNumber1, phoneNumber2;
     private final Office office;
     private Client client;
+    private final Handler commandID;
+    private final Date effectiveDate;
 
     /**
      *
@@ -45,8 +47,10 @@ public class CreateClientCommand implements Command {
      * @param foreingLetter
      * @param dniNumber
      * @param dniLetter
+     * @param effectiveDate
+     * @param commandId
      */
-    public CreateClientCommand(Office office, String name, String surnames, Address address, String civilState, int phoneNumber1, int phoneNumber2, String profession, Date birthDate, char foreingLetter, int dniNumber, char dniLetter) {
+    public CreateClientCommand(Office office, String name, String surnames, Address address, String civilState, int phoneNumber1, int phoneNumber2, String profession, Date birthDate, char foreingLetter, int dniNumber, char dniLetter, Date effectiveDate, Handler commandId) {
         this.name = name;
         this.surnames = surnames;
         this.address = address;
@@ -56,6 +60,9 @@ public class CreateClientCommand implements Command {
         this.profession = profession;
         this.birthDate = birthDate;
         this.office = office;
+        this.effectiveDate = effectiveDate;
+        this.commandID = commandId;
+        
 
     }
 
@@ -64,7 +71,7 @@ public class CreateClientCommand implements Command {
      */
     @Override
     public void execute() {
-        this.client = null;
+      
         try {
             this.client = new Person(this.name, this.surnames, this.address, this.civilState, this.phoneNumber1, this.phoneNumber2, this.profession, this.birthDate, this.foreingLetter, this.dniNumber, this.dniLetter);
             this.office.addClient(client);
@@ -80,7 +87,7 @@ public class CreateClientCommand implements Command {
      */
     @Override
     public Date getEffectiveDate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         return this.effectiveDate;
     }
 
     /**
@@ -89,7 +96,7 @@ public class CreateClientCommand implements Command {
      */
     @Override
     public Handler getID() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.commandID;
     }
 
     /**

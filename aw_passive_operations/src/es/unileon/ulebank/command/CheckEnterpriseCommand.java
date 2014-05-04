@@ -12,7 +12,7 @@ import java.util.Date;
  * @author Paula
  */
 
-          /****DUDOSO****/
+          
 
 
 public class CheckEnterpriseCommand implements Command{
@@ -33,7 +33,7 @@ public class CheckEnterpriseCommand implements Command{
      */
     @Override
     public void execute() {
-        this.enterpriseCode.compareTo(enterpriseCode);
+      
     }
 
     /**

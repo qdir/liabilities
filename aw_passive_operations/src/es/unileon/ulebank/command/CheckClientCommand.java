@@ -34,7 +34,7 @@ public class CheckClientCommand implements Command{
      */
     @Override
     public void execute() {
-             this.nif.compareTo(nif);
+             
     }
 
     /**

@@ -3,41 +3,59 @@
 
 package es.unileon.ulebank.command;
 
+import es.unileon.ulebank.client.Address;
+import es.unileon.ulebank.client.Client;
 import es.unileon.ulebank.client.Enterprise;
 import es.unileon.ulebank.client.EnterpriseHandler;
+import es.unileon.ulebank.client.Person;
 import es.unileon.ulebank.handler.Handler;
+import es.unileon.ulebank.handler.MalformedHandlerException;
+import es.unileon.ulebank.office.Office;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Paula
  */
 public class CreateEnterpriseCommand implements Command{
-    private final Enterprise name;
-    private final Enterprise address;
-    private final EnterpriseHandler enterpriseCode;
+    private final String enterpriseName;
+    private final Address address;
+    private int cifNumber;
+    private char cifLetter;
+    private EnterpriseHandler enterpriseCode;
+    private final Office office;
+    private Client client;
+    private final Handler commandID;
+    private final Date effectiveDate;
 
     /**
      *
-     * @param name
+     * @param office
+     * @param enterpriseName
      * @param address
-     * @param cif
-     * @param letter
+     * @param cifNumber
+     * @param cifLetter
+     * @param effectiveDate
+     * @param commandId
      */
-    public CreateEnterpriseCommand(Enterprise name, Enterprise address, int cif, char letter){
-            this.enterpriseCode= new EnterpriseHandler(letter, cif);
-            this.name = name;
-            this.address=address;
-        }
-
+    public CreateEnterpriseCommand(Office office, String enterpriseName, Address address, int cifNumber, char cifLetter, Date effectiveDate, Handler commandId){
+       
+        this.enterpriseName = enterpriseName;
+        this.address=address;
+        this.office = office;
+        this.effectiveDate = effectiveDate;
+        this.commandID = commandId;
+      
+    }
     /**
      *
      */
     @Override
     public void execute() {
-        this.name.getEnterpriseName();
-        this.address.getAddress();
-        this.enterpriseCode.toString();
+        this.client = new Enterprise(this.cifLetter, this.cifNumber, this.enterpriseName, this.address);
+        this.office.addClient(client);
        
     }
 
@@ -47,7 +65,7 @@ public class CreateEnterpriseCommand implements Command{
      */
     @Override
     public Date getEffectiveDate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.effectiveDate;
     }
 
     /**
@@ -56,7 +74,7 @@ public class CreateEnterpriseCommand implements Command{
      */
     @Override
     public Handler getID() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.commandID;
     }
 
     /**
@@ -64,7 +82,9 @@ public class CreateEnterpriseCommand implements Command{
      */
     @Override
     public void undo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (this.client != null) {
+            this.office.deleteClient(this.client.getId());
+        }
     }
 
     /**
@@ -72,7 +92,9 @@ public class CreateEnterpriseCommand implements Command{
      */
     @Override
     public void redo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (this.client != null) {
+            this.office.addClient(this.client);
+        }
     }
     
 }
