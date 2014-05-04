@@ -4,6 +4,7 @@ package es.unileon.ulebank.taskList;
 
 import es.unileon.ulebank.command.Command;
 import es.unileon.ulebank.handler.Handler;
+import es.unileon.ulebank.time.Time;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -32,14 +33,9 @@ public class TaskList {
      */
     private final CommandDateComparator comparator;
     /**
-     *
+     * Bank's time
      */
-    private final Date date;
-    /**
-     *
-     */
-    private final Date updatedTime;
-
+    private final Time time;
     /**
      *
      */
@@ -48,8 +44,7 @@ public class TaskList {
         this.tasksDone = new ArrayList<>();
         this.deletedCommands = new ArrayList<>();
         this.comparator = new CommandDateComparator();
-        this.date = new Date(System.currentTimeMillis());
-        this.updatedTime = new Date(System.currentTimeMillis());
+        this.time = Time.getInstance();
     }
 
     /**
@@ -69,14 +64,6 @@ public class TaskList {
             this.sort();
         }
         return add;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Date getDate() {
-        return this.date;
     }
 
     /**
@@ -118,7 +105,7 @@ public class TaskList {
      */
     public void executeTasks() {
         int i = 0;
-        while (this.tasks.get(i).getEffectiveDate().getTime() <= this.date.getTime()) {
+        while (this.tasks.get(i).getEffectiveDate().getTime() <= this.time.getTime()) {
             Command c = this.tasks.get(i);
             c.execute();
             this.tasks.remove(i);
@@ -128,62 +115,9 @@ public class TaskList {
         this.sort();;
     }
 
-    /**
-     *
-     * @param timestamp
-     */
-    public void setTime(long timestamp) {
-        this.date.setTime(timestamp);
-        this.updatedTime.setTime(System.currentTimeMillis());
-    }
-
-    /**
-     *
-     * @param date
-     */
-    public void setTime(Date date) {
-        this.setTime(date.getTime());
-    }
-
-    /**
-     *
-     * @param days
-     */
-    public void forwardDays(int days) {
-        if (days > 0) {
-            //days * hours* minutes* seconds * milliseconds
-            long timeToForward = (long) (days) * 24 * 60 * 60 * 1000;
-            this.date.setTime(timeToForward + this.date.getTime());
-            this.updatedTime.setTime(System.currentTimeMillis());
-            this.executeTasks();
-        }
-    }
-
-    /**
-     *
-     * @param days
-     */
-    public void backwardDays(int days) {
-        if (days > 0) {
-            long timeToForward = (long) (-days) * 24 * 60 * 60 * 1000;
-            this.date.setTime(timeToForward + this.date.getTime());
-            this.updatedTime.setTime(System.currentTimeMillis());
-        }
-    }
-
     private void sort() {
         Collections.sort(this.tasks, this.comparator);
         Collections.sort(this.tasksDone, this.comparator);
-    }
-
-    /**
-     *
-     */
-    public void updateTime() {
-        long timestamp = this.updatedTime.getTime();
-        this.updatedTime.setTime(System.currentTimeMillis());
-        long diff = this.updatedTime.getTime() - timestamp;
-        this.date.setTime(this.date.getTime() + diff);
     }
 
     /**
