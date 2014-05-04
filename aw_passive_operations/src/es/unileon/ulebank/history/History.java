@@ -1,5 +1,6 @@
 package es.unileon.ulebank.history;
 
+import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.history.conditions.ConditionFactory;
 import es.unileon.ulebank.history.conditions.WrongArgsException;
 import es.unileon.ulebank.iterator.Condition;
@@ -16,6 +17,17 @@ import java.util.List;
  */
 public class History<T extends Transaction> {
 
+    private final Collection<T> transactions;
+    private final ConditionFactory<T> conditionFactory;
+
+    /**
+     *
+     */
+    public History() {
+        this.transactions = new ArrayList();
+        this.conditionFactory = ConditionFactory.getInstance();
+    }
+
     /**
      * Delete the spaces in the iterator args
      *
@@ -30,24 +42,25 @@ public class History<T extends Transaction> {
         return args;
     }
 
-    private final Collection<T> transactions;
-    private final ConditionFactory<T> conditionFactory;
-
-    /**
-     *
-     */
-    public History() {
-        this.transactions = new ArrayList();
-        this.conditionFactory = ConditionFactory.getInstance();
-    }
-
     /**
      *
      * @param transaction
      * @return
      */
     public boolean add(T transaction) {
-        return this.transactions.add(transaction);
+        boolean found = false;
+        Iterator<T> it = this.transactions.iterator();
+        while (it.hasNext() && !found) {
+            T t = it.next();
+            if (t.getId().compareTo(transaction.getId()) == 0) {
+                found = true;
+            }
+        }
+        if (!found) {
+            return this.transactions.add(transaction);
+        }
+        return false;
+
     }
 
     /**
@@ -139,10 +152,19 @@ public class History<T extends Transaction> {
 
     /**
      *
-     * @param t
+     * @param id
      * @return
      */
-    public boolean remove(T t) {
-        return this.transactions.remove(t);
+    public boolean remove(Handler id) {
+        boolean found = false;
+        Iterator<T> it = this.transactions.iterator();
+        while (it.hasNext() && !found) {
+            T t = it.next();
+            if (t.getId().compareTo(id) == 0) {
+                found = true;
+                this.transactions.remove(t);
+            }
+        }
+        return found;
     }
 }

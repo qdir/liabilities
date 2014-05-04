@@ -4,6 +4,7 @@ package es.unileon.ulebank.account;
 
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.history.Transaction;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,13 +17,12 @@ public interface LiquidationStrategy {
      * Perform liquitadation based on account history.
      *
      * @param transactions ( The transactions for doing the liquidation )
-     * @param months ( The number of months )
-     *
-     * max(transaction.date)-min(transaction.date)==months
+     * @param min
+     * @param max
      *
      * @return (The amount of money to pay )
      */
-    public Transaction doLiquidation(List<Transaction> transactions, int months);
+    public Transaction doLiquidation(List<Transaction> transactions, Date min, Date max);
 
     /**
      * The liquidation strategy id.

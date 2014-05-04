@@ -380,7 +380,7 @@ public class Account {
         int i = 0;
         boolean found = false;
         while (i < this.liquidationStrategies.size() && !found) {
-            if (this.liquidationStrategies.get(i).getID().compareTo(strategy.getID()) == 0) {
+            if (this.liquidationStrategies.get(i++).getID().compareTo(strategy.getID()) == 0) {
                 found = true;
             }
         }
@@ -399,7 +399,7 @@ public class Account {
         int i = 0;
         boolean found = false;
         while (i < this.liquidationStrategies.size() && !found) {
-            if (this.liquidationStrategies.get(i).getID().compareTo(id) == 0) {
+            if (this.liquidationStrategies.get(i++).getID().compareTo(id) == 0) {
                 this.liquidationStrategies.remove(i);
                 found = true;
             }
