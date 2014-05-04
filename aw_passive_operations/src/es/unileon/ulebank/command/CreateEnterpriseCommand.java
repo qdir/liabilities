@@ -24,6 +24,7 @@ public class CreateEnterpriseCommand implements Command{
     private final Address address;
     private int cifNumber;
     private char cifLetter;
+    private char cifControl;
     private EnterpriseHandler enterpriseCode;
     private final Office office;
     private Client client;
@@ -40,7 +41,7 @@ public class CreateEnterpriseCommand implements Command{
      * @param effectiveDate
      * @param commandId
      */
-    public CreateEnterpriseCommand(Office office, String enterpriseName, Address address, int cifNumber, char cifLetter, Date effectiveDate, Handler commandId){
+    public CreateEnterpriseCommand(Office office, String enterpriseName, Address address, int cifNumber, char cifLetter, char cifControl, Date effectiveDate, Handler commandId){
        
         this.enterpriseName = enterpriseName;
         this.address=address;
@@ -54,9 +55,12 @@ public class CreateEnterpriseCommand implements Command{
      */
     @Override
     public void execute() {
-        this.client = new Enterprise(this.cifLetter, this.cifNumber, this.enterpriseName, this.address);
-        this.office.addClient(client);
-       
+        try {
+            this.client = new Enterprise(this.cifLetter, this.cifNumber, this.cifControl, this.enterpriseName, this.address);
+            this.office.addClient(client);
+        } catch (MalformedHandlerException ex) {
+            Logger.getLogger(CreateEnterpriseCommand.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
