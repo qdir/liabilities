@@ -12,6 +12,12 @@ import java.util.Date;
  * @author Paula
  */
 public class DoHistoryCommand implements Command{
+    
+    public DoHistoryCommand(){
+        
+    }
+    
+    
  @Override
     public void execute() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
