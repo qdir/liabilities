@@ -24,6 +24,16 @@ public class Time {
     private long lastUpdateTimestamp;
 
     /**
+     * Equivalence between days and milliseconds
+     */
+    public final static long DAYS_TO_MILLIS = (long) 24l * 60l * 60l * 1000l;
+
+    /**
+     * Equivalence between milliseconds and days
+     */
+    public final static long MILLIS_TO_DAYS = (long) 1l / DAYS_TO_MILLIS;
+
+    /**
      * Private constructor
      */
     private Time() {
@@ -83,9 +93,9 @@ public class Time {
     }
 
     /**
-     * Update the time. If you don't call updateTime method,
-     * the time will be the same always. When you call updateTime
-     * the time between the last update and now is added.
+     * Update the time. If you don't call updateTime method, the time will be
+     * the same always. When you call updateTime the time between the last
+     * update and now is added.
      */
     public void updateTime() {
         long diff = System.currentTimeMillis() - this.lastUpdateTimestamp;

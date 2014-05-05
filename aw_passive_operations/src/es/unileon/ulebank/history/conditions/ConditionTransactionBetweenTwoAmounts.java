@@ -12,29 +12,26 @@ import es.unileon.ulebank.iterator.Condition;
  */
 public class ConditionTransactionBetweenTwoAmounts<T extends Transaction> implements Condition<T> {
 
-    private long low;
-    private long high;
-    private boolean isValid;
+    private long min;
+    private long max;
 
     /**
      *
-     * @param low
-     * @param high
-     * @param isValid
+     * @param min
+     * @param max
      * @throws WrongArgsException
      */
-    public ConditionTransactionBetweenTwoAmounts(long low, long high, boolean isValid) throws WrongArgsException {
-        if (low > high) {
+    public ConditionTransactionBetweenTwoAmounts(long min, long max) throws WrongArgsException {
+        if (min > max) {
             throw new WrongArgsException("Low param is higher than high param\n");
         }
-        this.low = low;
-        this.high = high;
-        this.isValid = isValid;
+        this.min = min;
+        this.max = max;
     }
 
     @Override
     public boolean test(T t) {
         double amount = t.getAmount();
-        return (this.low <= amount && amount <= this.high) ^ !isValid;
+        return (this.min <= amount && amount <= this.max);
     }
 }

@@ -2,12 +2,10 @@
  group.*/
 package es.unileon.ulebank.taskList;
 
-import es.unileon.ulebank.command.Command;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.time.Time;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,32 +15,37 @@ import java.util.List;
 public class TaskList {
 
     /**
-     *
+     * Tasks to execute.
      */
     private final List<Task> tasks;
+
     /**
-     *
+     * Tasks executed.
      */
     private final List<Task> tasksDone;
+
     /**
-     *
+     * Deleted tasks before execute it.
      */
-    private final List<Task> deletedCommands;
+    private final List<Task> deletedTasks;
+
     /**
-     *
+     * Tasks's comparator to sort by effective date.
      */
     private final TaskDateComparator comparator;
+
     /**
-     * Bank's time
+     * Bank's time.
      */
     private final Time time;
+
     /**
-     *
+     * Create a new tasklist.
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
         this.tasksDone = new ArrayList<>();
-        this.deletedCommands = new ArrayList<>();
+        this.deletedTasks = new ArrayList<>();
         this.comparator = new TaskDateComparator();
         this.time = Time.getInstance();
     }
@@ -71,14 +74,14 @@ public class TaskList {
      * @param task
      * @return
      */
-    public boolean deleteCommand(Task task) {
+    public boolean deleteTask(Task task) {
         boolean delete = false;
         if (task != null) {
             for (int i = 0; i < tasks.size() && !delete; i++) {
                 if (task.getID().compareTo(this.tasks.get(i).getID()) == 0) {
                     Task c = this.tasks.get(i);
                     this.tasks.remove(i);
-                    this.deletedCommands.add(c);
+                    this.deletedTasks.add(c);
                     delete = true;
                 }
             }
@@ -91,7 +94,7 @@ public class TaskList {
      *
      * @param id
      */
-    public void undoCommand(Handler id) {
+    public void undoTask(Handler id) {
         for (int i = 0; i < this.tasksDone.size(); i++) {
             Task c = this.tasksDone.get(i);
             if (c.getID().compareTo(id) == 0) {
@@ -124,8 +127,8 @@ public class TaskList {
      *
      * @return
      */
-    public List<Task> getDeleteCommands() {
-        return new ArrayList<>(this.deletedCommands);
+    public List<Task> getDeteledTasks() {
+        return new ArrayList<>(this.deletedTasks);
     }
 
     /**

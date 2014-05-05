@@ -12,6 +12,7 @@ import java.util.Date;
  */
 public class Task {
 
+    
     private final Command command;
 
     private final Date effectiveDate;

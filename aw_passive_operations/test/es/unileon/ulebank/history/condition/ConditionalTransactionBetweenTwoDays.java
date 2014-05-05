@@ -21,45 +21,30 @@ public class ConditionalTransactionBetweenTwoDays {
     private static final long DAY_TIMESTAMP = 1000 * 24 * 60 * 60;
 
     private ConditionTransactionBetweenTwoDates<Transaction> conditionBetween;
-    private ConditionTransactionBetweenTwoDates<Transaction> conditionBetweenExclusive;
 
-    private Date low;
-    private Date high;
+    private Date min;
+    private Date max;
 
     @Before
     public void setup() throws Exception {
-        this.low = new Date(DAY_TIMESTAMP * 10 - DAY_TIMESTAMP / 2);
-        this.high = new Date(DAY_TIMESTAMP * 20 + DAY_TIMESTAMP / 2);
-        this.conditionBetween = new ConditionTransactionBetweenTwoDates<>(low, high, true);
-        this.conditionBetweenExclusive = new ConditionTransactionBetweenTwoDates<>(low, high, false);
+        this.min = new Date(DAY_TIMESTAMP * 10 - DAY_TIMESTAMP / 2);
+        this.max = new Date(DAY_TIMESTAMP * 20 + DAY_TIMESTAMP / 2);
+        this.conditionBetween = new ConditionTransactionBetweenTwoDates<>(min, max);
     }
 
     @Test
     public void testConditionBetweenOK() {
-        assertTrue(this.conditionBetween.test(this.getTransaction(new Date(this.low.getTime() + (this.high.getTime() - this.low.getTime())))));
-        assertTrue(this.conditionBetween.test(this.getTransaction(new Date(this.low.getTime()))));
-        assertTrue(this.conditionBetween.test(this.getTransaction(new Date(this.high.getTime()))));
+        assertTrue(this.conditionBetween.test(this.getTransaction(new Date(this.min.getTime() + (this.max.getTime() - this.min.getTime())))));
+        assertTrue(this.conditionBetween.test(this.getTransaction(new Date(this.min.getTime()))));
+        assertTrue(this.conditionBetween.test(this.getTransaction(new Date(this.max.getTime()))));
 
     }
 
     @Test
     public void testConditionBetweenNoOK() {
-        assertFalse(this.conditionBetween.test(this.getTransaction(new Date(this.low.getTime() - 1))));
-        assertFalse(this.conditionBetween.test(this.getTransaction(new Date(this.high.getTime() + 1))));
+        assertFalse(this.conditionBetween.test(this.getTransaction(new Date(this.min.getTime() - 1))));
+        assertFalse(this.conditionBetween.test(this.getTransaction(new Date(this.max.getTime() + 1))));
 
-    }
-
-    @Test
-    public void testConditionBetweenOKExclusive() {
-        assertTrue(this.conditionBetweenExclusive.test(this.getTransaction(new Date(this.low.getTime() - 1))));
-        assertTrue(this.conditionBetweenExclusive.test(this.getTransaction(new Date(this.high.getTime() + 1))));
-    }
-
-    @Test
-    public void testConditionBetweenNoOKExclusive() {
-        assertFalse(this.conditionBetweenExclusive.test(this.getTransaction(new Date(this.low.getTime() + (this.high.getTime() - this.low.getTime())))));
-        assertFalse(this.conditionBetweenExclusive.test(this.getTransaction(new Date(this.low.getTime()))));
-        assertFalse(this.conditionBetweenExclusive.test(this.getTransaction(new Date(this.high.getTime()))));
     }
 
     public final Transaction getTransaction(Date date) {

@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
  */
 public class TimeTest {
 
-    public Time time;
+    private Time time;
 
     @Before
     public void setUp() {

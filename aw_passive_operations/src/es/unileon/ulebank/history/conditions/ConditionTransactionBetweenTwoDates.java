@@ -13,30 +13,27 @@ import java.util.Date;
  */
 public class ConditionTransactionBetweenTwoDates<T extends Transaction> implements Condition<T> {
 
-    private final long timestampLess;
-    private final long timestampHigher;
-    private final boolean isValid;
+    private final long timestampMin;
+    private final long timestampMax;
 
     /**
      *
-     * @param less
-     * @param high
-     * @param isValid
+     * @param min
+     * @param max
      * @throws WrongArgsException
      */
-    public ConditionTransactionBetweenTwoDates(Date less, Date high, boolean isValid) throws WrongArgsException {
-        this.timestampLess = less.getTime();
-        this.timestampHigher = high.getTime();
-        if (this.timestampLess > this.timestampHigher) {
+    public ConditionTransactionBetweenTwoDates(Date min, Date max) throws WrongArgsException {
+        this.timestampMin = min.getTime();
+        this.timestampMax = max.getTime();
+        if (this.timestampMin > this.timestampMax) {
             throw new WrongArgsException("Less date is higher than the high");
         }
-        this.isValid = isValid;
     }
 
     @Override
     public boolean test(T t) {
         final long timestamp = t.getEffectiveDate().getTime();
-        return (this.timestampLess <= timestamp && timestamp <= this.timestampHigher) == isValid;
+        return (this.timestampMin <= timestamp && timestamp <= this.timestampMax);
     }
 
 }

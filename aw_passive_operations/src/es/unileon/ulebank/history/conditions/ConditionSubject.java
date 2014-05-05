@@ -31,7 +31,7 @@ public class ConditionSubject<T extends Transaction> implements Condition<T> {
      */
     public ConditionSubject(boolean isValidSubject, String... words) {
         this.subject = words;
-        this.isValidSubject = !isValidSubject;
+        this.isValidSubject = isValidSubject;
     }
 
     @Override

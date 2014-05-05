@@ -19,9 +19,9 @@ public class ConditionTransactionBetweenTwoAmountsTest {
 
     @Test
     public void testBetweenOk() throws WrongArgsException {
-        ConditionTransactionBetweenTwoAmounts condition = new ConditionTransactionBetweenTwoAmounts<>(100, 100, true);
+        ConditionTransactionBetweenTwoAmounts condition = new ConditionTransactionBetweenTwoAmounts<>(100, 100);
         assertTrue(condition.test(this.getTransaction(100)));
-        condition = new ConditionTransactionBetweenTwoAmounts<>(100, 125, true);
+        condition = new ConditionTransactionBetweenTwoAmounts<>(100, 125);
         assertTrue(condition.test(this.getTransaction(100)));
         assertTrue(condition.test(this.getTransaction(125)));
         assertTrue(condition.test(this.getTransaction(115)));
@@ -30,32 +30,11 @@ public class ConditionTransactionBetweenTwoAmountsTest {
 
     @Test
     public void testBetweenNotOk() throws WrongArgsException {
-        ConditionTransactionBetweenTwoAmounts condition = new ConditionTransactionBetweenTwoAmounts<>(100, 100, true);
+        ConditionTransactionBetweenTwoAmounts condition = new ConditionTransactionBetweenTwoAmounts<>(100, 100);
         assertFalse(condition.test(this.getTransaction(101)));
-        condition = new ConditionTransactionBetweenTwoAmounts<>(100, 125, true);
+        condition = new ConditionTransactionBetweenTwoAmounts<>(100, 125);
         assertFalse(condition.test(this.getTransaction(99)));
         assertFalse(condition.test(this.getTransaction(126)));
-        
-    }
-
-    @Test
-    public void testBetweenOkExclusive() throws WrongArgsException {
-        ConditionTransactionBetweenTwoAmounts condition = new ConditionTransactionBetweenTwoAmounts<>(100, 100, false);
-        assertTrue(condition.test(this.getTransaction(101)));
-        condition = new ConditionTransactionBetweenTwoAmounts<>(100, 125, false);
-        assertTrue(condition.test(this.getTransaction(99)));
-        assertTrue(condition.test(this.getTransaction(126)));
-        
-    }
-
-    @Test
-    public void testBetweenNotOkExclusive() throws WrongArgsException {
-        ConditionTransactionBetweenTwoAmounts condition = new ConditionTransactionBetweenTwoAmounts<>(100, 100, false);
-        assertFalse(condition.test(this.getTransaction(100)));
-        condition = new ConditionTransactionBetweenTwoAmounts<>(100, 125, false);
-        assertFalse(condition.test(this.getTransaction(100)));
-        assertFalse(condition.test(this.getTransaction(125)));
-        assertFalse(condition.test(this.getTransaction(115)));
         
     }
 

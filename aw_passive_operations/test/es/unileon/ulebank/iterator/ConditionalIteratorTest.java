@@ -33,6 +33,6 @@ public class ConditionalIteratorTest {
         }
         this.conditions = new ArrayList<>();
         this.iterator = new ConditionalIterator<>(conditions, elemsList);
-    }
-
+    }            
+   
 }
