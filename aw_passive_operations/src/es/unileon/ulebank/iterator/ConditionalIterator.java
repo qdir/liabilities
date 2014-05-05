@@ -15,7 +15,7 @@ import java.util.List;
  * @author runix
  * @param <T>
  */
-public class ConditionalIterator<T> implements Iterator<T> {
+public abstract class ConditionalIterator<T> implements Iterator<T> {
 
     /**
      * Conditions for decide if a element is going to be include or not
@@ -117,13 +117,9 @@ public class ConditionalIterator<T> implements Iterator<T> {
         while (this.elementsIterator.hasNext() && !done) {
             T actual = this.elementsIterator.next();
             boolean valid = true;
-            boolean end = false;
-            for (int i = 0; i < this.conditions.size() && !end; i++) {
-                Condition<T> condition = this.conditions.get(i);
-                if (!this.conditions.get(i).test(actual)) {
-                    end = true;
-                    valid = false;
-                }
+            int i = 0;
+            while (i < this.conditions.size() && valid) {
+                valid = this.conditions.get(i++).test(actual);
             }
             if (valid) {
                 this.next = actual;

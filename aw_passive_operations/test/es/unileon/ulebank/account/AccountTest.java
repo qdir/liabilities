@@ -545,7 +545,7 @@ public class AccountTest {
         assertEquals(0.0, this.commercialAccount.getBalance(), EPSILON);
 
         History history = this.commercialAccount.getHistory();;
-        Iterator<GenericTransaction> it = history.getIterator(null);
+        Iterator<GenericTransaction> it = history.getIterator();
         this.compareEntryAndGenericTransactionsWithAsserts(t2, it.next());
         this.compareEntryAndGenericTransactionsWithAsserts(t, it.next());
 

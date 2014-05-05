@@ -15,33 +15,28 @@ public class ConditionSubject<T extends Transaction> implements Condition<T> {
     /**
      * Words to search in the subject
      */
-    private final String[] subject;
+    private final String word;
 
     private final boolean isValidSubject;
 
     /**
-     * Create a new ConditionSubejct. The words as passed as parameters will be
-     * searched in the subject. If the param isValidSubject is true this words
+     * Create a new ConditionSubejct. The word as passed as parameters will be
+     * searched in the subject. If the param isValidSubject is true this word
      * must be in the subject and if isValidSubject is false the words musn't be
      * in the subject.
      *
      * @param isValidSubject ( if the words are valid )
      *
-     * @param words (words to search )
+     * @param word (words to search )
      */
-    public ConditionSubject(boolean isValidSubject, String... words) {
-        this.subject = words;
+    public ConditionSubject(boolean isValidSubject, String word) {
+        this.word = word;
         this.isValidSubject = isValidSubject;
     }
 
     @Override
     public boolean test(T t) {
-        boolean contains = true;
-        int i = 0;
-        while (i < subject.length && contains) {
-            contains = t.getSubject().contains(this.subject[i++]);
-        }
-        return contains ^ !isValidSubject;
+        return t.getSubject().contains(this.word) ^ !isValidSubject;
     }
 
 }

@@ -16,12 +16,12 @@ import java.util.List;
  */
 public class IteratorSubject<T extends Transaction> extends ConditionalIterator<T> {
 
-    public IteratorSubject(Condition<T> condition, Iterator<T> iterator, String subject, boolean includeSubject) {
+    public IteratorSubject(Iterator<T> iterator, String subject, boolean includeSubject) {
         super(new ConditionSubject<T>(includeSubject, subject), iterator);
     }
 
-    public IteratorSubject(Condition<T> condition, List<T> elems) {
-        super(condition, elems);
+    public IteratorSubject(List<T> elems, String subject, boolean includeSubject) {
+        super(new ConditionSubject<T>(includeSubject, subject), elems);
     }
 
 }

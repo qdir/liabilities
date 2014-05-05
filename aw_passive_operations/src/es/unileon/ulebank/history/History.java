@@ -48,7 +48,7 @@ public class History<T extends Transaction> {
      * @param args
      * @return
      */
-    public Iterator<T> getIterator(String[] args) {
+    public Iterator<T> getIterator() {
         return this.transactions.iterator();
     }
 
