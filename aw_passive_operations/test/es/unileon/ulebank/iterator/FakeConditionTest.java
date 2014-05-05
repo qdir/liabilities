@@ -13,31 +13,14 @@ import org.junit.Test;
 public class FakeConditionTest {
 
     @Test
-    public void testFakeConditionAllTrue() {
-        FakeCondition f = new FakeCondition(true, true);
+    public void testTrue() {
+        FakeCondition f = new FakeCondition(true);
         assertTrue(f.test(null));
-        assertTrue(f.isExclusive());
     }
 
     @Test
-    public void testFakeConditionAllNeg() {
-        FakeCondition f = new FakeCondition(false, false);
+    public void testFalse() {
+        FakeCondition f = new FakeCondition(false);
         assertFalse(f.test(null));
-        assertFalse(f.isExclusive());
     }
-
-    @Test
-    public void testFakeConditionTestTrue() {
-        FakeCondition f = new FakeCondition(true, false);
-        assertTrue(f.test(null));
-        assertFalse(f.isExclusive());
-    }
-
-    @Test
-    public void testFakeConditionExclusiveTrue() {
-        FakeCondition f = new FakeCondition(false, true);
-        assertFalse(f.test(null));
-        assertTrue(f.isExclusive());
-    }
-
 }

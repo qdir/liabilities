@@ -19,19 +19,19 @@ public class TaskList {
     /**
      *
      */
-    private final List<Command> tasks;
+    private final List<Task> tasks;
     /**
      *
      */
-    private final List<Command> tasksDone;
+    private final List<Task> tasksDone;
     /**
      *
      */
-    private final List<Command> deletedCommands;
+    private final List<Task> deletedCommands;
     /**
      *
      */
-    private final CommandDateComparator comparator;
+    private final TaskDateComparator comparator;
     /**
      * Bank's time
      */
@@ -43,24 +43,24 @@ public class TaskList {
         this.tasks = new ArrayList<>();
         this.tasksDone = new ArrayList<>();
         this.deletedCommands = new ArrayList<>();
-        this.comparator = new CommandDateComparator();
+        this.comparator = new TaskDateComparator();
         this.time = Time.getInstance();
     }
 
     /**
      *
-     * @param command
+     * @param task
      * @return
      */
-    public synchronized boolean addTask(Command command) {
+    public synchronized boolean addTask(Task task) {
         boolean add = true;
-        if (command != null) {
+        if (task != null) {
             for (int i = 0; i < tasks.size() && add; i++) {
-                if (command.getID().compareTo(this.tasks.get(i).getID()) == 0) {
+                if (task.getID().compareTo(this.tasks.get(i).getID()) == 0) {
                     add = false;
                 }
             }
-            this.tasks.add(command);
+            this.tasks.add(task);
             this.sort();
         }
         return add;
@@ -68,15 +68,15 @@ public class TaskList {
 
     /**
      *
-     * @param command
+     * @param task
      * @return
      */
-    public boolean deleteCommand(Command command) {
+    public boolean deleteCommand(Task task) {
         boolean delete = false;
-        if (command != null) {
+        if (task != null) {
             for (int i = 0; i < tasks.size() && !delete; i++) {
-                if (command.getID().compareTo(this.tasks.get(i).getID()) == 0) {
-                    Command c = this.tasks.get(i);
+                if (task.getID().compareTo(this.tasks.get(i).getID()) == 0) {
+                    Task c = this.tasks.get(i);
                     this.tasks.remove(i);
                     this.deletedCommands.add(c);
                     delete = true;
@@ -93,7 +93,7 @@ public class TaskList {
      */
     public void undoCommand(Handler id) {
         for (int i = 0; i < this.tasksDone.size(); i++) {
-            Command c = this.tasksDone.get(i);
+            Task c = this.tasksDone.get(i);
             if (c.getID().compareTo(id) == 0) {
                 c.undo();
             }
@@ -106,7 +106,7 @@ public class TaskList {
     public void executeTasks() {
         int i = 0;
         while (this.tasks.get(i).getEffectiveDate().getTime() <= this.time.getTime()) {
-            Command c = this.tasks.get(i);
+            Task c = this.tasks.get(i);
             c.execute();
             this.tasks.remove(i);
             this.tasksDone.add(c);
@@ -124,7 +124,7 @@ public class TaskList {
      *
      * @return
      */
-    public List<Command> getDeleteCommands() {
+    public List<Task> getDeleteCommands() {
         return new ArrayList<>(this.deletedCommands);
     }
 
@@ -132,7 +132,7 @@ public class TaskList {
      *
      * @return
      */
-    public List<Command> getTaskList() {
+    public List<Task> getTaskList() {
         return new ArrayList<>(this.tasks);
     }
 
@@ -140,7 +140,7 @@ public class TaskList {
      *
      * @return
      */
-    public List<Command> getTasksListDone() {
+    public List<Task> getTasksListDone() {
         return new ArrayList<>(this.tasksDone);
     }
 

@@ -38,9 +38,7 @@ public class ConditionalIterator<T> implements Iterator<T> {
      * @param elements ( elements for the iterator )
      */
     public ConditionalIterator(List<Condition<T>> conditions, Collection<T> elements) {
-        this.conditions = conditions;
-        this.elementsIterator = elements.iterator();
-        this.calcNext();
+        this(conditions, elements.iterator());
     }
 
     /**
@@ -51,6 +49,41 @@ public class ConditionalIterator<T> implements Iterator<T> {
      */
     public ConditionalIterator(List<T> elements) {
         this(new ArrayList<Condition<T>>(), elements);
+    }
+
+    /**
+     * Create a new Iterator with one condition.
+     *
+     * @param condition
+     * @param elements ( elements for the iterator )
+     */
+    public ConditionalIterator(Condition<T> condition, List<T> elements) {
+        this(condition, elements.iterator());
+    }
+
+    /**
+     * Create a new Iterator with one condition.
+     *
+     * @param condition
+     * @param iterator
+     */
+    public ConditionalIterator(Condition<T> condition, Iterator<T> iterator) {
+        this.conditions = new ArrayList<>();
+        this.conditions.add(condition);
+        this.elementsIterator = iterator;
+        this.calcNext();
+    }
+
+    /**
+     * Create a new Iterator with one condition.
+     *
+     * @param conditions
+     * @param iterator
+     */
+    public ConditionalIterator(List<Condition<T>> conditions, Iterator<T> iterator) {
+        this.conditions = conditions;
+        this.elementsIterator = iterator;
+        this.calcNext();
     }
 
     /**
@@ -76,10 +109,7 @@ public class ConditionalIterator<T> implements Iterator<T> {
     }
 
     /**
-     * Calculate the next element. The next element won't be necessarily the
-     * next element in the original list, the next element will be the next
-     * valid element, so the list can has elements yet and any elements of this
-     * be valid ( hasNext = false, next null ).
+     * Calculate the next element.
      */
     private void calcNext() {
         this.next = null;
@@ -88,20 +118,11 @@ public class ConditionalIterator<T> implements Iterator<T> {
             T actual = this.elementsIterator.next();
             boolean valid = true;
             boolean end = false;
-            boolean excluyent = false;
             for (int i = 0; i < this.conditions.size() && !end; i++) {
                 Condition<T> condition = this.conditions.get(i);
-                if (!condition.isExclusive()) {
-                    if (!excluyent) {
-                        valid = false;
-                    }
-                    valid |= condition.test(actual);
-                    excluyent = true;
-                } else {
-                    if (!this.conditions.get(i).test(actual)) {
-                        end = true;
-                        valid = false;
-                    }
+                if (!this.conditions.get(i).test(actual)) {
+                    end = true;
+                    valid = false;
                 }
             }
             if (valid) {

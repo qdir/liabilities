@@ -137,15 +137,20 @@ public class Account {
      * @return ( true if success, else false )
      */
     public boolean addTitular(Client client) {
-        for (int i = 0; i < this.titulars.size(); i++) {
+        boolean found = false;
+        int i = 0;
+        while (i < this.titulars.size() && !found) {
             if (this.titulars.get(i).getId().compareTo(client.getId()) == 0) {
-                LOG.error("Cannot add the titular " + client.getId().toString() + " , the titular already exists");
-                return false;
+                found = true;
             }
         }
-        LOG.info(("Add new titular " + client.getId()));
-        this.titulars.add(client);
-        return true;
+        if (!found) {
+            LOG.info(("Add new titular " + client.getId()));
+            this.titulars.add(client);
+        } else {
+            LOG.error("Cannot add the titular " + client.getId().toString() + " , the titular already exists");
+        }
+        return !found;
     }
 
     /**
@@ -160,15 +165,19 @@ public class Account {
      * @return ( true if success, false otherwise )
      */
     public boolean deleteTitular(Handler id) {
-        for (int i = 0; i < this.titulars.size(); i++) {
+        boolean found = false;
+        int i = 0;
+        while (i < this.titulars.size() && !found) {
             if (this.titulars.get(i).getId().compareTo(id) == 0) {
                 LOG.info("Delete " + id.toString() + " titular");
                 this.titulars.remove(i);
-                return true;
+                found = true;
             }
         }
-        LOG.error("Cannot remove the titular " + id.toString() + " because it doesn't exist");
-        return false;
+        if (!found) {
+            LOG.error("Cannot remove the titular " + id.toString() + " because it doesn't exist");
+        }
+        return found;
     }
 
     /**
@@ -183,14 +192,20 @@ public class Account {
      * @return ( true if success, else false )
      */
     public boolean addAuthorized(Client authorized) {
-        for (int i = 0; i < this.authorizeds.size(); i++) {
+        boolean found = false;
+        int i = 0;
+        while (i < this.authorizeds.size() && !found) {
             if (this.authorizeds.get(i).getId().compareTo(authorized.getId()) == 0) {
-                LOG.error("Cannot add the authorized " + authorized.getId().toString() + " , the authorized already exists");
-                return false;
+                found = true;
             }
         }
-        LOG.info(("Add new titular " + authorized.getId()));
-        return this.authorizeds.add(authorized);
+        if (!found) {
+            LOG.info(("Add new authorized " + authorized.getId()));
+            this.authorizeds.add(authorized);
+        } else {
+            LOG.error("Cannot add the authorized " + authorized.getId().toString() + " , the authorized already exists");
+        }
+        return !found;
     }
 
     /**
@@ -205,15 +220,19 @@ public class Account {
      * @return ( true if success, else false )
      */
     public boolean deleteAuthorized(Handler id) {
-        for (int i = 0; i < this.authorizeds.size(); i++) {
+        boolean found = false;
+        int i = 0;
+        while (i < this.authorizeds.size() && !found) {
             if (this.authorizeds.get(i).getId().compareTo(id) == 0) {
                 LOG.info("Delete " + id.toString() + " authorized");
                 this.authorizeds.remove(i);
-                return true;
+                found = true;
             }
         }
-        LOG.error("Cannot remove the authorized " + id.toString() + " because it doesn't exist");
-        return false;
+        if (!found) {
+            LOG.error("Cannot remove the authorized " + id.toString() + " because it doesn't exist");
+        }
+        return found;
     }
 
     /**

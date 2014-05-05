@@ -2,7 +2,6 @@
  group.*/
 package es.unileon.ulebank.taskList;
 
-import es.unileon.ulebank.command.Command;
 import java.util.Comparator;
 
 /**
@@ -10,7 +9,7 @@ import java.util.Comparator;
  *
  * @author runix
  */
-public class CommandDateComparator implements Comparator<Command> {
+public class TaskDateComparator implements Comparator<Task> {
 
     /**
      * Compare commands for sorting
@@ -21,7 +20,7 @@ public class CommandDateComparator implements Comparator<Command> {
      * @return (o1 == o2 -> 0, o1 > o2 , 1, o2 > o1 -1 )
      */
     @Override
-    public int compare(Command o1, Command o2) {
+    public int compare(Task o1, Task o2) {
         if (o1.getEffectiveDate().getTime() == o2.getEffectiveDate().getTime()) {
             return 0;
         } else if (o1.getEffectiveDate().getTime() > o2.getEffectiveDate().getTime()) {

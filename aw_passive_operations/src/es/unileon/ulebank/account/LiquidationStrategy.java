@@ -5,7 +5,7 @@ package es.unileon.ulebank.account;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.history.Transaction;
 import java.util.Date;
-import java.util.List;
+import java.util.Iterator;
 
 /**
  *
@@ -22,7 +22,7 @@ public interface LiquidationStrategy {
      *
      * @return (The amount of money to pay )
      */
-    public Transaction doLiquidation(List<Transaction> transactions, Date min, Date max);
+    public Transaction doLiquidation(Iterator<Transaction> transactions, Date min, Date max);
 
     /**
      * The liquidation strategy id.

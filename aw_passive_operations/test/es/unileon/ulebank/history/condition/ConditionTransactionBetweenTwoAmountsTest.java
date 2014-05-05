@@ -24,7 +24,7 @@ public class ConditionTransactionBetweenTwoAmountsTest {
         assertTrue(condition.test(this.getTransaction(100)));
         assertTrue(condition.test(this.getTransaction(125)));
         assertTrue(condition.test(this.getTransaction(115)));
-        assertFalse(condition.isExclusive());
+        
     }
 
     @Test
@@ -34,7 +34,7 @@ public class ConditionTransactionBetweenTwoAmountsTest {
         condition = new ConditionTransactionBetweenTwoAmounts<>(100, 125, true);
         assertFalse(condition.test(this.getTransaction(99)));
         assertFalse(condition.test(this.getTransaction(126)));
-        assertFalse(condition.isExclusive());
+        
     }
 
     @Test
@@ -44,7 +44,7 @@ public class ConditionTransactionBetweenTwoAmountsTest {
         condition = new ConditionTransactionBetweenTwoAmounts<>(100, 125, false);
         assertTrue(condition.test(this.getTransaction(99)));
         assertTrue(condition.test(this.getTransaction(126)));
-        assertTrue(condition.isExclusive());
+        
     }
 
     @Test
@@ -55,7 +55,7 @@ public class ConditionTransactionBetweenTwoAmountsTest {
         assertFalse(condition.test(this.getTransaction(100)));
         assertFalse(condition.test(this.getTransaction(125)));
         assertFalse(condition.test(this.getTransaction(115)));
-        assertTrue(condition.isExclusive());
+        
     }
 
     public final Transaction getTransaction(double amount) {

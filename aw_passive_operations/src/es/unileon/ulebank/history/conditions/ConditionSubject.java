@@ -16,10 +16,8 @@ public class ConditionSubject<T extends Transaction> implements Condition<T> {
      * Words to search in the subject
      */
     private final String[] subject;
-    /**
-     * If is exclusive, that is, !isValidSubject ( constructor param )
-     */
-    private final boolean exclusive;
+
+    private final boolean isValidSubject;
 
     /**
      * Create a new ConditionSubejct. The words as passed as parameters will be
@@ -33,7 +31,7 @@ public class ConditionSubject<T extends Transaction> implements Condition<T> {
      */
     public ConditionSubject(boolean isValidSubject, String... words) {
         this.subject = words;
-        this.exclusive = !isValidSubject;
+        this.isValidSubject = !isValidSubject;
     }
 
     @Override
@@ -43,12 +41,7 @@ public class ConditionSubject<T extends Transaction> implements Condition<T> {
         while (i < subject.length && contains) {
             contains = t.getSubject().contains(this.subject[i++]);
         }
-        return contains ^ exclusive;
-    }
-
-    @Override
-    public boolean isExclusive() {
-        return this.exclusive;
+        return contains ^ !isValidSubject;
     }
 
 }

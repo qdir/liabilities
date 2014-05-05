@@ -21,7 +21,6 @@ public class ConditionSubjectTest {
         assertTrue(condition.test(getTransaction("kdahsdhasdasdpruebaasdajhsdhasd")));
         assertTrue(condition.test(getTransaction("pruebakdahsdhasdasdasdajhsdhasd")));
         assertTrue(condition.test(getTransaction("kdahsdhasdasdasdajhsdhasdprueba")));
-        assertFalse(condition.isExclusive());
     }
 
     @Test
@@ -30,7 +29,6 @@ public class ConditionSubjectTest {
         assertTrue(condition.test(getTransaction("kdahsdhasdasdpruebaasdajhsdhasd")));
         assertTrue(condition.test(getTransaction("pruebakdahsdhasdasdasdajhsdhasd")));
         assertTrue(condition.test(getTransaction("kdahsdhasdasdasdajhsdhasdprueba")));
-        assertFalse(condition.isExclusive());
     }
 
     @Test
@@ -39,7 +37,6 @@ public class ConditionSubjectTest {
         assertFalse(condition.test(getTransaction("kdahsdhasdasdpruebaasdajhsdhasd")));
         assertFalse(condition.test(getTransaction("pruebakdahsdhasdasdasdajhsdhasd")));
         assertFalse(condition.test(getTransaction("kdahsdhasdasdasdajhsdhasdprueba")));
-        assertFalse(condition.isExclusive());
     }
 
     @Test
@@ -48,7 +45,6 @@ public class ConditionSubjectTest {
         assertFalse(condition.test(getTransaction("kdahsdhasdasdpruebaasdajhsdhasd")));
         assertFalse(condition.test(getTransaction("pruebakdahsdhasdasdasdajhsdhasd")));
         assertFalse(condition.test(getTransaction("kdahsdhasdasdasdajhsdhasdprueba")));
-        assertFalse(condition.isExclusive());
     }
 
     @Test
@@ -57,7 +53,6 @@ public class ConditionSubjectTest {
         assertFalse(condition.test(getTransaction("kdahsdhasdasdpruebaasdajhsdhasd")));
         assertFalse(condition.test(getTransaction("pruebakdahsdhasdasdasdajhsdhasd")));
         assertFalse(condition.test(getTransaction("kdahsdhasdasdasdajhsdhasdprueba")));
-        assertFalse(condition.isExclusive());
     }
 
     @Test
@@ -66,7 +61,6 @@ public class ConditionSubjectTest {
         assertTrue(condition.test(getTransaction("kdahsdhasdasdpruebaasdajhsdhasd")));
         assertTrue(condition.test(getTransaction("pruebakdahsdhasdasdasdajhsdhasd")));
         assertTrue(condition.test(getTransaction("kdahsdhasdasdasdajhsdhasdprueba")));
-        assertTrue(condition.isExclusive());
     }
 
     @Test
@@ -75,7 +69,6 @@ public class ConditionSubjectTest {
         assertTrue(condition.test(getTransaction("kdahsdhasdasdpruebaasdajhsdhasd")));
         assertTrue(condition.test(getTransaction("pruebakdahsdhasdasdasdajhsdhasd")));
         assertTrue(condition.test(getTransaction("kdahsdhasdasdasdajhsdhasdprueba")));
-        assertTrue(condition.isExclusive());
     }
 
     @Test
@@ -84,7 +77,6 @@ public class ConditionSubjectTest {
         assertTrue(condition.test(getTransaction("kdahsdhasdasdpruebaasdajhsdhasd")));
         assertTrue(condition.test(getTransaction("pruebakdahsdhasdasdasdajhsdhasd")));
         assertTrue(condition.test(getTransaction("kdahsdhasdasdasdajhsdhasdprueba")));
-        assertTrue(condition.isExclusive());
     }
 
     @Test
@@ -93,7 +85,6 @@ public class ConditionSubjectTest {
         assertFalse(condition.test(getTransaction("kdahsdhasdasdpruebaasdajhsdhasd")));
         assertFalse(condition.test(getTransaction("pruebakdahsdhasdasdasdajhsdhasd")));
         assertFalse(condition.test(getTransaction("kdahsdhasdasdasdajhsdhasdprueba")));
-        assertTrue(condition.isExclusive());
     }
 
     @Test
@@ -102,7 +93,6 @@ public class ConditionSubjectTest {
         assertFalse(condition.test(getTransaction("kdahsdhasdasdpruebaasdajhsdhasd")));
         assertFalse(condition.test(getTransaction("pruebakdahsdhasdasdasdajhsdhasd")));
         assertFalse(condition.test(getTransaction("kdahsdhasdasdasdajhsdhasdprueba")));
-        assertTrue(condition.isExclusive());
     }
 
     public final Transaction getTransaction(String subject) {

@@ -14,7 +14,7 @@ public class ConditionTransactionBetweenTwoAmounts<T extends Transaction> implem
 
     private long low;
     private long high;
-    private boolean exclusive;
+    private boolean isValid;
 
     /**
      *
@@ -29,18 +29,12 @@ public class ConditionTransactionBetweenTwoAmounts<T extends Transaction> implem
         }
         this.low = low;
         this.high = high;
-        this.exclusive = !isValid;
+        this.isValid = isValid;
     }
 
     @Override
     public boolean test(T t) {
         double amount = t.getAmount();
-        return (this.low <= amount && amount <= this.high) ^ this.exclusive;
+        return (this.low <= amount && amount <= this.high) ^ !isValid;
     }
-
-    @Override
-    public boolean isExclusive() {
-        return this.exclusive;
-    }
-
 }

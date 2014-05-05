@@ -12,16 +12,13 @@ package es.unileon.ulebank.iterator;
 public class FakeCondition<T> implements Condition<T> {
 
     private final boolean test;
-    private final boolean exclusive;
 
     /**
      *
      * @param test
-     * @param exclusive
      */
-    public FakeCondition(boolean test, boolean exclusive) {
+    public FakeCondition(boolean test) {
         this.test = test;
-        this.exclusive = exclusive;
     }
 
     /**
@@ -34,16 +31,6 @@ public class FakeCondition<T> implements Condition<T> {
     @Override
     public boolean test(T t) {
         return this.test;
-    }
-
-    /**
-     * Returns exclusive value
-     *
-     * @return ( exclusive )
-     */
-    @Override
-    public boolean isExclusive() {
-        return this.exclusive;
     }
 
 }

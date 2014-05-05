@@ -6,7 +6,7 @@ import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.time.Time;
 import java.util.Date;
-import java.util.List;
+import java.util.Iterator;
 
 /**
  *
@@ -45,7 +45,7 @@ public class ConstantLiquidation implements LiquidationStrategy {
     }
 
     @Override
-    public Transaction doLiquidation(List<Transaction> transactions, Date min, Date max) {
+    public Transaction doLiquidation(Iterator<Transaction> transactions, Date min, Date max) {
         long actualTime = Time.getInstance().getTime();
         Transaction t = new Transaction(this.amount, new Date(actualTime), subject, null);
         t.setEffectiveDate(new Date(actualTime));
