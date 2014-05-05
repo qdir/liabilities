@@ -4,7 +4,11 @@
  */
 package es.unileon.ulebank.command;
 
+import es.unileon.ulebank.account.DetailedInformation;
 import es.unileon.ulebank.handler.Handler;
+import es.unileon.ulebank.history.Transaction;
+import es.unileon.ulebank.history.TransactionType;
+import es.unileon.ulebank.transacionManager.TransactionManager;
 import java.util.Date;
 
 /**
@@ -13,31 +17,73 @@ import java.util.Date;
  */
 public class DoTransactionCommand implements Command {
     
-    public DoTransactionCommand(){
+    private final Handler commandID;
+    private final double amount;
+    private final Date date;
+    private Date effectiveDate;
+    private final String subject;
+    private final Enum<TransactionType> type;
+    private final DetailedInformation extraInformation;
+    private Transaction transaction;
+    private TransactionManager trans;
+    /**
+     * 
+     * @param amount
+     * @param date
+     * @param subject
+     * @param type
+     * @param info
+     * @param commandId 
+     */
     
+    public DoTransactionCommand(double amount, Date date, String subject, Enum<TransactionType> type, DetailedInformation info,Handler commandId){
+        this.amount = amount;
+        this.date = date;
+        this.subject = subject;
+        this.type = type;
+        this.extraInformation = info;
+        this.commandID = commandId;
+  
     }
     
-    
+    /**
+     *
+     */
     @Override
     public void execute() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.transaction = new Transaction(this.amount, this.date, this.subject, this.type, this.extraInformation);
+       // this.trans.doTransaction(transaction, );
     }
     
+    /**
+     * 
+     * @return 
+     */
     @Override
     public Date getEffectiveDate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.effectiveDate;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public Handler getID() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.commandID;
     }
 
+    /**
+     *
+     */
     @Override
     public void undo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     */
     @Override
     public void redo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

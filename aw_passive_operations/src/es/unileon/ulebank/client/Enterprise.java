@@ -4,6 +4,7 @@
 package es.unileon.ulebank.client;
 
 import es.unileon.ulebank.handler.Handler;
+import es.unileon.ulebank.handler.MalformedHandlerException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -34,8 +35,8 @@ public class Enterprise extends Client{
      * @param cifLetter
      * @param cifNumber 
      */
-    public Enterprise(char cifLetter, int cifNumber) {
-        super(new EnterpriseHandler(cifLetter, cifNumber));
+    public Enterprise(char cifLetter, int cifNumber, char cifControl) throws MalformedHandlerException {
+        super(new EnterpriseHandler(cifLetter, cifNumber, cifControl));
         authorizedPersons = new ArrayList<>();
     }
     
@@ -46,8 +47,8 @@ public class Enterprise extends Client{
      * @param enterpriseName
      * @param address 
      */
-    public Enterprise(char cifLetter, int cifNumber, String enterpriseName, Address address) {
-        super(new EnterpriseHandler(cifLetter, cifNumber));
+    public Enterprise(char cifLetter, int cifNumber, char cifControl, String enterpriseName, Address address) throws MalformedHandlerException {
+        super(new EnterpriseHandler(cifLetter, cifNumber, cifControl));
         authorizedPersons = new ArrayList<>();
         this.enterpriseName=enterpriseName;
         this.address = address;
