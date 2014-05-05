@@ -13,7 +13,7 @@ import java.util.Date;
  *
  * @author roobre
  */
-public class Transaction {
+public abstract class Transaction {
 
     private final Handler id;
     private final double amount;

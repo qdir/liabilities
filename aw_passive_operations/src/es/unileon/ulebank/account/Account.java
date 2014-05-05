@@ -140,9 +140,9 @@ public class Account {
         boolean found = false;
         int i = 0;
         while (i < this.titulars.size() && !found) {
-            if (this.titulars.get(i).getId().compareTo(client.getId()) == 0) {
+            if (this.titulars.get(i++).getId().compareTo(client.getId()) == 0) {
                 found = true;
-            }
+            } 
         }
         if (!found) {
             LOG.info(("Add new titular " + client.getId()));
@@ -168,7 +168,7 @@ public class Account {
         boolean found = false;
         int i = 0;
         while (i < this.titulars.size() && !found) {
-            if (this.titulars.get(i).getId().compareTo(id) == 0) {
+            if (this.titulars.get(i++).getId().compareTo(id) == 0) {
                 LOG.info("Delete " + id.toString() + " titular");
                 this.titulars.remove(i);
                 found = true;
@@ -195,7 +195,7 @@ public class Account {
         boolean found = false;
         int i = 0;
         while (i < this.authorizeds.size() && !found) {
-            if (this.authorizeds.get(i).getId().compareTo(authorized.getId()) == 0) {
+            if (this.authorizeds.get(i++).getId().compareTo(authorized.getId()) == 0) {
                 found = true;
             }
         }
@@ -223,7 +223,7 @@ public class Account {
         boolean found = false;
         int i = 0;
         while (i < this.authorizeds.size() && !found) {
-            if (this.authorizeds.get(i).getId().compareTo(id) == 0) {
+            if (this.authorizeds.get(i++).getId().compareTo(id) == 0) {
                 LOG.info("Delete " + id.toString() + " authorized");
                 this.authorizeds.remove(i);
                 found = true;

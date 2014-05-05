@@ -2,6 +2,7 @@
  group.*/
 package es.unileon.ulebank.history.condition;
 
+import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.history.TransactionType;
 import es.unileon.ulebank.history.conditions.ConditionSubject;
@@ -96,7 +97,7 @@ public class ConditionSubjectTest {
     }
 
     public final Transaction getTransaction(String subject) {
-        Transaction t = new Transaction(0, null, subject, TransactionType.CHARGE);
+        Transaction t = new GenericTransaction(0, null, subject, TransactionType.CHARGE);
         return t;
     }
 }

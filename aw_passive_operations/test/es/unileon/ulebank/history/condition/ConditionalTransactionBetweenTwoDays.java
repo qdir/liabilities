@@ -2,6 +2,7 @@
  group.*/
 package es.unileon.ulebank.history.condition;
 
+import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.history.TransactionType;
 import es.unileon.ulebank.history.conditions.ConditionTransactionBetweenTwoDates;
@@ -62,7 +63,7 @@ public class ConditionalTransactionBetweenTwoDays {
     }
 
     public final Transaction getTransaction(Date date) {
-        Transaction t = new Transaction(0, date, "", TransactionType.CHARGE);
+        Transaction t = new GenericTransaction(0, date, "", TransactionType.CHARGE);
         t.setEffectiveDate(date);
         return t;
     }
