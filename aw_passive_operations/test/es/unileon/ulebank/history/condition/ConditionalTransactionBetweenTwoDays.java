@@ -4,7 +4,7 @@ package es.unileon.ulebank.history.condition;
 
 import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.Transaction;
-import es.unileon.ulebank.history.TransactionType;
+
 import es.unileon.ulebank.history.conditions.ConditionTransactionBetweenTwoDates;
 import java.util.Date;
 import static org.junit.Assert.assertFalse;
@@ -48,7 +48,7 @@ public class ConditionalTransactionBetweenTwoDays {
     }
 
     public final Transaction getTransaction(Date date) {
-        Transaction t = new GenericTransaction(0, date, "", TransactionType.CHARGE);
+        Transaction t = new GenericTransaction(0, date, "");
         t.setEffectiveDate(date);
         return t;
     }

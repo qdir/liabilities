@@ -18,10 +18,9 @@ public class GenericTransaction extends Transaction {
      * @param amount ( Transaction amount )
      * @param date ( Transaction date )
      * @param subject ( Transaction subject )
-     * @param type (Transaction type)
      */
-    public GenericTransaction(double amount, Date date, String subject, Enum<TransactionType> type) {
-        super(amount, date, subject, type);
+    public GenericTransaction(double amount, Date date, String subject) {
+        super(amount, date, subject);
     }
 
     /**
@@ -30,9 +29,8 @@ public class GenericTransaction extends Transaction {
      * @param amount ( Transaction amount )
      * @param date ( Transaction date )
      * @param subject ( Transaction subject )
-     * @param type (Transaction type)
      */
-    public GenericTransaction(double amount, Date date, String subject, Enum<TransactionType> type, DetailedInformation extraInfo) {
-        super(amount, date, subject, type, extraInfo);
+    public GenericTransaction(double amount, Date date, String subject, DetailedInformation extraInfo) {
+        super(amount, date, subject, extraInfo);
     }
 }

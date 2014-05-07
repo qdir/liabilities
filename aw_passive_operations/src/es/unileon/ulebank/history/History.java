@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-
 /**
  *
  * @author roobre
@@ -63,8 +62,8 @@ public class History<T extends Transaction> {
         while (it.hasNext() && !found) {
             T t = it.next();
             if (t.getId().compareTo(id) == 0) {
+                it.remove();
                 found = true;
-                this.transactions.remove(t);
             }
         }
         return found;

@@ -20,7 +20,6 @@ public abstract class Transaction {
     private final Date date;
     private Date effectiveDate;
     private final String subject;
-    private final Enum<TransactionType> type;
     private DetailedInformation extraInformation;
 
     /**
@@ -28,10 +27,9 @@ public abstract class Transaction {
      * @param amount
      * @param date
      * @param subject
-     * @param type
      */
-    public Transaction(double amount, Date date, String subject, Enum<TransactionType> type) {
-        this(amount, date, subject, type, new DetailedInformation(""));
+    public Transaction(double amount, Date date, String subject) {
+        this(amount, date, subject, new DetailedInformation(""));
     }
 
     /**
@@ -39,15 +37,33 @@ public abstract class Transaction {
      * @param amount
      * @param date
      * @param subject
-     * @param type
      * @param info
      */
-    public Transaction(double amount, Date date, String subject, Enum<TransactionType> type, DetailedInformation info) {
+    public Transaction(double amount, Date date, String subject, DetailedInformation info) {
         this.id = TransactionHandlerProvider.getTransactionHandler();
+        StringBuilder err = new StringBuilder();
+        if (subject == null) {
+            err.append("The subject cannot be null \n");
+        } else {
+            if (subject.length() == 0) {
+                err.append("Transaction length cannot be 0 \n");
+            }
+        }
+
+        if (id == null) {
+            err.append(("The id cannot be null \n"));
+        } else {
+            if (id.toString().length() == 0) {
+                err.append(("The id size cannot be 0 \n"));
+            }
+        }
+
+        if (date == null) {
+            err.append("The date cannot be null \n");
+        }
         this.amount = amount;
         this.date = date;
         this.subject = subject;
-        this.type = type;
         this.extraInformation = info;
         this.extraInformation.doFinal();
     }
@@ -85,13 +101,6 @@ public abstract class Transaction {
      */
     public String getSubject() {
         return subject;
-    }
-
-    /**
-     * @return the type
-     */
-    public Enum<TransactionType> getType() {
-        return type;
     }
 
     /**

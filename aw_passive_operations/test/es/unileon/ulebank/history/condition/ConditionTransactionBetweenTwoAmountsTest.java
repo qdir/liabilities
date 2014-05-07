@@ -4,7 +4,7 @@ package es.unileon.ulebank.history.condition;
 
 import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.Transaction;
-import es.unileon.ulebank.history.TransactionType;
+
 import es.unileon.ulebank.history.conditions.ConditionTransactionBetweenTwoAmounts;
 import es.unileon.ulebank.history.conditions.WrongArgsException;
 import static org.junit.Assert.assertFalse;
@@ -39,7 +39,7 @@ public class ConditionTransactionBetweenTwoAmountsTest {
     }
 
     public final Transaction getTransaction(double amount) {
-        Transaction t = new GenericTransaction(amount, null, "", TransactionType.CHARGE);
+        Transaction t = new GenericTransaction(amount, null, "");
         return t;
     }
 }

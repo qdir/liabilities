@@ -10,7 +10,6 @@ import es.unileon.ulebank.client.Client;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
 import es.unileon.ulebank.history.Transaction;
-import es.unileon.ulebank.history.TransactionType;
 import es.unileon.ulebank.Employee;
 import java.util.ArrayList;
 import java.util.List;
@@ -204,13 +203,7 @@ public class Office {
             if (handler.getBankHandler().compareTo(this.bank.getID()) == 0 && handler.getOfficeHandler().compareTo(this.id) == 0) {
                 for (int i = 0; i < accounts.size() && !finish; i++) {
                     if (accounts.get(i).getID().compareTo(destine) == 0) {
-                        if (t.getType() == TransactionType.CHARGE) {
-                            accounts.get(i).doWithdrawal(t);
-                        } else if (t.getType() == TransactionType.PAYMENT) {
-                            accounts.get(i).doDeposit(t);
-                        } else {
-                            error.append("Error, transaction not supported ").append(t.getType()).append("\n");
-                        }
+                        accounts.get(i).doTransaction(t);
                         finish = true;
                     }
                 }

@@ -5,9 +5,9 @@ import es.unileon.ulebank.bank.Bank;
 import es.unileon.ulebank.client.Client;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
+import es.unileon.ulebank.history.DirectDebitTransaction;
 import es.unileon.ulebank.history.History;
 import es.unileon.ulebank.history.Transaction;
-import es.unileon.ulebank.history.TransactionType;
 import es.unileon.ulebank.office.Office;
 import java.util.ArrayList;
 import java.util.Date;
@@ -49,7 +49,11 @@ public class Account {
     /**
      * The history of the account
      */
-    private final History history;
+    private final History<Transaction> history;
+    /**
+     *
+     */
+    private final History<DirectDebitTransaction> directDebit;
     /**
      * The last liquidation
      */
@@ -87,6 +91,7 @@ public class Account {
         this.lastLiquidation = new Date(System.currentTimeMillis());
         this.liquidationFrecuency = DEFAULT_LIQUIDATION_FREQUENCY;
         this.liquidationStrategies = new ArrayList<>();
+        this.directDebit = new History<>();
         this.maxOverdraft = 0;
         LOG.info("Create a new account with number " + accountnumber + " office " + office.getIdOffice().toString() + " bank " + bank.getID());
     }
@@ -142,7 +147,7 @@ public class Account {
         while (i < this.titulars.size() && !found) {
             if (this.titulars.get(i++).getId().compareTo(client.getId()) == 0) {
                 found = true;
-            } 
+            }
         }
         if (!found) {
             LOG.info(("Add new titular " + client.getId()));
@@ -274,109 +279,28 @@ public class Account {
     }
 
     /**
-     * Withdraw money from the account.
      *
-     * @param transaction ( transaction to do )
-     *
+     * @param transaction
      * @throws TransactionException
-     * es.unileon.ulebank.account.exception.TransactionException (if there are
-     * some null fields in the transaction)
      */
-    public synchronized void doWithdrawal(Transaction transaction) throws TransactionException {
+    public synchronized void doDirectDebit(DirectDebitTransaction transaction) throws TransactionException {
+        this.doTransaction(transaction);
+        this.directDebit.add(transaction);
+    }
+
+    /**
+     *
+     * @param transaction
+     * @throws TransactionException
+     */
+    public synchronized void doTransaction(Transaction transaction) throws TransactionException {
         StringBuilder err = new StringBuilder();
-        if (transaction.getSubject() == null) {
-            err.append("The subject cannot be null \n");
-        } else {
-            if (transaction.getSubject().length() == 0) {
-                err.append("Transaction length cannot be 0 \n");
-            }
-        }
 
-        if (transaction.getType() != TransactionType.CHARGE && transaction.getType() != TransactionType.SALARY) {
-            err = err.append("Withdrawal operations must be ").append(TransactionType.CHARGE).append(" type\n");
-        }
-
-        if (transaction.getId() == null) {
-            err.append(("The id cannot be null \n"));
-        } else {
-            if (transaction.getId().toString().length() == 0) {
-                err.append(("The id size cannot be 0 \n"));
-            }
-        }
-        if (transaction.getDate() == null) {
-            err.append("The date cannot be null \n");
-        }
-
-        if (transaction.getAmount() < 0) {
-            err.append("Fail, the amount of money cannot be less than zero\n");
-        }
-
-        if (transaction.getEffectiveDate() == null) {
-            err.append("The effective date cannot be null \n");
-        }
-
-        if (balance - transaction.getAmount() < -this.maxOverdraft) {
+        if (balance + transaction.getAmount() < -this.maxOverdraft) {
             err.append("Cannot withdrawal money, max overdraft reached. Max overdraft = ").append(this.maxOverdraft).append("\n");
         }
 
         if (err.length() > 0) {
-            LOG.error(err.toString());
-            throw new TransactionException(err.toString());
-        }
-        boolean success = this.history.add(transaction);
-        if (success) {
-            this.balance -= transaction.getAmount();
-        } else {
-            String error = "Cannot store the transaction\n";
-            LOG.error(error);
-            throw new TransactionException(error);
-        }
-
-    }
-
-    /**
-     * Deposit money in the account
-     *
-     * @param transaction ( transaction to do )
-     *
-     * @throws TransactionException (if there are some null fields in the
-     * transaction)
-     */
-    public synchronized void doDeposit(Transaction transaction) throws TransactionException {
-        StringBuilder err = new StringBuilder();
-        if (transaction.getSubject() == null) {
-            err.append("The subject cannot be null \n");
-        } else {
-            if (transaction.getSubject().length() == 0) {
-                err.append("Transaction length cannot be 0 \n");
-            }
-        }
-
-        if (transaction.getType() != TransactionType.PAYMENT && transaction.getType() != TransactionType.PAYROLL) {
-            err = err.append("Deposit operations must be").append(TransactionType.PAYMENT).append(" type\n");
-        }
-
-        if (transaction.getId() == null) {
-            err.append(("The id cannot be null \n"));
-        } else {
-            if (transaction.getId().toString().length() == 0) {
-                err.append(("The id size cannot be 0 \n"));
-            }
-        }
-
-        if (transaction.getDate() == null) {
-            err.append("The date cannot be null \n");
-        }
-
-        if (transaction.getAmount() < 0) {
-            err.append("Fail, the amount of money cannot be less than zero\n");
-        }
-
-        if (transaction.getEffectiveDate() == null) {
-            err.append("The effective date cannot be null \n");
-        }
-        if (err.length() > 0) {
-            LOG.error(err.toString());
             throw new TransactionException(err.toString());
         }
 
