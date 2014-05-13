@@ -2,6 +2,7 @@
  group.*/
 package es.unileon.ulebank.history.iterator;
 
+import es.unileon.ulebank.account.DetailedInformation;
 import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.Transaction;
 
@@ -101,7 +102,7 @@ public class IteratorBetweenTwoDatesTest {
     }
 
     public Transaction getTransaction(long timestamp) {
-        Transaction t = new GenericTransaction(0, null, null);
+        Transaction t = new GenericTransaction(0, new Date(), "", new DetailedInformation());
         t.setEffectiveDate(new Date(timestamp));
         return t;
     }

@@ -2,11 +2,13 @@
  group.*/
 package es.unileon.ulebank.history.iterator;
 
+import es.unileon.ulebank.account.DetailedInformation;
 import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.history.conditions.WrongArgsException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
@@ -100,6 +102,6 @@ public class IteratorBetweenTwoAmountsTest {
     }
 
     public Transaction getTransaction(double amount) {
-        return new GenericTransaction(amount, null, null, null);
+        return new GenericTransaction(amount, new Date(), "", new DetailedInformation());
     }
 }

@@ -69,6 +69,20 @@ public class TaskList {
         return add;
     }
 
+    public synchronized boolean addDoneTask(Task task) {
+        boolean add = true;
+        if (task != null) {
+            for (int i = 0; i < this.tasksDone.size() && add; i++) {
+                if (task.getID().compareTo(this.tasksDone.get(i).getID()) == 0) {
+                    add = false;
+                }
+            }
+            this.tasksDone.add(task);
+            this.sort();
+        }
+        return add;
+    }
+
     /**
      *
      * @param task

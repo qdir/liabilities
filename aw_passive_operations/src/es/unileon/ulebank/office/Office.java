@@ -21,30 +21,34 @@ import org.apache.log4j.Logger;
  */
 public class Office {
 
+    /**
+     * Office's logger
+     */
     private static final Logger LOG = Logger.getLogger(Account.class.getName());
 
     /**
-     *
+     * Max account number
      */
     public static final long MAX_ACCOUNT_NUMBER = 1000000000l - 1;
+
     /**
-     *
+     * The list of accounts of this office
      */
     private final List<Account> accounts;
     /**
-     *
+     * The list of clients of this office
      */
     private final List<Client> clients;
     /**
-     *
+     * Office's id
      */
     private final Handler id;
     /**
-     *
+     * Office's Bank
      */
     private final Bank bank;
     /**
-     *
+     * Next account number
      */
     private long nextAccountNumber;
     /**
@@ -74,14 +78,13 @@ public class Office {
     /**
      * The list of employees of this office
      */
-    private ArrayList<Employee> employeeList;
+    private List<Employee> employeeList;
 
     /**
-     * The list of accounts of this office
-     */
-    /**
+     * Create a new office
      *
-     * @param id
+     * @param id ( the office's id )
+     *
      * @param bank
      */
     public Office(Handler id, Bank bank) {
@@ -94,11 +97,12 @@ public class Office {
     }
 
     /**
+     * Add a new account. The account cannot be repeated.
      *
-     * @param account
-     * @return
+     * @param account ( Account to add)
+     * @return ( true if success, false otherwise )
      */
-    public boolean addAccount(Account account) {
+    public synchronized boolean addAccount(Account account) {
         if (account != null) {
             int i = 0;
             boolean found = false;
@@ -116,9 +120,10 @@ public class Office {
     }
 
     /**
+     * Add a new client.
      *
-     * @param client
-     * @return
+     * @param client ( client to add )
+     * @return ( true if success, false otherwise )
      */
     public synchronized boolean addClient(Client client) {
         if (client != null) {
@@ -136,9 +141,10 @@ public class Office {
     }
 
     /**
+     * Delete a client.
      *
-     * @param id
-     * @return
+     * @param id ( client's id)
+     * @return (true if success, false otherwise )
      */
     public synchronized boolean deleteClient(Handler id) {
         int i = 0;
@@ -155,9 +161,10 @@ public class Office {
     }
 
     /**
+     * Delete a account.
      *
-     * @param id
-     * @return
+     * @param id ( account's id )
+     * @return ( true if success, false otherwise )
      */
     public synchronized boolean deleteAccount(Handler id) {
         int i = 0;
@@ -173,6 +180,7 @@ public class Office {
     }
 
     /**
+     * Get the list of clients
      *
      * @return
      */
@@ -181,6 +189,7 @@ public class Office {
     }
 
     /**
+     * Get the office's id
      *
      * @return
      */
@@ -189,11 +198,13 @@ public class Office {
     }
 
     /**
-     *
-     * @param t
-     * @param destine
-     * @throws TransactionException
-     * @throws MalformedHandlerException
+     * Do a transaction.
+     * 
+     * @param t ( Transaction to do )
+     * @param destine ( Account to forward )
+     * 
+     * @throws TransactionException ( If the transaction couldn't be done )
+     * @throws MalformedHandlerException ( If the destine isn't valid )
      */
     public void doTransaction(Transaction t, Handler destine) throws TransactionException, MalformedHandlerException {
         boolean finish = false;
@@ -221,8 +232,10 @@ public class Office {
     }
 
     /**
+     * Gets the next accountNumber. This number is incremental, from zero to
+     * MAX_ACCOUNT_NUMBER.
      *
-     * @return
+     * @return ( The number in String format )
      */
     public synchronized String getNewAccountNumber() {
         String accountNumber;
@@ -235,7 +248,7 @@ public class Office {
     }
 
     /**
-     *
+     * Gets the list of accounts
      * @return
      */
     public List<Account> getAccounts() {

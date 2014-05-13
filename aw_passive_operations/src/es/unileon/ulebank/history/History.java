@@ -12,10 +12,13 @@ import java.util.Iterator;
  */
 public class History<T extends Transaction> {
 
+    /**
+     * Collection to store the transactions
+     */
     private final Collection<T> transactions;
 
     /**
-     *
+     * Create a new history
      */
     public History() {
         this.transactions = new ArrayList();
@@ -43,8 +46,8 @@ public class History<T extends Transaction> {
     }
 
     /**
+     * Get the history iterator
      *
-     * @param args
      * @return
      */
     public Iterator<T> getIterator() {
@@ -52,9 +55,11 @@ public class History<T extends Transaction> {
     }
 
     /**
+     * Remove a transaction
      *
-     * @param id
-     * @return
+     * @param id (transaction's id )
+     *
+     * @return ( true if sucess, false otherwise )
      */
     public boolean remove(Handler id) {
         boolean found = false;

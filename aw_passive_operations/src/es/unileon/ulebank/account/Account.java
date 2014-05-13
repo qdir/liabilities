@@ -6,9 +6,11 @@ import es.unileon.ulebank.client.Client;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
 import es.unileon.ulebank.history.DirectDebitTransaction;
+import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.History;
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.office.Office;
+import es.unileon.ulebank.time.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,7 +30,7 @@ public class Account {
     /**
      * The default liquidation frecuency
      */
-    private static final int DEFAULT_LIQUIDATION_FREQUENCY = 6;
+    public static final int DEFAULT_LIQUIDATION_FREQUENCY = 6;
     /**
      * The account identifier
      */
@@ -47,28 +49,42 @@ public class Account {
      */
     private final List<Client> authorizeds;
     /**
-     * The history of the account
+     * The account's history
      */
     private final History<Transaction> history;
     /**
-     *
+     * The account's direct debit history
      */
-    private final History<DirectDebitTransaction> directDebit;
+    private final History<DirectDebitTransaction> directDebitHistory;
     /**
      * The last liquidation
      */
     private Date lastLiquidation;
+
     /**
      * The liquidation frequency in months
      */
     private int liquidationFrecuency;
 
+    /**
+     * The strategies
+     */
     private final List<LiquidationStrategy> liquidationStrategies;
 
     /**
      * The max account's overdraft ( in positive )
      */
-    private float maxOverdraft;
+    private double maxOverdraft;
+
+    /**
+     * To know if the account is free of liquidation
+     */
+    private ExemptLiquidationStrategy<Transaction> exemptLiquidationStrategy;
+
+    /**
+     * Account's direct debits
+     */
+    private AccountDirectDebits directDebits;
 
     /**
      * Create a new account
@@ -91,8 +107,9 @@ public class Account {
         this.lastLiquidation = new Date(System.currentTimeMillis());
         this.liquidationFrecuency = DEFAULT_LIQUIDATION_FREQUENCY;
         this.liquidationStrategies = new ArrayList<>();
-        this.directDebit = new History<>();
+        this.directDebitHistory = new History<>();
         this.maxOverdraft = 0;
+        this.directDebits = new AccountDirectDebits();
         LOG.info("Create a new account with number " + accountnumber + " office " + office.getIdOffice().toString() + " bank " + bank.getID());
     }
 
@@ -117,12 +134,21 @@ public class Account {
     }
 
     /**
+     * Get liquidation frecuency
+     *
+     * @return
+     */
+    public int getLiquidationFrecuency() {
+        return this.liquidationFrecuency;
+    }
+
+    /**
      * Set the max account's overdraft
      *
      * @param maxOverdraft ( the account's overdraft ( in positive ))
      * @return ( true if succes, false otherwise)
      */
-    public boolean setMaxOverdraft(float maxOverdraft) {
+    public boolean setMaxOverdraft(double maxOverdraft) {
         if (maxOverdraft >= 0) {
             LOG.info("Change max overdraft to " + maxOverdraft + "\n");
             this.maxOverdraft = maxOverdraft;
@@ -188,7 +214,7 @@ public class Account {
     /**
      *
      * Add a new authorized. The authorized cannot be repeated, that is, two
-     * titulars cannot have the same id, because its id is unique.If we try to
+     * authorized cannot have the same id, because its id is unique.If we try to
      * add a person that is already added the method return false.
      *
      *
@@ -279,19 +305,29 @@ public class Account {
     }
 
     /**
+     * Do a direct debit. The Transaction is added in the direct transaction
+     * history and in the common history.
      *
-     * @param transaction
-     * @throws TransactionException
+     * @see es.unileon.ulebank.account.Account.doTransaction
+     *
+     * @param transaction ( transaction to do )
+     *
+     * @throws TransactionException ( if the max overdraft is reached or sth
+     * like that ( see doTransaction exception )
      */
     public synchronized void doDirectDebit(DirectDebitTransaction transaction) throws TransactionException {
         this.doTransaction(transaction);
-        this.directDebit.add(transaction);
+        this.directDebitHistory.add(transaction);
     }
 
     /**
+     * Do a transaction. The transaction's amount and the account's amount is
+     * added, so, if the transaction's amount is negative the balance is
+     * decrease.
      *
-     * @param transaction
-     * @throws TransactionException
+     * @param transaction ( transaction to do )
+     *
+     * @throws TransactionException ( if the max overdraft is reached )
      */
     public synchronized void doTransaction(Transaction transaction) throws TransactionException {
         StringBuilder err = new StringBuilder();
@@ -315,9 +351,12 @@ public class Account {
     }
 
     /**
+     * Add a new liquidation strategy. The liquidation's id must be unique, so,
+     * if there is a transaction with the same id the method return false and
+     * the strategy won't be added
      *
-     * @param strategy
-     * @return
+     * @param strategy (strategy to add)
+     * @return ( true if sucess, false otherwise )
      */
     public boolean addLiquidationStrategy(LiquidationStrategy strategy) {
         int i = 0;
@@ -334,9 +373,11 @@ public class Account {
     }
 
     /**
+     * Delete the liquidation strategy with specified id.
      *
-     * @param id
-     * @return
+     * @param id ( liquidation trategy's id)
+     *
+     * @return ( true if sucess, false otherwise )
      */
     public boolean deleteLiquidationStrategy(Handler id) {
         int i = 0;
@@ -351,6 +392,7 @@ public class Account {
     }
 
     /**
+     * Perform account liquidation.
      *
      * @param office
      */
@@ -358,23 +400,68 @@ public class Account {
         StringBuilder err = new StringBuilder();
         try {
             AccountHandler ah = new AccountHandler(this.id);
-            if (office.getIdOffice().compareTo(ah) == 0) {
-
+            if (office.getIdOffice().compareTo(ah.getOfficeHandler()) == 0) {
+                if (this.exemptLiquidationStrategy == null || !this.exemptLiquidationStrategy.isExempt(this.history.getIterator(), this.directDebitHistory.getIterator(), this.directDebits)) {
+                    Date now = new Date(Time.getInstance().getTime());
+                    for (int i = 0; i < this.liquidationStrategies.size(); i++) {
+                        //Substract from account and add in other ?
+                        //Account office, -t transaction for office ?
+                        Transaction t = this.liquidationStrategies.get(i).doLiquidation(this.history.getIterator(), lastLiquidation, now);
+                        Transaction tNeg = new GenericTransaction(-t.getAmount(), t.getDate(), t.getSubject());
+                        tNeg.setEffectiveDate(t.getEffectiveDate());
+                        try {
+                            this.doTransaction(t);
+                        } catch (TransactionException ex) {
+                            LOG.error(ex);
+                        }
+                    }
+                    this.lastLiquidation = now;
+                }
             } else {
                 err.append("Wrong office\n");
             }
         } catch (MalformedHandlerException e) {
             err.append("Error while parsing handler\n");
         }
+
+        if (err.length() > 0) {
+//            throw new... ?
+        }
     }
 
     /**
-     * Get the account transactions
+     * Get the account's transactions
      *
      * @return (The transactions)
      */
     public History getHistory() {
         return this.history;
+    }
+
+    /**
+     * Get the direct debit transactions
+     *
+     * @return
+     */
+    public History<DirectDebitTransaction> getDirectDebitHistory() {
+        return this.directDebitHistory;
+    }
+
+    /**
+     * Get the ExemptLiquidationStrategy
+     *
+     * @return
+     */
+    public ExemptLiquidationStrategy<Transaction> getExemptLiquidationStrategy() {
+        return exemptLiquidationStrategy;
+    }
+
+    /**
+     *
+     * @param exemptLiquidationStrategy ( Strategy to set)
+     */
+    public void setExemptLiquidationStrategy(ExemptLiquidationStrategy<Transaction> exemptLiquidationStrategy) {
+        this.exemptLiquidationStrategy = exemptLiquidationStrategy;
     }
 
     /**

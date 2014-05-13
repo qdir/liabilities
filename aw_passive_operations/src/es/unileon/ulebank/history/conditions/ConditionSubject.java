@@ -8,15 +8,20 @@ import es.unileon.ulebank.iterator.Condition;
 /**
  *
  * @author runix
+ *
  * @param <T>
  */
 public class ConditionSubject<T extends Transaction> implements Condition<T> {
 
     /**
-     * Words to search in the subject
+     * Words to search in the subject.
      */
     private final String word;
 
+    /**
+     * If the word is valid. If is valid, it will be incluided and if it is
+     * false the word can't appear in the subject.
+     */
     private final boolean isValidSubject;
 
     /**
@@ -25,9 +30,9 @@ public class ConditionSubject<T extends Transaction> implements Condition<T> {
      * must be in the subject and if isValidSubject is false the words musn't be
      * in the subject.
      *
-     * @param isValidSubject ( if the words are valid )
+     * @param isValidSubject ( if the word is valid )
      *
-     * @param word (words to search )
+     * @param word (word to search )
      */
     public ConditionSubject(boolean isValidSubject, String word) {
         this.word = word;

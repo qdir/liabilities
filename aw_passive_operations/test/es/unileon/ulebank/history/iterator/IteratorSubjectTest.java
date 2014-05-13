@@ -2,10 +2,12 @@
  group.*/
 package es.unileon.ulebank.history.iterator;
 
+import es.unileon.ulebank.account.DetailedInformation;
 import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.history.TransactionHandlerProvider;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
@@ -107,6 +109,6 @@ public class IteratorSubjectTest {
     }
 
     public Transaction getTransaction(String subject) {
-        return new GenericTransaction(0, null, subject, null);
+        return new GenericTransaction(0, new Date(), subject, new DetailedInformation());
     }
 }

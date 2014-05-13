@@ -8,14 +8,17 @@ import es.unileon.ulebank.client.Client;
 import es.unileon.ulebank.handler.GenericHandler;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
+import es.unileon.ulebank.history.DirectDebitTransaction;
 import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.office.Office;
 import es.unileon.ulebank.transacionManager.TransactionManager;
 import es.unileon.ulebank.history.History;
+import es.unileon.ulebank.history.Transaction;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
@@ -256,12 +259,17 @@ public class AccountTest {
     public void testGetID() throws MalformedHandlerException {
         Handler accountNumber = new AccountHandler(office.getIdOffice(), bank.getID(), this.accountNumber);
         assertTrue(accountNumber.compareTo(this.commercialAccount.getID()) == 0);
+        accountNumber = new AccountHandler(office.getIdOffice(), bank.getID(), "1299567899");
+        assertFalse(accountNumber.compareTo(this.commercialAccount.getID()) == 0);
+        accountNumber = new AccountHandler(office.getIdOffice(), new GenericHandler("9999"), this.accountNumber);
+        assertFalse(accountNumber.compareTo(this.commercialAccount.getID()) == 0);
+        accountNumber = new AccountHandler(new GenericHandler("9999"), office.getIdOffice(), this.accountNumber);
+        assertFalse(accountNumber.compareTo(this.commercialAccount.getID()) == 0);
     }
 
     @Test
-    public void testAccountHistory() throws TransactionException {
+    public void testDoTransaction() throws TransactionException {
         double amount = 10.0;
-
         GenericTransaction t2 = new GenericTransaction(amount, new Date(), "Salary");
         t2.setEffectiveDate(new Date(System.currentTimeMillis()));
         this.commercialAccount.doTransaction(t2);
@@ -272,14 +280,109 @@ public class AccountTest {
         this.commercialAccount.doTransaction(t);
         assertEquals(0.0, this.commercialAccount.getBalance(), EPSILON);
 
-        History history = this.commercialAccount.getHistory();;
-        Iterator<GenericTransaction> it = history.getIterator();
-        this.compareEntryAndGenericTransactionsWithAsserts(t2, it.next());
-        this.compareEntryAndGenericTransactionsWithAsserts(t, it.next());
+        GenericTransaction t3 = new GenericTransaction(amount, new Date(), "Salary");
+        t.setEffectiveDate(new Date(System.currentTimeMillis()));
+        this.commercialAccount.doTransaction(t3);
+        assertEquals(amount, this.commercialAccount.getBalance(), EPSILON);
+
+        GenericTransaction t4 = new GenericTransaction(amount, new Date(), "Salary");
+        t.setEffectiveDate(new Date(System.currentTimeMillis()));
+        this.commercialAccount.doTransaction(t4);
+        assertEquals(2 * amount, this.commercialAccount.getBalance(), EPSILON);
+    }
+
+    @Test
+    public void testGetterAndSetterMaxOverdraft() {
+        assertEquals(this.commercialAccount.getMaxOverdraft(), 0.0, EPSILON);
+        double maxOverdraft = 1;
+        assertTrue(this.commercialAccount.setMaxOverdraft(maxOverdraft));
+        assertEquals(this.commercialAccount.getMaxOverdraft(), maxOverdraft, EPSILON);
+        assertFalse(this.commercialAccount.setMaxOverdraft(-maxOverdraft));
+        assertEquals(this.commercialAccount.getMaxOverdraft(), maxOverdraft, EPSILON);
+        maxOverdraft = 10000.0d;
+        assertTrue(this.commercialAccount.setMaxOverdraft(maxOverdraft));
+        assertEquals(this.commercialAccount.getMaxOverdraft(), maxOverdraft, EPSILON);
+    }
+
+    @Test
+    public void testGetterAndSetterLiquidationFrecuency() {
+        int frecuency = 1;
+        assertEquals(this.commercialAccount.getLiquidationFrecuency(), Account.DEFAULT_LIQUIDATION_FREQUENCY);
+        assertTrue(this.commercialAccount.setLiquidationFrecuency(frecuency));
+        assertEquals(this.commercialAccount.getLiquidationFrecuency(), frecuency);
+        assertFalse(this.commercialAccount.setLiquidationFrecuency(0));
+        assertEquals(this.commercialAccount.getLiquidationFrecuency(), frecuency);
+        assertFalse(this.commercialAccount.setLiquidationFrecuency(-1));
+        assertEquals(this.commercialAccount.getLiquidationFrecuency(), frecuency);
 
     }
 
-    public void compareEntryAndGenericTransactionsWithAsserts(GenericTransaction t, GenericTransaction entry) {
+    @Test(expected = TransactionException.class)
+    public void testDoTransactionNotEnoughOverdraftZero() throws TransactionException {
+        double amount = -10.0;
+        GenericTransaction t2 = new GenericTransaction(amount, new Date(), "Salary");
+        t2.setEffectiveDate(new Date(System.currentTimeMillis()));
+        this.commercialAccount.doTransaction(t2);
+    }
+
+    @Test(expected = TransactionException.class)
+    public void testDoTransactionNotEnoughOverdraft() throws TransactionException {
+        double amount = -10.0;
+        this.commercialAccount.setMaxOverdraft(-1.0d * ((double) amount / 2));
+        GenericTransaction t2 = new GenericTransaction(amount, new Date(), "Salary");
+        t2.setEffectiveDate(new Date(System.currentTimeMillis()));
+        this.commercialAccount.doTransaction(t2);
+    }
+
+    @Test
+    public void testAccountHistory() throws TransactionException {
+        double amount = 10.0;
+        GenericTransaction t2 = new GenericTransaction(amount, new Date(), "Salary");
+        t2.setEffectiveDate(new Date(System.currentTimeMillis()));
+        this.commercialAccount.doTransaction(t2);
+
+        GenericTransaction t = new GenericTransaction(-amount, new Date(), "Salary");
+        t.setEffectiveDate(new Date(System.currentTimeMillis()));
+        this.commercialAccount.doTransaction(t);
+
+        History history = this.commercialAccount.getHistory();;
+        Iterator<Transaction> it = history.getIterator();
+        this.compareEntryAndTransactionsWithAsserts(t2, it.next());
+        this.compareEntryAndTransactionsWithAsserts(t, it.next());
+    }
+
+    @Test
+    public void testDirectDebitHistory() throws TransactionException {
+        double amount = 10;
+        DirectDebitTransaction ddt = new DirectDebitTransaction(amount, new Date(), "nothing", new GenericHandler("1234"));
+        ddt.setEffectiveDate(new Date());
+        this.commercialAccount.doDirectDebit(ddt);
+        assertEquals(this.commercialAccount.getBalance(), amount, EPSILON);
+        DirectDebitTransaction ddt2 = new DirectDebitTransaction(amount, new Date(), "nothing", new GenericHandler("1224"));
+        ddt2.setEffectiveDate(new Date());
+        this.commercialAccount.doDirectDebit(ddt2);
+        assertEquals(this.commercialAccount.getBalance(), 2 * amount, EPSILON);
+        DirectDebitTransaction ddt3 = new DirectDebitTransaction(amount, new Date(), "nothing", new GenericHandler("1334"));
+        ddt3.setEffectiveDate(new Date());
+        this.commercialAccount.doDirectDebit(ddt3);
+        assertEquals(this.commercialAccount.getBalance(), 3 * amount, EPSILON);
+        Iterator<DirectDebitTransaction> it = this.commercialAccount.getDirectDebitHistory().getIterator();
+        this.compareEntryAndDirectDebitTransactionWithAsserts(ddt, it.next());
+        this.compareEntryAndDirectDebitTransactionWithAsserts(ddt2, it.next());
+        this.compareEntryAndDirectDebitTransactionWithAsserts(ddt3, it.next());
+
+    }
+
+    public void compareEntryAndDirectDebitTransactionWithAsserts(DirectDebitTransaction t, DirectDebitTransaction entry) {
+        assertTrue(t.getSubject().equals(entry.getSubject()));
+        assertTrue(t.getId().compareTo(entry.getId()) == 0);
+        assertEquals(t.getAmount(), entry.getAmount(), EPSILON);
+        assertTrue(t.getDate().compareTo(entry.getDate()) == 0);
+        assertTrue(t.getEffectiveDate().compareTo(entry.getEffectiveDate()) == 0);
+        assertTrue(t.getDirectDebitId().compareTo(entry.getDirectDebitId()) == 0);
+    }
+
+    public void compareEntryAndTransactionsWithAsserts(Transaction t, Transaction entry) {
         assertTrue(t.getSubject().equals(entry.getSubject()));
         assertTrue(t.getId().compareTo(entry.getId()) == 0);
         assertEquals(t.getAmount(), entry.getAmount(), EPSILON);
