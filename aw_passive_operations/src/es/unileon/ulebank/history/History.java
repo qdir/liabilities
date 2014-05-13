@@ -21,7 +21,7 @@ public class History<T extends Transaction> {
      * Create a new history
      */
     public History() {
-        this.transactions = new ArrayList();
+        this.transactions = new ArrayList<>();
     }
 
     /**
@@ -59,7 +59,7 @@ public class History<T extends Transaction> {
      *
      * @param id (transaction's id )
      *
-     * @return ( true if sucess, false otherwise )
+     * @return ( true if success, false otherwise )
      */
     public boolean remove(Handler id) {
         boolean found = false;

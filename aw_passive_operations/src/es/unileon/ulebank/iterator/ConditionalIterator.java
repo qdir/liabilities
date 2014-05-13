@@ -15,7 +15,7 @@ import java.util.List;
  * @author runix
  * @param <T>
  */
-public abstract class ConditionalIterator<T> implements Iterator<T> {
+public class ConditionalIterator<T> implements Iterator<T> {
 
     /**
      * Conditions for decide if a element is going to be include or not

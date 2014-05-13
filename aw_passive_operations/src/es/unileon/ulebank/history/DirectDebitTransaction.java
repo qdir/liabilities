@@ -13,7 +13,7 @@ import java.util.Date;
 public class DirectDebitTransaction extends Transaction {
 
     /**
-     * The direct debit transaction (The same as direct debit)
+     * The direct debit transaction id (The same as direct debit id)
      */
     private final Handler directDebitId;
 
