@@ -5,7 +5,6 @@ package es.unileon.ulebank.history.iterator;
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.history.conditions.ConditionTransactionBetweenTwoDates;
 import es.unileon.ulebank.history.conditions.WrongArgsException;
-import es.unileon.ulebank.iterator.Condition;
 import es.unileon.ulebank.iterator.ConditionalIterator;
 import java.util.Date;
 import java.util.Iterator;

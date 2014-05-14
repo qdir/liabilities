@@ -562,7 +562,6 @@ public class AccountTest {
      */
     @Test
     public void testSetLiquidationFrecuency() {
-        System.out.println("setLiquidationFrecuency");
         int liquidationFrecuency = 0;
         Account instance = null;
         boolean expResult = false;
@@ -577,7 +576,6 @@ public class AccountTest {
      */
     @Test
     public void testGetLiquidationFrecuency() {
-        System.out.println("getLiquidationFrecuency");
         Account instance = null;
         int expResult = 0;
         int result = instance.getLiquidationFrecuency();
@@ -591,7 +589,6 @@ public class AccountTest {
      */
     @Test
     public void testSetMaxOverdraft() {
-        System.out.println("setMaxOverdraft");
         double maxOverdraft = 0.0;
         Account instance = null;
         boolean expResult = false;
@@ -606,7 +603,6 @@ public class AccountTest {
      */
     @Test
     public void testAddTitular() {
-        System.out.println("addTitular");
         Client client = null;
         Account instance = null;
         boolean expResult = false;
@@ -621,7 +617,6 @@ public class AccountTest {
      */
     @Test
     public void testDeleteTitular() {
-        System.out.println("deleteTitular");
         Handler id = null;
         Account instance = null;
         boolean expResult = false;
@@ -636,7 +631,6 @@ public class AccountTest {
      */
     @Test
     public void testAddAuthorized() {
-        System.out.println("addAuthorized");
         Client authorized = null;
         Account instance = null;
         boolean expResult = false;
@@ -651,7 +645,6 @@ public class AccountTest {
      */
     @Test
     public void testDeleteAuthorized() {
-        System.out.println("deleteAuthorized");
         Handler id = null;
         Account instance = null;
         boolean expResult = false;
@@ -666,7 +659,6 @@ public class AccountTest {
      */
     @Test
     public void testGetAuthorizeds() {
-        System.out.println("getAuthorizeds");
         Account instance = null;
         List<Client> expResult = null;
         List<Client> result = instance.getAuthorizeds();
@@ -680,7 +672,6 @@ public class AccountTest {
      */
     @Test
     public void testGetMaxOverdraft() {
-        System.out.println("getMaxOverdraft");
         Account instance = null;
         double expResult = 0.0;
         double result = instance.getMaxOverdraft();
@@ -694,7 +685,6 @@ public class AccountTest {
      */
     @Test
     public void testDoDirectDebit() throws Exception {
-        System.out.println("doDirectDebit");
         DirectDebitTransaction transaction = null;
         Account instance = null;
         instance.doDirectDebit(transaction);
@@ -707,7 +697,6 @@ public class AccountTest {
      */
     @Test
     public void testAddLiquidationStrategy() {
-        System.out.println("addLiquidationStrategy");
         LiquidationStrategy strategy = null;
         Account instance = null;
         boolean expResult = false;
@@ -722,7 +711,6 @@ public class AccountTest {
      */
     @Test
     public void testDeleteLiquidationStrategy() {
-        System.out.println("deleteLiquidationStrategy");
         Handler id = null;
         Account instance = null;
         boolean expResult = false;
@@ -737,7 +725,6 @@ public class AccountTest {
      */
     @Test
     public void testDoLiquidation() {
-        System.out.println("doLiquidation");
         Office office = null;
         Account instance = null;
         instance.doLiquidation(office);
@@ -750,7 +737,6 @@ public class AccountTest {
      */
     @Test
     public void testGetHistory() {
-        System.out.println("getHistory");
         Account instance = null;
         History expResult = null;
         History result = instance.getHistory();
@@ -764,7 +750,6 @@ public class AccountTest {
      */
     @Test
     public void testGetDirectDebitHistory() {
-        System.out.println("getDirectDebitHistory");
         Account instance = null;
         History<DirectDebitTransaction> expResult = null;
         History<DirectDebitTransaction> result = instance.getDirectDebitHistory();
@@ -778,7 +763,6 @@ public class AccountTest {
      */
     @Test
     public void testGetExemptLiquidationStrategy() {
-        System.out.println("getExemptLiquidationStrategy");
         Account instance = null;
         ExemptLiquidationStrategy<Transaction> expResult = null;
         ExemptLiquidationStrategy<Transaction> result = instance.getExemptLiquidationStrategy();
@@ -792,7 +776,6 @@ public class AccountTest {
      */
     @Test
     public void testSetExemptLiquidationStrategy() {
-        System.out.println("setExemptLiquidationStrategy");
         ExemptLiquidationStrategy<Transaction> exemptLiquidationStrategy = null;
         Account instance = null;
         instance.setExemptLiquidationStrategy(exemptLiquidationStrategy);

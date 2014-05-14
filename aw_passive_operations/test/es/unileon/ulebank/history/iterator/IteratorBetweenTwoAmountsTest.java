@@ -7,7 +7,6 @@ import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.history.conditions.WrongArgsException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;

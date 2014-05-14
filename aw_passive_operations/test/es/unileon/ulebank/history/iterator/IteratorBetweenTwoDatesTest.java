@@ -3,6 +3,8 @@
 package es.unileon.ulebank.history.iterator;
 
 import es.unileon.ulebank.account.DetailedInformation;
+import es.unileon.ulebank.command.CommandFilterTransactionByDates;
+import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.Transaction;
 
@@ -28,6 +30,9 @@ public class IteratorBetweenTwoDatesTest {
     private List<Transaction> correctElements;
     private long min;
     private long max;
+    private Handler commandId;
+    private CommandFilterTransactionByDates commandFromList;
+    private CommandFilterTransactionByDates commandFromIterator;
 
     @Before
     public void setup() throws WrongArgsException {
@@ -46,6 +51,7 @@ public class IteratorBetweenTwoDatesTest {
             this.elements.add(t);
             actual += 100;
         }
+        
         this.iteratorFromIterator = new IteratorBetweenTwoDates<>(this.elements.iterator(), this.min, this.max);
         this.iteratorFromList = new IteratorBetweenTwoDates<>(this.elements, this.min, this.max);
     }
@@ -85,7 +91,6 @@ public class IteratorBetweenTwoDatesTest {
     @Test
     public void testWithElements() {
         Iterator<Transaction> it = this.correctElements.iterator();
-        int count = 0;
         while (this.iteratorFromIterator.hasNext() && this.iteratorFromList.hasNext() && it.hasNext()) {
             Transaction nextFromIterator, nextFromList, correct;
             nextFromIterator = this.iteratorFromIterator.next();

@@ -4,7 +4,6 @@ package es.unileon.ulebank.history.iterator;
 
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.history.conditions.ConditionSubject;
-import es.unileon.ulebank.iterator.Condition;
 import es.unileon.ulebank.iterator.ConditionalIterator;
 import java.util.Iterator;
 import java.util.List;

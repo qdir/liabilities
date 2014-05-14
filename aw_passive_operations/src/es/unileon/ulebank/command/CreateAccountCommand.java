@@ -5,6 +5,7 @@ import es.unileon.ulebank.bank.Bank;
 import es.unileon.ulebank.client.Client;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
+import es.unileon.ulebank.history.conditions.WrongArgsException;
 import es.unileon.ulebank.office.Office;
 import java.util.ArrayList;
 import java.util.Date;
@@ -82,7 +83,7 @@ public class CreateAccountCommand implements Command {
                 }
                 this.office.addAccount(account);
             }
-        } catch (MalformedHandlerException ex) {
+        } catch (MalformedHandlerException | WrongArgsException ex) {
             Logger.getLogger(CreateAccountCommand.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

@@ -7,7 +7,6 @@ import es.unileon.ulebank.client.Address;
 import es.unileon.ulebank.client.Client;
 import es.unileon.ulebank.client.Enterprise;
 import es.unileon.ulebank.client.EnterpriseHandler;
-import es.unileon.ulebank.client.Person;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
 import es.unileon.ulebank.office.Office;

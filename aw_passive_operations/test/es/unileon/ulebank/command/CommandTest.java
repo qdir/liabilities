@@ -6,7 +6,6 @@ package es.unileon.ulebank.command;
 
 import org.junit.After;
 import org.junit.AfterClass;
-import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -41,8 +40,6 @@ public class CommandTest {
      */
     @Test
     public void testExecute() {
-        System.out.println("execute");
-//        Command instance = new CommandImpl();
 //        instance.execute();
         // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
