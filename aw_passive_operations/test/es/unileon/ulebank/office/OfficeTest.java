@@ -12,6 +12,7 @@ import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
 import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.Transaction;
+import es.unileon.ulebank.history.conditions.WrongArgsException;
 import java.util.Date;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -31,7 +32,7 @@ public class OfficeTest {
     private Client titular;
 
     @Before
-    public void setUp() throws MalformedHandlerException {
+    public void setUp() throws MalformedHandlerException, WrongArgsException {
         this.bank = new Bank(new GenericHandler("1234"));
         this.office = new Office(new GenericHandler("1234"), this.bank);
         this.titular = new Person(71525252, 'J');

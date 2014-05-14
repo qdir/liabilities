@@ -9,6 +9,7 @@ import es.unileon.ulebank.history.DirectDebitTransaction;
 import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.History;
 import es.unileon.ulebank.history.Transaction;
+import es.unileon.ulebank.history.conditions.WrongArgsException;
 import es.unileon.ulebank.office.Office;
 import es.unileon.ulebank.time.Time;
 import java.util.ArrayList;
@@ -97,21 +98,25 @@ public class Account {
      * @param authorized
      *
      * @throws es.unileon.ulebank.handler.MalformedHandlerException
+     * @throws es.unileon.ulebank.history.conditions.WrongArgsException
      *
      */
-    public Account(Office office, Bank bank, String accountnumber, Client authorized) throws MalformedHandlerException {
+    public Account(Office office, Bank bank, String accountnumber, Client authorized) throws MalformedHandlerException, WrongArgsException {
         this.id = new AccountHandler(office.getIdOffice(), bank.getID(), accountnumber);
-        this.history = new History<>();
-        this.balance = 0.0d;
         this.titulars = new ArrayList<>();
-        this.authorizeds = new ArrayList<>();
-        this.lastLiquidation = new Date(System.currentTimeMillis());
-        this.liquidationFrecuency = DEFAULT_LIQUIDATION_FREQUENCY;
-        this.liquidationStrategies = new ArrayList<>();
-        this.directDebitHistory = new History<>();
-        this.maxOverdraft = 0;
-        this.directDebits = new AccountDirectDebits();
-        this.addTitular(authorized);
+        if (!this.addTitular(authorized)) {
+            throw new WrongArgsException("There were a problem when add the authorized, may be it is null\n");
+        } else {
+            this.history = new History<>();
+            this.balance = 0.0d;
+            this.authorizeds = new ArrayList<>();
+            this.lastLiquidation = new Date(System.currentTimeMillis());
+            this.liquidationFrecuency = DEFAULT_LIQUIDATION_FREQUENCY;
+            this.liquidationStrategies = new ArrayList<>();
+            this.directDebitHistory = new History<>();
+            this.maxOverdraft = 0;
+            this.directDebits = new AccountDirectDebits();
+        }
         LOG.info("Create a new account with number " + accountnumber + " office " + office.getIdOffice().toString() + " bank " + bank.getID());
     }
 
@@ -171,17 +176,21 @@ public class Account {
      */
     public boolean addTitular(Client client) {
         boolean found = false;
-        int i = 0;
-        while (i < this.titulars.size() && !found) {
-            if (this.titulars.get(i++).getId().compareTo(client.getId()) == 0) {
-                found = true;
-            }
-        }
-        if (!found) {
-            LOG.info(("Add new titular " + client.getId()));
-            this.titulars.add(client);
+        if (client == null || client.getId() == null) {
+            found = true;
         } else {
-            LOG.error("Cannot add the titular " + client.getId().toString() + " , the titular already exists");
+            int i = 0;
+            while (i < this.titulars.size() && !found) {
+                if (this.titulars.get(i++).getId().compareTo(client.getId()) == 0) {
+                    found = true;
+                }
+            }
+            if (!found) {
+                LOG.info(("Add new titular " + client.getId()));
+                this.titulars.add(client);
+            } else {
+                LOG.error("Cannot add the titular " + client.getId().toString() + " , the titular already exists");
+            }
         }
         return !found;
     }
@@ -215,7 +224,7 @@ public class Account {
                 err.append("Cannot remove the titular ").append(id.toString()).append(" because it doesn't exist");
             }
         }
-        if(err.length() > 1) {
+        if (err.length() > 1) {
             found = false;
             LOG.error(err);
         }

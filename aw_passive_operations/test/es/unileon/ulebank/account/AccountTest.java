@@ -13,6 +13,7 @@ import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.office.Office;
 import es.unileon.ulebank.history.History;
 import es.unileon.ulebank.history.Transaction;
+import es.unileon.ulebank.history.conditions.WrongArgsException;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -39,23 +40,21 @@ public class AccountTest {
     private Handler authorizedHandler1;
     private Handler authorizedHandler2;
 
-
     private String accountNumber = "0000000000";
 
     @Before
-    public void setUp() throws MalformedHandlerException {
-        this.bank = new Bank( new GenericHandler("1234"));
+    public void setUp() throws MalformedHandlerException, WrongArgsException {
+        this.bank = new Bank(new GenericHandler("1234"));
         this.office = new Office(new GenericHandler("1234"), this.bank);
-//        this.commercialAccount = new Account(this.office, this.bank, accountNumber);
         this.titularHandler1 = new GenericHandler("Paco");
         this.titularHandler2 = new GenericHandler("Manuel");
         this.authorizedHandler1 = new GenericHandler("Miguel");
         this.authorizedHandler2 = new GenericHandler("Jorge");
         this.titular1 = new Client(titularHandler1);
+        this.commercialAccount = new Account(this.office, this.bank, accountNumber, titular1);
         this.titular2 = new Client(titularHandler2);
         this.authorized1 = new Client(authorizedHandler1);
         this.authorized2 = new Client(authorizedHandler2);
-        this.commercialAccount.addTitular(this.titular1);
         this.commercialAccount.addTitular(this.titular2);
         this.commercialAccount.addAuthorized(this.authorized1);
         this.commercialAccount.addAuthorized(this.authorized2);
@@ -63,331 +62,337 @@ public class AccountTest {
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testMoreAccountnumberLengthNullClient() throws MalformedHandlerException {
-        this.commercialAccount = new Account(this.office, this.bank, "000000000000",null);
+    public void testMoreAccountnumberLengthNullClient() throws MalformedHandlerException, WrongArgsException {
+        this.commercialAccount = new Account(this.office, this.bank, "000000000000", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testLessAccountnumberLengthNullClient() throws MalformedHandlerException {
-        this.commercialAccount = new Account(this.office, this.bank, "000000",null);
+    public void testLessAccountnumberLengthNullClient() throws MalformedHandlerException, WrongArgsException {
+        this.commercialAccount = new Account(this.office, this.bank, "000000", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testCorrectAccountnumberLengthInterspersedLettersNullClient() throws MalformedHandlerException {
-        this.commercialAccount = new Account(this.office, this.bank, "00aa00aa00",null);
+    public void testCorrectAccountnumberLengthInterspersedLettersNullClient() throws MalformedHandlerException, WrongArgsException {
+        this.commercialAccount = new Account(this.office, this.bank, "00aa00aa00", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testCorrectLengthWithLetterIn1CharacterNullClient() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "a000000000",null);
+    public void testCorrectLengthWithLetterIn1CharacterNullClient() throws MalformedHandlerException, WrongArgsException {
+        new Account(this.office, this.bank, "a000000000", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testCorrectLengthWithLetterIn2CharacterNullClient() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "0a00000000",null);
+    public void testCorrectLengthWithLetterIn2CharacterNullClient() throws MalformedHandlerException, WrongArgsException {
+        new Account(this.office, this.bank, "0a00000000", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testCorrectLengthWithLetterIn3CharacterNullClient() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "00a0000000",null);
+    public void testCorrectLengthWithLetterIn3CharacterNullClient() throws MalformedHandlerException, WrongArgsException {
+        new Account(this.office, this.bank, "00a0000000", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testCorrectLengthWithLetterIn4CharacterNullClient() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "000a000000",null);
+    public void testCorrectLengthWithLetterIn4CharacterNullClient() throws MalformedHandlerException, WrongArgsException {
+        new Account(this.office, this.bank, "000a000000", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testCorrectLengthWithLetterIn5CharacterNullClient() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "0000a00000",null);
+    public void testCorrectLengthWithLetterIn5CharacterNullClient() throws MalformedHandlerException, WrongArgsException {
+        new Account(this.office, this.bank, "0000a00000", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testCorrectLengthWithLetterIn6CharacterNullClient() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "00000a0000",null);
+    public void testCorrectLengthWithLetterIn6CharacterNullClient() throws MalformedHandlerException, WrongArgsException {
+        new Account(this.office, this.bank, "00000a0000", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testCorrectLengthWithLetterIn7CharacterNullClient() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "000000a000",null);
+    public void testCorrectLengthWithLetterIn7CharacterNullClient() throws MalformedHandlerException, WrongArgsException {
+        new Account(this.office, this.bank, "000000a000", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testCorrectLengthWithLetterIn8CharacterNullClient() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "0000000a00",null);
+    public void testCorrectLengthWithLetterIn8CharacterNullClient() throws MalformedHandlerException, WrongArgsException {
+        new Account(this.office, this.bank, "0000000a00", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testCorrectLengthWithLetterIn9CharacterNullClient() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "00000000a0",null);
+    public void testCorrectLengthWithLetterIn9CharacterNullClient() throws MalformedHandlerException, WrongArgsException {
+        new Account(this.office, this.bank, "00000000a0", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testCorrectLengthWithLetterIn10CharacterNullClient() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "000000000a",null);
+    public void testCorrectLengthWithLetterIn10CharacterNullClient() throws MalformedHandlerException, WrongArgsException {
+        new Account(this.office, this.bank, "000000000a", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testMoreLengthWithLetterIn1CharacterNullClient() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "a0000000000",null);
+    public void testMoreLengthWithLetterIn1CharacterNullClient() throws MalformedHandlerException, WrongArgsException {
+        new Account(this.office, this.bank, "a0000000000", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testMoreLengthWithLetterIn2CharacterNullClient() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "0a000000000",null);
+    public void testMoreLengthWithLetterIn2CharacterNullClient() throws MalformedHandlerException, WrongArgsException {
+        new Account(this.office, this.bank, "0a000000000", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testMoreLengthWithLetterIn3CharacterNullClient() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "00a00000000",null);
+    public void testMoreLengthWithLetterIn3CharacterNullClient() throws MalformedHandlerException, WrongArgsException {
+        new Account(this.office, this.bank, "00a00000000", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testMoreLengthWithLetterIn4CharacterNullClient() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "000a0000000",null);
+    public void testMoreLengthWithLetterIn4CharacterNullClient() throws MalformedHandlerException, WrongArgsException {
+        new Account(this.office, this.bank, "000a0000000", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testMoreLengthWithLetterIn5CharacterNullClient() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "0000a000000",null);
+    public void testMoreLengthWithLetterIn5CharacterNullClient() throws MalformedHandlerException, WrongArgsException {
+        new Account(this.office, this.bank, "0000a000000", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testMoreLengthWithLetterIn6CharacterNullClient() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "00000a00000",null);
+    public void testMoreLengthWithLetterIn6CharacterNullClient() throws MalformedHandlerException, WrongArgsException {
+        new Account(this.office, this.bank, "00000a00000", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testMoreLengthWithLetterIn7CharacterNullClient() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "000000a0000",null);
+    public void testMoreLengthWithLetterIn7CharacterNullClient() throws MalformedHandlerException, WrongArgsException {
+        new Account(this.office, this.bank, "000000a0000", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testMoreLengthWithLetterIn8CharacterNullClient() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "0000000a000",null);
+    public void testMoreLengthWithLetterIn8CharacterNullClient() throws MalformedHandlerException, WrongArgsException {
+        new Account(this.office, this.bank, "0000000a000", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testMoreLengthWithLetterIn9CharacterNullClient() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "00000000a00",null);
+    public void testMoreLengthWithLetterIn9CharacterNullClient() throws MalformedHandlerException, WrongArgsException {
+        new Account(this.office, this.bank, "00000000a00", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testMoreLengthWithLetterIn10CharacterNullClient() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "000000000a0",null);
+    public void testMoreLengthWithLetterIn10CharacterNullClient() throws MalformedHandlerException, WrongArgsException {
+        new Account(this.office, this.bank, "000000000a0", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testMoreLengthWithLetterIn11CharacterNullClient() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "0000000000a",null);
+    public void testMoreLengthWithLetterIn11CharacterNullClient() throws MalformedHandlerException, WrongArgsException {
+        new Account(this.office, this.bank, "0000000000a", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testLessLengthWithLetterIn2CharacterNullClient() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "a00000000",null);
+    public void testLessLengthWithLetterIn2CharacterNullClient() throws MalformedHandlerException, WrongArgsException {
+        new Account(this.office, this.bank, "a00000000", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testLessLengthWithLetterIn3CharacterNullClient() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "0a0000000",null);
+    public void testLessLengthWithLetterIn3CharacterNullClient() throws MalformedHandlerException, WrongArgsException {
+        new Account(this.office, this.bank, "0a0000000", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testLessLengthWithLetterIn4CharacterNullClient() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "00a000000",null);
+    public void testLessLengthWithLetterIn4CharacterNullClient() throws MalformedHandlerException, WrongArgsException {
+        new Account(this.office, this.bank, "00a000000", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testLessLengthWithLetterIn5CharacterNullClient() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "000a00000",null);
+    public void testLessLengthWithLetterIn5CharacterNullClient() throws MalformedHandlerException, WrongArgsException {
+        new Account(this.office, this.bank, "000a00000", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testLessLengthWithLetterIn6CharacterNullClient() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "0000a0000",null);
+    public void testLessLengthWithLetterIn6CharacterNullClient() throws MalformedHandlerException, WrongArgsException {
+        new Account(this.office, this.bank, "0000a0000", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testLessLengthWithLetterIn7CharacterNullClient() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "00000a000",null);
+    public void testLessLengthWithLetterIn7CharacterNullClient() throws MalformedHandlerException, WrongArgsException {
+        new Account(this.office, this.bank, "00000a000", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testLessLengthWithLetterIn8CharacterNullClient() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "000000a00",null);
+    public void testLessLengthWithLetterIn8CharacterNullClient() throws MalformedHandlerException, WrongArgsException {
+        new Account(this.office, this.bank, "000000a00", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testLessLengthWithLetterIn9CharacterNullClient() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "0000000a0",null);
+    public void testLessLengthWithLetterIn9CharacterNullClient() throws MalformedHandlerException, WrongArgsException {
+        new Account(this.office, this.bank, "0000000a0", null);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testLessLengthWithLetterIn10CharacterNullClient() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "00000000a",null);
+    public void testLessLengthWithLetterIn10CharacterNullClient() throws MalformedHandlerException, WrongArgsException {
+        new Account(this.office, this.bank, "00000000a", null);
     }
-      @Test(expected = MalformedHandlerException.class)
-    public void testMoreAccountnumberLength() throws MalformedHandlerException {
+
+    @Test(expected = WrongArgsException.class)
+    public void testNullClient() throws MalformedHandlerException, WrongArgsException {
+        new Account(this.office, this.bank, this.accountNumber, null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testMoreAccountnumberLength() throws MalformedHandlerException, WrongArgsException {
         this.commercialAccount = new Account(this.office, this.bank, "000000000000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testLessAccountnumberLength() throws MalformedHandlerException {
+    public void testLessAccountnumberLength() throws MalformedHandlerException, WrongArgsException {
         this.commercialAccount = new Account(this.office, this.bank, "000000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testCorrectAccountnumberLengthInterspersedLetters() throws MalformedHandlerException {
+    public void testCorrectAccountnumberLengthInterspersedLetters() throws MalformedHandlerException, WrongArgsException {
         this.commercialAccount = new Account(this.office, this.bank, "00aa00aa00", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testCorrectLengthWithLetterIn1Character() throws MalformedHandlerException {
+    public void testCorrectLengthWithLetterIn1Character() throws MalformedHandlerException, WrongArgsException {
         new Account(this.office, this.bank, "a000000000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testCorrectLengthWithLetterIn2Character() throws MalformedHandlerException {
+    public void testCorrectLengthWithLetterIn2Character() throws MalformedHandlerException, WrongArgsException {
         new Account(this.office, this.bank, "0a00000000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testCorrectLengthWithLetterIn3Character() throws MalformedHandlerException {
+    public void testCorrectLengthWithLetterIn3Character() throws MalformedHandlerException, WrongArgsException {
         new Account(this.office, this.bank, "00a0000000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testCorrectLengthWithLetterIn4Character() throws MalformedHandlerException {
+    public void testCorrectLengthWithLetterIn4Character() throws MalformedHandlerException, WrongArgsException {
         new Account(this.office, this.bank, "000a000000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testCorrectLengthWithLetterIn5Character() throws MalformedHandlerException {
+    public void testCorrectLengthWithLetterIn5Character() throws MalformedHandlerException, WrongArgsException {
         new Account(this.office, this.bank, "0000a00000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testCorrectLengthWithLetterIn6Character() throws MalformedHandlerException {
+    public void testCorrectLengthWithLetterIn6Character() throws MalformedHandlerException, WrongArgsException {
         new Account(this.office, this.bank, "00000a0000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testCorrectLengthWithLetterIn7Character() throws MalformedHandlerException {
+    public void testCorrectLengthWithLetterIn7Character() throws MalformedHandlerException, WrongArgsException {
         new Account(this.office, this.bank, "000000a000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testCorrectLengthWithLetterIn8Character() throws MalformedHandlerException {
+    public void testCorrectLengthWithLetterIn8Character() throws MalformedHandlerException, WrongArgsException {
         new Account(this.office, this.bank, "0000000a00", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testCorrectLengthWithLetterIn9Character() throws MalformedHandlerException {
+    public void testCorrectLengthWithLetterIn9Character() throws MalformedHandlerException, WrongArgsException {
         new Account(this.office, this.bank, "00000000a0", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testCorrectLengthWithLetterIn10Character() throws MalformedHandlerException {
+    public void testCorrectLengthWithLetterIn10Character() throws MalformedHandlerException, WrongArgsException {
         new Account(this.office, this.bank, "000000000a", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testMoreLengthWithLetterIn1Character() throws MalformedHandlerException {
+    public void testMoreLengthWithLetterIn1Character() throws MalformedHandlerException, WrongArgsException {
         new Account(this.office, this.bank, "a0000000000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testMoreLengthWithLetterIn2Character() throws MalformedHandlerException {
+    public void testMoreLengthWithLetterIn2Character() throws MalformedHandlerException, WrongArgsException {
         new Account(this.office, this.bank, "0a000000000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testMoreLengthWithLetterIn3Character() throws MalformedHandlerException {
+    public void testMoreLengthWithLetterIn3Character() throws MalformedHandlerException, WrongArgsException {
         new Account(this.office, this.bank, "00a00000000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testMoreLengthWithLetterIn4Character() throws MalformedHandlerException {
+    public void testMoreLengthWithLetterIn4Character() throws MalformedHandlerException, WrongArgsException {
         new Account(this.office, this.bank, "000a0000000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testMoreLengthWithLetterIn5Character() throws MalformedHandlerException {
+    public void testMoreLengthWithLetterIn5Character() throws MalformedHandlerException, WrongArgsException {
         new Account(this.office, this.bank, "0000a000000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testMoreLengthWithLetterIn6Character() throws MalformedHandlerException {
+    public void testMoreLengthWithLetterIn6Character() throws MalformedHandlerException, WrongArgsException {
         new Account(this.office, this.bank, "00000a00000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testMoreLengthWithLetterIn7Character() throws MalformedHandlerException {
+    public void testMoreLengthWithLetterIn7Character() throws MalformedHandlerException, WrongArgsException {
         new Account(this.office, this.bank, "000000a0000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testMoreLengthWithLetterIn8Character() throws MalformedHandlerException {
+    public void testMoreLengthWithLetterIn8Character() throws MalformedHandlerException, WrongArgsException {
         new Account(this.office, this.bank, "0000000a000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testMoreLengthWithLetterIn9Character() throws MalformedHandlerException {
+    public void testMoreLengthWithLetterIn9Character() throws MalformedHandlerException, WrongArgsException {
         new Account(this.office, this.bank, "00000000a00", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testMoreLengthWithLetterIn10Character() throws MalformedHandlerException {
+    public void testMoreLengthWithLetterIn10Character() throws MalformedHandlerException, WrongArgsException {
         new Account(this.office, this.bank, "000000000a0", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testMoreLengthWithLetterIn11Character() throws MalformedHandlerException {
+    public void testMoreLengthWithLetterIn11Character() throws MalformedHandlerException, WrongArgsException {
         new Account(this.office, this.bank, "0000000000a", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testLessLengthWithLetterIn2Character() throws MalformedHandlerException {
+    public void testLessLengthWithLetterIn2Character() throws MalformedHandlerException, WrongArgsException {
         new Account(this.office, this.bank, "a00000000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testLessLengthWithLetterIn3Character() throws MalformedHandlerException {
+    public void testLessLengthWithLetterIn3Character() throws MalformedHandlerException, WrongArgsException {
         new Account(this.office, this.bank, "0a0000000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testLessLengthWithLetterIn4Character() throws MalformedHandlerException {
+    public void testLessLengthWithLetterIn4Character() throws MalformedHandlerException, WrongArgsException {
         new Account(this.office, this.bank, "00a000000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testLessLengthWithLetterIn5Character() throws MalformedHandlerException {
+    public void testLessLengthWithLetterIn5Character() throws MalformedHandlerException, WrongArgsException {
         new Account(this.office, this.bank, "000a00000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testLessLengthWithLetterIn6Character() throws MalformedHandlerException {
+    public void testLessLengthWithLetterIn6Character() throws MalformedHandlerException, WrongArgsException {
         new Account(this.office, this.bank, "0000a0000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testLessLengthWithLetterIn7Character() throws MalformedHandlerException {
+    public void testLessLengthWithLetterIn7Character() throws MalformedHandlerException, WrongArgsException {
         new Account(this.office, this.bank, "00000a000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testLessLengthWithLetterIn8Character() throws MalformedHandlerException {
+    public void testLessLengthWithLetterIn8Character() throws MalformedHandlerException, WrongArgsException {
         new Account(this.office, this.bank, "000000a00", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testLessLengthWithLetterIn9Character() throws MalformedHandlerException {
+    public void testLessLengthWithLetterIn9Character() throws MalformedHandlerException, WrongArgsException {
         new Account(this.office, this.bank, "0000000a0", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
-    public void testLessLengthWithLetterIn10Character() throws MalformedHandlerException {
+    public void testLessLengthWithLetterIn10Character() throws MalformedHandlerException, WrongArgsException {
         new Account(this.office, this.bank, "00000000a", this.titular1);
     }
 
@@ -418,7 +423,7 @@ public class AccountTest {
     }
 
     @Test
-    public void testGetID() throws MalformedHandlerException {
+    public void testGetID() throws MalformedHandlerException, WrongArgsException {
         Handler accountNumber = new AccountHandler(office.getIdOffice(), bank.getID(), this.accountNumber);
         assertTrue(accountNumber.compareTo(this.commercialAccount.getID()) == 0);
         accountNumber = new AccountHandler(office.getIdOffice(), bank.getID(), "1299567899");
