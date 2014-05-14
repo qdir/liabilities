@@ -27,7 +27,7 @@ public class AccountHandlerTest {
 
     @Before
     public void setUp() throws MalformedHandlerException {
-        this.bank = new Bank(null, new GenericHandler("1234"));
+        this.bank = new Bank( new GenericHandler("1234"));
         this.office = new Office(new GenericHandler("1234"), this.bank);
         this.accountNumber = "1234567891";
         this.accountHandler1 = new AccountHandler(office.getIdOffice(), bank.getID(), accountNumber);

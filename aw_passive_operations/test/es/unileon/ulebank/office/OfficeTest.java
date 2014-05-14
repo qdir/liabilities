@@ -5,13 +5,13 @@ package es.unileon.ulebank.office;
 import es.unileon.ulebank.account.Account;
 import es.unileon.ulebank.exceptions.TransactionException;
 import es.unileon.ulebank.bank.Bank;
+import es.unileon.ulebank.client.Client;
+import es.unileon.ulebank.client.Person;
 import es.unileon.ulebank.handler.GenericHandler;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
 import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.Transaction;
-
-import es.unileon.ulebank.transacionManager.TransactionManager;
 import java.util.Date;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -28,15 +28,14 @@ public class OfficeTest {
     private Office office;
     private Bank bank;
     private Account account;
-    private TransactionManager manager;
+    private Client titular;
 
     @Before
     public void setUp() throws MalformedHandlerException {
-
-        this.manager = new TransactionManager();
-        this.bank = new Bank(this.manager, new GenericHandler("1234"));
+        this.bank = new Bank(new GenericHandler("1234"));
         this.office = new Office(new GenericHandler("1234"), this.bank);
-        this.account = new Account(office, bank, "1234567890");
+        this.titular = new Person(71525252, 'J');
+        this.account = new Account(office, bank, "1234567890", titular);
     }
 
     /**

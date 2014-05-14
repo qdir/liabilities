@@ -94,11 +94,12 @@ public class Account {
      * @param bank ( The bank of the office )
      *
      * @param accountnumber (the accountNumber)
+     * @param authorized
      *
      * @throws es.unileon.ulebank.handler.MalformedHandlerException
      *
      */
-    public Account(Office office, Bank bank, String accountnumber) throws MalformedHandlerException {
+    public Account(Office office, Bank bank, String accountnumber, Client authorized) throws MalformedHandlerException {
         this.id = new AccountHandler(office.getIdOffice(), bank.getID(), accountnumber);
         this.history = new History<>();
         this.balance = 0.0d;
@@ -110,6 +111,7 @@ public class Account {
         this.directDebitHistory = new History<>();
         this.maxOverdraft = 0;
         this.directDebits = new AccountDirectDebits();
+        this.addTitular(authorized);
         LOG.info("Create a new account with number " + accountnumber + " office " + office.getIdOffice().toString() + " bank " + bank.getID());
     }
 
@@ -198,15 +200,24 @@ public class Account {
     public boolean deleteTitular(Handler id) {
         boolean found = false;
         int i = 0;
-        while (i < this.titulars.size() && !found) {
-            if (this.titulars.get(i++).getId().compareTo(id) == 0) {
-                LOG.info("Delete " + id.toString() + " titular");
-                this.titulars.remove(i);
-                found = true;
+        StringBuilder err = new StringBuilder();
+        if (this.titulars.size() <= 1) {
+            err.append("Error, the account must have at least one titular\n");
+        } else {
+            while (i < this.titulars.size() && !found) {
+                if (this.titulars.get(i++).getId().compareTo(id) == 0) {
+                    LOG.info("Delete " + id.toString() + " titular");
+                    this.titulars.remove(i);
+                    found = true;
+                }
+            }
+            if (!found) {
+                err.append("Cannot remove the titular ").append(id.toString()).append(" because it doesn't exist");
             }
         }
-        if (!found) {
-            LOG.error("Cannot remove the titular " + id.toString() + " because it doesn't exist");
+        if(err.length() > 1) {
+            found = false;
+            LOG.error(err);
         }
         return found;
     }

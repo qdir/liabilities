@@ -2,14 +2,12 @@
  group.*/
 package es.unileon.ulebank.bank;
 
-import es.unileon.ulebank.account.Account;
 import es.unileon.ulebank.account.AccountHandler;
 import es.unileon.ulebank.exceptions.TransactionException;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.office.Office;
-import es.unileon.ulebank.transacionManager.TransactionManager;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
@@ -26,18 +24,14 @@ public class Bank {
 
     private final Handler bankID;
 
-    private final TransactionManager manager;
-
     /**
      *
-     * @param manager
      * @param bankID
      * @throws MalformedHandlerException
      */
-    public Bank(TransactionManager manager, Handler bankID) throws MalformedHandlerException {
+    public Bank(Handler bankID) throws MalformedHandlerException {
         this.bankID = new BankHandler(bankID.toString());
         this.offices = new ArrayList<>();
-        this.manager = manager;
     }
 
     /**
@@ -111,8 +105,6 @@ public class Bank {
                 if (!found) {
                     error.append("Error, office not found\n");
                 }
-            } else {
-                this.manager.doTransaction(t, destine);
             }
         } else {
             error.append(("The transaction cannot be null or destination be null"));

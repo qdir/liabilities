@@ -11,7 +11,6 @@ import es.unileon.ulebank.handler.MalformedHandlerException;
 import es.unileon.ulebank.history.DirectDebitTransaction;
 import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.office.Office;
-import es.unileon.ulebank.transacionManager.TransactionManager;
 import es.unileon.ulebank.history.History;
 import es.unileon.ulebank.history.Transaction;
 import java.util.Date;
@@ -20,6 +19,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -39,16 +39,14 @@ public class AccountTest {
     private Handler authorizedHandler1;
     private Handler authorizedHandler2;
 
-    private TransactionManager manager;
 
     private String accountNumber = "0000000000";
 
     @Before
     public void setUp() throws MalformedHandlerException {
-        this.manager = new TransactionManager();
-        this.bank = new Bank(manager, new GenericHandler("1234"));
+        this.bank = new Bank( new GenericHandler("1234"));
         this.office = new Office(new GenericHandler("1234"), this.bank);
-        this.commercialAccount = new Account(this.office, this.bank, accountNumber);
+//        this.commercialAccount = new Account(this.office, this.bank, accountNumber);
         this.titularHandler1 = new GenericHandler("Paco");
         this.titularHandler2 = new GenericHandler("Manuel");
         this.authorizedHandler1 = new GenericHandler("Miguel");
@@ -65,168 +63,332 @@ public class AccountTest {
     }
 
     @Test(expected = MalformedHandlerException.class)
+    public void testMoreAccountnumberLengthNullClient() throws MalformedHandlerException {
+        this.commercialAccount = new Account(this.office, this.bank, "000000000000",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testLessAccountnumberLengthNullClient() throws MalformedHandlerException {
+        this.commercialAccount = new Account(this.office, this.bank, "000000",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testCorrectAccountnumberLengthInterspersedLettersNullClient() throws MalformedHandlerException {
+        this.commercialAccount = new Account(this.office, this.bank, "00aa00aa00",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testCorrectLengthWithLetterIn1CharacterNullClient() throws MalformedHandlerException {
+        new Account(this.office, this.bank, "a000000000",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testCorrectLengthWithLetterIn2CharacterNullClient() throws MalformedHandlerException {
+        new Account(this.office, this.bank, "0a00000000",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testCorrectLengthWithLetterIn3CharacterNullClient() throws MalformedHandlerException {
+        new Account(this.office, this.bank, "00a0000000",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testCorrectLengthWithLetterIn4CharacterNullClient() throws MalformedHandlerException {
+        new Account(this.office, this.bank, "000a000000",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testCorrectLengthWithLetterIn5CharacterNullClient() throws MalformedHandlerException {
+        new Account(this.office, this.bank, "0000a00000",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testCorrectLengthWithLetterIn6CharacterNullClient() throws MalformedHandlerException {
+        new Account(this.office, this.bank, "00000a0000",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testCorrectLengthWithLetterIn7CharacterNullClient() throws MalformedHandlerException {
+        new Account(this.office, this.bank, "000000a000",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testCorrectLengthWithLetterIn8CharacterNullClient() throws MalformedHandlerException {
+        new Account(this.office, this.bank, "0000000a00",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testCorrectLengthWithLetterIn9CharacterNullClient() throws MalformedHandlerException {
+        new Account(this.office, this.bank, "00000000a0",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testCorrectLengthWithLetterIn10CharacterNullClient() throws MalformedHandlerException {
+        new Account(this.office, this.bank, "000000000a",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testMoreLengthWithLetterIn1CharacterNullClient() throws MalformedHandlerException {
+        new Account(this.office, this.bank, "a0000000000",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testMoreLengthWithLetterIn2CharacterNullClient() throws MalformedHandlerException {
+        new Account(this.office, this.bank, "0a000000000",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testMoreLengthWithLetterIn3CharacterNullClient() throws MalformedHandlerException {
+        new Account(this.office, this.bank, "00a00000000",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testMoreLengthWithLetterIn4CharacterNullClient() throws MalformedHandlerException {
+        new Account(this.office, this.bank, "000a0000000",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testMoreLengthWithLetterIn5CharacterNullClient() throws MalformedHandlerException {
+        new Account(this.office, this.bank, "0000a000000",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testMoreLengthWithLetterIn6CharacterNullClient() throws MalformedHandlerException {
+        new Account(this.office, this.bank, "00000a00000",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testMoreLengthWithLetterIn7CharacterNullClient() throws MalformedHandlerException {
+        new Account(this.office, this.bank, "000000a0000",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testMoreLengthWithLetterIn8CharacterNullClient() throws MalformedHandlerException {
+        new Account(this.office, this.bank, "0000000a000",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testMoreLengthWithLetterIn9CharacterNullClient() throws MalformedHandlerException {
+        new Account(this.office, this.bank, "00000000a00",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testMoreLengthWithLetterIn10CharacterNullClient() throws MalformedHandlerException {
+        new Account(this.office, this.bank, "000000000a0",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testMoreLengthWithLetterIn11CharacterNullClient() throws MalformedHandlerException {
+        new Account(this.office, this.bank, "0000000000a",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testLessLengthWithLetterIn2CharacterNullClient() throws MalformedHandlerException {
+        new Account(this.office, this.bank, "a00000000",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testLessLengthWithLetterIn3CharacterNullClient() throws MalformedHandlerException {
+        new Account(this.office, this.bank, "0a0000000",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testLessLengthWithLetterIn4CharacterNullClient() throws MalformedHandlerException {
+        new Account(this.office, this.bank, "00a000000",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testLessLengthWithLetterIn5CharacterNullClient() throws MalformedHandlerException {
+        new Account(this.office, this.bank, "000a00000",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testLessLengthWithLetterIn6CharacterNullClient() throws MalformedHandlerException {
+        new Account(this.office, this.bank, "0000a0000",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testLessLengthWithLetterIn7CharacterNullClient() throws MalformedHandlerException {
+        new Account(this.office, this.bank, "00000a000",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testLessLengthWithLetterIn8CharacterNullClient() throws MalformedHandlerException {
+        new Account(this.office, this.bank, "000000a00",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testLessLengthWithLetterIn9CharacterNullClient() throws MalformedHandlerException {
+        new Account(this.office, this.bank, "0000000a0",null);
+    }
+
+    @Test(expected = MalformedHandlerException.class)
+    public void testLessLengthWithLetterIn10CharacterNullClient() throws MalformedHandlerException {
+        new Account(this.office, this.bank, "00000000a",null);
+    }
+      @Test(expected = MalformedHandlerException.class)
     public void testMoreAccountnumberLength() throws MalformedHandlerException {
-        this.commercialAccount = new Account(this.office, this.bank, "000000000000");
+        this.commercialAccount = new Account(this.office, this.bank, "000000000000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessAccountnumberLength() throws MalformedHandlerException {
-        this.commercialAccount = new Account(this.office, this.bank, "000000");
+        this.commercialAccount = new Account(this.office, this.bank, "000000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testCorrectAccountnumberLengthInterspersedLetters() throws MalformedHandlerException {
-        this.commercialAccount = new Account(this.office, this.bank, "00aa00aa00");
+        this.commercialAccount = new Account(this.office, this.bank, "00aa00aa00", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testCorrectLengthWithLetterIn1Character() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "a000000000");
+        new Account(this.office, this.bank, "a000000000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testCorrectLengthWithLetterIn2Character() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "0a00000000");
+        new Account(this.office, this.bank, "0a00000000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testCorrectLengthWithLetterIn3Character() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "00a0000000");
+        new Account(this.office, this.bank, "00a0000000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testCorrectLengthWithLetterIn4Character() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "000a000000");
+        new Account(this.office, this.bank, "000a000000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testCorrectLengthWithLetterIn5Character() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "0000a00000");
+        new Account(this.office, this.bank, "0000a00000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testCorrectLengthWithLetterIn6Character() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "00000a0000");
+        new Account(this.office, this.bank, "00000a0000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testCorrectLengthWithLetterIn7Character() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "000000a000");
+        new Account(this.office, this.bank, "000000a000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testCorrectLengthWithLetterIn8Character() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "0000000a00");
+        new Account(this.office, this.bank, "0000000a00", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testCorrectLengthWithLetterIn9Character() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "00000000a0");
+        new Account(this.office, this.bank, "00000000a0", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testCorrectLengthWithLetterIn10Character() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "000000000a");
+        new Account(this.office, this.bank, "000000000a", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreLengthWithLetterIn1Character() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "a0000000000");
+        new Account(this.office, this.bank, "a0000000000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreLengthWithLetterIn2Character() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "0a000000000");
+        new Account(this.office, this.bank, "0a000000000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreLengthWithLetterIn3Character() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "00a00000000");
+        new Account(this.office, this.bank, "00a00000000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreLengthWithLetterIn4Character() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "000a0000000");
+        new Account(this.office, this.bank, "000a0000000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreLengthWithLetterIn5Character() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "0000a000000");
+        new Account(this.office, this.bank, "0000a000000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreLengthWithLetterIn6Character() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "00000a00000");
+        new Account(this.office, this.bank, "00000a00000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreLengthWithLetterIn7Character() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "000000a0000");
+        new Account(this.office, this.bank, "000000a0000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreLengthWithLetterIn8Character() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "0000000a000");
+        new Account(this.office, this.bank, "0000000a000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreLengthWithLetterIn9Character() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "00000000a00");
+        new Account(this.office, this.bank, "00000000a00", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreLengthWithLetterIn10Character() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "000000000a0");
+        new Account(this.office, this.bank, "000000000a0", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testMoreLengthWithLetterIn11Character() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "0000000000a");
+        new Account(this.office, this.bank, "0000000000a", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessLengthWithLetterIn2Character() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "a00000000");
+        new Account(this.office, this.bank, "a00000000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessLengthWithLetterIn3Character() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "0a0000000");
+        new Account(this.office, this.bank, "0a0000000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessLengthWithLetterIn4Character() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "00a000000");
+        new Account(this.office, this.bank, "00a000000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessLengthWithLetterIn5Character() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "000a00000");
+        new Account(this.office, this.bank, "000a00000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessLengthWithLetterIn6Character() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "0000a0000");
+        new Account(this.office, this.bank, "0000a0000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessLengthWithLetterIn7Character() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "00000a000");
+        new Account(this.office, this.bank, "00000a000", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessLengthWithLetterIn8Character() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "000000a00");
+        new Account(this.office, this.bank, "000000a00", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessLengthWithLetterIn9Character() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "0000000a0");
+        new Account(this.office, this.bank, "0000000a0", this.titular1);
     }
 
     @Test(expected = MalformedHandlerException.class)
     public void testLessLengthWithLetterIn10Character() throws MalformedHandlerException {
-        new Account(this.office, this.bank, "00000000a");
+        new Account(this.office, this.bank, "00000000a", this.titular1);
     }
 
     /**
@@ -388,5 +550,248 @@ public class AccountTest {
         assertEquals(t.getAmount(), entry.getAmount(), EPSILON);
         assertTrue(t.getDate().compareTo(entry.getDate()) == 0);
         assertTrue(t.getEffectiveDate().compareTo(entry.getEffectiveDate()) == 0);
+    }
+
+    /**
+     * Test of setLiquidationFrecuency method, of class Account.
+     */
+    @Test
+    public void testSetLiquidationFrecuency() {
+        System.out.println("setLiquidationFrecuency");
+        int liquidationFrecuency = 0;
+        Account instance = null;
+        boolean expResult = false;
+        boolean result = instance.setLiquidationFrecuency(liquidationFrecuency);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getLiquidationFrecuency method, of class Account.
+     */
+    @Test
+    public void testGetLiquidationFrecuency() {
+        System.out.println("getLiquidationFrecuency");
+        Account instance = null;
+        int expResult = 0;
+        int result = instance.getLiquidationFrecuency();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setMaxOverdraft method, of class Account.
+     */
+    @Test
+    public void testSetMaxOverdraft() {
+        System.out.println("setMaxOverdraft");
+        double maxOverdraft = 0.0;
+        Account instance = null;
+        boolean expResult = false;
+        boolean result = instance.setMaxOverdraft(maxOverdraft);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of addTitular method, of class Account.
+     */
+    @Test
+    public void testAddTitular() {
+        System.out.println("addTitular");
+        Client client = null;
+        Account instance = null;
+        boolean expResult = false;
+        boolean result = instance.addTitular(client);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of deleteTitular method, of class Account.
+     */
+    @Test
+    public void testDeleteTitular() {
+        System.out.println("deleteTitular");
+        Handler id = null;
+        Account instance = null;
+        boolean expResult = false;
+        boolean result = instance.deleteTitular(id);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of addAuthorized method, of class Account.
+     */
+    @Test
+    public void testAddAuthorized() {
+        System.out.println("addAuthorized");
+        Client authorized = null;
+        Account instance = null;
+        boolean expResult = false;
+        boolean result = instance.addAuthorized(authorized);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of deleteAuthorized method, of class Account.
+     */
+    @Test
+    public void testDeleteAuthorized() {
+        System.out.println("deleteAuthorized");
+        Handler id = null;
+        Account instance = null;
+        boolean expResult = false;
+        boolean result = instance.deleteAuthorized(id);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getAuthorizeds method, of class Account.
+     */
+    @Test
+    public void testGetAuthorizeds() {
+        System.out.println("getAuthorizeds");
+        Account instance = null;
+        List<Client> expResult = null;
+        List<Client> result = instance.getAuthorizeds();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getMaxOverdraft method, of class Account.
+     */
+    @Test
+    public void testGetMaxOverdraft() {
+        System.out.println("getMaxOverdraft");
+        Account instance = null;
+        double expResult = 0.0;
+        double result = instance.getMaxOverdraft();
+        assertEquals(expResult, result, 0.0);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of doDirectDebit method, of class Account.
+     */
+    @Test
+    public void testDoDirectDebit() throws Exception {
+        System.out.println("doDirectDebit");
+        DirectDebitTransaction transaction = null;
+        Account instance = null;
+        instance.doDirectDebit(transaction);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of addLiquidationStrategy method, of class Account.
+     */
+    @Test
+    public void testAddLiquidationStrategy() {
+        System.out.println("addLiquidationStrategy");
+        LiquidationStrategy strategy = null;
+        Account instance = null;
+        boolean expResult = false;
+        boolean result = instance.addLiquidationStrategy(strategy);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of deleteLiquidationStrategy method, of class Account.
+     */
+    @Test
+    public void testDeleteLiquidationStrategy() {
+        System.out.println("deleteLiquidationStrategy");
+        Handler id = null;
+        Account instance = null;
+        boolean expResult = false;
+        boolean result = instance.deleteLiquidationStrategy(id);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of doLiquidation method, of class Account.
+     */
+    @Test
+    public void testDoLiquidation() {
+        System.out.println("doLiquidation");
+        Office office = null;
+        Account instance = null;
+        instance.doLiquidation(office);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getHistory method, of class Account.
+     */
+    @Test
+    public void testGetHistory() {
+        System.out.println("getHistory");
+        Account instance = null;
+        History expResult = null;
+        History result = instance.getHistory();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getDirectDebitHistory method, of class Account.
+     */
+    @Test
+    public void testGetDirectDebitHistory() {
+        System.out.println("getDirectDebitHistory");
+        Account instance = null;
+        History<DirectDebitTransaction> expResult = null;
+        History<DirectDebitTransaction> result = instance.getDirectDebitHistory();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getExemptLiquidationStrategy method, of class Account.
+     */
+    @Test
+    public void testGetExemptLiquidationStrategy() {
+        System.out.println("getExemptLiquidationStrategy");
+        Account instance = null;
+        ExemptLiquidationStrategy<Transaction> expResult = null;
+        ExemptLiquidationStrategy<Transaction> result = instance.getExemptLiquidationStrategy();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setExemptLiquidationStrategy method, of class Account.
+     */
+    @Test
+    public void testSetExemptLiquidationStrategy() {
+        System.out.println("setExemptLiquidationStrategy");
+        ExemptLiquidationStrategy<Transaction> exemptLiquidationStrategy = null;
+        Account instance = null;
+        instance.setExemptLiquidationStrategy(exemptLiquidationStrategy);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 }

@@ -15,12 +15,6 @@ public interface Command {
      *
      * @return
      */
-    public Date getEffectiveDate();
-
-    /**
-     *
-     * @return
-     */
     public Handler getID();
 
     /**

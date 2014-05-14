@@ -57,29 +57,35 @@ public class TaskList {
      */
     public synchronized boolean addTask(Task task) {
         boolean add = true;
-        if (task != null) {
-            for (int i = 0; i < tasks.size() && add; i++) {
+        if (task == null) {
+            add = false;
+        } else {
+            int i = -1;
+            while (++i < this.tasks.size() && add) {
                 if (task.getID().compareTo(this.tasks.get(i).getID()) == 0) {
                     add = false;
                 }
             }
-            this.tasks.add(task);
-            this.sort();
         }
+        this.tasks.add(task);
+        this.sort();
         return add;
     }
 
     public synchronized boolean addDoneTask(Task task) {
         boolean add = true;
-        if (task != null) {
-            for (int i = 0; i < this.tasksDone.size() && add; i++) {
+        if (task == null) {
+            add = false;
+        } else {
+            int i = -1;
+            while (++i < this.tasksDone.size() && add) {
                 if (task.getID().compareTo(this.tasksDone.get(i).getID()) == 0) {
                     add = false;
                 }
             }
-            this.tasksDone.add(task);
-            this.sort();
         }
+        this.tasksDone.add(task);
+        this.sort();
         return add;
     }
 
@@ -90,8 +96,9 @@ public class TaskList {
      */
     public boolean deleteTask(Task task) {
         boolean delete = false;
-        if (task != null) {
-            for (int i = 0; i < tasks.size() && !delete; i++) {
+        if (task == null) {
+            int i = -1;
+            while (++i < tasks.size() && !delete) {
                 if (task.getID().compareTo(this.tasks.get(i).getID()) == 0) {
                     Task c = this.tasks.get(i);
                     this.tasks.remove(i);
@@ -109,10 +116,13 @@ public class TaskList {
      * @param id
      */
     public void undoTask(Handler id) {
-        for (int i = 0; i < this.tasksDone.size(); i++) {
+        int i = -1;
+        boolean done = false;
+        while(++i < this.tasksDone.size() && !done){
             Task c = this.tasksDone.get(i);
             if (c.getID().compareTo(id) == 0) {
                 c.undo();
+                done = true;
             }
         }
     }

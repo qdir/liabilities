@@ -86,15 +86,6 @@ public class CreateClientCommand implements Command {
      * @return
      */
     @Override
-    public Date getEffectiveDate() {
-         return this.effectiveDate;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
     public Handler getID() {
         return this.commandID;
     }
