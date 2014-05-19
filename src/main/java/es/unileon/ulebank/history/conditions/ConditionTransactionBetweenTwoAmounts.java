@@ -32,6 +32,6 @@ public class ConditionTransactionBetweenTwoAmounts<T extends Transaction> implem
     @Override
     public boolean test(T t) {
         double amount = t.getAmount();
-        return (this.min <= amount && amount <= this.max);
+        return this.min <= amount && amount <= this.max;
     }
 }

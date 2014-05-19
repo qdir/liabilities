@@ -55,9 +55,9 @@ public class AccountTest {
         this.titular2 = new Client(titularHandler2);
         this.authorized1 = new Client(authorizedHandler1);
         this.authorized2 = new Client(authorizedHandler2);
-        this.commercialAccount.addTitular(this.titular2);
-        this.commercialAccount.addAuthorized(this.authorized1);
-        this.commercialAccount.addAuthorized(this.authorized2);
+        assertTrue(this.commercialAccount.addTitular(this.titular2));
+        assertTrue(this.commercialAccount.addAuthorized(this.authorized1));
+        assertTrue(this.commercialAccount.addAuthorized(this.authorized2));
 
     }
 
@@ -415,7 +415,7 @@ public class AccountTest {
     }
 
     @Test
-    public void testAuthorizeds() {
+    public void testGetAuthorizeds() {
         List<Client> clients = this.commercialAccount.getAuthorizeds();
         assertEquals(clients.size(), 2);
         assertTrue(clients.contains(this.authorized1));
@@ -558,44 +558,30 @@ public class AccountTest {
     }
 
     /**
-     * Test of setLiquidationFrecuency method, of class Account.
-     */
-    @Test
-    public void testSetLiquidationFrecuency() {
-        int liquidationFrecuency = 0;
-        Account instance = null;
-        boolean expResult = false;
-        boolean result = instance.setLiquidationFrecuency(liquidationFrecuency);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of getLiquidationFrecuency method, of class Account.
      */
     @Test
-    public void testGetLiquidationFrecuency() {
-        Account instance = null;
-        int expResult = 0;
-        int result = instance.getLiquidationFrecuency();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testGetAndSetLiquidationFrecuency() {
+        assertEquals(this.commercialAccount.getLiquidationFrecuency(), Account.DEFAULT_LIQUIDATION_FREQUENCY);
+        int frecuency = 1;
+        assertTrue(this.commercialAccount.setLiquidationFrecuency(frecuency));
+        assertEquals(this.commercialAccount.getLiquidationFrecuency(), frecuency);
+        assertFalse(this.commercialAccount.setLiquidationFrecuency(-frecuency));
+        assertEquals(this.commercialAccount.getLiquidationFrecuency(), frecuency);
+        
     }
 
     /**
      * Test of setMaxOverdraft method, of class Account.
      */
     @Test
-    public void testSetMaxOverdraft() {
-        double maxOverdraft = 0.0;
-        Account instance = null;
-        boolean expResult = false;
-        boolean result = instance.setMaxOverdraft(maxOverdraft);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testSetAndGetMaxOverdraft() {
+        assertEquals(this.commercialAccount.getMaxOverdraft(), 0.0, EPSILON);
+        double valid = 100;
+        assertTrue(this.commercialAccount.setMaxOverdraft(valid));
+        assertEquals(this.commercialAccount.getMaxOverdraft(), valid, EPSILON);
+        assertFalse(this.commercialAccount.setMaxOverdraft(-valid));
+        assertEquals(this.commercialAccount.getMaxOverdraft(), valid, EPSILON);
     }
 
     /**
@@ -603,12 +589,6 @@ public class AccountTest {
      */
     @Test
     public void testAddTitular() {
-        Client client = null;
-        Account instance = null;
-        boolean expResult = false;
-        boolean result = instance.addTitular(client);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
@@ -617,13 +597,11 @@ public class AccountTest {
      */
     @Test
     public void testDeleteTitular() {
-        Handler id = null;
-        Account instance = null;
-        boolean expResult = false;
-        boolean result = instance.deleteTitular(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+     	assertEquals(this.commercialAccount.getTitulars().size(),2);
+        assertTrue(this.commercialAccount.deleteTitular(this.titularHandler1));
+        assertEquals(this.commercialAccount.getTitulars().size(), 1);
+        assertFalse(this.commercialAccount.deleteTitular(this.titularHandler2));
+        assertEquals(this.commercialAccount.getTitulars().size(),1);
     }
 
     /**
@@ -631,13 +609,7 @@ public class AccountTest {
      */
     @Test
     public void testAddAuthorized() {
-        Client authorized = null;
-        Account instance = null;
-        boolean expResult = false;
-        boolean result = instance.addAuthorized(authorized);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    	 fail("The test case is a prototype.");
     }
 
     /**
@@ -645,39 +617,11 @@ public class AccountTest {
      */
     @Test
     public void testDeleteAuthorized() {
-        Handler id = null;
-        Account instance = null;
-        boolean expResult = false;
-        boolean result = instance.deleteAuthorized(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getAuthorizeds method, of class Account.
-     */
-    @Test
-    public void testGetAuthorizeds() {
-        Account instance = null;
-        List<Client> expResult = null;
-        List<Client> result = instance.getAuthorizeds();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getMaxOverdraft method, of class Account.
-     */
-    @Test
-    public void testGetMaxOverdraft() {
-        Account instance = null;
-        double expResult = 0.0;
-        double result = instance.getMaxOverdraft();
-        assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    	assertEquals(this.commercialAccount.getAuthorizeds().size(),2);
+        assertTrue(this.commercialAccount.deleteAuthorized(this.authorizedHandler1));
+        assertEquals(this.commercialAccount.getAuthorizeds().size(), 1);
+        assertTrue(this.commercialAccount.deleteAuthorized(this.authorizedHandler2));
+        assertEquals(this.commercialAccount.getAuthorizeds().size(),0);
     }
 
     /**
@@ -685,101 +629,14 @@ public class AccountTest {
      */
     @Test
     public void testDoDirectDebit() throws Exception {
-        DirectDebitTransaction transaction = null;
-        Account instance = null;
-        instance.doDirectDebit(transaction);
-        // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-
-    /**
-     * Test of addLiquidationStrategy method, of class Account.
-     */
-    @Test
-    public void testAddLiquidationStrategy() {
-        LiquidationStrategy strategy = null;
-        Account instance = null;
-        boolean expResult = false;
-        boolean result = instance.addLiquidationStrategy(strategy);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of deleteLiquidationStrategy method, of class Account.
-     */
-    @Test
-    public void testDeleteLiquidationStrategy() {
-        Handler id = null;
-        Account instance = null;
-        boolean expResult = false;
-        boolean result = instance.deleteLiquidationStrategy(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
+    
     /**
      * Test of doLiquidation method, of class Account.
      */
     @Test
     public void testDoLiquidation() {
-        Office office = null;
-        Account instance = null;
-        instance.doLiquidation(office);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getHistory method, of class Account.
-     */
-    @Test
-    public void testGetHistory() {
-        Account instance = null;
-        History expResult = null;
-        History result = instance.getHistory();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getDirectDebitHistory method, of class Account.
-     */
-    @Test
-    public void testGetDirectDebitHistory() {
-        Account instance = null;
-        History<DirectDebitTransaction> expResult = null;
-        History<DirectDebitTransaction> result = instance.getDirectDebitHistory();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getExemptLiquidationStrategy method, of class Account.
-     */
-    @Test
-    public void testGetExemptLiquidationStrategy() {
-        Account instance = null;
-        ExemptLiquidationStrategy<Transaction> expResult = null;
-        ExemptLiquidationStrategy<Transaction> result = instance.getExemptLiquidationStrategy();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setExemptLiquidationStrategy method, of class Account.
-     */
-    @Test
-    public void testSetExemptLiquidationStrategy() {
-        ExemptLiquidationStrategy<Transaction> exemptLiquidationStrategy = null;
-        Account instance = null;
-        instance.setExemptLiquidationStrategy(exemptLiquidationStrategy);
-        // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 }

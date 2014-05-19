@@ -4,26 +4,38 @@ package es.unileon.ulebank.account;
 
 import es.unileon.ulebank.history.DirectDebitTransaction;
 import es.unileon.ulebank.history.Transaction;
+
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  *
  * @author runix
  * @param <T>
  */
-public interface ExemptLiquidationStrategy<T extends Transaction> {
+public class LiquidationFee {
 
-    /**
-     * To know if the account is liquidation exempt.
-     *
-     * @param transactions ( All transactions )
-     * 
-     * @param directDebitTransactions ( DirectDebitTransactions )
-     * 
-     * @param accountDirectDebits ( Account's direct debits )
-     * 
-     * @return
-     */
-    boolean isExempt(Iterator<T> transactions, Iterator<DirectDebitTransaction> directDebitTransactions, AccountDirectDebits accountDirectDebits);
+	private List<FeeCase> feeCases;
+	
+	public LiquidationFee() {
+		this.feeCases = new ArrayList<FeeCase>();
+	}
+	
+	public void addFeeCase(FeeCase fee){
+		this.feeCases.add(fee);
+	}
+	
+    public Transaction calculateFee(Iterator<Transaction> transactions, Iterator<DirectDebitTransaction> directDebitTransactions, AccountDirectDebits accountDirectDebits){
+    	int i = -1;
+    	boolean foundValidCase = false;
+    	while(foundValidCase && ++i < feeCases.size() ) {
+    		foundValidCase = this.feeCases.get(i).triggerCase(transactions, directDebitTransactions, accountDirectDebits);
+    	}
+    	if(foundValidCase) {
+    		return this.feeCases.get(i).calculateAmount(transactions, directDebitTransactions, accountDirectDebits);
+    	}
+    	return null;
+    }
 
 }

@@ -33,7 +33,7 @@ public class ConditionTransactionBetweenTwoDates<T extends Transaction> implemen
     @Override
     public boolean test(T t) {
         final long timestamp = t.getEffectiveDate().getTime();
-        return (this.timestampMin <= timestamp && timestamp <= this.timestampMax);
+        return this.timestampMin <= timestamp && timestamp <= this.timestampMax;
     }
 
 }

@@ -1,6 +1,6 @@
 /* Application developed for AW subject, belonging to passive operations
  group.*/
-package es.unileon.ulebank.taskList;
+package es.unileon.ulebank.tasklist;
 
 import java.util.Comparator;
 

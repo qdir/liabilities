@@ -107,7 +107,7 @@ public class Bank {
                 }
             }
         } else {
-            error.append(("The transaction cannot be null or destination be null"));
+            error.append("The transaction cannot be null or destination be null");
         }
 
         if (error.length() > 0) {

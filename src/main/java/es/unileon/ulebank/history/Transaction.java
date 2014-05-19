@@ -51,10 +51,10 @@ public abstract class Transaction {
         }
 
         if (id == null) {
-            err.append(("The id cannot be null \n"));
+            err.append("The id cannot be null \n");
         } else {
             if (id.toString().length() == 0) {
-                err.append(("The id size cannot be 0 \n"));
+                err.append("The id size cannot be 0 \n");
             }
         }
 

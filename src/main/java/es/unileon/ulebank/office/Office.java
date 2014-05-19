@@ -29,7 +29,7 @@ public class Office {
     /**
      * Max account number
      */
-    public static final long MAX_ACCOUNT_NUMBER = 1000000000l - 1;
+    public static final long MAX_ACCOUNT_NUMBER = 1000000000L - 1;
 
     /**
      * The list of accounts of this office
@@ -222,7 +222,7 @@ public class Office {
                 this.bank.doTransaction(t, destine);
             }
         } else {
-            error.append(("The transaction cannot be null or destination be null"));
+            error.append("The transaction cannot be null or destination be null");
         }
 
         if (error.length() > 0) {
@@ -307,14 +307,14 @@ public class Office {
     /**
      * Returns a copy of the list of employees of the office
      */
-    public ArrayList<Employee> getEmployeeList() {
+    public List<Employee> getEmployeeList() {
         return new ArrayList<Employee>(employeeList);
     }
 
     /**
      * Sets the list of employees of the office
      */
-    public void setEmployeeList(ArrayList<Employee> employeeList) {
+    public void setEmployeeList(List<Employee> employeeList) {
         this.employeeList = employeeList;
     }
 

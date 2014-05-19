@@ -70,17 +70,12 @@ public class Account {
     /**
      * The strategies
      */
-    private final List<LiquidationStrategy> liquidationStrategies;
+//    private final List<LiquidationStrategy> liquidationStrategies;
 
     /**
      * The max account's overdraft ( in positive )
      */
     private double maxOverdraft;
-
-    /**
-     * To know if the account is free of liquidation
-     */
-    private ExemptLiquidationStrategy<Transaction> exemptLiquidationStrategy;
 
     /**
      * Account's direct debits
@@ -112,7 +107,7 @@ public class Account {
             this.authorizeds = new ArrayList<Client>();
             this.lastLiquidation = new Date(System.currentTimeMillis());
             this.liquidationFrecuency = DEFAULT_LIQUIDATION_FREQUENCY;
-            this.liquidationStrategies = new ArrayList<LiquidationStrategy>();
+//            this.liquidationStrategies = new ArrayList<LiquidationStrategy>();
             this.directDebitHistory = new History<DirectDebitTransaction>();
             this.maxOverdraft = 0;
             this.directDebits = new AccountDirectDebits();
@@ -186,7 +181,7 @@ public class Account {
                 }
             }
             if (!found) {
-                LOG.info(("Add new titular " + client.getId()));
+                LOG.info("Add new titular " + client.getId());
                 this.titulars.add(client);
             } else {
                 LOG.error("Cannot add the titular " + client.getId().toString() + " , the titular already exists");
@@ -214,11 +209,12 @@ public class Account {
             err.append("Error, the account must have at least one titular\n");
         } else {
             while (i < this.titulars.size() && !found) {
-                if (this.titulars.get(i++).getId().compareTo(id) == 0) {
+                if (this.titulars.get(i).getId().compareTo(id) == 0) {
                     LOG.info("Delete " + id.toString() + " titular");
                     this.titulars.remove(i);
                     found = true;
                 }
+                i++;
             }
             if (!found) {
                 err.append("Cannot remove the titular ").append(id.toString()).append(" because it doesn't exist");
@@ -251,7 +247,7 @@ public class Account {
             }
         }
         if (!found) {
-            LOG.info(("Add new authorized " + authorized.getId()));
+            LOG.info("Add new authorized " + authorized.getId());
             this.authorizeds.add(authorized);
         } else {
             LOG.error("Cannot add the authorized " + authorized.getId().toString() + " , the authorized already exists");
@@ -274,11 +270,12 @@ public class Account {
         boolean found = false;
         int i = 0;
         while (i < this.authorizeds.size() && !found) {
-            if (this.authorizeds.get(i++).getId().compareTo(id) == 0) {
+            if (this.authorizeds.get(i).getId().compareTo(id) == 0) {
                 LOG.info("Delete " + id.toString() + " authorized");
                 this.authorizeds.remove(i);
                 found = true;
             }
+            i++;
         }
         if (!found) {
             LOG.error("Cannot remove the authorized " + id.toString() + " because it doesn't exist");
@@ -370,46 +367,33 @@ public class Account {
         }
     }
 
-    /**
-     * Add a new liquidation strategy. The liquidation's id must be unique, so,
-     * if there is a transaction with the same id the method return false and
-     * the strategy won't be added
-     *
-     * @param strategy (strategy to add)
-     * @return ( true if sucess, false otherwise )
-     */
-    public boolean addLiquidationStrategy(LiquidationStrategy strategy) {
-        int i = 0;
-        boolean found = false;
-        while (i < this.liquidationStrategies.size() && !found) {
-            if (this.liquidationStrategies.get(i++).getID().compareTo(strategy.getID()) == 0) {
-                found = true;
-            }
-        }
-        if (!found) {
-            this.liquidationStrategies.add(strategy);
-        }
-        return !found;
-    }
+    
+//    public boolean addLiquidationLiquidationFee(LiquidationStrategy strategy) {
+//        int i = 0;
+//        boolean found = false;
+//        while (i < this.liquidationStrategies.size() && !found) {
+//            if (this.liquidationStrategies.get(i++).getID().compareTo(strategy.getID()) == 0) {
+//                found = true;
+//            }
+//        }
+//        if (!found) {
+//            this.liquidationStrategies.add(strategy);
+//        }
+//        return !found;
+//    }
 
-    /**
-     * Delete the liquidation strategy with specified id.
-     *
-     * @param id ( liquidation trategy's id)
-     *
-     * @return ( true if sucess, false otherwise )
-     */
-    public boolean deleteLiquidationStrategy(Handler id) {
-        int i = 0;
-        boolean found = false;
-        while (i < this.liquidationStrategies.size() && !found) {
-            if (this.liquidationStrategies.get(i++).getID().compareTo(id) == 0) {
-                this.liquidationStrategies.remove(i);
-                found = true;
-            }
-        }
-        return found;
-    }
+  
+//    public boolean deleteLiquidationFee(Handler id) {
+//        int i = 0;
+//        boolean found = false;
+//        while (i < this.liquidationStrategies.size() && !found) {
+//            if (this.liquidationStrategies.get(i++).getID().compareTo(id) == 0) {
+//                this.liquidationStrategies.remove(i);
+//                found = true;
+//            }
+//        }
+//        return found;
+//    }
 
     /**
      * Perform account liquidation.
@@ -417,36 +401,7 @@ public class Account {
      * @param office
      */
     public void doLiquidation(Office office) {
-        StringBuilder err = new StringBuilder();
-        try {
-            AccountHandler ah = new AccountHandler(this.id);
-            if (office.getIdOffice().compareTo(ah.getOfficeHandler()) == 0) {
-                if (this.exemptLiquidationStrategy == null || !this.exemptLiquidationStrategy.isExempt(this.history.getIterator(), this.directDebitHistory.getIterator(), this.directDebits)) {
-                    Date now = new Date(Time.getInstance().getTime());
-                    for (int i = 0; i < this.liquidationStrategies.size(); i++) {
-                        //Substract from account and add in other ?
-                        //Account office, -t transaction for office ?
-                        Transaction t = this.liquidationStrategies.get(i).doLiquidation(this.history.getIterator(), lastLiquidation, now);
-                        Transaction tNeg = new GenericTransaction(-t.getAmount(), t.getDate(), t.getSubject());
-                        tNeg.setEffectiveDate(t.getEffectiveDate());
-                        try {
-                            this.doTransaction(t);
-                        } catch (TransactionException ex) {
-                            LOG.error(ex);
-                        }
-                    }
-                    this.lastLiquidation = now;
-                }
-            } else {
-                err.append("Wrong office\n");
-            }
-        } catch (MalformedHandlerException e) {
-            err.append("Error while parsing handler\n");
-        }
-
-        if (err.length() > 0) {
-//            throw new... ?
-        }
+      
     }
 
     /**
@@ -467,22 +422,6 @@ public class Account {
         return this.directDebitHistory;
     }
 
-    /**
-     * Get the ExemptLiquidationStrategy
-     *
-     * @return
-     */
-    public ExemptLiquidationStrategy<Transaction> getExemptLiquidationStrategy() {
-        return exemptLiquidationStrategy;
-    }
-
-    /**
-     *
-     * @param exemptLiquidationStrategy ( Strategy to set)
-     */
-    public void setExemptLiquidationStrategy(ExemptLiquidationStrategy<Transaction> exemptLiquidationStrategy) {
-        this.exemptLiquidationStrategy = exemptLiquidationStrategy;
-    }
 
     /**
      * Get the account ID
