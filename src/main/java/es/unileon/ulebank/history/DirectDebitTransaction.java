@@ -3,7 +3,9 @@
 package es.unileon.ulebank.history;
 
 import es.unileon.ulebank.account.DetailedInformation;
+import es.unileon.ulebank.exceptions.TransactionException;
 import es.unileon.ulebank.handler.Handler;
+
 import java.util.Date;
 
 /**
@@ -26,7 +28,7 @@ public class DirectDebitTransaction extends Transaction {
      * @param directDebitId (The direct debit transaction (The same as direct
      * debit))
      */
-    public DirectDebitTransaction(double amount, Date date, String subject, Handler directDebitId) {
+    public DirectDebitTransaction(double amount, Date date, String subject, Handler directDebitId) throws TransactionException{
         super(amount, date, subject);
         this.directDebitId = directDebitId;
     }
@@ -40,7 +42,7 @@ public class DirectDebitTransaction extends Transaction {
      * @param info
      * @param directDebitId
      */
-    public DirectDebitTransaction(double amount, Date date, String subject, DetailedInformation info, Handler directDebitId) {
+    public DirectDebitTransaction(double amount, Date date, String subject, DetailedInformation info, Handler directDebitId) throws TransactionException{
         super(amount, date, subject, info);
         this.directDebitId = directDebitId;
     }

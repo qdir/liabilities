@@ -3,15 +3,19 @@
 package es.unileon.ulebank.history.iterator;
 
 import es.unileon.ulebank.account.DetailedInformation;
+import es.unileon.ulebank.exceptions.TransactionException;
 import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.history.conditions.WrongArgsException;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,7 +33,7 @@ public class IteratorBetweenTwoAmountsTest {
     private double max;
 
     @Before
-    public void setup() throws WrongArgsException {
+    public void setup() throws WrongArgsException, TransactionException {
         this.min = 100;
         this.max = 2000;
         this.elements = new ArrayList<Transaction>();
@@ -100,7 +104,7 @@ public class IteratorBetweenTwoAmountsTest {
         assertEquals(this.iteratorFromList.next(), null);
     }
 
-    public Transaction getTransaction(double amount) {
+    public Transaction getTransaction(double amount) throws TransactionException{
         return new GenericTransaction(amount, new Date(), "", new DetailedInformation());
     }
 }

@@ -3,17 +3,21 @@
 package es.unileon.ulebank.command;
 
 import es.unileon.ulebank.account.DetailedInformation;
+import es.unileon.ulebank.exceptions.TransactionException;
 import es.unileon.ulebank.handler.GenericHandler;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.history.TransactionHandlerProvider;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 /**
@@ -37,7 +41,7 @@ public class CommandFilterTransactionBySubjectTest {
     private CommandFilterTransactionBySubject commandFromIteratorNegate;
 
     @Before
-    public void setup() {
+    public void setup() throws TransactionException {
         this.elements = new ArrayList<Transaction>();
         this.correctElements = new ArrayList<Transaction>();
         this.invalidElements = new ArrayList<Transaction>();
@@ -150,7 +154,7 @@ public class CommandFilterTransactionBySubjectTest {
         assertEquals(this.iteratorFromListNegate.next(), null);
     }
 
-    public Transaction getTransaction(String subject) {
+    public Transaction getTransaction(String subject) throws TransactionException{
         return new GenericTransaction(0, new Date(), subject, new DetailedInformation());
     }
 

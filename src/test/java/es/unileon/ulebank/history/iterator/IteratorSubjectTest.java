@@ -3,15 +3,19 @@
 package es.unileon.ulebank.history.iterator;
 
 import es.unileon.ulebank.account.DetailedInformation;
+import es.unileon.ulebank.exceptions.TransactionException;
 import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.history.TransactionHandlerProvider;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,7 +35,7 @@ public class IteratorSubjectTest {
     private String word;
 
     @Before
-    public void setup() {
+    public void setup() throws TransactionException{
         this.elements = new ArrayList<Transaction>();
         this.correctElements = new ArrayList<Transaction>();
         this.invalidElements = new ArrayList<Transaction>();
@@ -107,7 +111,7 @@ public class IteratorSubjectTest {
         assertEquals(this.iteratorFromListNegate.next(), null);
     }
 
-    public Transaction getTransaction(String subject) {
+    public Transaction getTransaction(String subject) throws TransactionException{
         return new GenericTransaction(0, new Date(), subject, new DetailedInformation());
     }
 }

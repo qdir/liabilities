@@ -14,12 +14,6 @@ import java.util.logging.Logger;
  */
 public final class TimeUtils {
 
-    /**
-     * Private construct. You can't instance it.
-     */
-    private TimeUtils() {
-
-    }
 
     /**
      * Gets the date's month
@@ -73,7 +67,7 @@ public final class TimeUtils {
         try {
             timestamp = sdf.parse(day + "/" + month + "/" + year).getTime();
         } catch (ParseException ex) {
-            Logger.getLogger(TimeUtils.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
         return timestamp;
     }

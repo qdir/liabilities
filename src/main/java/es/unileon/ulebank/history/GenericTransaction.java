@@ -3,6 +3,8 @@
 package es.unileon.ulebank.history;
 
 import es.unileon.ulebank.account.DetailedInformation;
+import es.unileon.ulebank.exceptions.TransactionException;
+
 import java.util.Date;
 
 /**
@@ -19,7 +21,7 @@ public class GenericTransaction extends Transaction {
      * @param date ( Transaction date )
      * @param subject ( Transaction subject )
      */
-    public GenericTransaction(double amount, Date date, String subject) {
+    public GenericTransaction(double amount, Date date, String subject) throws TransactionException{
         super(amount, date, subject);
     }
 
@@ -30,7 +32,7 @@ public class GenericTransaction extends Transaction {
      * @param date ( Transaction date )
      * @param subject ( Transaction subject )
      */
-    public GenericTransaction(double amount, Date date, String subject, DetailedInformation extraInfo) {
+    public GenericTransaction(double amount, Date date, String subject, DetailedInformation extraInfo) throws TransactionException{
         super(amount, date, subject, extraInfo);
     }
 }

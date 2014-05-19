@@ -8,11 +8,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
 import org.junit.Before;
 import org.junit.Test;
+
+import es.unileon.ulebank.exceptions.TransactionException;
 
 /**
  *
@@ -30,9 +34,10 @@ public class HistoryTest {
 
     /**
      * Test of add method, of class AccountHistory.
+     * @throws TransactionException 
      */
     @Test
-    public void testAddGenericTransaction() {
+    public void testAddGenericTransaction() throws TransactionException {
         Transaction transaction = new GenericTransaction(10.5d, new Date(), "Imposicion");
         assertTrue(this.accountHistory.add(transaction));
     }
@@ -41,7 +46,7 @@ public class HistoryTest {
      * Test of getTransactions method, of class AccountHistory.
      */
     @Test
-    public void testGetTransactions() throws ParseException {
+    public void testGetTransactions() throws ParseException, TransactionException {
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
         Date date1 = sdf.parse("01/01/2014");

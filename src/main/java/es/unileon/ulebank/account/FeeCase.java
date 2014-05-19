@@ -9,6 +9,7 @@ import org.mvel2.MVEL;
 import com.fathzer.soft.javaluator.DoubleEvaluator;
 import com.fathzer.soft.javaluator.StaticVariableSet;
 
+import es.unileon.ulebank.exceptions.TransactionException;
 import es.unileon.ulebank.history.DirectDebitTransaction;
 import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.Transaction;
@@ -54,7 +55,7 @@ public class FeeCase {
 				}
 
 				this.triggeringConditions.append(equation);
-			
+
 			} catch (Throwable e) {
 				result = false;
 			}
@@ -65,7 +66,7 @@ public class FeeCase {
 
 	public boolean triggerCase(Iterator<Transaction> transactions,
 			Iterator<DirectDebitTransaction> directDebitTransactions,
-			AccountDirectDebits accountDirectDebits) {
+			AccountDirectDebits accountDirectDebits, Date min, Date max) {
 		HashMap<String, Object> variables = new HashMap<String, Object>();
 		StaticVariableSet<Double> set = this.featureExtractor.getVariables();
 		for (String name : this.featureExtractor.getVariableNames()) {
@@ -77,10 +78,11 @@ public class FeeCase {
 
 	public Transaction calculateAmount(Iterator<Transaction> transactions,
 			Iterator<DirectDebitTransaction> directDebitTransactions,
-			AccountDirectDebits accountDirectDebits) {
+			AccountDirectDebits accountDirectDebits, Date min, Date max)
+			throws TransactionException {
 		Transaction result = null;
 		if (this.triggerCase(transactions, directDebitTransactions,
-				accountDirectDebits)) {
+				accountDirectDebits, min, max)) {
 			double amount = EVALUATOR.evaluate(this.amountFormula,
 					this.featureExtractor.generateRandomVariables());
 			result = new GenericTransaction(amount, new Date(Time.getInstance()

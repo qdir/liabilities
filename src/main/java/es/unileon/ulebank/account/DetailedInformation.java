@@ -34,18 +34,7 @@ public class DetailedInformation {
     public void appendInformation(String information) {
         if (!this.nonEditable) {
             this.info.append(information);
-            if (information.charAt(information.length() - 1) != '\n') {
-                this.info.append("\n");
-            }
         }
-    }
-
-    /**
-     *
-     * @param information
-     */
-    public void appendInformaton(StringBuffer information) {
-        this.appendInformation(information.toString());
     }
 
     /**

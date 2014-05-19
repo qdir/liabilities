@@ -30,13 +30,17 @@ public class AccountHandler implements Handler {
 	 */
 	private static final int NUMBER_OF_FIELDS = 4;
 	/**
+	 * The number of digits ( control digits) 
+	 */
+	private static final int DC_NUMBER_LENGTH = 2;
+	/**
 	 * Number pattern
 	 */
 	private static Pattern NUMBER_PATTERN = Pattern.compile("^[0-9]*$");
 	/**
 	 * Separator of the fields
 	 */
-	private final static String SEPARATOR = "-";
+	public final static String SEPARATOR = "-";
 	/**
 	 * The account number, the number of digits of this number is given by {
 	 *
@@ -183,7 +187,6 @@ public class AccountHandler implements Handler {
 	
 	private static Handler getField(Handler another, int number)
 			throws MalformedHandlerException {
-
 		String[] splitHandler = null;
 		StringBuilder error = new StringBuilder();
 		if (0 < number && NUMBER_OF_FIELDS < number) {
@@ -197,8 +200,8 @@ public class AccountHandler implements Handler {
 					error.append("The handler must have "+NUMBER_OF_FIELDS+" fields splitted by "
 							+ SEPARATOR + "\n");
 				} else {
-					String raw = another.toString().replace("-","");
-					if(NUMBER_PATTERN.matcher(raw).find()) {
+					String raw = another.toString().replace(SEPARATOR,"");
+					if(!(NUMBER_PATTERN.matcher(raw).find() && raw.length() == (ACCOUNT_NUMBER_LENGTH+ BANK_NUMBER_LENGTH+ OFFICE_NUMBER_LENGTH+ DC_NUMBER_LENGTH))) {
 						error.append("There are letters in the handler, only numbers are allowed\n");
 					}
 				}

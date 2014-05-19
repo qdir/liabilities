@@ -36,4 +36,5 @@ public class TimeUtilsTest {
         assertEquals(TimeUtils.getTimestamp(1970, 1, 2), 82800000);
         assertEquals(TimeUtils.getTimestamp(2014, 4,13), 1397340000000l);
     }
+    
 }
