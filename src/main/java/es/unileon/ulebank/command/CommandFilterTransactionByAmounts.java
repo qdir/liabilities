@@ -6,6 +6,8 @@ import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.history.conditions.WrongArgsException;
 import es.unileon.ulebank.history.iterator.IteratorBetweenTwoAmounts;
+
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
@@ -17,49 +19,55 @@ import java.util.logging.Logger;
  */
 public class CommandFilterTransactionByAmounts implements Command {
 
-    private final double min;
-    private final double max;
-    private final Iterator<Transaction> it;
-    private Iterator<Transaction> iteratorFiltered;
-    private final Handler commandId;
+	private final double min;
+	private final double max;
+	private Iterator<Transaction> iteratorFiltered;
+	private final Handler commandId;
+	private List<Transaction> result;
 
-    public CommandFilterTransactionByAmounts(double min, double max, List<Transaction> transactions, Handler commandId) {
-        this(min, max, transactions.iterator(), commandId);
-    }
+	public CommandFilterTransactionByAmounts(double min, double max,
+			List<Transaction> transactions, Handler commandId)
+			throws WrongArgsException {
+		this(min, max, transactions.iterator(), commandId);
+	}
 
-    public CommandFilterTransactionByAmounts(double min, double max, Iterator<Transaction> iterator, Handler commandId) {
-        this.min = min;
-        this.max = max;
-        this.it = iterator;
-        this.commandId = commandId;
-    }
+	public CommandFilterTransactionByAmounts(double min, double max,
+			Iterator<Transaction> iterator, Handler commandId)
+			throws WrongArgsException {
+		this.min = min;
+		this.max = max;
+		this.commandId = commandId;
+		this.iteratorFiltered = new IteratorBetweenTwoAmounts<Transaction>(
+				iterator, min, max);
+		this.result = new ArrayList<Transaction>();
+	}
 
-    @Override
-    public Handler getID() {
-        return this.commandId;
-    }
+	@Override
+	public Handler getID() {
+		return this.commandId;
+	}
 
-    @Override
-    public void execute() {
-        try {
-            this.iteratorFiltered = new IteratorBetweenTwoAmounts<Transaction>(it, min, max);
-        } catch (WrongArgsException ex) {
-            Logger.getLogger(CommandFilterTransactionByDates.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+	@Override
+	public void execute() {
+		if (this.result.size() == 0) {
+			while (this.iteratorFiltered.hasNext()) {
+				this.result.add(this.iteratorFiltered.next());
+			}
+		}
+	}
 
-    public Iterator<Transaction> getIterator() {
-        return this.iteratorFiltered;
-    }
+	public List<Transaction> getList() {
+		return this.result;
+	}
 
-    @Override
-    public void undo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	@Override
+	public void undo() {
 
-    @Override
-    public void redo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	}
+
+	@Override
+	public void redo() {
+
+	}
 
 }

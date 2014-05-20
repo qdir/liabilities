@@ -57,7 +57,7 @@ public class CommandFilterTransactionBySubjectTest {
         this.elements.addAll(this.invalidElements);
         this.elements.addAll(this.correctElements);
 
-        this.commandFromIterator = new CommandFilterTransactionBySubject(this.elements.iterator(), commandId, word, true);
+        this.commandFromIterator = new CommandFilterTransactionBySubject(this.elements.iterator(), this.commandId, this.word, true);
         this.commandFromList = new CommandFilterTransactionBySubject(this.elements, commandId, word, true);
 
         this.commandFromIteratorNegate = new CommandFilterTransactionBySubject(this.elements.iterator(), commandId, word, false);
@@ -68,11 +68,11 @@ public class CommandFilterTransactionBySubjectTest {
         this.commandFromIteratorNegate.execute();
         this.commandFromListNegate.execute();
 
-        this.iteratorFromList = this.commandFromList.getIterator();
-        this.iteratorFromListNegate = this.commandFromListNegate.getIterator();
+        this.iteratorFromList = this.commandFromList.getList().iterator();
+        this.iteratorFromListNegate = this.commandFromListNegate.getList().iterator();
 
-        this.iteratorFromIterator = this.commandFromIterator.getIterator();
-        this.iteratorFromIteratorNegate = this.commandFromIteratorNegate.getIterator();
+        this.iteratorFromIterator = this.commandFromIterator.getList().iterator();
+        this.iteratorFromIteratorNegate = this.commandFromIteratorNegate.getList().iterator();
     }
 
     @Test
@@ -90,8 +90,6 @@ public class CommandFilterTransactionBySubjectTest {
         assertFalse(it.hasNext());
         assertFalse(this.iteratorFromIterator.hasNext());
         assertFalse(this.iteratorFromList.hasNext());
-        assertEquals(this.iteratorFromIterator.next(), null);
-        assertEquals(this.iteratorFromList.next(), null);
     }
 
     @Test
@@ -99,30 +97,26 @@ public class CommandFilterTransactionBySubjectTest {
         this.elements.removeAll(this.correctElements);
         this.commandFromIterator = new CommandFilterTransactionBySubject(this.elements.iterator(), commandId, word, true);
         this.commandFromIterator.execute();
-        this.iteratorFromIterator = this.commandFromIterator.getIterator();
+        this.iteratorFromIterator = this.commandFromIterator.getList().iterator();
 
         this.commandFromList = new CommandFilterTransactionBySubject(this.elements, commandId, word, true);
         this.commandFromList.execute();;
-        this.iteratorFromList = this.commandFromList.getIterator();
+        this.iteratorFromList = this.commandFromList.getList().iterator();
         assertFalse(this.iteratorFromIterator.hasNext());
         assertFalse(this.iteratorFromList.hasNext());
-        assertEquals(this.iteratorFromIterator.next(), null);
-        assertEquals(this.iteratorFromList.next(), null);
 
         this.elements.clear();
         this.elements.addAll(this.correctElements);
         this.commandFromIteratorNegate = new CommandFilterTransactionBySubject(this.elements.iterator(), commandId, word, false);
         this.commandFromIteratorNegate.execute();
-        this.iteratorFromIteratorNegate = this.commandFromIteratorNegate.getIterator();
+        this.iteratorFromIteratorNegate = this.commandFromIteratorNegate.getList().iterator();
 
         this.commandFromListNegate = new CommandFilterTransactionBySubject(this.elements, commandId, word, false);
         this.commandFromListNegate.execute();;
-        this.iteratorFromListNegate = this.commandFromListNegate.getIterator();
+        this.iteratorFromListNegate = this.commandFromListNegate.getList().iterator();
 
         assertFalse(this.iteratorFromIteratorNegate.hasNext());
         assertFalse(this.iteratorFromListNegate.hasNext());
-        assertEquals(this.iteratorFromIteratorNegate.next(), null);
-        assertEquals(this.iteratorFromListNegate.next(), null);
     }
 
     @Test
@@ -139,19 +133,15 @@ public class CommandFilterTransactionBySubjectTest {
         this.commandFromIteratorNegate.execute();
         this.commandFromListNegate.execute();
 
-        this.iteratorFromList = this.commandFromList.getIterator();
-        this.iteratorFromListNegate = this.commandFromListNegate.getIterator();
+        this.iteratorFromList = this.commandFromList.getList().iterator();
+        this.iteratorFromListNegate = this.commandFromListNegate.getList().iterator();
 
-        this.iteratorFromIterator = this.commandFromIterator.getIterator();
-        this.iteratorFromIteratorNegate = this.commandFromIteratorNegate.getIterator();
+        this.iteratorFromIterator = this.commandFromIterator.getList().iterator();
+        this.iteratorFromIteratorNegate = this.commandFromIteratorNegate.getList().iterator();
         assertFalse(this.iteratorFromIterator.hasNext());
         assertFalse(this.iteratorFromList.hasNext());
-        assertEquals(this.iteratorFromIterator.next(), null);
-        assertEquals(this.iteratorFromList.next(), null);
         assertFalse(this.iteratorFromIteratorNegate.hasNext());
         assertFalse(this.iteratorFromListNegate.hasNext());
-        assertEquals(this.iteratorFromIteratorNegate.next(), null);
-        assertEquals(this.iteratorFromListNegate.next(), null);
     }
 
     public Transaction getTransaction(String subject) throws TransactionException{
@@ -172,7 +162,7 @@ public class CommandFilterTransactionBySubjectTest {
      */
     @Test
     public void testUndo() {
-        fail("Todo");
+    	//Nothing to do
     }
 
     /**
@@ -180,7 +170,7 @@ public class CommandFilterTransactionBySubjectTest {
      */
     @Test
     public void testRedo() {
-        fail("Todo");
+        //Nothing to do
     }
 
 }
