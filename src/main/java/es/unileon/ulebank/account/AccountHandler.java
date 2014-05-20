@@ -30,7 +30,7 @@ public class AccountHandler implements Handler {
 	 */
 	private static final int NUMBER_OF_FIELDS = 4;
 	/**
-	 * The number of digits ( control digits) 
+	 * The number of digits ( control digits)
 	 */
 	private static final int DC_NUMBER_LENGTH = 2;
 	/**
@@ -184,26 +184,24 @@ public class AccountHandler implements Handler {
 		return bankHandler.toString() + SEPARATOR + officeHandler.toString()
 				+ SEPARATOR + dc + SEPARATOR + accountNumber;
 	}
-	
+
 	private static Handler getField(Handler another, int number)
 			throws MalformedHandlerException {
 		String[] splitHandler = null;
 		StringBuilder error = new StringBuilder();
-		if (0 < number && NUMBER_OF_FIELDS < number) {
-			error.append("The must be in the range [0..3]");
+
+		if (another == null || another.toString() == null) {
+			error.append("The handler is null \n");
 		} else {
-			if (another == null || another.toString() == null) {
-				error.append("The handler is null \n");
+			splitHandler = another.toString().split(SEPARATOR);
+			if (splitHandler.length != NUMBER_OF_FIELDS) {
+				error.append("The handler must have " + NUMBER_OF_FIELDS
+						+ " fields splitted by " + SEPARATOR + "\n");
 			} else {
-				splitHandler = another.toString().split(SEPARATOR);
-				if (splitHandler.length != NUMBER_OF_FIELDS) {
-					error.append("The handler must have "+NUMBER_OF_FIELDS+" fields splitted by "
-							+ SEPARATOR + "\n");
-				} else {
-					String raw = another.toString().replace(SEPARATOR,"");
-					if(!(NUMBER_PATTERN.matcher(raw).find() && raw.length() == (ACCOUNT_NUMBER_LENGTH+ BANK_NUMBER_LENGTH+ OFFICE_NUMBER_LENGTH+ DC_NUMBER_LENGTH))) {
-						error.append("There are letters in the handler, only numbers are allowed\n");
-					}
+				String raw = another.toString().replace(SEPARATOR, "");
+				if (!(NUMBER_PATTERN.matcher(raw).find() && raw.length() == (ACCOUNT_NUMBER_LENGTH
+						+ BANK_NUMBER_LENGTH + OFFICE_NUMBER_LENGTH + DC_NUMBER_LENGTH))) {
+					error.append("There are letters in the handler, only numbers are allowed\n");
 				}
 			}
 		}
