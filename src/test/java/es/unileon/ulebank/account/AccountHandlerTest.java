@@ -53,8 +53,10 @@ public class AccountHandlerTest {
 	@Test
 	public void testHandlerFromAnotherWithSymbols()
 			throws MalformedHandlerException {
-		Handler another = new GenericHandler(this.bank.getID().toString() + "-"
-				+ this.office.getIdOffice().toString() + "-" + this.dc + "-"
+		Handler another = new GenericHandler(this.bank.getID().toString()
+				+ AccountHandler.SEPARATOR
+				+ this.office.getIdOffice().toString()
+				+ AccountHandler.SEPARATOR + this.dc + AccountHandler.SEPARATOR
 				+ this.accountNumber);
 		AccountHandler parsed = new AccountHandler(another);
 		assertTrue(this.bank.getID().compareTo(parsed.getBankHandler()) == 0);
@@ -64,7 +66,6 @@ public class AccountHandlerTest {
 		assertTrue(this.dc.equals(this.dc));
 	}
 
-	
 	@Test(expected = MalformedHandlerException.class)
 	public void testMoreBankHandlerLength() throws MalformedHandlerException {
 		new AccountHandler(new GenericHandler("00000"), new GenericHandler(
@@ -91,7 +92,6 @@ public class AccountHandlerTest {
 				new GenericHandler("0000"), "000000000000");
 	}
 
-
 	@Test(expected = MalformedHandlerException.class)
 	public void testMoreOfficeHandlerLength() throws MalformedHandlerException {
 		new AccountHandler(new GenericHandler("0000"), new GenericHandler(
@@ -105,7 +105,6 @@ public class AccountHandlerTest {
 				"a0000"), "000000000000");
 	}
 
-	
 	@Test(expected = MalformedHandlerException.class)
 	public void testLessOfficeHandlerLength() throws MalformedHandlerException {
 		new AccountHandler(new GenericHandler("0000"),
@@ -133,7 +132,6 @@ public class AccountHandlerTest {
 				"0000"), "a0000000000");
 	}
 
-	
 	@Test(expected = MalformedHandlerException.class)
 	public void testLessAccountnumberHandlerLength()
 			throws MalformedHandlerException {
@@ -1273,22 +1271,38 @@ public class AccountHandlerTest {
 	@Test(expected = MalformedHandlerException.class)
 	public void testParsingHandlerBadDCAllDigits()
 			throws MalformedHandlerException {
-		new AccountHandler(new GenericHandler(this.bank.toString() + "-"
-				+ this.office.toString() + "99" + this.accountNumber));
+		new AccountHandler(new GenericHandler(this.bank.getID().toString()
+				+ AccountHandler.SEPARATOR + this.office.getIdOffice().toString() + "99"
+				+ this.accountNumber));
 	}
 
 	@Test(expected = MalformedHandlerException.class)
 	public void testParsingHandlerBadDCFirstDigit()
 			throws MalformedHandlerException {
-		new AccountHandler(new GenericHandler(this.bank.toString() + "-"
-				+ this.office.toString() + "11" + this.accountNumber));
+		new AccountHandler(new GenericHandler(this.bank.getID().toString()
+				+ AccountHandler.SEPARATOR + this.office.getIdOffice().toString() + "11"
+				+ this.accountNumber));
 	}
 
 	@Test(expected = MalformedHandlerException.class)
 	public void testParsingHandlerBadDCLastDigit()
 			throws MalformedHandlerException {
-		new AccountHandler(new GenericHandler(this.bank.toString() + "-"
-				+ this.office.toString() + "20" + this.accountNumber));
+			new AccountHandler(new GenericHandler(this.bank.getID().toString()
+					+ AccountHandler.SEPARATOR + this.office.getIdOffice().toString()
+					+ AccountHandler.SEPARATOR + "21"
+					+ AccountHandler.SEPARATOR + this.accountNumber));
+
+	}
+
+	@Test(expected = MalformedHandlerException.class)
+	public void testParsingNullHandler() throws MalformedHandlerException {
+		new AccountHandler(null);
+	}
+
+	@Test(expected = MalformedHandlerException.class)
+	public void testParsingGenericWithNullString()
+			throws MalformedHandlerException {
+		new AccountHandler(new GenericHandler(null));
 	}
 
 	// Creating OK
@@ -1296,11 +1310,11 @@ public class AccountHandlerTest {
 	public void testParsingHandlerOk() throws MalformedHandlerException {
 		AccountHandler ac = new AccountHandler(new GenericHandler(this.bank
 				.getID().toString()
-				+ "-"
+				+ AccountHandler.SEPARATOR
 				+ this.office.getIdOffice().toString()
-				+ "-"
+				+ AccountHandler.SEPARATOR
 				+ this.dc
-				+ "-"
+				+ AccountHandler.SEPARATOR
 				+ this.accountNumber));
 		assertTrue(ac.getBankHandler().toString()
 				.equals(this.bank.getID().toString()));

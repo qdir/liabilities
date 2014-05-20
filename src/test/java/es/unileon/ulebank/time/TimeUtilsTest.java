@@ -12,6 +12,10 @@ import static org.junit.Assert.*;
  */
 public class TimeUtilsTest {
 
+	@Test
+	public void testConstructor() {
+		TimeUtils t = new TimeUtils();
+	}
     @Test
     public void testGetYear() {
         assertEquals(TimeUtils.getYear(new Date(0)), 1970);
