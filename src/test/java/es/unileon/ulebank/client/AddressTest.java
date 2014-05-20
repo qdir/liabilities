@@ -7,8 +7,14 @@ import org.junit.Test;
 
 public class AddressTest {
 
+	/**
+	 * 
+	 */
 	private Address address;
 
+	/**
+	 * 
+	 */
 	private String street;
 
 	/**
