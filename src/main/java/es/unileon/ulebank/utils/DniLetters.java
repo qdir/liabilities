@@ -14,6 +14,12 @@ public class DniLetters {
      */
     private static DniLetters instance = null;
 
+
+    /**
+     * dni letters table
+     */
+    private final char[] dniLetters;
+    
     /**
      * Gets the unique instance of the class, if it doesn't exists, the instance
      * is created
@@ -27,10 +33,6 @@ public class DniLetters {
         return instance;
     }
 
-    /**
-     * dni letters table
-     */
-    private final char[] dniLetters;
 
     /**
      * Constructos that create the dni letters table.
