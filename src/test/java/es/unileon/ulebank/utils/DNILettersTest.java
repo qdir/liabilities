@@ -44,7 +44,7 @@ public class DNILettersTest {
 		assertNotSame(DniLetters.getInstance().isDniValid(112312314, 'z'),true);
 		assertEquals(DniLetters.getInstance().isDniValid(1000000000, 'A'),false);
 		assertEquals(DniLetters.getInstance().isDniValid(1000000000, 'Q'),false);
-		
+		assertEquals(DniLetters.getInstance().isDniValid(10000000, 'Z'),false);
 	}
 
 }
