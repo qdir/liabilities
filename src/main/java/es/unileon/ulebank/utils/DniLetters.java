@@ -43,7 +43,7 @@ public class DniLetters {
 	}
 
 	/**
-	 * Obtaint the dni correct letter and compare it with the parametter
+	 * Obtains the dni correct letter and compare it with the parameter
 	 * dniLetter
 	 *
 	 * @param dniNumber
