@@ -30,7 +30,7 @@ public class Client {
      * 
      * @param clientHandler 
      */
-    public Client(Handler clientHandler){
+    protected Client(Handler clientHandler){
         accounts = new ArrayList<Account>();
         this.id=clientHandler;
     }
