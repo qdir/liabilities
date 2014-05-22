@@ -35,9 +35,6 @@ public class IteratorBetweenTwoDatesTest {
     private List<Transaction> correctElements;
     private long min;
     private long max;
-    private Handler commandId;
-    private CommandFilterTransactionByDates commandFromList;
-    private CommandFilterTransactionByDates commandFromIterator;
 
     @Before
     public void setup() throws WrongArgsException, TransactionException {
