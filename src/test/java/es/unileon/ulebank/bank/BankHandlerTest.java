@@ -22,7 +22,7 @@ public class BankHandlerTest {
 
 	@Test
 	public void testToString() {
-		assertEquals(this.bankHandler.toString().equals(number),0);
+		assertEquals(this.bankHandler.toString().compareTo(number),0);
 	}
 	
 	@Test

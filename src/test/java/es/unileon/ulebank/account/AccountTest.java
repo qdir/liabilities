@@ -5,6 +5,8 @@ package es.unileon.ulebank.account;
 import es.unileon.ulebank.exceptions.TransactionException;
 import es.unileon.ulebank.bank.Bank;
 import es.unileon.ulebank.client.Client;
+import es.unileon.ulebank.client.Person;
+import es.unileon.ulebank.client.PersonHandler;
 import es.unileon.ulebank.handler.GenericHandler;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
@@ -14,13 +16,16 @@ import es.unileon.ulebank.office.Office;
 import es.unileon.ulebank.history.History;
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.history.conditions.WrongArgsException;
+
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -35,10 +40,16 @@ public class AccountTest {
     private Client titular2;
     private Client authorized1;
     private Client authorized2;
-    private Handler titularHandler1;
-    private Handler titularHandler2;
-    private Handler authorizedHandler1;
-    private Handler authorizedHandler2;
+    
+    private static int NIF1=98765432;
+    private static int NIF2=87654321;
+    private static int NIF3=76543210;
+    private static int NIF4=12345678;
+    
+    private static char NIF_LETTER1='M';
+    private static char NIF_LETTER2='X';
+    private static char NIF_LETTER3='S';
+    private static char NIF_LETTER4='Z';
 
     private String accountNumber = "0000000000";
 
@@ -46,15 +57,11 @@ public class AccountTest {
     public void setUp() throws MalformedHandlerException, WrongArgsException {
         this.bank = new Bank(new GenericHandler("1234"));
         this.office = new Office(new GenericHandler("1234"), this.bank);
-        this.titularHandler1 = new GenericHandler("Paco");
-        this.titularHandler2 = new GenericHandler("Manuel");
-        this.authorizedHandler1 = new GenericHandler("Miguel");
-        this.authorizedHandler2 = new GenericHandler("Jorge");
-        this.titular1 = new Client(titularHandler1);
+        this.titular1 = new Person(NIF1, NIF_LETTER1);
         this.commercialAccount = new Account(this.office, this.bank, accountNumber, titular1);
-        this.titular2 = new Client(titularHandler2);
-        this.authorized1 = new Client(authorizedHandler1);
-        this.authorized2 = new Client(authorizedHandler2);
+        this.titular2 = new Person(NIF2, NIF_LETTER2);
+        this.authorized1 = new Person(NIF3, NIF_LETTER3);
+        this.authorized2 = new Person(NIF4, NIF_LETTER4);
         assertTrue(this.commercialAccount.addTitular(this.titular2));
         assertTrue(this.commercialAccount.addAuthorized(this.authorized1));
         assertTrue(this.commercialAccount.addAuthorized(this.authorized2));
@@ -594,13 +601,14 @@ public class AccountTest {
 
     /**
      * Test of deleteTitular method, of class Account.
+     * @throws MalformedHandlerException 
      */
     @Test
-    public void testDeleteTitular() {
+    public void testDeleteTitular() throws MalformedHandlerException {
      	assertEquals(this.commercialAccount.getTitulars().size(),2);
-        assertTrue(this.commercialAccount.deleteTitular(this.titularHandler1));
+        assertTrue(this.commercialAccount.deleteTitular(new PersonHandler(NIF1, NIF_LETTER1)));
         assertEquals(this.commercialAccount.getTitulars().size(), 1);
-        assertFalse(this.commercialAccount.deleteTitular(this.titularHandler2));
+        assertFalse(this.commercialAccount.deleteTitular(new PersonHandler(NIF2, NIF_LETTER2)));
         assertEquals(this.commercialAccount.getTitulars().size(),1);
     }
 
@@ -614,13 +622,14 @@ public class AccountTest {
 
     /**
      * Test of deleteAuthorized method, of class Account.
+     * @throws MalformedHandlerException 
      */
     @Test
-    public void testDeleteAuthorized() {
+    public void testDeleteAuthorized() throws MalformedHandlerException {
     	assertEquals(this.commercialAccount.getAuthorizeds().size(),2);
-        assertTrue(this.commercialAccount.deleteAuthorized(this.authorizedHandler1));
+        assertTrue(this.commercialAccount.deleteAuthorized(new PersonHandler(NIF3, NIF_LETTER3)));
         assertEquals(this.commercialAccount.getAuthorizeds().size(), 1);
-        assertTrue(this.commercialAccount.deleteAuthorized(this.authorizedHandler2));
+        assertTrue(this.commercialAccount.deleteAuthorized(new PersonHandler(NIF4, NIF_LETTER4)));
         assertEquals(this.commercialAccount.getAuthorizeds().size(),0);
     }
 
