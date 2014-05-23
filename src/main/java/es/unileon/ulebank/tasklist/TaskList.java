@@ -134,7 +134,7 @@ public class TaskList {
 	 *
 	 * @param id
 	 */
-	public void undoTask(Handler id) {
+	public boolean undoTask(Handler id) {
 		int i = -1;
 		boolean done = false;
 		while (++i < this.tasksDone.size() && !done) {
@@ -144,6 +144,7 @@ public class TaskList {
 				done = true;
 			}
 		}
+		return done;
 	}
 
 	/**

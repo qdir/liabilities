@@ -63,6 +63,10 @@ public class TaskListTest {
 		while (it.hasNext() && fromTaskList.hasNext()) {
 			assertEquals(it.next(), fromTaskList.next());
 		}
+		for (int i = 0; i < this.taskToDo.size(); ++i) {
+			assertEquals(this.taskToDo.get(i).getState(),
+					MockTask.STATE_EXECUTE);
+		}
 		assertEquals(it.hasNext(), fromTaskList.hasNext());
 
 		assertFalse(this.taskList.addDoneTask(getTask(new Date(Time
@@ -112,9 +116,9 @@ public class TaskListTest {
 		assertEquals(c, deleteIt.next());
 		assertEquals(c1, deleteIt.next());
 		assertEquals(deleteIt.hasNext(), false);
-		
-		c = getTask(new Date(System.currentTimeMillis() + 10*10*10));
-		c1 = getTask(new Date(System.currentTimeMillis() + 10*10*11));
+
+		c = getTask(new Date(System.currentTimeMillis() + 10 * 10 * 10));
+		c1 = getTask(new Date(System.currentTimeMillis() + 10 * 10 * 11));
 		this.taskList.executeTasks();
 		assertTrue(this.taskList.addTask(c));
 		assertTrue(this.taskList.addTask(c1));
@@ -124,6 +128,11 @@ public class TaskListTest {
 		assertEquals(task.next(), c);
 		assertEquals(task.next(), c1);
 		assertFalse(task.hasNext());
+
+		assertTrue(this.taskList.undoTask(this.taskToDo.get(1).getID()));
+		assertEquals(this.taskToDo.get(1).getState(), MockTask.STATE_UNDO);
+		
+		assertFalse(this.taskList.undoTask(new GenericHandler("invalid")));
 
 	}
 
