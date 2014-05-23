@@ -2,7 +2,10 @@ package es.unileon.ulebank.tasklist;
 
 import java.util.Date;
 
-public class FakeTask extends Task{
+import es.unileon.ulebank.command.MockCommand;
+import es.unileon.ulebank.handler.Handler;
+
+public class MockTask extends Task{
 
 	public static int STATE_EXECUTE = 0;
 	public static int STATE_REDO = 1;
@@ -11,8 +14,8 @@ public class FakeTask extends Task{
 	
 	public int state;
 	
-	public FakeTask(Date date) {
-		super(date,null);
+	public MockTask(Date date, Handler id) {
+		super(date,new MockCommand(id));
 		state = STATE_NORMAL;
 	}
 

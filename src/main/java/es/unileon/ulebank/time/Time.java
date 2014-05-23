@@ -49,6 +49,7 @@ public class Time {
 	public static Time getInstance() {
 		if (instance == null) {
 			instance = new Time();
+			instance.updateTime();
 		}
 		return instance;
 	}

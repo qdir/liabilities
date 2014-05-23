@@ -55,14 +55,14 @@ public class TaskList {
 		this.comparator = new TaskDateComparator();
 		this.time = Time.getInstance();
 	}
-	
-	/**ce;
-	}
+
+	/**
 	 * Get a instance
+	 * 
 	 * @return
 	 */
 	public static TaskList getInstance() {
-		if(instance == null)
+		if (instance == null)
 			instance = new TaskList();
 		return instance;
 	}
@@ -77,32 +77,34 @@ public class TaskList {
 		if (task == null) {
 			add = false;
 		} else {
-			int i = -1;
-			while (++i < this.tasks.size() && add) {
-				if (task.getID().compareTo(this.tasks.get(i).getID()) == 0) {
-					add = false;
-				}
-			}
+			add = !this.isInAnyList(task.getID());
 		}
-		this.tasks.add(task);
-		this.sort();
+		if (add) {
+			this.tasks.add(task);
+			this.sort();
+		}
 		return add;
 	}
 
+	/**
+	 * 
+	 * @param task
+	 * @return
+	 */
 	public synchronized boolean addDoneTask(Task task) {
 		boolean add = true;
-		if (task == null) {
+		time.updateTime();
+		if (task == null
+				|| task.getEffectiveDate().getTime() > this.time.getTime()) {
 			add = false;
 		} else {
-			int i = -1;
-			while (++i < this.tasksDone.size() && add) {
-				if (task.getID().compareTo(this.tasksDone.get(i).getID()) == 0) {
-					add = false;
-				}
-			}
+			add = !this.isInAnyList(task.getID());
 		}
-		this.tasksDone.add(task);
-		this.sort();
+
+		if (add) {
+			this.tasksDone.add(task);
+			this.sort();
+		}
 		return add;
 	}
 
@@ -111,12 +113,12 @@ public class TaskList {
 	 * @param task
 	 * @return
 	 */
-	public boolean deleteTask(Task task) {
+	public boolean deleteTask(Handler id) {
 		boolean delete = false;
-		if (task == null) {
+		if (id != null) {
 			int i = -1;
 			while (++i < tasks.size() && !delete) {
-				if (task.getID().compareTo(this.tasks.get(i).getID()) == 0) {
+				if (id.compareTo(this.tasks.get(i).getID()) == 0) {
 					Task c = this.tasks.get(i);
 					this.tasks.remove(i);
 					this.deletedTasks.add(c);
@@ -148,17 +150,44 @@ public class TaskList {
      *
      */
 	public void executeTasks() {
-		int i = 0;
-		while (this.tasks.get(i).getEffectiveDate().getTime() <= this.time
-				.getTime()) {
-			Task c = this.tasks.get(i);
+		while (this.tasks.size() > 0
+				&& this.tasks.get(0).getEffectiveDate().getTime() <= this.time
+						.getTime()) {
+			Task c = this.tasks.get(0);
 			c.execute();
-			this.tasks.remove(i);
+			this.tasks.remove(0);
 			this.tasksDone.add(c);
-			++i;
 		}
 		this.sort();
 		;
+	}
+
+	private boolean isInAnyList(Handler id) {
+		boolean found = false;
+		int i = -1;
+		while (++i < this.tasksDone.size() && !found) {
+			if (id.compareTo(this.tasksDone.get(i).getID()) == 0) {
+				found = true;
+			}
+		}
+		if (!found) {
+			i = -1;
+			while (++i < this.tasks.size() && !found) {
+				if (id.compareTo(this.tasks.get(i).getID()) == 0) {
+					found = true;
+				}
+			}
+		}
+
+		if (!found) {
+			i = -1;
+			while (++i < this.deletedTasks.size() && !found) {
+				if (id.compareTo(this.deletedTasks.get(i).getID()) == 0) {
+					found = true;
+				}
+			}
+		}
+		return found;
 	}
 
 	private void sort() {
