@@ -4,6 +4,7 @@ package es.unileon.ulebank.command;
 
 import es.unileon.ulebank.account.DetailedInformation;
 import es.unileon.ulebank.exceptions.TransactionException;
+import es.unileon.ulebank.handler.GenericHandler;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.Transaction;
@@ -29,12 +30,13 @@ public class CommandFilterTransactionByAmountsTest {
 	private Iterator<Transaction> iteratorFromIterator;
 	private List<Transaction> elements;
 	private List<Transaction> correctElements;
+	private CommandFilterTransactionByAmounts command;
+	private CommandFilterTransactionByAmounts commandFromIterator;
 	private double min;
 	private double max;
 
 	@Before
 	public void setup() throws WrongArgsException, TransactionException {
-		fail("TOODOO");
 		this.min = 100;
 		this.max = 2000;
 		this.elements = new ArrayList<Transaction>();
@@ -50,36 +52,53 @@ public class CommandFilterTransactionByAmountsTest {
 			this.elements.add(t);
 			actual += 100;
 		}
-		this.iteratorFromIterator = new IteratorBetweenTwoAmounts<Transaction>(
-				this.elements.iterator(), this.min, this.max);
-		this.iteratorFromList = new IteratorBetweenTwoAmounts<Transaction>(
-				this.elements, this.min, this.max);
+
+		this.command = new CommandFilterTransactionByAmounts(this.min,
+				this.max, this.elements, new GenericHandler(""));
+		this.commandFromIterator = new CommandFilterTransactionByAmounts(
+				this.min, this.max, this.elements.iterator(),
+				new GenericHandler(""));
+		this.command.execute();
+		this.commandFromIterator.execute();
+
+		this.iteratorFromIterator = this.commandFromIterator.getList()
+				.iterator();
+		this.iteratorFromList = this.command.getList().iterator();
 	}
 
 	@Test
 	public void testNoElements() throws WrongArgsException {
 		this.elements.clear();
-		this.iteratorFromIterator = new IteratorBetweenTwoAmounts<Transaction>(
-				this.elements.iterator(), this.min, this.max);
-		this.iteratorFromList = new IteratorBetweenTwoAmounts<Transaction>(
-				this.elements, this.min, this.max);
+		this.command = new CommandFilterTransactionByAmounts(this.min,
+				this.max, this.elements, new GenericHandler(""));
+		this.commandFromIterator = new CommandFilterTransactionByAmounts(
+				this.min, this.max, this.elements.iterator(),
+				new GenericHandler(""));
+		this.command.execute();
+		this.commandFromIterator.execute();
+
+		this.iteratorFromIterator = this.commandFromIterator.getList()
+				.iterator();
+		this.iteratorFromList = this.command.getList().iterator();
 		assertFalse(this.iteratorFromIterator.hasNext());
 		assertFalse(this.iteratorFromList.hasNext());
-		assertEquals(this.iteratorFromIterator.next(), null);
-		assertEquals(this.iteratorFromList.next(), null);
 	}
 
 	@Test
 	public void testNoValidElements() throws WrongArgsException {
 		this.elements.removeAll(this.correctElements);
-		this.iteratorFromIterator = new IteratorBetweenTwoAmounts<Transaction>(
-				this.elements.iterator(), this.min, this.max);
-		this.iteratorFromList = new IteratorBetweenTwoAmounts<Transaction>(
-				this.elements, this.min, this.max);
+		this.command = new CommandFilterTransactionByAmounts(this.min,
+				this.max, this.elements, new GenericHandler(""));
+		this.commandFromIterator = new CommandFilterTransactionByAmounts(
+				this.min, this.max, this.elements.iterator(),
+				new GenericHandler(""));
+		this.command.execute();
+		this.commandFromIterator.execute();
+
+		this.iteratorFromIterator = this.commandFromIterator.getList().iterator();
+		this.iteratorFromList = this.command.getList().iterator();
 		assertFalse(this.iteratorFromIterator.hasNext());
 		assertFalse(this.iteratorFromList.hasNext());
-		assertEquals(this.iteratorFromIterator.next(), null);
-		assertEquals(this.iteratorFromList.next(), null);
 	}
 
 	@Test(expected = WrongArgsException.class)
@@ -96,7 +115,6 @@ public class CommandFilterTransactionByAmountsTest {
 	@Test
 	public void testWithElements() {
 		Iterator<Transaction> it = this.correctElements.iterator();
-		int count = 0;
 		while (this.iteratorFromIterator.hasNext()
 				&& this.iteratorFromList.hasNext() && it.hasNext()) {
 			Transaction nextFromIterator, nextFromList, correct;
@@ -109,13 +127,11 @@ public class CommandFilterTransactionByAmountsTest {
 		assertFalse(it.hasNext());
 		assertFalse(this.iteratorFromIterator.hasNext());
 		assertFalse(this.iteratorFromList.hasNext());
-		assertEquals(this.iteratorFromIterator.next(), null);
-		assertEquals(this.iteratorFromList.next(), null);
 	}
 
 	public Transaction getTransaction(double amount)
 			throws TransactionException {
-		return new GenericTransaction(amount, new Date(), "",
+		return new GenericTransaction(amount, new Date(), "subject",
 				new DetailedInformation());
 	}
 }

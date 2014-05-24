@@ -2,6 +2,8 @@
  group.*/
 package es.unileon.ulebank.history.condition;
 
+import java.util.Date;
+
 import es.unileon.ulebank.exceptions.TransactionException;
 import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.Transaction;
@@ -40,7 +42,7 @@ public class ConditionTransactionBetweenTwoAmountsTest {
     }
 
     public final Transaction getTransaction(double amount) throws TransactionException{
-        Transaction t = new GenericTransaction(amount, null, "");
+        Transaction t = new GenericTransaction(amount, new Date(), "subject");
         return t;
     }
 }

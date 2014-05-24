@@ -51,7 +51,7 @@ public class ConditionalTransactionBetweenTwoDays {
     }
 
     public final Transaction getTransaction(Date date) throws TransactionException{
-        Transaction t = new GenericTransaction(0, date, "");
+        Transaction t = new GenericTransaction(0, date, "subject");
         t.setEffectiveDate(date);
         return t;
     }
