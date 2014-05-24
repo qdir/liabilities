@@ -46,6 +46,7 @@ public abstract class Transaction {
 			DetailedInformation info) throws TransactionException {
 		this.id = TransactionHandlerProvider.getTransactionHandler();
 		StringBuilder err = new StringBuilder();
+
 		if (subject == null) {
 			err.append("The subject cannot be null \n");
 		} else {
@@ -59,6 +60,14 @@ public abstract class Transaction {
 		}
 		if (date == null) {
 			err.append("The date cannot be null \n");
+		}
+
+		if (info == null) {
+			err.append("Extra info cannot be null \n");
+		}
+
+		if (err.length() > 0) {
+			throw new TransactionException(err.toString());
 		}
 		this.amount = amount;
 		this.date = date;

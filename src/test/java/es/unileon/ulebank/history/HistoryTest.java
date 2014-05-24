@@ -62,7 +62,9 @@ public class HistoryTest {
         added.add(transaction3);
 
         assertTrue(this.accountHistory.add(transaction1));
+        assertFalse(this.accountHistory.add(transaction1));
         assertTrue(this.accountHistory.add(transaction2));
+        assertFalse(this.accountHistory.add(transaction2));
         assertTrue(this.accountHistory.add(transaction3));
         assertFalse(this.accountHistory.add(transaction3));
 
