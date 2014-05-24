@@ -101,7 +101,7 @@ public class TaskListTest {
 		}
 		assertEquals(it.hasNext(), fromTaskList.hasNext());
 
-		Task c1 = getTask(new Date(System.currentTimeMillis() + 1));
+		Task c1 = getTask(new Date(System.currentTimeMillis() - 3));
 		assertTrue(this.taskList.addTask(c1));
 		assertFalse(this.taskList.deleteTask(new GenericHandler("notFound..")));
 		it = tasks.iterator();
@@ -117,8 +117,8 @@ public class TaskListTest {
 		assertEquals(c1, deleteIt.next());
 		assertEquals(deleteIt.hasNext(), false);
 
-		c = getTask(new Date(System.currentTimeMillis() + 10 * 10 * 10));
-		c1 = getTask(new Date(System.currentTimeMillis() + 10 * 10 * 11));
+		c = getTask(new Date( 10 * 10 * 10));
+		c1 = getTask(new Date( 10 * 10 * 11));
 		this.taskList.executeTasks();
 		assertTrue(this.taskList.addTask(c));
 		assertTrue(this.taskList.addTask(c1));
@@ -131,9 +131,27 @@ public class TaskListTest {
 
 		assertTrue(this.taskList.undoTask(this.taskToDo.get(1).getID()));
 		assertEquals(this.taskToDo.get(1).getState(), MockTask.STATE_UNDO);
-		
+
 		assertFalse(this.taskList.undoTask(new GenericHandler("invalid")));
 
+		assertFalse(this.taskList.addTask(null));
+		assertFalse(this.taskList.addDoneTask(null));
+		assertFalse(this.taskList.deleteTask(null));
+
+		c = getTask(new Date(System.currentTimeMillis() + 10));
+		c1 = getTask(new Date(System.currentTimeMillis()+9 ));
+		assertTrue(this.taskList.addTask(c));
+		assertTrue(this.taskList.addTask(c1));
+		assertTrue(this.taskList.deleteTask(c.getID()));
+		Time.getInstance().updateTime();
+		this.taskList.executeTasks();
+		Iterator<Task> todo = this.taskList.getTaskList().iterator();
+		assertEquals(todo.next(), c1);
+		
+		assertFalse(this.taskList.addTask(c));
+		c = getTask(new Date(10003));
+		assertTrue(this.taskList.addDoneTask(c));
+		assertFalse(this.taskList.addDoneTask(c));
 	}
 
 	private MockTask getTask(Date date) {
