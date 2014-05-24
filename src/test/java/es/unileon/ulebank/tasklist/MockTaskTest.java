@@ -46,10 +46,10 @@ public class MockTaskTest {
 		assertEquals(this.effectiveDate.getTime(), this.task.getEffectiveDate()
 				.getTime());
 	}
-	
+
 	@Test
 	public void testHandler() {
-		assertEquals(this.id.compareTo(this.task.getID()),0 );
+		assertEquals(this.id.compareTo(this.task.getID()), 0);
 	}
 
 	@Test

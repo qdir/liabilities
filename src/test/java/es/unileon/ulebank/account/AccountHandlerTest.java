@@ -1272,7 +1272,8 @@ public class AccountHandlerTest {
 	public void testParsingHandlerBadDCAllDigits()
 			throws MalformedHandlerException {
 		new AccountHandler(new GenericHandler(this.bank.getID().toString()
-				+ AccountHandler.SEPARATOR + this.office.getIdOffice().toString() + "99"
+				+ AccountHandler.SEPARATOR
+				+ this.office.getIdOffice().toString() + "99"
 				+ this.accountNumber));
 	}
 
@@ -1280,17 +1281,19 @@ public class AccountHandlerTest {
 	public void testParsingHandlerBadDCFirstDigit()
 			throws MalformedHandlerException {
 		new AccountHandler(new GenericHandler(this.bank.getID().toString()
-				+ AccountHandler.SEPARATOR + this.office.getIdOffice().toString() + "11"
+				+ AccountHandler.SEPARATOR
+				+ this.office.getIdOffice().toString() + "11"
 				+ this.accountNumber));
 	}
 
 	@Test(expected = MalformedHandlerException.class)
 	public void testParsingHandlerBadDCLastDigit()
 			throws MalformedHandlerException {
-			new AccountHandler(new GenericHandler(this.bank.getID().toString()
-					+ AccountHandler.SEPARATOR + this.office.getIdOffice().toString()
-					+ AccountHandler.SEPARATOR + "21"
-					+ AccountHandler.SEPARATOR + this.accountNumber));
+		new AccountHandler(new GenericHandler(this.bank.getID().toString()
+				+ AccountHandler.SEPARATOR
+				+ this.office.getIdOffice().toString()
+				+ AccountHandler.SEPARATOR + "21" + AccountHandler.SEPARATOR
+				+ this.accountNumber));
 
 	}
 

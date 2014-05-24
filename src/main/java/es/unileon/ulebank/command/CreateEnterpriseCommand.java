@@ -89,7 +89,8 @@ public class CreateEnterpriseCommand implements Command {
      */
 	@Override
 	public void undo() {
-		if (this.client != null && ((this.state & (STATE_EXECUTED | STATE_REDO)) != 0)) {
+		if (this.client != null
+				&& ((this.state & (STATE_EXECUTED | STATE_REDO)) != 0)) {
 			this.office.deleteClient(this.client.getId());
 			this.state = STATE_UNDO;
 		}

@@ -22,25 +22,30 @@ import org.junit.Test;
  */
 public class CreateAccountCommandTest {
 
-    private Office office;
-    private Bank bank;
+	private Office office;
+	private Bank bank;
 
-    @Before
-    public void setUp() throws MalformedHandlerException {
-        this.bank = new Bank(new GenericHandler("1234"));
-        this.office = new Office(new GenericHandler("1234"), this.bank);
-    }
+	@Before
+	public void setUp() throws MalformedHandlerException {
+		this.bank = new Bank(new GenericHandler("1234"));
+		this.office = new Office(new GenericHandler("1234"), this.bank);
+	}
 
-    /**
-     * Test of execute method, of class CreateAccountCommand.
-     *
-     * @throws es.unileon.ulebank.handler.MalformedHandlerException
-     */
-    @Test
-    public void testExecute() throws MalformedHandlerException {
-        Client titular = new Person(71525252, 'J');
-        CreateAccountCommand command = new CreateAccountCommand(this.office, this.bank, new Date(System.currentTimeMillis()), new GenericHandler(""), titular);
-        command.execute();
-        assertEquals(((AccountHandler) this.office.getAccounts().get(0).getID()).getNumber(), "0000000000", "0000000000");
-    }
+	/**
+	 * Test of execute method, of class CreateAccountCommand.
+	 *
+	 * @throws es.unileon.ulebank.handler.MalformedHandlerException
+	 */
+	@Test
+	public void testExecute() throws MalformedHandlerException {
+		Client titular = new Person(71525252, 'J');
+		CreateAccountCommand command = new CreateAccountCommand(this.office,
+				this.bank, new Date(System.currentTimeMillis()),
+				new GenericHandler(""), titular);
+		command.execute();
+		assertEquals(
+				((AccountHandler) this.office.getAccounts().get(0).getID())
+						.getNumber(),
+				"0000000000", "0000000000");
+	}
 }

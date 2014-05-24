@@ -48,7 +48,7 @@ public class DoTransactionCommandTest {
 		command = new DoTransactionCommand(bank, amount, account.getID(), date,
 				subject, info, commandId);
 	}
-	
+
 	@Test
 	public void testExecute() {
 		command.execute();
@@ -58,7 +58,7 @@ public class DoTransactionCommandTest {
 		assertEquals(info, t.getDetailedInformation());
 		assertEquals(subject, t.getSubject());
 	}
-	
+
 	@Test
 	public void testUndoFromExecute() {
 		command.execute();
@@ -69,7 +69,7 @@ public class DoTransactionCommandTest {
 		assertEquals(info, t.getDetailedInformation());
 		assertEquals(subject, t.getSubject());
 	}
-	
+
 	@Test
 	public void testUndoFromRedo() {
 		command.redo();
@@ -77,7 +77,7 @@ public class DoTransactionCommandTest {
 		Iterator<Transaction> it = this.account.getHistory().getIterator();
 		assertFalse(it.hasNext());
 	}
-	
+
 	@Test
 	public void testRedo() {
 		command.execute();

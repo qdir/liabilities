@@ -117,8 +117,8 @@ public class TaskListTest {
 		assertEquals(c1, deleteIt.next());
 		assertEquals(deleteIt.hasNext(), false);
 
-		c = getTask(new Date( 10 * 10 * 10));
-		c1 = getTask(new Date( 10 * 10 * 11));
+		c = getTask(new Date(10 * 10 * 10));
+		c1 = getTask(new Date(10 * 10 * 11));
 		this.taskList.executeTasks();
 		assertTrue(this.taskList.addTask(c));
 		assertTrue(this.taskList.addTask(c1));
@@ -139,7 +139,7 @@ public class TaskListTest {
 		assertFalse(this.taskList.deleteTask(null));
 
 		c = getTask(new Date(System.currentTimeMillis() + 10));
-		c1 = getTask(new Date(System.currentTimeMillis()+9 ));
+		c1 = getTask(new Date(System.currentTimeMillis() + 9));
 		assertTrue(this.taskList.addTask(c));
 		assertTrue(this.taskList.addTask(c1));
 		assertTrue(this.taskList.deleteTask(c.getID()));
@@ -147,7 +147,7 @@ public class TaskListTest {
 		this.taskList.executeTasks();
 		Iterator<Task> todo = this.taskList.getTaskList().iterator();
 		assertEquals(todo.next(), c1);
-		
+
 		assertFalse(this.taskList.addTask(c));
 		c = getTask(new Date(10003));
 		assertTrue(this.taskList.addDoneTask(c));

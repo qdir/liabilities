@@ -14,25 +14,33 @@ import java.util.Date;
  */
 public class GenericTransaction extends Transaction {
 
-    /**
-     * Create a new generic transaction
-     *
-     * @param amount ( Transaction amount )
-     * @param date ( Transaction date )
-     * @param subject ( Transaction subject )
-     */
-    public GenericTransaction(double amount, Date date, String subject) throws TransactionException{
-        super(amount, date, subject);
-    }
+	/**
+	 * Create a new generic transaction
+	 *
+	 * @param amount
+	 *            ( Transaction amount )
+	 * @param date
+	 *            ( Transaction date )
+	 * @param subject
+	 *            ( Transaction subject )
+	 */
+	public GenericTransaction(double amount, Date date, String subject)
+			throws TransactionException {
+		super(amount, date, subject);
+	}
 
-    /**
-     * Create a new generic transaction
-     *
-     * @param amount ( Transaction amount )
-     * @param date ( Transaction date )
-     * @param subject ( Transaction subject )
-     */
-    public GenericTransaction(double amount, Date date, String subject, DetailedInformation extraInfo) throws TransactionException{
-        super(amount, date, subject, extraInfo);
-    }
+	/**
+	 * Create a new generic transaction
+	 *
+	 * @param amount
+	 *            ( Transaction amount )
+	 * @param date
+	 *            ( Transaction date )
+	 * @param subject
+	 *            ( Transaction subject )
+	 */
+	public GenericTransaction(double amount, Date date, String subject,
+			DetailedInformation extraInfo) throws TransactionException {
+		super(amount, date, subject, extraInfo);
+	}
 }

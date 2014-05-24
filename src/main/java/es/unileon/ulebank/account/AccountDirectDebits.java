@@ -11,23 +11,24 @@ import java.util.List;
  */
 public class AccountDirectDebits {
 
-    private List<DirectDebit> directDebits;
+	private List<DirectDebit> directDebits;
 
-    public AccountDirectDebits() {
-        this.directDebits = new ArrayList<DirectDebit>();
-    }
+	public AccountDirectDebits() {
+		this.directDebits = new ArrayList<DirectDebit>();
+	}
 
-    public boolean addDirectDebit(DirectDebit d) {
-        int i = -1;
-        boolean duplicated = false;
-        while (++i < directDebits.size() && !duplicated) {
-            if (directDebits.get(i).getDirectDebitID().compareTo(d.getDirectDebitID()) == 0) {
-                duplicated = true;
-            }
-        }
-        if (!duplicated) {
-            return this.directDebits.add(d);
-        }
-        return false;
-    }
+	public boolean addDirectDebit(DirectDebit d) {
+		int i = -1;
+		boolean duplicated = false;
+		while (++i < directDebits.size() && !duplicated) {
+			if (directDebits.get(i).getDirectDebitID()
+					.compareTo(d.getDirectDebitID()) == 0) {
+				duplicated = true;
+			}
+		}
+		if (!duplicated) {
+			return this.directDebits.add(d);
+		}
+		return false;
+	}
 }

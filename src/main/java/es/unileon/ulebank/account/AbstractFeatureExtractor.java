@@ -12,8 +12,10 @@ public interface AbstractFeatureExtractor {
 	StaticVariableSet<Double> getVariables();
 
 	StaticVariableSet<Double> generateRandomVariables();
-	
-	String [] getVariableNames();
-	
-	void updateVariables(Iterator<Transaction> transactions, Iterator<DirectDebitTransaction> directDebitTransactions, AccountDirectDebits accountDirectDebits);
+
+	String[] getVariableNames();
+
+	void updateVariables(Iterator<Transaction> transactions,
+			Iterator<DirectDebitTransaction> directDebitTransactions,
+			AccountDirectDebits accountDirectDebits);
 }

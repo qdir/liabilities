@@ -95,7 +95,8 @@ public class CommandFilterTransactionByAmountsTest {
 		this.command.execute();
 		this.commandFromIterator.execute();
 
-		this.iteratorFromIterator = this.commandFromIterator.getList().iterator();
+		this.iteratorFromIterator = this.commandFromIterator.getList()
+				.iterator();
 		this.iteratorFromList = this.command.getList().iterator();
 		assertFalse(this.iteratorFromIterator.hasNext());
 		assertFalse(this.iteratorFromList.hasNext());

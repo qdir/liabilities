@@ -26,106 +26,114 @@ import org.junit.Test;
  */
 public class OfficeTest {
 
-    private Office office;
-    private Bank bank;
-    private Account account;
-    private Client titular;
+	private Office office;
+	private Bank bank;
+	private Account account;
+	private Client titular;
 
-    @Before
-    public void setUp() throws MalformedHandlerException, WrongArgsException {
-        this.bank = new Bank(new GenericHandler("1234"));
-        this.office = new Office(new GenericHandler("1234"), this.bank);
-        this.titular = new Person(71525252, 'J');
-        this.account = new Account(office, bank, "1234567890", titular);
-    }
+	@Before
+	public void setUp() throws MalformedHandlerException, WrongArgsException {
+		this.bank = new Bank(new GenericHandler("1234"));
+		this.office = new Office(new GenericHandler("1234"), this.bank);
+		this.titular = new Person(71525252, 'J');
+		this.account = new Account(office, bank, "1234567890", titular);
+	}
 
-    /**
-     * Test of addAccount method, of class Office.
-     */
-    @Test
-    public void testAddAccount() {
-        int numberOfAccounts = this.office.getAccounts().size();
-        assertTrue(this.office.addAccount(account));
-        assertEquals(this.office.getAccounts().size(), numberOfAccounts + 1);
-        assertFalse(this.office.addAccount(account));
-        assertEquals(this.office.getAccounts().size(), numberOfAccounts + 1);
-    }
+	/**
+	 * Test of addAccount method, of class Office.
+	 */
+	@Test
+	public void testAddAccount() {
+		int numberOfAccounts = this.office.getAccounts().size();
+		assertTrue(this.office.addAccount(account));
+		assertEquals(this.office.getAccounts().size(), numberOfAccounts + 1);
+		assertFalse(this.office.addAccount(account));
+		assertEquals(this.office.getAccounts().size(), numberOfAccounts + 1);
+	}
 
-    /**
-     * Test of addAccount method, of class Office.
-     */
-    @Test
-    public void testAddAccountNullAccount() {
+	/**
+	 * Test of addAccount method, of class Office.
+	 */
+	@Test
+	public void testAddAccountNullAccount() {
 
-        assertFalse(this.office.addAccount(null));
-    }
+		assertFalse(this.office.addAccount(null));
+	}
 
-    /**
-     * Test of getID method, of class Office.
-     */
-    @Test
-    public void testGetID() {
+	/**
+	 * Test of getID method, of class Office.
+	 */
+	@Test
+	public void testGetID() {
 
-        Handler expResult = new GenericHandler("1234");
+		Handler expResult = new GenericHandler("1234");
 
-        assertEquals(this.office.getIdOffice().compareTo(expResult), 0);
+		assertEquals(this.office.getIdOffice().compareTo(expResult), 0);
 
-    }
+	}
 
-    /**
-     * Test of doTransaction method, of class Office.
-     *
-     * @throws es.unileon.ulebank.handler.MalformedHandlerException
-     */
-    @Test
-    public void testDoTransaction() throws TransactionException, MalformedHandlerException {
+	/**
+	 * Test of doTransaction method, of class Office.
+	 *
+	 * @throws es.unileon.ulebank.handler.MalformedHandlerException
+	 */
+	@Test
+	public void testDoTransaction() throws TransactionException,
+			MalformedHandlerException {
 
-        this.office.addAccount(account);
+		this.office.addAccount(account);
 
-        Transaction transaction = new GenericTransaction(2.0, new Date(), "Salary");
+		Transaction transaction = new GenericTransaction(2.0, new Date(),
+				"Salary");
 
-        transaction.setEffectiveDate(new Date());
+		transaction.setEffectiveDate(new Date());
 
-        this.office.doTransaction(transaction, this.account.getID());
+		this.office.doTransaction(transaction, this.account.getID());
 
-        assertEquals(this.account.getBalance(), 2.0, 2.0);
-    }
+		assertEquals(this.account.getBalance(), 2.0, 2.0);
+	}
 
-    /**
-     * Test throw of TransactionException in doTransaction method, of class
-     * Office.
-     *
-     * @throws es.unileon.ulebank.handler.MalformedHandlerException
-     */
-    @Test(expected = TransactionException.class)
-    public void testDoTransactionNullTransactionNullDestination() throws TransactionException, MalformedHandlerException {
-        this.office.doTransaction(null, null);
-    }
+	/**
+	 * Test throw of TransactionException in doTransaction method, of class
+	 * Office.
+	 *
+	 * @throws es.unileon.ulebank.handler.MalformedHandlerException
+	 */
+	@Test(expected = TransactionException.class)
+	public void testDoTransactionNullTransactionNullDestination()
+			throws TransactionException, MalformedHandlerException {
+		this.office.doTransaction(null, null);
+	}
 
-    @Test(expected = TransactionException.class)
-    public void testDoTransactionNullDestination() throws TransactionException, MalformedHandlerException {
-        Transaction transaction = new GenericTransaction(2.0, new Date(), "Salary");
-        transaction.setEffectiveDate(new Date());
-        this.office.doTransaction(transaction, null);
-    }
+	@Test(expected = TransactionException.class)
+	public void testDoTransactionNullDestination() throws TransactionException,
+			MalformedHandlerException {
+		Transaction transaction = new GenericTransaction(2.0, new Date(),
+				"Salary");
+		transaction.setEffectiveDate(new Date());
+		this.office.doTransaction(transaction, null);
+	}
 
-    /**
-     * Test throw of TransactionException in doTransaction method, of class
-     * Office.
-     *
-     * @throws es.unileon.ulebank.handler.MalformedHandlerException
-     */
-    @Test(expected = TransactionException.class)
-    public void testDoTransactionNullTransaction() throws TransactionException, MalformedHandlerException {
+	/**
+	 * Test throw of TransactionException in doTransaction method, of class
+	 * Office.
+	 *
+	 * @throws es.unileon.ulebank.handler.MalformedHandlerException
+	 */
+	@Test(expected = TransactionException.class)
+	public void testDoTransactionNullTransaction() throws TransactionException,
+			MalformedHandlerException {
 
-        this.office.doTransaction(null, this.account.getID());
-    }
+		this.office.doTransaction(null, this.account.getID());
+	}
 
-    @Test
-    public void testLastNumberAccount() throws TransactionException, MalformedHandlerException {
+	@Test
+	public void testLastNumberAccount() throws TransactionException,
+			MalformedHandlerException {
 
-        this.office.addAccount(account);
+		this.office.addAccount(account);
 
-        assertEquals(this.office.getNewAccountNumber(), "1234567891", "1234567891");
-    }
+		assertEquals(this.office.getNewAccountNumber(), "1234567891",
+				"1234567891");
+	}
 }

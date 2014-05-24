@@ -12,65 +12,66 @@ import java.util.Iterator;
  */
 public class History<T extends Transaction> {
 
-    /**
-     * Collection to store the transactions
-     */
-    private final Collection<T> transactions;
+	/**
+	 * Collection to store the transactions
+	 */
+	private final Collection<T> transactions;
 
-    /**
-     * Create a new history
-     */
-    public History() {
-        this.transactions = new ArrayList<T>();
-    }
+	/**
+	 * Create a new history
+	 */
+	public History() {
+		this.transactions = new ArrayList<T>();
+	}
 
-    /**
-     *
-     * @param transaction
-     * @return
-     */
-    public boolean add(T transaction) {
-        boolean found = false;
-        Iterator<T> it = this.transactions.iterator();
-        while (it.hasNext() && !found) {
-            T t = it.next();
-            if (t.getId().compareTo(transaction.getId()) == 0) {
-                found = true;
-            }
-        }
-        if (!found) {
-            return this.transactions.add(transaction);
-        }
-        return false;
+	/**
+	 *
+	 * @param transaction
+	 * @return
+	 */
+	public boolean add(T transaction) {
+		boolean found = false;
+		Iterator<T> it = this.transactions.iterator();
+		while (it.hasNext() && !found) {
+			T t = it.next();
+			if (t.getId().compareTo(transaction.getId()) == 0) {
+				found = true;
+			}
+		}
+		if (!found) {
+			return this.transactions.add(transaction);
+		}
+		return false;
 
-    }
+	}
 
-    /**
-     * Get the history iterator
-     *
-     * @return
-     */
-    public Iterator<T> getIterator() {
-        return this.transactions.iterator();
-    }
+	/**
+	 * Get the history iterator
+	 *
+	 * @return
+	 */
+	public Iterator<T> getIterator() {
+		return this.transactions.iterator();
+	}
 
-    /**
-     * Remove a transaction
-     *
-     * @param id (transaction's id )
-     *
-     * @return ( true if success, false otherwise )
-     */
-    public boolean remove(Handler id) {
-        boolean found = false;
-        Iterator<T> it = this.transactions.iterator();
-        while (it.hasNext() && !found) {
-            T t = it.next();
-            if (t.getId().compareTo(id) == 0) {
-                it.remove();
-                found = true;
-            }
-        }
-        return found;
-    }
+	/**
+	 * Remove a transaction
+	 *
+	 * @param id
+	 *            (transaction's id )
+	 *
+	 * @return ( true if success, false otherwise )
+	 */
+	public boolean remove(Handler id) {
+		boolean found = false;
+		Iterator<T> it = this.transactions.iterator();
+		while (it.hasNext() && !found) {
+			T t = it.next();
+			if (t.getId().compareTo(id) == 0) {
+				it.remove();
+				found = true;
+			}
+		}
+		return found;
+	}
 }

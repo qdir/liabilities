@@ -12,7 +12,7 @@ public class MockCommand implements Command {
 	public static int STATE_NORMAL = 4;
 	private int state;
 	private Handler id;
-	
+
 	public MockCommand(Handler id) {
 		state = STATE_NORMAL;
 		this.id = id;
@@ -37,7 +37,7 @@ public class MockCommand implements Command {
 	public void redo() {
 		this.state = STATE_REDO;
 	}
-	
+
 	public int getState() {
 		return this.state;
 	}

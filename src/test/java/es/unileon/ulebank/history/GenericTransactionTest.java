@@ -44,25 +44,25 @@ public class GenericTransactionTest {
 				extraInfo));
 	}
 
-	@Test(expected =TransactionException.class)
+	@Test(expected = TransactionException.class)
 	public void testNullDate() throws TransactionException {
 		new GenericTransaction(amount, null, subject, new DetailedInformation(
 				extraInfo));
 	}
 
-	@Test(expected =TransactionException.class)
+	@Test(expected = TransactionException.class)
 	public void testNullSubjectNullDate() throws TransactionException {
 		new GenericTransaction(amount, null, null, new DetailedInformation(
 				extraInfo));
 	}
 
-	@Test(expected =TransactionException.class)
+	@Test(expected = TransactionException.class)
 	public void testNullSubjectNullDetailedInformation()
 			throws TransactionException {
 		new GenericTransaction(amount, date, subject, null);
 	}
 
-	@Test(expected =TransactionException.class)
+	@Test(expected = TransactionException.class)
 	public void testEmptySubject() throws TransactionException {
 		new GenericTransaction(amount, date, "", new DetailedInformation(
 				extraInfo));
@@ -108,8 +108,9 @@ public class GenericTransactionTest {
 
 	@Test
 	public void testGetDetailedInformation() {
-		assertEquals("".equals(this.generic
-				.getDetailedInformation().toString()), true);
+		assertEquals(
+				"".equals(this.generic.getDetailedInformation().toString()),
+				true);
 		assertEquals(extraInfo.equals(this.genericWithExtraInfo
 				.getDetailedInformation().toString()), true);
 	}

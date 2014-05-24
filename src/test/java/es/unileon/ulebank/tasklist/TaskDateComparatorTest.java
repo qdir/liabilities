@@ -10,8 +10,8 @@ import org.junit.Test;
 public class TaskDateComparatorTest {
 
 	private TaskDateComparator comparator;
-	
-	public  TaskDateComparatorTest() {
+
+	public TaskDateComparatorTest() {
 		this.comparator = new TaskDateComparator();
 	}
 
@@ -27,15 +27,15 @@ public class TaskDateComparatorTest {
 		assertEquals(this.comparator.compare(t1, t2), 0);
 		assertEquals(this.comparator.compare(t2, t1), 0);
 	}
-	
+
 	@Test
 	public void testDiferentTimes() {
 		Date time = new Date();
 		Task t1 = new Task(time, null);
-		Task t2 = new Task(new Date(time.getTime()+1), null);
+		Task t2 = new Task(new Date(time.getTime() + 1), null);
 		assertEquals(this.comparator.compare(t1, t2), -1);
 		assertEquals(this.comparator.compare(t2, t1), 1);
-		Date time2 = new Date(time.getTime()+1000);
+		Date time2 = new Date(time.getTime() + 1000);
 		t2 = new Task(time2, null);
 		assertEquals(this.comparator.compare(t1, t2), -1);
 		assertEquals(this.comparator.compare(t2, t1), 1);

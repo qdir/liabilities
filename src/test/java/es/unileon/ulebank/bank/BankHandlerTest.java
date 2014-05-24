@@ -13,7 +13,7 @@ public class BankHandlerTest {
 
 	private String number;
 	private Handler bankHandler;
-	
+
 	@Before
 	public void setUp() throws Exception {
 		this.number = "1234";
@@ -22,39 +22,43 @@ public class BankHandlerTest {
 
 	@Test
 	public void testToString() {
-		assertEquals(this.bankHandler.toString().compareTo(number),0);
+		assertEquals(this.bankHandler.toString().compareTo(number), 0);
 	}
-	
+
 	@Test
 	public void testCompareTo() {
 		Handler generic = new GenericHandler(this.number);
-		assertEquals(this.bankHandler.compareTo(generic),0);
+		assertEquals(this.bankHandler.compareTo(generic), 0);
 		generic = new GenericHandler("4321");
-		assertNotSame(this.bankHandler.compareTo(generic),0);
+		assertNotSame(this.bankHandler.compareTo(generic), 0);
 	}
 
-	@Test(expected=MalformedHandlerException.class)
-	public void testConstructorWithExtraNumbers() throws MalformedHandlerException{
+	@Test(expected = MalformedHandlerException.class)
+	public void testConstructorWithExtraNumbers()
+			throws MalformedHandlerException {
 		new BankHandler("12345");
 	}
-	
-	@Test(expected=MalformedHandlerException.class)
-	public void testConstructorWithLessNumbers() throws MalformedHandlerException{
+
+	@Test(expected = MalformedHandlerException.class)
+	public void testConstructorWithLessNumbers()
+			throws MalformedHandlerException {
 		new BankHandler("125");
 	}
-	
-	@Test(expected=MalformedHandlerException.class)
-	public void testConstructorWithExtraNumbersAndLetter() throws MalformedHandlerException{
+
+	@Test(expected = MalformedHandlerException.class)
+	public void testConstructorWithExtraNumbersAndLetter()
+			throws MalformedHandlerException {
 		new BankHandler("a2345");
 	}
-	
-	@Test(expected=MalformedHandlerException.class)
-	public void testConstructorWithLessNumbersAndLetter() throws MalformedHandlerException{
+
+	@Test(expected = MalformedHandlerException.class)
+	public void testConstructorWithLessNumbersAndLetter()
+			throws MalformedHandlerException {
 		new BankHandler("1a5");
 	}
 
-	@Test(expected=MalformedHandlerException.class)
-	public void testConstructorWithLetter() throws MalformedHandlerException{
+	@Test(expected = MalformedHandlerException.class)
+	public void testConstructorWithLetter() throws MalformedHandlerException {
 		new BankHandler("1a25");
 	}
 }

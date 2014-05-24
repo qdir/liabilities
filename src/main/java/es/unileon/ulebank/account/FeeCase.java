@@ -97,7 +97,7 @@ public class FeeCase {
 				error.append(e.toString());
 			}
 		}
-		if(error.length() > 0) {
+		if (error.length() > 0) {
 			throw new TransactionException(error.toString());
 		}
 		return result;

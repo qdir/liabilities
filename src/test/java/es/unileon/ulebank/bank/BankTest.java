@@ -27,135 +27,141 @@ import org.junit.Test;
  */
 public class BankTest {
 
-    private Bank bank;
-    private Office office;
-    private Account account;
-    private Client titular;
-    
-    @Before
-    public void setUp() throws MalformedHandlerException, WrongArgsException {
-        this.bank = new Bank(new GenericHandler("1234"));
-        this.office = new Office(new GenericHandler("1234"), this.bank);
-        this.titular = new Person(71525252, 'J');
-        this.account = new Account(office, bank, "1234567890", this.titular);
-    }
+	private Bank bank;
+	private Office office;
+	private Account account;
+	private Client titular;
 
-    /**
-     * Test of getID method, of class Bank.
-     */
-    @Test
-    public void testGetID() {
+	@Before
+	public void setUp() throws MalformedHandlerException, WrongArgsException {
+		this.bank = new Bank(new GenericHandler("1234"));
+		this.office = new Office(new GenericHandler("1234"), this.bank);
+		this.titular = new Person(71525252, 'J');
+		this.account = new Account(office, bank, "1234567890", this.titular);
+	}
 
-        Handler expResult = new GenericHandler("1234");
-        assertNotNull(bank.getID());
-        assertEquals(bank.getID().compareTo(expResult), 0);
-    }
+	/**
+	 * Test of getID method, of class Bank.
+	 */
+	@Test
+	public void testGetID() {
 
-    /**
-     * Test of addOffice method, of class Bank.
-     */
-    @Test
-    public void testAddOffice() {
+		Handler expResult = new GenericHandler("1234");
+		assertNotNull(bank.getID());
+		assertEquals(bank.getID().compareTo(expResult), 0);
+	}
 
-        assertTrue(this.bank.addOffice(office));
-    }
+	/**
+	 * Test of addOffice method, of class Bank.
+	 */
+	@Test
+	public void testAddOffice() {
 
-    /**
-     * Test of addOffice method, of class Bank.
-     */
-    @Test
-    public void testAddOfficeNullOffice() {
+		assertTrue(this.bank.addOffice(office));
+	}
 
-        assertFalse(this.bank.addOffice(null));
-    }
+	/**
+	 * Test of addOffice method, of class Bank.
+	 */
+	@Test
+	public void testAddOfficeNullOffice() {
 
-    /**
-     * Test of addOffice method, of class Bank.
-     */
-    @Test
-    public void testAddOfficeSameOffice() {
+		assertFalse(this.bank.addOffice(null));
+	}
 
-        this.bank.addOffice(office);
+	/**
+	 * Test of addOffice method, of class Bank.
+	 */
+	@Test
+	public void testAddOfficeSameOffice() {
 
-        assertFalse(this.bank.addOffice(office));
-    }
+		this.bank.addOffice(office);
 
-    /**
-     * Test of removeOffice method, of class Bank.
-     */
-    @Test
-    public void testRemoveOffice() {
+		assertFalse(this.bank.addOffice(office));
+	}
 
-        this.bank.addOffice(office);
-        assertTrue(this.bank.removeOffice(office.getIdOffice()));
-    }
+	/**
+	 * Test of removeOffice method, of class Bank.
+	 */
+	@Test
+	public void testRemoveOffice() {
 
-    /**
-     * Test of removeOffice method, of class Bank.
-     */
-    @Test
-    public void testRemoveOfficeNullOffice() {
+		this.bank.addOffice(office);
+		assertTrue(this.bank.removeOffice(office.getIdOffice()));
+	}
 
-        assertFalse(this.bank.removeOffice(null));
-    }
+	/**
+	 * Test of removeOffice method, of class Bank.
+	 */
+	@Test
+	public void testRemoveOfficeNullOffice() {
 
-    /**
-     * Test of removeOffice method, of class Bank.
-     */
-    @Test
-    public void testRemoveOfficeNotBelongsTheBank() {
+		assertFalse(this.bank.removeOffice(null));
+	}
 
-        assertFalse(this.bank.removeOffice(office.getIdOffice()));
-    }
+	/**
+	 * Test of removeOffice method, of class Bank.
+	 */
+	@Test
+	public void testRemoveOfficeNotBelongsTheBank() {
 
-    /**
-     * Test of doTransaction method, of class Bank.
-     *
-     * @throws es.unileon.ulebank.handler.MalformedHandlerException
-     */
-    @Test
-    public void testDoTransaction() throws TransactionException, MalformedHandlerException {
+		assertFalse(this.bank.removeOffice(office.getIdOffice()));
+	}
 
-        this.bank.addOffice(office);
-        this.office.addAccount(account);
+	/**
+	 * Test of doTransaction method, of class Bank.
+	 *
+	 * @throws es.unileon.ulebank.handler.MalformedHandlerException
+	 */
+	@Test
+	public void testDoTransaction() throws TransactionException,
+			MalformedHandlerException {
 
-        Transaction transaction = new GenericTransaction(2.0, new Date(), "Salary");
+		this.bank.addOffice(office);
+		this.office.addAccount(account);
 
-        transaction.setEffectiveDate(new Date());
+		Transaction transaction = new GenericTransaction(2.0, new Date(),
+				"Salary");
 
-        this.bank.doTransaction(transaction, this.account.getID());
+		transaction.setEffectiveDate(new Date());
 
-        assertEquals(this.account.getBalance(), 2.0, 2.0);
-    }
+		this.bank.doTransaction(transaction, this.account.getID());
 
-    /**
-     * Test throw of TransactionException in doTransaction method, of class
-     * Bank.
-     *
-     * @throws es.unileon.ulebank.handler.MalformedHandlerException
-     */
-    @Test(expected = TransactionException.class)
-    public void testDoTransactionNullDestination() throws TransactionException, MalformedHandlerException {
+		assertEquals(this.account.getBalance(), 2.0, 2.0);
+	}
 
-        this.bank.addOffice(office);
-        this.office.addAccount(account);
+	/**
+	 * Test throw of TransactionException in doTransaction method, of class
+	 * Bank.
+	 *
+	 * @throws es.unileon.ulebank.handler.MalformedHandlerException
+	 */
+	@Test(expected = TransactionException.class)
+	public void testDoTransactionNullDestination() throws TransactionException,
+			MalformedHandlerException {
 
-        Transaction transaction = new GenericTransaction(2.0, new Date(), "Salary");
+		this.bank.addOffice(office);
+		this.office.addAccount(account);
 
-        this.bank.doTransaction(transaction, null);
-    }
+		Transaction transaction = new GenericTransaction(2.0, new Date(),
+				"Salary");
 
-    /**
-     * Test throw of TransactionException in doTransaction method, of class
-     * Bank.
-     *
-     * @throws es.unileon.ulebank.handler.MalformedHandlerException
-     */
-    @Test(expected = TransactionException.class)
-    public void testDoTransactionNotFoundOffice() throws TransactionException, MalformedHandlerException {
+		this.bank.doTransaction(transaction, null);
+	}
 
-        Transaction transaction = new GenericTransaction(2.0, new Date(), "Salary");
+	/**
+	 * Test throw of TransactionException in doTransaction method, of class
+	 * Bank.
+	 *
+	 * @throws es.unileon.ulebank.handler.MalformedHandlerException
+	 */
+	@Test(expected = TransactionException.class)
+	public void testDoTransactionNotFoundOffice() throws TransactionException,
+			MalformedHandlerException {
 
-        this.bank.doTransaction(transaction, this.account.getID());
-    }
+		Transaction transaction = new GenericTransaction(2.0, new Date(),
+				"Salary");
+
+		this.bank.doTransaction(transaction, this.account.getID());
+	}
 }

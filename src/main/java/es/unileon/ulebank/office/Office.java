@@ -236,8 +236,9 @@ public class Office {
 							found = true;
 						}
 					}
-					if(!found) {
-						error.append("Error, account with id = "+destine.toString()+" not found\n");
+					if (!found) {
+						error.append("Error, account with id = "
+								+ destine.toString() + " not found\n");
 					}
 				}
 			}

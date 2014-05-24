@@ -27,8 +27,8 @@ public class CommandFilterTransactionBySubject implements Command {
 
 	public CommandFilterTransactionBySubject(Iterator<Transaction> it,
 			Handler commandId, String subject, boolean isValidSubject) {
-		this.iteratorFiltered = new IteratorSubject<Transaction>(it,
-				subject, isValidSubject);
+		this.iteratorFiltered = new IteratorSubject<Transaction>(it, subject,
+				isValidSubject);
 		this.commandId = commandId;
 		this.result = new ArrayList<Transaction>();
 	}

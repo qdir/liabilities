@@ -51,7 +51,7 @@ public class TaskTest {
 	public void testGetId() {
 		assertEquals(this.id.compareTo(this.task.getID()), 0);
 	}
-	
+
 	@Test
 	public void testCombined() {
 		this.task.undo();
@@ -70,6 +70,7 @@ public class TaskTest {
 
 	@Test
 	public void testGetEffectiveDate() {
-		assertEquals(this.effectiveDate.getTime(), this.task.getEffectiveDate().getTime());
+		assertEquals(this.effectiveDate.getTime(), this.task.getEffectiveDate()
+				.getTime());
 	}
 }

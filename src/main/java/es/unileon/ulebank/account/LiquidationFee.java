@@ -19,25 +19,30 @@ import java.util.List;
 public class LiquidationFee {
 
 	private List<FeeCase> feeCases;
-	
+
 	public LiquidationFee() {
 		this.feeCases = new ArrayList<FeeCase>();
 	}
-	
-	public void addFeeCase(FeeCase fee){
+
+	public void addFeeCase(FeeCase fee) {
 		this.feeCases.add(fee);
 	}
-	
-    public Transaction calculateFee(Iterator<Transaction> transactions, Iterator<DirectDebitTransaction> directDebitTransactions, AccountDirectDebits accountDirectDebits, Date min, Date max) throws TransactionException{
-    	int i = -1;
-    	boolean foundValidCase = false;
-    	while(foundValidCase && ++i < feeCases.size() ) {
-    		foundValidCase = this.feeCases.get(i).triggerCase(transactions, directDebitTransactions, accountDirectDebits,min,max);
-    	}
-    	if(foundValidCase) {
-    		return this.feeCases.get(i).calculateAmount(transactions, directDebitTransactions, accountDirectDebits,min,max);
-    	}
-    	return null;
-    }
+
+	public Transaction calculateFee(Iterator<Transaction> transactions,
+			Iterator<DirectDebitTransaction> directDebitTransactions,
+			AccountDirectDebits accountDirectDebits, Date min, Date max)
+			throws TransactionException {
+		int i = -1;
+		boolean foundValidCase = false;
+		while (foundValidCase && ++i < feeCases.size()) {
+			foundValidCase = this.feeCases.get(i).triggerCase(transactions,
+					directDebitTransactions, accountDirectDebits, min, max);
+		}
+		if (foundValidCase) {
+			return this.feeCases.get(i).calculateAmount(transactions,
+					directDebitTransactions, accountDirectDebits, min, max);
+		}
+		return null;
+	}
 
 }

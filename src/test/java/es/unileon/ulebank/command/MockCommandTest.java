@@ -18,7 +18,7 @@ public class MockCommandTest {
 		this.id = new GenericHandler("mock");
 		this.command = new MockCommand(id);
 	}
-	
+
 	@Test
 	public void testUndo() {
 		this.command.undo();
