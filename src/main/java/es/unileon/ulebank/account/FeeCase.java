@@ -56,7 +56,9 @@ public class FeeCase {
 
 				this.triggeringConditions.append(equation);
 
-			} catch (Throwable e) {
+			} catch (RuntimeException e) {
+				result = false;
+			} catch (Exception e) {
 				result = false;
 			}
 		}
@@ -81,12 +83,22 @@ public class FeeCase {
 			AccountDirectDebits accountDirectDebits, Date min, Date max)
 			throws TransactionException {
 		Transaction result = null;
+		StringBuffer error = new StringBuffer();
 		if (this.triggerCase(transactions, directDebitTransactions,
 				accountDirectDebits, min, max)) {
-			double amount = EVALUATOR.evaluate(this.amountFormula,
-					this.featureExtractor.generateRandomVariables());
-			result = new GenericTransaction(amount, new Date(Time.getInstance()
-					.getTime()), subject);
+			try {
+				double amount = EVALUATOR.evaluate(this.amountFormula,
+						this.featureExtractor.generateRandomVariables());
+				result = new GenericTransaction(amount, new Date(Time
+						.getInstance().getTime()), subject);
+			} catch (RuntimeException r) {
+				error.append(r.toString());
+			} catch (Exception e) {
+				error.append(e.toString());
+			}
+		}
+		if(error.length() > 0) {
+			throw new TransactionException(error.toString());
 		}
 		return result;
 	}
