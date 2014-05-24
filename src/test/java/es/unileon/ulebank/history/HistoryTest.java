@@ -61,10 +61,40 @@ public class HistoryTest {
         added.add(transaction2);
         added.add(transaction3);
 
-        this.accountHistory.add(transaction1);
-        this.accountHistory.add(transaction2);
-        this.accountHistory.add(transaction3);
+        assertTrue(this.accountHistory.add(transaction1));
+        assertTrue(this.accountHistory.add(transaction2));
+        assertTrue(this.accountHistory.add(transaction3));
+        assertFalse(this.accountHistory.add(transaction3));
 
+        Iterator<Transaction> itHistory = this.accountHistory.getIterator();
+        Iterator<Transaction> it = added.iterator();
+        while (it.hasNext() && itHistory.hasNext()) {
+            assertEquals(it.next(), itHistory.next());
+        }
+        assertFalse(it.hasNext());
+        assertFalse(itHistory.hasNext());
+    }
+    
+    @Test
+    public void testDelete() throws ParseException, TransactionException {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+        Date date1 = sdf.parse("01/01/2014");
+        Date date2 = sdf.parse("01/02/2014");
+        Date date3 = sdf.parse("01/03/2014");
+
+        Transaction transaction1 = new GenericTransaction(10.5d, date1, "Imposicion");
+        Transaction transaction2 = new GenericTransaction(10.5d, date2, "Imposicion");
+        Transaction transaction3 = new GenericTransaction(10.5d, date3, "Imposicion");
+        List<Transaction> added = new ArrayList<Transaction>();
+        added.add(transaction1);
+        added.add(transaction3);
+
+        assertTrue(this.accountHistory.add(transaction1));
+        assertTrue(this.accountHistory.add(transaction2));
+        assertTrue(this.accountHistory.add(transaction3));
+        assertTrue(this.accountHistory.remove(transaction2.getId()));
+        assertFalse(this.accountHistory.remove(transaction2.getId()));
         Iterator<Transaction> itHistory = this.accountHistory.getIterator();
         Iterator<Transaction> it = added.iterator();
         while (it.hasNext() && itHistory.hasNext()) {
