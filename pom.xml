@@ -187,6 +187,6 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-
+<sonar.mantis.id>52</sonar.mantis.id> 
 </project>
 
