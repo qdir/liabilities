@@ -10,7 +10,7 @@ import es.unileon.ulebank.bank.Bank;
 import es.unileon.ulebank.handler.GenericHandler;
 import es.unileon.ulebank.office.Office;
 
-public class ClientTests {
+public class ClientTest {
 
 	private Client client;
 	private Account account;

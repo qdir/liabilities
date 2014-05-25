@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import es.unileon.ulebank.handler.GenericHandler;
 
-public class EnterpriseTests {
+public class EnterpriseTest {
 
 	private Enterprise enterprise;
 	private Address address;
