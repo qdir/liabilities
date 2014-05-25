@@ -1,23 +1,16 @@
 package es.unileon.ulebank.account.liquidation;
 
 import java.util.Date;
-import java.util.Iterator;
-import java.util.Map;
-
-import com.fathzer.soft.javaluator.StaticVariableSet;
 
 import es.unileon.ulebank.account.Account;
-import es.unileon.ulebank.account.AccountDirectDebits;
-import es.unileon.ulebank.history.DirectDebitTransaction;
-import es.unileon.ulebank.history.Transaction;
 
 public interface AbstractFeatureExtractor<T> {
 
-	Map<String,T> getVariables();
+	public String getFeatureName();
 
-	Map<String,T> generateRandomVariables();
+	public void updateFeature(Account account, Date min, Date max);
 
-	String[] getVariableNames();
+	public T getFeature();
 
-	void updateVariables(Account account, Date min, Date max);
+	public T generateRandomFeature();
 }

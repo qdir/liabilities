@@ -17,7 +17,7 @@ import es.unileon.ulebank.time.Time;
 
 public class DoubleFeeCase implements AbstractFeeCase<Double> {
 
-	private AbstractFeatureExtractor<Double> featureExtractor;
+	private Features<Double> featureExtractor;
 	private String amountFormula;
 	private StringBuilder triggeringConditions;
 	private String subject;
@@ -25,7 +25,7 @@ public class DoubleFeeCase implements AbstractFeeCase<Double> {
 	private static final double PRECISION = 10;
 	private static final double EPSILON = Math.pow(10, -PRECISION);
 
-	public DoubleFeeCase(AbstractFeatureExtractor<Double> featureExtractor,
+	public DoubleFeeCase(Features<Double> featureExtractor,
 			String amountFormula, String subject, Account account) {
 		this.featureExtractor = featureExtractor;
 		this.triggeringConditions = new StringBuilder();
@@ -50,7 +50,7 @@ public class DoubleFeeCase implements AbstractFeeCase<Double> {
 	public boolean triggerCase() {
 		if (this.triggeringConditions.length() > 0)
 			return MVEL.evalToBoolean(this.triggeringConditions.toString(),
-					this.featureExtractor.generateRandomVariables());
+					this.featureExtractor.generateRandomFeatures());
 		return true;
 	}
 
@@ -61,7 +61,7 @@ public class DoubleFeeCase implements AbstractFeeCase<Double> {
 			StringBuilder err = new StringBuilder();
 			try {
 				double amount = EVALUATOR.evaluate(this.amountFormula,
-						castTo(this.featureExtractor.getVariables()));
+						castTo(this.featureExtractor.getFeatures()));
 				result = new GenericTransaction(amount, new Date(Time
 						.getInstance().getTime()), subject);
 			} catch (RuntimeException r) {
@@ -89,7 +89,7 @@ public class DoubleFeeCase implements AbstractFeeCase<Double> {
 		StringBuilder err = new StringBuilder();
 		try {
 			EVALUATOR.evaluate(operand,
-					castTo(this.featureExtractor.generateRandomVariables()));
+					castTo(this.featureExtractor.generateRandomFeatures()));
 		} catch (RuntimeException e) {
 			err.append(e.toString());
 		} catch (Exception e) {
@@ -121,7 +121,7 @@ public class DoubleFeeCase implements AbstractFeeCase<Double> {
 	}
 
 	@Override
-	public AbstractFeatureExtractor<Double> getFeatureExtractor() {
+	public Features<Double> getFeatureExtractor() {
 		return this.featureExtractor;
 	}
 }

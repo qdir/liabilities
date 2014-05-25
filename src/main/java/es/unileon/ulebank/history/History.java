@@ -1,9 +1,10 @@
 package es.unileon.ulebank.history;
 
-import es.unileon.ulebank.handler.Handler;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+
+import es.unileon.ulebank.handler.Handler;
 
 /**
  *

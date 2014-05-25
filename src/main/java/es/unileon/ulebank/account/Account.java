@@ -1,8 +1,16 @@
 package es.unileon.ulebank.account;
 
-import es.unileon.ulebank.exceptions.TransactionException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import es.unileon.ulebank.account.liquidation.AbstractLiquidationFee;
 import es.unileon.ulebank.bank.Bank;
 import es.unileon.ulebank.client.Client;
+import es.unileon.ulebank.exceptions.TransactionException;
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
 import es.unileon.ulebank.history.DirectDebitTransaction;
@@ -10,12 +18,8 @@ import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.History;
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.history.conditions.WrongArgsException;
+import es.unileon.ulebank.history.iterator.IteratorBetweenTwoDates;
 import es.unileon.ulebank.office.Office;
-import es.unileon.ulebank.time.Time;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -66,12 +70,6 @@ public class Account {
 	 * The liquidation frequency in months
 	 */
 	private int liquidationFrecuency;
-
-	/**
-	 * The strategies
-	 */
-	// private final List<LiquidationStrategy> liquidationStrategies;
-
 	/**
 	 * The max account's overdraft ( in positive )
 	 */
@@ -81,6 +79,8 @@ public class Account {
 	 * Account's direct debits
 	 */
 	private AccountDirectDebits directDebits;
+
+	private List<AbstractLiquidationFee> liquidationFees;
 
 	/**
 	 * Create a new account
@@ -114,11 +114,10 @@ public class Account {
 			this.authorizeds = new ArrayList<Client>();
 			this.lastLiquidation = new Date(System.currentTimeMillis());
 			this.liquidationFrecuency = DEFAULT_LIQUIDATION_FREQUENCY;
-			// this.liquidationStrategies = new
-			// ArrayList<LiquidationStrategy>();
 			this.directDebitHistory = new History<DirectDebitTransaction>();
 			this.maxOverdraft = 0;
 			this.directDebits = new AccountDirectDebits();
+			this.liquidationFees = new ArrayList<AbstractLiquidationFee>();
 		}
 		LOG.info("Create a new account with number " + accountnumber
 				+ " office " + office.getIdOffice().toString() + " bank "
@@ -396,42 +395,58 @@ public class Account {
 		}
 	}
 
-	// public boolean addLiquidationLiquidationFee(LiquidationStrategy strategy)
-	// {
-	// int i = 0;
-	// boolean found = false;
-	// while (i < this.liquidationStrategies.size() && !found) {
-	// if
-	// (this.liquidationStrategies.get(i++).getID().compareTo(strategy.getID())
-	// == 0) {
-	// found = true;
-	// }
-	// }
-	// if (!found) {
-	// this.liquidationStrategies.add(strategy);
-	// }
-	// return !found;
-	// }
-
-	// public boolean deleteLiquidationFee(Handler id) {
-	// int i = 0;
-	// boolean found = false;
-	// while (i < this.liquidationStrategies.size() && !found) {
-	// if (this.liquidationStrategies.get(i++).getID().compareTo(id) == 0) {
-	// this.liquidationStrategies.remove(i);
-	// found = true;
-	// }
-	// }
-	// return found;
-	// }
-
 	/**
 	 * Perform account liquidation.
 	 *
 	 * @param office
 	 */
 	public void doLiquidation(Office office) {
+		for (AbstractLiquidationFee fee : this.liquidationFees) {
+			try {
+				Transaction t = fee.calculateFee(null, null);
+				Transaction tNegate = new GenericTransaction(-t.getAmount(),
+						t.getDate(), t.getSubject() + "Accoun : "
+								+ this.getID().toString() + "id = " + t.getId());
+				this.doTransaction(t);
+				// TODO
+				// Transaction forward transaction to office
+			} catch (TransactionException e) {
+				// Store error in? :(
+			}
+		}
+	}
 
+	/**
+	 * Get directDebits between the dates passed as parameters.
+	 * 
+	 * @param min
+	 * @param max
+	 * @return
+	 * @throws WrongArgsException
+	 */
+	public List<DirectDebitTransaction> getFilteredDirectDebits(Date min,
+			Date max) throws WrongArgsException {
+		Iterator<DirectDebitTransaction> it = new IteratorBetweenTwoDates<DirectDebitTransaction>(
+				this.directDebitHistory.getIterator(), min.getTime(),
+				max.getTime());
+		List<DirectDebitTransaction> directDebits = new ArrayList<DirectDebitTransaction>();
+		while (it.hasNext()) {
+			directDebits.add(it.next());
+		}
+
+		return directDebits;
+	}
+
+	public boolean removeLiquidationFee(Handler id) {
+		int i = -1;
+		boolean removed = false;
+		while (++i < this.liquidationFees.size() & !removed) {
+			if (this.liquidationFees.get(i).getId().compareTo(id) == 0) {
+				this.liquidationFees.remove(i);
+				removed = true;
+			}
+		}
+		return removed;
 	}
 
 	/**

@@ -2,12 +2,13 @@
  group.*/
 package es.unileon.ulebank.history.iterator;
 
+import java.util.Iterator;
+import java.util.List;
+
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.history.conditions.ConditionTransactionBetweenTwoAmounts;
 import es.unileon.ulebank.history.conditions.WrongArgsException;
 import es.unileon.ulebank.iterator.ConditionalIterator;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  *

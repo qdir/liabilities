@@ -1,6 +1,8 @@
 package es.unileon.ulebank.client;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,34 +18,34 @@ public class ClientTest {
 	private Account account;
 	private Office office;
 	private Bank bank;
-	
+
 	@Before
 	public void setUp() throws Exception {
-		
+
 		client = new Client(new GenericHandler("1234"));
 		bank = new Bank(new GenericHandler("1234"));
 		office = new Office(new GenericHandler("1234"), bank);
-		
+
 		account = new Account(office, bank, "0000000000", client);
 	}
 
 	@Test
 	public void testAdd() {
-		
+
 		client.add(account);
 		assertTrue(client.existsAccount(account.getID()));
 	}
-	
+
 	@Test
 	public void testAddSameAccount() {
-		
+
 		client.add(account);
 		assertTrue(client.existsAccount(account.getID()));
 	}
 
 	@Test
 	public void testRemoveAccount() {
-		
+
 		client.add(account);
 		assertTrue(client.existsAccount(account.getID()));
 		client.removeAccount(account.getID());
@@ -52,14 +54,14 @@ public class ClientTest {
 
 	@Test
 	public void testExistsAccount() {
-		
+
 		client.add(account);
 		assertTrue(client.existsAccount(account.getID()));
 	}
 
 	@Test
 	public void testGetId() {
-		
+
 		assertEquals(0, client.getId().compareTo(new GenericHandler("1234")), 0);
 	}
 

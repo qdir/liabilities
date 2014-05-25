@@ -1,8 +1,6 @@
 package es.unileon.ulebank.history;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
 
@@ -11,7 +9,6 @@ import org.junit.Test;
 
 import es.unileon.ulebank.account.DetailedInformation;
 import es.unileon.ulebank.exceptions.TransactionException;
-import es.unileon.ulebank.handler.MalformedHandlerException;
 
 public class GenericTransactionTest {
 

@@ -3,8 +3,9 @@
 
 package es.unileon.ulebank.client;
 
-import es.unileon.ulebank.handler.MalformedHandlerException;
 import java.util.Date;
+
+import es.unileon.ulebank.handler.MalformedHandlerException;
 
 /**
  *

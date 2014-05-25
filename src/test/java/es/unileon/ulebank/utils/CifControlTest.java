@@ -1,6 +1,7 @@
 package es.unileon.ulebank.utils;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -8,10 +9,10 @@ import org.junit.Test;
 public class CifControlTest {
 
 	private CifControl cifControl;
-	
+
 	@Before
 	public void setUp() throws Exception {
-		
+
 		cifControl = CifControl.instance();
 	}
 

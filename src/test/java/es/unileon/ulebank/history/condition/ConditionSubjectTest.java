@@ -2,16 +2,17 @@
  group.*/
 package es.unileon.ulebank.history.condition;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.util.Date;
+
+import org.junit.Test;
 
 import es.unileon.ulebank.exceptions.TransactionException;
 import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.history.conditions.ConditionSubject;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
 
 /**
  *

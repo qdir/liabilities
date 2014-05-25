@@ -2,13 +2,8 @@
  group.*/
 package es.unileon.ulebank.command;
 
-import es.unileon.ulebank.account.DetailedInformation;
-import es.unileon.ulebank.exceptions.TransactionException;
-import es.unileon.ulebank.handler.GenericHandler;
-import es.unileon.ulebank.handler.Handler;
-import es.unileon.ulebank.history.GenericTransaction;
-import es.unileon.ulebank.history.Transaction;
-import es.unileon.ulebank.history.TransactionHandlerProvider;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,7 +13,13 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import es.unileon.ulebank.account.DetailedInformation;
+import es.unileon.ulebank.exceptions.TransactionException;
+import es.unileon.ulebank.handler.GenericHandler;
+import es.unileon.ulebank.handler.Handler;
+import es.unileon.ulebank.history.GenericTransaction;
+import es.unileon.ulebank.history.Transaction;
+import es.unileon.ulebank.history.TransactionHandlerProvider;
 
 /**
  *

@@ -2,16 +2,14 @@
  group.*/
 package es.unileon.ulebank.command;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.history.conditions.WrongArgsException;
 import es.unileon.ulebank.history.iterator.IteratorBetweenTwoAmounts;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

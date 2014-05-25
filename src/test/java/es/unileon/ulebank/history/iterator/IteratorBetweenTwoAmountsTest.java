@@ -2,22 +2,22 @@
  group.*/
 package es.unileon.ulebank.history.iterator;
 
-import es.unileon.ulebank.account.DetailedInformation;
-import es.unileon.ulebank.exceptions.TransactionException;
-import es.unileon.ulebank.history.GenericTransaction;
-import es.unileon.ulebank.history.Transaction;
-import es.unileon.ulebank.history.conditions.WrongArgsException;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import es.unileon.ulebank.account.DetailedInformation;
+import es.unileon.ulebank.exceptions.TransactionException;
+import es.unileon.ulebank.history.GenericTransaction;
+import es.unileon.ulebank.history.Transaction;
+import es.unileon.ulebank.history.conditions.WrongArgsException;
 
 /**
  *

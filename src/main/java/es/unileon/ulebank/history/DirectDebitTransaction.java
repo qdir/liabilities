@@ -2,11 +2,11 @@
  group.*/
 package es.unileon.ulebank.history;
 
+import java.util.Date;
+
 import es.unileon.ulebank.account.DetailedInformation;
 import es.unileon.ulebank.exceptions.TransactionException;
 import es.unileon.ulebank.handler.Handler;
-
-import java.util.Date;
 
 /**
  *

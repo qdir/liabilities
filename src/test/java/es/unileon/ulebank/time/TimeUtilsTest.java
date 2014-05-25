@@ -2,9 +2,11 @@
  group.*/
 package es.unileon.ulebank.time;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Date;
+
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *

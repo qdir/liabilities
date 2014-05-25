@@ -1,7 +1,5 @@
 package es.unileon.ulebank.command;
 
-import java.util.Date;
-
 import es.unileon.ulebank.handler.Handler;
 
 public class MockCommand implements Command {

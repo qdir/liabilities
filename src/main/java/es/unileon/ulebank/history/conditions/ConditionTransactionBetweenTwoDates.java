@@ -2,9 +2,10 @@
  group.*/
 package es.unileon.ulebank.history.conditions;
 
+import java.util.Date;
+
 import es.unileon.ulebank.history.Transaction;
 import es.unileon.ulebank.iterator.Condition;
-import java.util.Date;
 
 /**
  *

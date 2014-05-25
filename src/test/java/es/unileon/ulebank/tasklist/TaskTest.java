@@ -1,18 +1,15 @@
 package es.unileon.ulebank.tasklist;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import es.unileon.ulebank.bank.Bank;
-import es.unileon.ulebank.command.Command;
 import es.unileon.ulebank.command.MockCommand;
 import es.unileon.ulebank.handler.GenericHandler;
 import es.unileon.ulebank.handler.Handler;
-import es.unileon.ulebank.office.Office;
 
 public class TaskTest {
 

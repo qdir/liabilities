@@ -1,10 +1,9 @@
 package es.unileon.ulebank.tasklist;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class TaskDateComparatorTest {

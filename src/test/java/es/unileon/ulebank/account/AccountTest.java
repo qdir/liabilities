@@ -2,32 +2,32 @@
  group.*/
 package es.unileon.ulebank.account;
 
-import es.unileon.ulebank.exceptions.TransactionException;
-import es.unileon.ulebank.bank.Bank;
-import es.unileon.ulebank.client.Client;
-import es.unileon.ulebank.client.Person;
-import es.unileon.ulebank.client.PersonHandler;
-import es.unileon.ulebank.handler.GenericHandler;
-import es.unileon.ulebank.handler.Handler;
-import es.unileon.ulebank.handler.MalformedHandlerException;
-import es.unileon.ulebank.history.DirectDebitTransaction;
-import es.unileon.ulebank.history.GenericTransaction;
-import es.unileon.ulebank.office.Office;
-import es.unileon.ulebank.history.History;
-import es.unileon.ulebank.history.Transaction;
-import es.unileon.ulebank.history.conditions.WrongArgsException;
-
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
+
+import es.unileon.ulebank.bank.Bank;
+import es.unileon.ulebank.client.Client;
+import es.unileon.ulebank.client.Person;
+import es.unileon.ulebank.client.PersonHandler;
+import es.unileon.ulebank.exceptions.TransactionException;
+import es.unileon.ulebank.handler.GenericHandler;
+import es.unileon.ulebank.handler.Handler;
+import es.unileon.ulebank.handler.MalformedHandlerException;
+import es.unileon.ulebank.history.DirectDebitTransaction;
+import es.unileon.ulebank.history.GenericTransaction;
+import es.unileon.ulebank.history.History;
+import es.unileon.ulebank.history.Transaction;
+import es.unileon.ulebank.history.conditions.WrongArgsException;
+import es.unileon.ulebank.office.Office;
 
 public class AccountTest {
 

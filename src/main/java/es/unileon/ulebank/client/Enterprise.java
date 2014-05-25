@@ -3,11 +3,11 @@
 
 package es.unileon.ulebank.client;
 
-import es.unileon.ulebank.handler.Handler;
-import es.unileon.ulebank.handler.MalformedHandlerException;
-
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import es.unileon.ulebank.handler.Handler;
+import es.unileon.ulebank.handler.MalformedHandlerException;
 
 /**
  * Class that implements the data of an enterprise
@@ -73,7 +73,7 @@ public class Enterprise extends Client {
 	 * @return
 	 */
 	public Person removeAuthorizedPerson(Handler personHandler) {
-		
+
 		int position = 0;
 		Iterator<Person> iterator = authorizedPersons.iterator();
 		while (iterator.hasNext()) {
@@ -83,7 +83,7 @@ public class Enterprise extends Client {
 			}
 			position++;
 		}
-		
+
 		return authorizedPersons.remove(position);
 	}
 

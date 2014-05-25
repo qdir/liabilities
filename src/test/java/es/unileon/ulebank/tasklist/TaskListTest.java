@@ -1,6 +1,8 @@
 package es.unileon.ulebank.tasklist;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,12 +10,10 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import es.unileon.ulebank.handler.GenericHandler;
 import es.unileon.ulebank.time.Time;
-import es.unileon.ulebank.time.TimeUtils;
 
 public class TaskListTest {
 

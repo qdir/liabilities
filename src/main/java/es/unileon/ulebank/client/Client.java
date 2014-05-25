@@ -3,10 +3,11 @@
 
 package es.unileon.ulebank.client;
 
-import es.unileon.ulebank.account.Account;
-import es.unileon.ulebank.handler.Handler;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import es.unileon.ulebank.account.Account;
+import es.unileon.ulebank.handler.Handler;
 
 /**
  * Class tha provides the basic gestion data of a client in a bank
@@ -65,7 +66,7 @@ public class Client {
 			}
 			position++;
 		}
-		
+
 		accounts.remove(position);
 		return result;
 	}

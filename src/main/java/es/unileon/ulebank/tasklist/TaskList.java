@@ -2,12 +2,12 @@
  group.*/
 package es.unileon.ulebank.tasklist;
 
-import es.unileon.ulebank.handler.Handler;
-import es.unileon.ulebank.time.Time;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import es.unileon.ulebank.handler.Handler;
+import es.unileon.ulebank.time.Time;
 
 /**
  *
