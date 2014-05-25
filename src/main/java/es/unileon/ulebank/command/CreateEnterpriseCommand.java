@@ -52,6 +52,9 @@ public class CreateEnterpriseCommand implements Command {
 		this.enterpriseName = enterpriseName;
 		this.address = address;
 		this.office = office;
+		this.cifNumber = cifNumber;
+		this.cifLetter = cifLetter;
+		this.cifControl = cifControl;
 		this.effectiveDate = effectiveDate;
 		this.commandID = commandId;
 

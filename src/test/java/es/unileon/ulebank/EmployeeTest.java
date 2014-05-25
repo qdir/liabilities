@@ -36,12 +36,40 @@ public class EmployeeTest {
 	}
 	
 	@Test
+	public void testSetNullName() {
+
+		employee.setName(null);
+		assertTrue(employee.getName().equals("Name"));
+	}
+	
+	@Test
+	public void testSetEmptyName() {
+
+		employee.setName("");
+		assertTrue(employee.getName().equals("Name"));
+	}
+	
+	@Test
 	public void testGetSurname() {
 		
 		String employeeSurname = employee.getSurname();
 		assertTrue(employee.getSurname().equals(employeeSurname));
 		employee.setSurname("Surname 2");
 		assertTrue(employee.getSurname().equals("Surname 2"));
+	}
+	
+	@Test
+	public void testSetNullSurname() {
+
+		employee.setSurname(null);
+		assertTrue(employee.getSurname().equals("Surname"));
+	}
+	
+	@Test
+	public void testSetEmptySurname() {
+
+		employee.setSurname("");
+		assertTrue(employee.getSurname().equals("Surname"));
 	}
 	
 	@Test
@@ -63,6 +91,13 @@ public class EmployeeTest {
 	}
 	
 	@Test
+	public void testSetNegativeSalary() {
+		
+		employee.setSalary(-1800f);
+		assertEquals(2100f, employee.getSalary(), 0);
+	}
+	
+	@Test
 	public void testGetOffice() {
 		
 		Office office2 = new Office(new GenericHandler("2345"), bank);
@@ -79,6 +114,14 @@ public class EmployeeTest {
 		assertEquals(0, employee.getIdEmployee().compareTo(idEmployee),0);
 		employee.setIdEmployee(idEmployee2);
 		assertEquals(0, employee.getIdEmployee().compareTo(idEmployee2),0);
+	}
+	
+	@Test
+	public void testSetNullIdEmployee() {
+		
+		Handler idEmployee = employee.getIdEmployee();
+		employee.setIdEmployee(null);
+		assertEquals(0, employee.getIdEmployee().compareTo(idEmployee),0);
 	}
 	
 	@Test

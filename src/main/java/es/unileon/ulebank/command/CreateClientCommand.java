@@ -67,7 +67,9 @@ public class CreateClientCommand implements Command {
 		this.profession = profession;
 		this.birthDate = birthDate;
 		this.office = office;
-		;
+		this.foreingLetter = foreingLetter;
+		this.dniNumber = dniNumber;
+		this.dniLetter = dniLetter;
 		this.commandID = commandId;
 		this.state = STATE_NORMAL;
 	}
