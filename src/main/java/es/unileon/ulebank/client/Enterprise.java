@@ -5,6 +5,7 @@ package es.unileon.ulebank.client;
 
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -72,16 +73,18 @@ public class Enterprise extends Client {
 	 * @return
 	 */
 	public Person removeAuthorizedPerson(Handler personHandler) {
-		Person result = null;
+		
+		int position = 0;
 		Iterator<Person> iterator = authorizedPersons.iterator();
 		while (iterator.hasNext()) {
 			Person person = iterator.next();
 			if (person.getId().compareTo(personHandler) == 0) {
-				result = person;
-				authorizedPersons.remove(person);
+				break;
 			}
+			position++;
 		}
-		return result;
+		
+		return authorizedPersons.remove(position);
 	}
 
 	/**

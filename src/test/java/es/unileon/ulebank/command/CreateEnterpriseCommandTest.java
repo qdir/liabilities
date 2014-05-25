@@ -16,10 +16,10 @@ import es.unileon.ulebank.office.Office;
 
 public class CreateEnterpriseCommandTest {
 
-	CreateEnterpriseCommand createEnterpriseCommand;
-	Office office;
-	Bank bank;
-	Address address;
+	private CreateEnterpriseCommand createEnterpriseCommand;
+	private Office office;
+	private Bank bank;
+	private Address address;
 	
 	@Before
 	public void setUp() throws MalformedHandlerException {
