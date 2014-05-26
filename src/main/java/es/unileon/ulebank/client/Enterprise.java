@@ -73,18 +73,17 @@ public class Enterprise extends Client {
 	 * @return
 	 */
 	public Person removeAuthorizedPerson(Handler personHandler) {
-
-		int position = 0;
+		Person removed = null;
 		Iterator<Person> iterator = authorizedPersons.iterator();
-		while (iterator.hasNext()) {
+		while (removed == null && iterator.hasNext()) {
 			Person person = iterator.next();
 			if (person.getId().compareTo(personHandler) == 0) {
-				break;
+				removed = person;
+				iterator.remove();
 			}
-			position++;
 		}
 
-		return authorizedPersons.remove(position);
+		return removed;
 	}
 
 	/**

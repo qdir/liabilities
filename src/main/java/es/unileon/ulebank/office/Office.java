@@ -205,51 +205,20 @@ public class Office {
 	}
 
 	/**
-	 * Do a transaction.
 	 * 
-	 * @param t
-	 *            ( Transaction to do )
 	 * @param destine
-	 *            ( Account to forward )
-	 * 
-	 * @throws TransactionException
-	 *             ( If the transaction couldn't be done )
-	 * @throws MalformedHandlerException
-	 *             ( If the destine isn't valid )
+	 * @return
 	 */
-	public void doTransaction(Transaction t, Handler destine)
-			throws TransactionException, MalformedHandlerException {
-		boolean found = false;
-		StringBuilder error = new StringBuilder();
-		if (t == null || destine == null) {
-			error.append("The transaction cannot be null or destination be null");
-		} else {
-			AccountHandler handler = new AccountHandler(destine);
-			if (handler.getBankHandler().compareTo(this.bank.getID()) != 0) {
-				error.append("Wrong bank \n");
-			} else {
-				if (handler.getOfficeHandler().compareTo(this.id) != 0) {
-					error.append("Wrong office \n");
-				} else {
-					int i = -1;
-					while (++i < accounts.size() && !found) {
-						if (accounts.get(i).getID().compareTo(destine) == 0) {
-							accounts.get(i).doTransaction(t);
-							found = true;
-						}
-					}
-					if (!found) {
-						error.append("Error, account with id = "
-								+ destine.toString() + " not found\n");
-					}
-				}
+	public Account searchAccount(Handler destine) {
+		Account result = null;
+		int i = -1;
+		while (++i < accounts.size() && result == null) {
+			if (accounts.get(i).getID().compareTo(destine) == 0) {
+				result = accounts.get(i);
 			}
 		}
 
-		if (error.length() > 0) {
-			LOG.error("Office id " + this.id + " error : " + error.toString());
-			throw new TransactionException(error.toString());
-		}
+		return result;
 	}
 
 	/**

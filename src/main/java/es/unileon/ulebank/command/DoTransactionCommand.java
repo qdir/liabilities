@@ -56,18 +56,18 @@ public class DoTransactionCommand implements Command {
      */
 	@Override
 	public void execute() {
-		try {
-			this.transaction = new GenericTransaction(this.amount, this.date,
-					this.subject, this.extraInformation);
-			this.bank.doTransaction(transaction, destine);
-
-		} catch (MalformedHandlerException ex) {
-			Logger.getLogger(DoTransactionCommand.class.getName()).log(
-					Level.SEVERE, null, ex);
-		} catch (TransactionException ex) {
-			Logger.getLogger(DoTransactionCommand.class.getName()).log(
-					Level.SEVERE, null, ex);
-		}
+//		try {
+//			this.transaction = new GenericTransaction(this.amount, this.date,
+//					this.subject, this.extraInformation);
+//			this.bank.doTransaction(transaction, destine);
+//
+//		} catch (MalformedHandlerException ex) {
+//			Logger.getLogger(DoTransactionCommand.class.getName()).log(
+//					Level.SEVERE, null, ex);
+//		} catch (TransactionException ex) {
+//			Logger.getLogger(DoTransactionCommand.class.getName()).log(
+//					Level.SEVERE, null, ex);
+//		}
 	}
 
 	/**

@@ -13,6 +13,7 @@ import es.unileon.ulebank.handler.GenericHandler;
 public class EnterpriseTest {
 
 	private Enterprise enterprise;
+	private Enterprise enterpriseOther;
 	private Address address;
 	private Person person;
 
@@ -23,6 +24,8 @@ public class EnterpriseTest {
 				24000);
 		enterprise = new Enterprise('Q', 6582297, 'E', "enterpriseName",
 				address);
+		enterpriseOther = new Enterprise('Q', 6582297, 'E');
+		enterpriseOther.setAddress(address);
 		person = new Person(98765432, 'M');
 	}
 
@@ -41,6 +44,7 @@ public class EnterpriseTest {
 		assertTrue(enterprise.existsAuthorizedPerson(new GenericHandler(
 				"98765432M")));
 		enterprise.removeAuthorizedPerson(new GenericHandler("98765432M"));
+
 		assertFalse(enterprise.existsAuthorizedPerson(new GenericHandler(
 				"98765432M")));
 	}
@@ -79,4 +83,50 @@ public class EnterpriseTest {
 		assertEquals(25000, enterprise.getAddress().getZipCode(), 0);
 
 	}
+
+	@Test
+	public void testAddAuthorizedPersonOther() {
+
+		enterpriseOther.addAuthorizedPerson(person);
+		assertTrue(enterpriseOther.existsAuthorizedPerson(new GenericHandler(
+				"98765432M")));
+	}
+
+	@Test
+	public void testRemoveAuthorizedPersonOther() {
+
+		enterpriseOther.addAuthorizedPerson(person);
+		assertTrue(enterpriseOther.existsAuthorizedPerson(new GenericHandler(
+				"98765432M")));
+		enterpriseOther.removeAuthorizedPerson(new GenericHandler("98765432M"));
+
+		assertFalse(enterpriseOther.existsAuthorizedPerson(new GenericHandler(
+				"98765432M")));
+	}
+
+	@Test
+	public void testExistsAuthorizedPersonOther() {
+
+		enterpriseOther.addAuthorizedPerson(person);
+		assertTrue(enterpriseOther.existsAuthorizedPerson(new GenericHandler(
+				"98765432M")));
+	}
+
+	@Test
+	public void testGetAddressOther() {
+
+		assertNotNull(enterpriseOther.getAddress());
+		address = new Address("Calle", 3, 4, 'A', "Leon", "Provincia Leon",
+				25000);
+		enterpriseOther.setAddress(address);
+		assertTrue(enterpriseOther.getAddress().getStreet().equals("Calle"));
+		assertTrue(enterpriseOther.getAddress().getLocality().equals("Leon"));
+		assertTrue(enterpriseOther.getAddress().getProvince()
+				.equals("Provincia Leon"));
+		assertEquals(3, enterpriseOther.getAddress().getBlockNumber(), 0);
+		assertEquals(4, enterpriseOther.getAddress().getFloor(), 0);
+		assertEquals(25000, enterpriseOther.getAddress().getZipCode(), 0);
+
+	}
+
 }

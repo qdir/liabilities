@@ -55,20 +55,17 @@ public class Client {
 	 * @return true if account is deleted, false if account doesn't exists
 	 */
 	public boolean removeAccount(Handler accountHandler) {
-		int position = 0;
-		boolean result = false;
+		boolean removed = false;
 		Iterator<Account> iterator = accounts.iterator();
-		while (iterator.hasNext()) {
+		while (!removed && iterator.hasNext()) {
 			Account account = iterator.next();
 			if (account.getID().compareTo(accountHandler) == 0) {
-				result = true;
-				break;
+				removed = true;
+				iterator.remove();
 			}
-			position++;
 		}
 
-		accounts.remove(position);
-		return result;
+		return removed;
 	}
 
 	/**

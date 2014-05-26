@@ -80,46 +80,15 @@ public class Bank {
 		return removed;
 	}
 
-	/**
-	 * Forward transaction to the correct account or throw a exception
-	 * otherwise.
-	 *
-	 * @param t
-	 *            ( Transaction to forward )
-	 * @param destine
-	 *            ( The transaction destine )
-	 *
-	 * @throws es.unileon.ulebank.handler.MalformedHandlerException
-	 *             ( If the destine isn't well-formed )
-	 * @throws TransactionException
-	 *             ( If the transaction cannot be deliver )
-	 */
-	public void doTransaction(Transaction t, Handler destine)
-			throws MalformedHandlerException, TransactionException {
-		StringBuilder error = new StringBuilder();
-		if (t != null && destine != null) {
-			AccountHandler handler = new AccountHandler(destine);
-			Handler bank = handler.getBankHandler();
-			if (this.bankID.compareTo(bank) == 0) {
-				Handler office = handler.getOfficeHandler();
-				boolean found = false;
-				for (int i = 0; i < this.offices.size() && !found; i++) {
-					if (this.offices.get(i).getIdOffice().compareTo(office) == 0) {
-						found = true;
-						this.offices.get(i).doTransaction(t, destine);
-					}
-				}
-				if (!found) {
-					error.append("Error, office not found\n");
-				}
+	public Office searchOffice(Handler id) {
+		Office result = null;
+		int i = -1;
+		while (++i < offices.size() && result == null) {
+			if (offices.get(i).getIdOffice().compareTo(id) == 0) {
+				result = offices.get(i);
 			}
-		} else {
-			error.append("The transaction cannot be null or destination be null");
 		}
 
-		if (error.length() > 0) {
-			LOG.error("Bank id " + this.bankID + " error : " + error.toString());
-			throw new TransactionException(error.toString());
-		}
+		return result;
 	}
 }
