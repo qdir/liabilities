@@ -55,6 +55,11 @@ public class DoubleFeatureExtractorPayrrolsMaxAmountTests {
 		extractor.updateFeature(account, new Date(2), new Date(8));
 	}
 
+	
+	@Test
+	public void testGetFeatureName() {
+		assertEquals(extractor.getFeatureName(), "Nomina de maximo importe");
+	}
 	@Test
 	public void testGetFeature() {
 		assertEquals(extractor.getFeature(), 7.0, Math.pow(10, -5));

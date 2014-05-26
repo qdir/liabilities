@@ -53,6 +53,12 @@ public class DoubleFeatureExtractorDirectDebitsAverageTests {
 		extractor.generateRandomFeature();
 		extractor.updateFeature(account, new Date(2), new Date(8));
 	}
+	
+
+	@Test
+	public void testGetFeatureName() {
+		assertEquals(extractor.getFeatureName(), "importe medio pagos domiciliados");
+	}
 
 	@Test
 	public void testGetFeature() {

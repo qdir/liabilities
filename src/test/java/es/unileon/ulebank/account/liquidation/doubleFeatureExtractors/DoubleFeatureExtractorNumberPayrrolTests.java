@@ -56,6 +56,10 @@ public class DoubleFeatureExtractorNumberPayrrolTests {
 	}
 
 	@Test
+	public void testGetFeatureName() {
+		assertEquals(extractor.getFeatureName(), "Numero de nominas");
+	}
+	@Test
 	public void testGetFeature() {
 		assertEquals(extractor.getFeature(), 3.0, Math.pow(10, -5));
 	}

@@ -56,6 +56,11 @@ public class DoubleFeatureExtractorNumberDirectDebitsTests {
 	}
 
 	@Test
+	public void testGetFeatureName() {
+		assertEquals(extractor.getFeatureName(), "Numero medio de pagos domiciliados");
+	}
+	
+	@Test
 	public void testGetFeature() {
 		assertEquals(extractor.getFeature(), 4, Math.pow(10, -5));
 	}

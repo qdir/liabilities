@@ -57,6 +57,11 @@ public class DoubleFeatureExtractorDirectDebitsMaxAmountTests {
 	}
 
 	@Test
+	public void testGetFeatureName() {
+		assertEquals(extractor.getFeatureName(), "pago domiciliado mas alto");
+	}
+	
+	@Test
 	public void testGetFeature() {
 		assertEquals(extractor.getFeature(), -8.0, Math.pow(10, -5));
 	}

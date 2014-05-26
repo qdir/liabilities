@@ -56,6 +56,11 @@ public class DoubleFeatureExtractorPayrrolAverageTests {
 	}
 
 	@Test
+	public void testGetFeatureName() {
+		assertEquals(extractor.getFeatureName(), "Importe medio nominas");
+	}
+	
+	@Test
 	public void testGetFeature() {
 		assertEquals(extractor.getFeature(), 5.0, Math.pow(10, -5));
 	}
