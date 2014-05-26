@@ -33,7 +33,7 @@ public class AccountTest {
 
 	private static final double EPSILON = 0.00001;
 
-	private Account commercialAccount;
+	private Account account;
 	private Office office;
 	private Bank bank;
 	private Client titular1;
@@ -58,35 +58,35 @@ public class AccountTest {
 		this.bank = new Bank(new GenericHandler("1234"));
 		this.office = new Office(new GenericHandler("1234"), this.bank);
 		this.titular1 = new Person(NIF1, NIF_LETTER1);
-		this.commercialAccount = new Account(this.office, this.bank,
+		this.account = new Account(this.office, this.bank,
 				accountNumber, titular1);
 		this.titular2 = new Person(NIF2, NIF_LETTER2);
 		this.authorized1 = new Person(NIF3, NIF_LETTER3);
 		this.authorized2 = new Person(NIF4, NIF_LETTER4);
-		assertTrue(this.commercialAccount.addTitular(this.titular2));
-		assertTrue(this.commercialAccount.addAuthorized(this.authorized1));
-		assertTrue(this.commercialAccount.addAuthorized(this.authorized2));
+		assertTrue(this.account.addTitular(this.titular2));
+		assertTrue(this.account.addAuthorized(this.authorized1));
+		assertTrue(this.account.addAuthorized(this.authorized2));
 
 	}
 
 	@Test(expected = MalformedHandlerException.class)
 	public void testMoreAccountnumberLengthNullClient()
 			throws MalformedHandlerException, WrongArgsException {
-		this.commercialAccount = new Account(this.office, this.bank,
+		this.account = new Account(this.office, this.bank,
 				"000000000000", null);
 	}
 
 	@Test(expected = MalformedHandlerException.class)
 	public void testLessAccountnumberLengthNullClient()
 			throws MalformedHandlerException, WrongArgsException {
-		this.commercialAccount = new Account(this.office, this.bank, "000000",
+		this.account = new Account(this.office, this.bank, "000000",
 				null);
 	}
 
 	@Test(expected = MalformedHandlerException.class)
 	public void testCorrectAccountnumberLengthInterspersedLettersNullClient()
 			throws MalformedHandlerException, WrongArgsException {
-		this.commercialAccount = new Account(this.office, this.bank,
+		this.account = new Account(this.office, this.bank,
 				"00aa00aa00", null);
 	}
 
@@ -279,21 +279,21 @@ public class AccountTest {
 	@Test(expected = MalformedHandlerException.class)
 	public void testMoreAccountnumberLength() throws MalformedHandlerException,
 			WrongArgsException {
-		this.commercialAccount = new Account(this.office, this.bank,
+		this.account = new Account(this.office, this.bank,
 				"000000000000", this.titular1);
 	}
 
 	@Test(expected = MalformedHandlerException.class)
 	public void testLessAccountnumberLength() throws MalformedHandlerException,
 			WrongArgsException {
-		this.commercialAccount = new Account(this.office, this.bank, "000000",
+		this.account = new Account(this.office, this.bank, "000000",
 				this.titular1);
 	}
 
 	@Test(expected = MalformedHandlerException.class)
 	public void testCorrectAccountnumberLengthInterspersedLetters()
 			throws MalformedHandlerException, WrongArgsException {
-		this.commercialAccount = new Account(this.office, this.bank,
+		this.account = new Account(this.office, this.bank,
 				"00aa00aa00", this.titular1);
 	}
 
@@ -483,13 +483,13 @@ public class AccountTest {
 	@Test
 	public void testGetBalance() {
 		double expResult = 0.0d;
-		double result = this.commercialAccount.getBalance();
+		double result = this.account.getBalance();
 		assertEquals(expResult, result, 0.0);
 	}
 
 	@Test
 	public void testGetTitulars() {
-		List<Client> clients = this.commercialAccount.getTitulars();
+		List<Client> clients = this.account.getTitulars();
 		assertEquals(clients.size(), 2);
 		assertTrue(clients.contains(this.titular1));
 		assertTrue(clients.contains(this.titular2));
@@ -497,7 +497,7 @@ public class AccountTest {
 
 	@Test
 	public void testGetAuthorizeds() {
-		List<Client> clients = this.commercialAccount.getAuthorizeds();
+		List<Client> clients = this.account.getAuthorizeds();
 		assertEquals(clients.size(), 2);
 		assertTrue(clients.contains(this.authorized1));
 		assertTrue(clients.contains(this.authorized2));
@@ -508,16 +508,16 @@ public class AccountTest {
 			WrongArgsException {
 		Handler accountNumber = new AccountHandler(office.getIdOffice(),
 				bank.getID(), this.accountNumber);
-		assertTrue(accountNumber.compareTo(this.commercialAccount.getID()) == 0);
+		assertTrue(accountNumber.compareTo(this.account.getID()) == 0);
 		accountNumber = new AccountHandler(office.getIdOffice(), bank.getID(),
 				"1299567899");
-		assertFalse(accountNumber.compareTo(this.commercialAccount.getID()) == 0);
+		assertFalse(accountNumber.compareTo(this.account.getID()) == 0);
 		accountNumber = new AccountHandler(office.getIdOffice(),
 				new GenericHandler("9999"), this.accountNumber);
-		assertFalse(accountNumber.compareTo(this.commercialAccount.getID()) == 0);
+		assertFalse(accountNumber.compareTo(this.account.getID()) == 0);
 		accountNumber = new AccountHandler(new GenericHandler("9999"),
 				office.getIdOffice(), this.accountNumber);
-		assertFalse(accountNumber.compareTo(this.commercialAccount.getID()) == 0);
+		assertFalse(accountNumber.compareTo(this.account.getID()) == 0);
 	}
 
 	@Test
@@ -526,57 +526,57 @@ public class AccountTest {
 		GenericTransaction t2 = new GenericTransaction(amount, new Date(),
 				"Salary");
 		t2.setEffectiveDate(new Date(System.currentTimeMillis()));
-		this.commercialAccount.doTransaction(t2);
-		assertEquals(amount, this.commercialAccount.getBalance(), EPSILON);
+		this.account.doTransaction(t2);
+		assertEquals(amount, this.account.getBalance(), EPSILON);
 
 		GenericTransaction t = new GenericTransaction(-amount, new Date(),
 				"Salary");
 		t.setEffectiveDate(new Date(System.currentTimeMillis()));
-		this.commercialAccount.doTransaction(t);
-		assertEquals(0.0, this.commercialAccount.getBalance(), EPSILON);
+		this.account.doTransaction(t);
+		assertEquals(0.0, this.account.getBalance(), EPSILON);
 
 		GenericTransaction t3 = new GenericTransaction(amount, new Date(),
 				"Salary");
 		t.setEffectiveDate(new Date(System.currentTimeMillis()));
-		this.commercialAccount.doTransaction(t3);
-		assertEquals(amount, this.commercialAccount.getBalance(), EPSILON);
+		this.account.doTransaction(t3);
+		assertEquals(amount, this.account.getBalance(), EPSILON);
 
 		GenericTransaction t4 = new GenericTransaction(amount, new Date(),
 				"Salary");
 		t.setEffectiveDate(new Date(System.currentTimeMillis()));
-		this.commercialAccount.doTransaction(t4);
-		assertEquals(2 * amount, this.commercialAccount.getBalance(), EPSILON);
+		this.account.doTransaction(t4);
+		assertEquals(2 * amount, this.account.getBalance(), EPSILON);
 	}
 
 	@Test
 	public void testGetterAndSetterMaxOverdraft() {
-		assertEquals(this.commercialAccount.getMaxOverdraft(), 0.0, EPSILON);
+		assertEquals(this.account.getMaxOverdraft(), 0.0, EPSILON);
 		double maxOverdraft = 1;
-		assertTrue(this.commercialAccount.setMaxOverdraft(maxOverdraft));
-		assertEquals(this.commercialAccount.getMaxOverdraft(), maxOverdraft,
+		assertTrue(this.account.setMaxOverdraft(maxOverdraft));
+		assertEquals(this.account.getMaxOverdraft(), maxOverdraft,
 				EPSILON);
-		assertFalse(this.commercialAccount.setMaxOverdraft(-maxOverdraft));
-		assertEquals(this.commercialAccount.getMaxOverdraft(), maxOverdraft,
+		assertFalse(this.account.setMaxOverdraft(-maxOverdraft));
+		assertEquals(this.account.getMaxOverdraft(), maxOverdraft,
 				EPSILON);
 		maxOverdraft = 10000.0d;
-		assertTrue(this.commercialAccount.setMaxOverdraft(maxOverdraft));
-		assertEquals(this.commercialAccount.getMaxOverdraft(), maxOverdraft,
+		assertTrue(this.account.setMaxOverdraft(maxOverdraft));
+		assertEquals(this.account.getMaxOverdraft(), maxOverdraft,
 				EPSILON);
 	}
 
 	@Test
 	public void testGetterAndSetterLiquidationFrecuency() {
 		int frecuency = 1;
-		assertEquals(this.commercialAccount.getLiquidationFrecuency(),
+		assertEquals(this.account.getLiquidationFrecuency(),
 				Account.DEFAULT_LIQUIDATION_FREQUENCY);
-		assertTrue(this.commercialAccount.setLiquidationFrecuency(frecuency));
-		assertEquals(this.commercialAccount.getLiquidationFrecuency(),
+		assertTrue(this.account.setLiquidationFrecuency(frecuency));
+		assertEquals(this.account.getLiquidationFrecuency(),
 				frecuency);
-		assertFalse(this.commercialAccount.setLiquidationFrecuency(0));
-		assertEquals(this.commercialAccount.getLiquidationFrecuency(),
+		assertFalse(this.account.setLiquidationFrecuency(0));
+		assertEquals(this.account.getLiquidationFrecuency(),
 				frecuency);
-		assertFalse(this.commercialAccount.setLiquidationFrecuency(-1));
-		assertEquals(this.commercialAccount.getLiquidationFrecuency(),
+		assertFalse(this.account.setLiquidationFrecuency(-1));
+		assertEquals(this.account.getLiquidationFrecuency(),
 				frecuency);
 
 	}
@@ -588,18 +588,30 @@ public class AccountTest {
 		GenericTransaction t2 = new GenericTransaction(amount, new Date(),
 				"Salary");
 		t2.setEffectiveDate(new Date(System.currentTimeMillis()));
-		this.commercialAccount.doTransaction(t2);
+		this.account.doTransaction(t2);
+	}
+	
+
+	@Test(expected = TransactionException.class)
+	public void testDoTransactionRepeatedTransaction()
+			throws TransactionException {
+		double amount = 10.0;
+		GenericTransaction t2 = new GenericTransaction(amount, new Date(),
+				"Salary");
+		t2.setEffectiveDate(new Date(System.currentTimeMillis()));
+		this.account.doTransaction(t2);
+		this.account.doTransaction(t2);
 	}
 
 	@Test(expected = TransactionException.class)
 	public void testDoTransactionNotEnoughOverdraft()
 			throws TransactionException {
 		double amount = -10.0;
-		this.commercialAccount.setMaxOverdraft(-1.0d * ((double) amount / 2));
+		this.account.setMaxOverdraft(-1.0d * ((double) amount / 2));
 		GenericTransaction t2 = new GenericTransaction(amount, new Date(),
 				"Salary");
 		t2.setEffectiveDate(new Date(System.currentTimeMillis()));
-		this.commercialAccount.doTransaction(t2);
+		this.account.doTransaction(t2);
 	}
 
 	@Test
@@ -608,14 +620,14 @@ public class AccountTest {
 		GenericTransaction t2 = new GenericTransaction(amount, new Date(),
 				"Salary");
 		t2.setEffectiveDate(new Date(System.currentTimeMillis()));
-		this.commercialAccount.doTransaction(t2);
+		this.account.doTransaction(t2);
 
 		GenericTransaction t = new GenericTransaction(-amount, new Date(),
 				"Salary");
 		t.setEffectiveDate(new Date(System.currentTimeMillis()));
-		this.commercialAccount.doTransaction(t);
+		this.account.doTransaction(t);
 
-		History history = this.commercialAccount.getHistory();
+		History history = this.account.getHistory();
 		;
 		Iterator<Transaction> it = history.getIterator();
 		this.compareEntryAndTransactionsWithAsserts(t2, it.next());
@@ -628,19 +640,19 @@ public class AccountTest {
 		DirectDebitTransaction ddt = new DirectDebitTransaction(amount,
 				new Date(), "nothing", new GenericHandler("1234"));
 		ddt.setEffectiveDate(new Date());
-		this.commercialAccount.doDirectDebit(ddt);
-		assertEquals(this.commercialAccount.getBalance(), amount, EPSILON);
+		this.account.doDirectDebit(ddt);
+		assertEquals(this.account.getBalance(), amount, EPSILON);
 		DirectDebitTransaction ddt2 = new DirectDebitTransaction(amount,
 				new Date(), "nothing", new GenericHandler("1224"));
 		ddt2.setEffectiveDate(new Date());
-		this.commercialAccount.doDirectDebit(ddt2);
-		assertEquals(this.commercialAccount.getBalance(), 2 * amount, EPSILON);
+		this.account.doDirectDebit(ddt2);
+		assertEquals(this.account.getBalance(), 2 * amount, EPSILON);
 		DirectDebitTransaction ddt3 = new DirectDebitTransaction(amount,
 				new Date(), "nothing", new GenericHandler("1334"));
 		ddt3.setEffectiveDate(new Date());
-		this.commercialAccount.doDirectDebit(ddt3);
-		assertEquals(this.commercialAccount.getBalance(), 3 * amount, EPSILON);
-		Iterator<DirectDebitTransaction> it = this.commercialAccount
+		this.account.doDirectDebit(ddt3);
+		assertEquals(this.account.getBalance(), 3 * amount, EPSILON);
+		Iterator<DirectDebitTransaction> it = this.account
 				.getDirectDebitHistory().getIterator();
 		this.compareEntryAndDirectDebitTransactionWithAsserts(ddt, it.next());
 		this.compareEntryAndDirectDebitTransactionWithAsserts(ddt2, it.next());
@@ -672,14 +684,14 @@ public class AccountTest {
 	 */
 	@Test
 	public void testGetAndSetLiquidationFrecuency() {
-		assertEquals(this.commercialAccount.getLiquidationFrecuency(),
+		assertEquals(this.account.getLiquidationFrecuency(),
 				Account.DEFAULT_LIQUIDATION_FREQUENCY);
 		int frecuency = 1;
-		assertTrue(this.commercialAccount.setLiquidationFrecuency(frecuency));
-		assertEquals(this.commercialAccount.getLiquidationFrecuency(),
+		assertTrue(this.account.setLiquidationFrecuency(frecuency));
+		assertEquals(this.account.getLiquidationFrecuency(),
 				frecuency);
-		assertFalse(this.commercialAccount.setLiquidationFrecuency(-frecuency));
-		assertEquals(this.commercialAccount.getLiquidationFrecuency(),
+		assertFalse(this.account.setLiquidationFrecuency(-frecuency));
+		assertEquals(this.account.getLiquidationFrecuency(),
 				frecuency);
 
 	}
@@ -689,20 +701,24 @@ public class AccountTest {
 	 */
 	@Test
 	public void testSetAndGetMaxOverdraft() {
-		assertEquals(this.commercialAccount.getMaxOverdraft(), 0.0, EPSILON);
+		assertEquals(this.account.getMaxOverdraft(), 0.0, EPSILON);
 		double valid = 100;
-		assertTrue(this.commercialAccount.setMaxOverdraft(valid));
-		assertEquals(this.commercialAccount.getMaxOverdraft(), valid, EPSILON);
-		assertFalse(this.commercialAccount.setMaxOverdraft(-valid));
-		assertEquals(this.commercialAccount.getMaxOverdraft(), valid, EPSILON);
+		assertTrue(this.account.setMaxOverdraft(valid));
+		assertEquals(this.account.getMaxOverdraft(), valid, EPSILON);
+		assertFalse(this.account.setMaxOverdraft(-valid));
+		assertEquals(this.account.getMaxOverdraft(), valid, EPSILON);
 	}
 
 	/**
 	 * Test of addTitular method, of class Account.
+	 * 
+	 * @throws MalformedHandlerException
 	 */
 	@Test
-	public void testAddTitular() {
-		fail("The test case is a prototype.");
+	public void testAddTitular() throws MalformedHandlerException {
+		Client c = new Person(89051755, 'X');
+		assertTrue(this.account.addAuthorized(c));
+		assertFalse(this.account.addAuthorized(c));
 	}
 
 	/**
@@ -712,21 +728,26 @@ public class AccountTest {
 	 */
 	@Test
 	public void testDeleteTitular() throws MalformedHandlerException {
-		assertEquals(this.commercialAccount.getTitulars().size(), 2);
-		assertTrue(this.commercialAccount.deleteTitular(new PersonHandler(NIF1,
+		assertEquals(this.account.getTitulars().size(), 2);
+		assertTrue(this.account.deleteTitular(new PersonHandler(NIF1,
 				NIF_LETTER1)));
-		assertEquals(this.commercialAccount.getTitulars().size(), 1);
-		assertFalse(this.commercialAccount.deleteTitular(new PersonHandler(
+		assertEquals(this.account.getTitulars().size(), 1);
+		assertFalse(this.account.deleteTitular(new PersonHandler(
 				NIF2, NIF_LETTER2)));
-		assertEquals(this.commercialAccount.getTitulars().size(), 1);
+		assertEquals(this.account.getTitulars().size(), 1);
+		assertFalse(this.account.deleteTitular(new GenericHandler(
+				"!234")));
 	}
 
 	/**
 	 * Test of addAuthorized method, of class Account.
+	 * @throws MalformedHandlerException 
 	 */
 	@Test
-	public void testAddAuthorized() {
-		fail("The test case is a prototype.");
+	public void testAddAuthorized() throws MalformedHandlerException {
+		Client c = new Person(89051755, 'X');
+		assertTrue(this.account.addAuthorized(c));
+		assertFalse(this.account.addAuthorized(c));
 	}
 
 	/**
@@ -736,13 +757,15 @@ public class AccountTest {
 	 */
 	@Test
 	public void testDeleteAuthorized() throws MalformedHandlerException {
-		assertEquals(this.commercialAccount.getAuthorizeds().size(), 2);
-		assertTrue(this.commercialAccount.deleteAuthorized(new PersonHandler(
+		assertEquals(this.account.getAuthorizeds().size(), 2);
+		assertTrue(this.account.deleteAuthorized(new PersonHandler(
 				NIF3, NIF_LETTER3)));
-		assertEquals(this.commercialAccount.getAuthorizeds().size(), 1);
-		assertTrue(this.commercialAccount.deleteAuthorized(new PersonHandler(
+		assertEquals(this.account.getAuthorizeds().size(), 1);
+		assertTrue(this.account.deleteAuthorized(new PersonHandler(
 				NIF4, NIF_LETTER4)));
-		assertEquals(this.commercialAccount.getAuthorizeds().size(), 0);
+		assertEquals(this.account.getAuthorizeds().size(), 0);
+		assertFalse(this.account.deleteAuthorized(new GenericHandler(
+				"!234")));
 	}
 
 	/**
