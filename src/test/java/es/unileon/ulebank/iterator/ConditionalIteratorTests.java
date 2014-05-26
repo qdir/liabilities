@@ -73,6 +73,11 @@ public class ConditionalIteratorTests {
 		assertFalse(itNoConditions.hasNext());
 	}
 
+	@Test(expected = UnsupportedOperationException.class)
+	public void testRemove() {
+		this.it.remove();
+	}
+
 	private Transaction getTransaction(String subject, Date date)
 			throws TransactionException {
 		Transaction t = new GenericTransaction(10, date, subject);
