@@ -17,7 +17,7 @@ import es.unileon.ulebank.time.Time;
 
 public class DoubleFeeCase implements AbstractFeeCase<Double> {
 
-	private Features<Double> featureExtractor;
+	private Features<Double> features;
 	private String amountFormula;
 	private StringBuilder triggeringConditions;
 	private String subject;
@@ -25,9 +25,9 @@ public class DoubleFeeCase implements AbstractFeeCase<Double> {
 	private static final double PRECISION = 10;
 	private static final double EPSILON = Math.pow(10, -PRECISION);
 
-	public DoubleFeeCase(Features<Double> featureExtractor,
-			String amountFormula, String subject, Account account) {
-		this.featureExtractor = featureExtractor;
+	public DoubleFeeCase(Features<Double> features, String amountFormula,
+			String subject, Account account) {
+		this.features = features;
 		this.triggeringConditions = new StringBuilder();
 		this.amountFormula = amountFormula;
 		this.subject = subject;
@@ -35,7 +35,6 @@ public class DoubleFeeCase implements AbstractFeeCase<Double> {
 
 	public void addConditionEquation(String leftOperand, char comparator,
 			String rightOperand) throws InvalidCondition {
-		comparator = correctComparatorChar(comparator);
 		if (isValidComparator(comparator) && testValidOperand(leftOperand)
 				&& testValidOperand(rightOperand)) {
 			if (this.triggeringConditions.length() > 0) {
@@ -43,6 +42,8 @@ public class DoubleFeeCase implements AbstractFeeCase<Double> {
 			}
 			this.triggeringConditions.append(generateEquation(leftOperand,
 					comparator, rightOperand));
+		} else {
+			throw new InvalidCondition("Invalid condition");
 		}
 	}
 
@@ -50,7 +51,7 @@ public class DoubleFeeCase implements AbstractFeeCase<Double> {
 	public boolean triggerCase() {
 		if (this.triggeringConditions.length() > 0)
 			return MVEL.evalToBoolean(this.triggeringConditions.toString(),
-					this.featureExtractor.generateRandomFeatures());
+					this.features.generateRandomFeatures());
 		return true;
 	}
 
@@ -61,7 +62,7 @@ public class DoubleFeeCase implements AbstractFeeCase<Double> {
 			StringBuilder err = new StringBuilder();
 			try {
 				double amount = EVALUATOR.evaluate(this.amountFormula,
-						castTo(this.featureExtractor.getFeatures()));
+						castTo(this.features.getFeatures()));
 				result = new GenericTransaction(amount, new Date(Time
 						.getInstance().getTime()), subject);
 			} catch (RuntimeException r) {
@@ -76,23 +77,12 @@ public class DoubleFeeCase implements AbstractFeeCase<Double> {
 		return result;
 	}
 
-	private static char correctComparatorChar(char comparator) {
-		if (comparator == '=') {
-			comparator = '<';
-		} else if (comparator == '!') {
-			comparator = '>';
-		}
-		return comparator;
-	}
-
 	private boolean testValidOperand(String operand) throws InvalidCondition {
 		StringBuilder err = new StringBuilder();
 		try {
 			EVALUATOR.evaluate(operand,
-					castTo(this.featureExtractor.generateRandomFeatures()));
+					castTo(this.features.generateRandomFeatures()));
 		} catch (RuntimeException e) {
-			err.append(e.toString());
-		} catch (Exception e) {
 			err.append(e.toString());
 		}
 		if (err.length() > 1) {
@@ -122,6 +112,6 @@ public class DoubleFeeCase implements AbstractFeeCase<Double> {
 
 	@Override
 	public Features<Double> getFeatureExtractor() {
-		return this.featureExtractor;
+		return this.features;
 	}
 }
