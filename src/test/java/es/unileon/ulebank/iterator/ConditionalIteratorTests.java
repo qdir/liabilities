@@ -1,6 +1,7 @@
 package es.unileon.ulebank.iterator;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,7 +13,6 @@ import org.junit.Test;
 import es.unileon.ulebank.exceptions.TransactionException;
 import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.Transaction;
-import es.unileon.ulebank.history.TransactionHandler;
 import es.unileon.ulebank.history.TransactionHandlerProvider;
 import es.unileon.ulebank.history.conditions.ConditionSubject;
 import es.unileon.ulebank.history.conditions.ConditionTransactionBetweenTwoDates;

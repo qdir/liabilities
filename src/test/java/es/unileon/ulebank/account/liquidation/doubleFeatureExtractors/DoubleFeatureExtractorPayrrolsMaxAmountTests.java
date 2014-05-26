@@ -1,6 +1,6 @@
 package es.unileon.ulebank.account.liquidation.doubleFeatureExtractors;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
 

@@ -1,6 +1,6 @@
 package es.unileon.ulebank.account.liquidation.doubleFeatureExtractors;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
 
@@ -9,8 +9,6 @@ import org.junit.Test;
 
 import es.unileon.ulebank.account.Account;
 import es.unileon.ulebank.account.liquidation.AbstractFeatureExtractor;
-import es.unileon.ulebank.account.liquidation.DoubleFeeCase;
-import es.unileon.ulebank.account.liquidation.Features;
 import es.unileon.ulebank.account.liquidation.InvalidCondition;
 import es.unileon.ulebank.bank.Bank;
 import es.unileon.ulebank.client.Client;

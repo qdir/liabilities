@@ -5,15 +5,10 @@
 package es.unileon.ulebank.command;
 
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import es.unileon.ulebank.account.DetailedInformation;
 import es.unileon.ulebank.bank.Bank;
-import es.unileon.ulebank.exceptions.TransactionException;
 import es.unileon.ulebank.handler.Handler;
-import es.unileon.ulebank.handler.MalformedHandlerException;
-import es.unileon.ulebank.history.GenericTransaction;
 import es.unileon.ulebank.history.Transaction;
 
 /**

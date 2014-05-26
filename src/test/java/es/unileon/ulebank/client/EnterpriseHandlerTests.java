@@ -1,6 +1,6 @@
 package es.unileon.ulebank.client;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
