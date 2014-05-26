@@ -107,18 +107,8 @@ public class Office {
 	 * @return ( true if success, false otherwise )
 	 */
 	public synchronized boolean addAccount(Account account) {
-		if (account != null) {
-			int i = 0;
-			boolean found = false;
-			while (i < this.accounts.size() && !found) {
-				if (accounts.get(i).getID().compareTo(account.getID()) == 0) {
-					found = true;
-				}
-				++i;
-			}
-			if (!found) {
-				return this.accounts.add(account);
-			}
+		if (account != null && this.searchAccount(account.getID()) == null) {
+			return this.accounts.add(account);
 		}
 		return false;
 	}
@@ -131,16 +121,8 @@ public class Office {
 	 * @return ( true if success, false otherwise )
 	 */
 	public synchronized boolean addClient(Client client) {
-		if (client != null) {
-			int i = 0;
-			boolean found = false;
-			while (i < this.clients.size() && !found) {
-				found = clients.get(i).getId().compareTo(client.getId()) == 0;
-				++i;
-			}
-			if (!found) {
-				return this.clients.add(client);
-			}
+		if (client != null && this.searchClient(client.getId()) == null) {
+			return this.clients.add(client);
 		}
 		return false;
 	}
@@ -153,17 +135,10 @@ public class Office {
 	 * @return (true if success, false otherwise )
 	 */
 	public synchronized boolean deleteClient(Handler id) {
-		int i = 0;
-		boolean found = false;
-		while (i < this.clients.size() && !found) {
-			if (clients.get(i).getId().compareTo(id) == 0) {
-				// TODO perform account liquidation
-				clients.remove(i);
-				found = true;
-			}
-			++i;
+		if (id != null && this.searchClient(id) != null) {
+			return this.clients.remove(this.searchClient(id));
 		}
-		return found;
+		return false;
 	}
 
 	/**
@@ -174,16 +149,10 @@ public class Office {
 	 * @return ( true if success, false otherwise )
 	 */
 	public synchronized boolean deleteAccount(Handler id) {
-		int i = 0;
-		boolean found = false;
-		while (i < this.accounts.size() && !found) {
-			if (accounts.get(i).getID().compareTo(id) == 0) {
-				accounts.remove(i);
-				found = true;
-			}
-			++i;
+		if (id != null && this.searchAccount(id) != null) {
+			return this.accounts.remove(this.searchAccount(id));
 		}
-		return found;
+		return false;
 	}
 
 	/**
@@ -206,15 +175,27 @@ public class Office {
 
 	/**
 	 * 
-	 * @param destine
+	 * @param id
 	 * @return
 	 */
-	public Account searchAccount(Handler destine) {
+	public Account searchAccount(Handler id) {
 		Account result = null;
 		int i = -1;
 		while (++i < accounts.size() && result == null) {
-			if (accounts.get(i).getID().compareTo(destine) == 0) {
+			if (accounts.get(i).getID().compareTo(id) == 0) {
 				result = accounts.get(i);
+			}
+		}
+
+		return result;
+	}
+	
+	public Client searchClient(Handler id) {
+		Client result = null;
+		int i = -1;
+		while (++i < clients.size() && result == null) {
+			if (clients.get(i).getId().compareTo(id) == 0) {
+				result = clients.get(i);
 			}
 		}
 

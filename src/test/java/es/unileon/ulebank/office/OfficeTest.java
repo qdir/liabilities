@@ -116,6 +116,17 @@ public class OfficeTest {
 	}
 
 	@Test
+	public void testSearchClinet() throws MalformedHandlerException,
+			WrongArgsException {
+		this.office.addClient(titular);
+		Client c = new Person(89051755, 'X');
+		this.office.addClient(c);
+		assertEquals(c, this.office.searchClient(c.getId()));
+		assertEquals(null,
+				this.office.searchClient(new GenericHandler("123123123")));
+	}
+
+	@Test
 	public void testGetNextAccountNumber() {
 		// for (long i = 0; i < 1000000000L - 1; i++) {
 		// assertEquals(String.format("%010d", i),

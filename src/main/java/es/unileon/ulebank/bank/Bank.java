@@ -50,13 +50,7 @@ public class Bank {
 	 * @return
 	 */
 	public boolean addOffice(Office office) {
-		if (office != null) {
-			for (int i = 0; i < offices.size(); ++i) {
-				if (offices.get(i).getIdOffice()
-						.compareTo(office.getIdOffice()) == 0) {
-					return false;
-				}
-			}
+		if (office != null && this.searchOffice(office.getIdOffice()) == null) {
 			return this.offices.add(office);
 		}
 		return false;
@@ -70,7 +64,8 @@ public class Bank {
 	public boolean removeOffice(Handler office) {
 		boolean removed = false;
 		if (office != null) {
-			for (int i = 0; i < offices.size() && !removed; ++i) {
+			int i = -1;
+			while (++i < offices.size() && !removed) {
 				if (offices.get(i).getIdOffice().compareTo(office) == 0) {
 					this.offices.remove(i);
 					removed = true;
