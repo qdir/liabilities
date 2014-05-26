@@ -186,7 +186,6 @@ public class Office {
 				result = accounts.get(i);
 			}
 		}
-
 		return result;
 	}
 	
@@ -198,7 +197,6 @@ public class Office {
 				result = clients.get(i);
 			}
 		}
-
 		return result;
 	}
 
