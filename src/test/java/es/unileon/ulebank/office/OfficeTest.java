@@ -52,6 +52,7 @@ public class OfficeTest {
 		assertEquals(this.office.getAccounts().size(), numberOfAccounts + 1);
 		assertFalse(this.office.addAccount(account));
 		assertEquals(this.office.getAccounts().size(), numberOfAccounts + 1);
+		assertFalse(this.office.addAccount(null));
 	}
 
 	@Test
@@ -59,6 +60,7 @@ public class OfficeTest {
 		int numberOfAccounts = this.office.getAccounts().size();
 		assertTrue(this.office.addClient(titular));
 		assertFalse(this.office.addClient(titular));
+		assertFalse(this.office.addClient(null));
 		assertEquals(this.office.getClients().size(), numberOfAccounts + 1);
 	}
 
@@ -71,6 +73,7 @@ public class OfficeTest {
 		assertTrue(this.office.addClient(c));
 		assertEquals(this.office.getClients().size(), numberOfAccounts + 2);
 		assertTrue(this.office.deleteClient(c.getId()));
+		assertFalse(this.office.deleteClient(null));
 		assertFalse(this.office.deleteClient(new GenericHandler("..")));
 	}
 
@@ -101,6 +104,7 @@ public class OfficeTest {
 		assertTrue(this.office.deleteAccount(newAccount.getID()));
 		assertTrue(this.office.searchAccount(newAccount.getID()) == null);
 		assertFalse(this.office.deleteAccount(new GenericHandler("!123123123")));
+		assertFalse(this.office.deleteAccount(null));
 	}
 
 	@Test
