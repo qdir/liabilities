@@ -54,12 +54,30 @@ public class OfficeTest {
 		assertEquals(this.office.getAccounts().size(), numberOfAccounts + 1);
 	}
 
+	@Test
+	public void testAddClient() {
+		int numberOfAccounts = this.office.getAccounts().size();
+		assertTrue(this.office.addClient(titular));
+		assertFalse(this.office.addClient(titular));
+		assertEquals(this.office.getClients().size(), numberOfAccounts + 1);
+	}
+
+	@Test
+	public void testDeleteClient() throws MalformedHandlerException {
+		int numberOfAccounts = this.office.getAccounts().size();
+		Client c = new Person(89051755, 'X');
+		assertTrue(this.office.addClient(titular));
+		assertTrue(this.office.addClient(c));
+		assertEquals(this.office.getClients().size(), numberOfAccounts + 2);
+		assertTrue(this.office.deleteClient(c.getId()));
+		assertFalse(this.office.deleteClient(new GenericHandler("..")));
+	}
+
 	/**
 	 * Test of addAccount method, of class Office.
 	 */
 	@Test
 	public void testAddAccountNullAccount() {
-
 		assertFalse(this.office.addAccount(null));
 	}
 
@@ -68,10 +86,39 @@ public class OfficeTest {
 	 */
 	@Test
 	public void testGetID() {
-
 		Handler expResult = new GenericHandler("1234");
-
 		assertEquals(this.office.getIdOffice().compareTo(expResult), 0);
+	}
 
+	@Test
+	public void testDeleteAccount() throws MalformedHandlerException,
+			WrongArgsException {
+		Account newAccount = new Account(office, bank,
+				this.office.getNewAccountNumber(), titular);
+		assertTrue(this.office.addAccount(newAccount));
+		assertTrue(this.office.deleteAccount(newAccount.getID()));
+		assertTrue(this.office.searchAccount(newAccount.getID()) == null);
+		assertFalse(this.office.deleteAccount(new GenericHandler("!123123123")));
+	}
+
+	@Test
+	public void testSearchAccount() throws MalformedHandlerException,
+			WrongArgsException {
+		this.office.addAccount(account);
+		Account newAccount = new Account(office, bank,
+				this.office.getNewAccountNumber(), titular);
+		this.office.addAccount(newAccount);
+		assertEquals(newAccount, this.office.searchAccount(newAccount.getID()));
+		assertEquals(null,
+				this.office.searchAccount(new GenericHandler("123123123")));
+	}
+
+	@Test
+	public void testGetNextAccountNumber() {
+		// for (long i = 0; i < 1000000000L - 1; i++) {
+		// assertEquals(String.format("%010d", i),
+		// this.office.getNewAccountNumber());
+		// }
+		// assertEquals(this.office.getNewAccountNumber(), "");
 	}
 }
