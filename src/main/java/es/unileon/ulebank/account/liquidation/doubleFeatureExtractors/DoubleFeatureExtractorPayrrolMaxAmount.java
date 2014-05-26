@@ -8,6 +8,7 @@ import java.util.Random;
 import es.unileon.ulebank.account.Account;
 import es.unileon.ulebank.account.liquidation.AbstractFeatureExtractor;
 import es.unileon.ulebank.history.DirectDebitTransaction;
+import es.unileon.ulebank.history.conditions.WrongArgsException;
 
 public class DoubleFeatureExtractorPayrrolMaxAmount implements
 		AbstractFeatureExtractor<Double> {
@@ -22,6 +23,10 @@ public class DoubleFeatureExtractorPayrrolMaxAmount implements
 	public void updateFeature(Account account, Date min, Date max) {
 		double maxAmount = 0;
 		List<DirectDebitTransaction> list = new ArrayList<DirectDebitTransaction>();
+		try {
+			list = account.getFilteredDirectDebits(min, max);
+		} catch (WrongArgsException e) {
+		}
 		for (DirectDebitTransaction actual : list) {
 			if (actual.getAmount() > maxAmount) {
 				maxAmount = actual.getAmount();

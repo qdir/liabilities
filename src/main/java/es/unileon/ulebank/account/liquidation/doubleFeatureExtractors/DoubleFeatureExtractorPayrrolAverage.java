@@ -8,6 +8,7 @@ import java.util.Random;
 import es.unileon.ulebank.account.Account;
 import es.unileon.ulebank.account.liquidation.AbstractFeatureExtractor;
 import es.unileon.ulebank.history.DirectDebitTransaction;
+import es.unileon.ulebank.history.conditions.WrongArgsException;
 
 public class DoubleFeatureExtractorPayrrolAverage implements
 		AbstractFeatureExtractor<Double> {
@@ -24,6 +25,10 @@ public class DoubleFeatureExtractorPayrrolAverage implements
 		double sum = 0;
 		int count = 0;
 		List<DirectDebitTransaction> list = new ArrayList<DirectDebitTransaction>();
+		try {
+			list = account.getFilteredDirectDebits(min, max);
+		} catch (WrongArgsException e) {
+		}
 		for (DirectDebitTransaction actual : list) {
 			if (actual.getAmount() > 0) {
 				sum += actual.getAmount();
