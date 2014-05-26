@@ -457,18 +457,7 @@ public class Account {
 	public History<Transaction> getHistory() {
 		return this.history;
 	}
-
-	/**
-	 * Remove a transaction
-	 * 
-	 * @param id
-	 *            ( Transaction's id)
-	 * @return (true if success, false otherwise)
-	 */
-	public boolean removeTransaction(Handler id) {
-		return this.history.remove(id);
-	}
-
+	
 	/**
 	 * Get the direct debit transactions
 	 *

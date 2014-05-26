@@ -66,6 +66,7 @@ public class OfficeTest {
 	public void testDeleteClient() throws MalformedHandlerException {
 		int numberOfAccounts = this.office.getAccounts().size();
 		Client c = new Person(89051755, 'X');
+		assertFalse(this.office.deleteClient(new GenericHandler("..")));
 		assertTrue(this.office.addClient(titular));
 		assertTrue(this.office.addClient(c));
 		assertEquals(this.office.getClients().size(), numberOfAccounts + 2);
@@ -95,6 +96,7 @@ public class OfficeTest {
 			WrongArgsException {
 		Account newAccount = new Account(office, bank,
 				this.office.getNewAccountNumber(), titular);
+		assertFalse(this.office.deleteAccount(new GenericHandler("!123123123")));
 		assertTrue(this.office.addAccount(newAccount));
 		assertTrue(this.office.deleteAccount(newAccount.getID()));
 		assertTrue(this.office.searchAccount(newAccount.getID()) == null);

@@ -58,8 +58,8 @@ public class AccountTest {
 		this.bank = new Bank(new GenericHandler("1234"));
 		this.office = new Office(new GenericHandler("1234"), this.bank);
 		this.titular1 = new Person(NIF1, NIF_LETTER1);
-		this.account = new Account(this.office, this.bank,
-				accountNumber, titular1);
+		this.account = new Account(this.office, this.bank, accountNumber,
+				titular1);
 		this.titular2 = new Person(NIF2, NIF_LETTER2);
 		this.authorized1 = new Person(NIF3, NIF_LETTER3);
 		this.authorized2 = new Person(NIF4, NIF_LETTER4);
@@ -72,22 +72,19 @@ public class AccountTest {
 	@Test(expected = MalformedHandlerException.class)
 	public void testMoreAccountnumberLengthNullClient()
 			throws MalformedHandlerException, WrongArgsException {
-		this.account = new Account(this.office, this.bank,
-				"000000000000", null);
+		this.account = new Account(this.office, this.bank, "000000000000", null);
 	}
 
 	@Test(expected = MalformedHandlerException.class)
 	public void testLessAccountnumberLengthNullClient()
 			throws MalformedHandlerException, WrongArgsException {
-		this.account = new Account(this.office, this.bank, "000000",
-				null);
+		this.account = new Account(this.office, this.bank, "000000", null);
 	}
 
 	@Test(expected = MalformedHandlerException.class)
 	public void testCorrectAccountnumberLengthInterspersedLettersNullClient()
 			throws MalformedHandlerException, WrongArgsException {
-		this.account = new Account(this.office, this.bank,
-				"00aa00aa00", null);
+		this.account = new Account(this.office, this.bank, "00aa00aa00", null);
 	}
 
 	@Test(expected = MalformedHandlerException.class)
@@ -279,8 +276,8 @@ public class AccountTest {
 	@Test(expected = MalformedHandlerException.class)
 	public void testMoreAccountnumberLength() throws MalformedHandlerException,
 			WrongArgsException {
-		this.account = new Account(this.office, this.bank,
-				"000000000000", this.titular1);
+		this.account = new Account(this.office, this.bank, "000000000000",
+				this.titular1);
 	}
 
 	@Test(expected = MalformedHandlerException.class)
@@ -293,8 +290,8 @@ public class AccountTest {
 	@Test(expected = MalformedHandlerException.class)
 	public void testCorrectAccountnumberLengthInterspersedLetters()
 			throws MalformedHandlerException, WrongArgsException {
-		this.account = new Account(this.office, this.bank,
-				"00aa00aa00", this.titular1);
+		this.account = new Account(this.office, this.bank, "00aa00aa00",
+				this.titular1);
 	}
 
 	@Test(expected = MalformedHandlerException.class)
@@ -553,15 +550,12 @@ public class AccountTest {
 		assertEquals(this.account.getMaxOverdraft(), 0.0, EPSILON);
 		double maxOverdraft = 1;
 		assertTrue(this.account.setMaxOverdraft(maxOverdraft));
-		assertEquals(this.account.getMaxOverdraft(), maxOverdraft,
-				EPSILON);
+		assertEquals(this.account.getMaxOverdraft(), maxOverdraft, EPSILON);
 		assertFalse(this.account.setMaxOverdraft(-maxOverdraft));
-		assertEquals(this.account.getMaxOverdraft(), maxOverdraft,
-				EPSILON);
+		assertEquals(this.account.getMaxOverdraft(), maxOverdraft, EPSILON);
 		maxOverdraft = 10000.0d;
 		assertTrue(this.account.setMaxOverdraft(maxOverdraft));
-		assertEquals(this.account.getMaxOverdraft(), maxOverdraft,
-				EPSILON);
+		assertEquals(this.account.getMaxOverdraft(), maxOverdraft, EPSILON);
 	}
 
 	@Test
@@ -570,14 +564,11 @@ public class AccountTest {
 		assertEquals(this.account.getLiquidationFrecuency(),
 				Account.DEFAULT_LIQUIDATION_FREQUENCY);
 		assertTrue(this.account.setLiquidationFrecuency(frecuency));
-		assertEquals(this.account.getLiquidationFrecuency(),
-				frecuency);
+		assertEquals(this.account.getLiquidationFrecuency(), frecuency);
 		assertFalse(this.account.setLiquidationFrecuency(0));
-		assertEquals(this.account.getLiquidationFrecuency(),
-				frecuency);
+		assertEquals(this.account.getLiquidationFrecuency(), frecuency);
 		assertFalse(this.account.setLiquidationFrecuency(-1));
-		assertEquals(this.account.getLiquidationFrecuency(),
-				frecuency);
+		assertEquals(this.account.getLiquidationFrecuency(), frecuency);
 
 	}
 
@@ -590,7 +581,6 @@ public class AccountTest {
 		t2.setEffectiveDate(new Date(System.currentTimeMillis()));
 		this.account.doTransaction(t2);
 	}
-	
 
 	@Test(expected = TransactionException.class)
 	public void testDoTransactionRepeatedTransaction()
@@ -688,11 +678,9 @@ public class AccountTest {
 				Account.DEFAULT_LIQUIDATION_FREQUENCY);
 		int frecuency = 1;
 		assertTrue(this.account.setLiquidationFrecuency(frecuency));
-		assertEquals(this.account.getLiquidationFrecuency(),
-				frecuency);
+		assertEquals(this.account.getLiquidationFrecuency(), frecuency);
 		assertFalse(this.account.setLiquidationFrecuency(-frecuency));
-		assertEquals(this.account.getLiquidationFrecuency(),
-				frecuency);
+		assertEquals(this.account.getLiquidationFrecuency(), frecuency);
 
 	}
 
@@ -717,8 +705,8 @@ public class AccountTest {
 	@Test
 	public void testAddTitular() throws MalformedHandlerException {
 		Client c = new Person(89051755, 'X');
-		assertTrue(this.account.addAuthorized(c));
-		assertFalse(this.account.addAuthorized(c));
+		assertTrue(this.account.addTitular(c));
+		assertFalse(this.account.addTitular(c));
 	}
 
 	/**
@@ -729,19 +717,21 @@ public class AccountTest {
 	@Test
 	public void testDeleteTitular() throws MalformedHandlerException {
 		assertEquals(this.account.getTitulars().size(), 2);
+		assertFalse(this.account.deleteTitular(new GenericHandler("!234")));
 		assertTrue(this.account.deleteTitular(new PersonHandler(NIF1,
 				NIF_LETTER1)));
 		assertEquals(this.account.getTitulars().size(), 1);
-		assertFalse(this.account.deleteTitular(new PersonHandler(
-				NIF2, NIF_LETTER2)));
+		assertFalse(this.account.deleteTitular(new PersonHandler(NIF2,
+				NIF_LETTER2)));
 		assertEquals(this.account.getTitulars().size(), 1);
-		assertFalse(this.account.deleteTitular(new GenericHandler(
-				"!234")));
+		assertFalse(this.account.deleteTitular(new GenericHandler("!234")));
+		assertFalse(this.account.deleteTitular(new GenericHandler("!234")));
 	}
 
 	/**
 	 * Test of addAuthorized method, of class Account.
-	 * @throws MalformedHandlerException 
+	 * 
+	 * @throws MalformedHandlerException
 	 */
 	@Test
 	public void testAddAuthorized() throws MalformedHandlerException {
@@ -758,14 +748,14 @@ public class AccountTest {
 	@Test
 	public void testDeleteAuthorized() throws MalformedHandlerException {
 		assertEquals(this.account.getAuthorizeds().size(), 2);
-		assertTrue(this.account.deleteAuthorized(new PersonHandler(
-				NIF3, NIF_LETTER3)));
+		assertFalse(this.account.deleteAuthorized(new GenericHandler("!234")));
+		assertTrue(this.account.deleteAuthorized(new PersonHandler(NIF3,
+				NIF_LETTER3)));
 		assertEquals(this.account.getAuthorizeds().size(), 1);
-		assertTrue(this.account.deleteAuthorized(new PersonHandler(
-				NIF4, NIF_LETTER4)));
+		assertTrue(this.account.deleteAuthorized(new PersonHandler(NIF4,
+				NIF_LETTER4)));
 		assertEquals(this.account.getAuthorizeds().size(), 0);
-		assertFalse(this.account.deleteAuthorized(new GenericHandler(
-				"!234")));
+		assertFalse(this.account.deleteAuthorized(new GenericHandler("!234")));
 	}
 
 	/**
