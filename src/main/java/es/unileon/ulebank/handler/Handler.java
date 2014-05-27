@@ -2,12 +2,14 @@
  group.*/
 package es.unileon.ulebank.handler;
 
+import java.util.Comparator;
+
 /**
  * Handler pattern.
  * 
  * @author runix
  */
-public interface Handler {
+public interface Handler extends Comparable<Handler>{
 
 	/**
 	 * Compare the actual handler with another
