@@ -56,6 +56,7 @@ public class DoubleFeatureExtractorDirectDebitsMaxAmountTest {
 		extractor.updateFeature(account, new Date(2), new Date(8));
 	}
 
+	@Test
 	public void testUpdateWrongArgs() {
 		extractor.updateFeature(account, new Date(8), new Date(2));
 		assertEquals(extractor.getFeature(), 0.0, Math.pow(10, -5));
