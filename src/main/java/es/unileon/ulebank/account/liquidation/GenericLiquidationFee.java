@@ -21,10 +21,12 @@ public class GenericLiquidationFee<T> implements AbstractLiquidationFee<T> {
 	private List<AbstractFeeCase<T>> feeCases;
 	private Features<T> featureExtractor;
 	private Account account;
-
-	public GenericLiquidationFee(Account account) {
+	private Handler id;
+	
+	public GenericLiquidationFee(Account account, Handler id) {
 		this.feeCases = new ArrayList<AbstractFeeCase<T>>();
 		this.account = account;
+		this.id = id;
 	}
 
 	@Override
@@ -53,8 +55,7 @@ public class GenericLiquidationFee<T> implements AbstractLiquidationFee<T> {
 
 	@Override
 	public Handler getId() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.id;
 	}
 
 }
