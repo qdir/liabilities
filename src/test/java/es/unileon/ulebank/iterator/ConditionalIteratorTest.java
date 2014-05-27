@@ -18,7 +18,7 @@ import es.unileon.ulebank.history.conditions.ConditionSubject;
 import es.unileon.ulebank.history.conditions.ConditionTransactionBetweenTwoDates;
 import es.unileon.ulebank.history.conditions.WrongArgsException;
 
-public class ConditionalIteratorTests {
+public class ConditionalIteratorTest {
 
 	private List<Transaction> valid;
 	private List<Transaction> inValid;

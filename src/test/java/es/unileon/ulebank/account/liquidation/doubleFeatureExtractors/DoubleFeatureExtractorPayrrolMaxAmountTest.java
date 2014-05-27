@@ -21,7 +21,7 @@ import es.unileon.ulebank.history.TransactionHandlerProvider;
 import es.unileon.ulebank.history.conditions.WrongArgsException;
 import es.unileon.ulebank.office.Office;
 
-public class DoubleFeatureExtractorPayrrolAverageTests {
+public class DoubleFeatureExtractorPayrrolMaxAmountTest {
 
 	private String subject;
 
@@ -49,20 +49,25 @@ public class DoubleFeatureExtractorPayrrolAverageTests {
 			account.doDirectDebit(getTransaction(subject, i % 2 == 0 ? -i : i,
 					new Date(i)));
 		}
-		extractor = new DoubleFeatureExtractorPayrrolAverage();
+		extractor = new DoubleFeatureExtractorPayrrolMaxAmount();
 		assertEquals(extractor.getFeature(), 0.0, Math.pow(10, -5));
 		extractor.generateRandomFeature();
 		extractor.updateFeature(account, new Date(2), new Date(8));
 	}
 
 	@Test
-	public void testGetFeatureName() {
-		assertEquals(extractor.getFeatureName(), "Importe medio nominas");
+	public void testUpdateWrongArgs() {
+		extractor.updateFeature(account, new Date(8), new Date(2));
+		assertEquals(extractor.getFeature(), 0.0, Math.pow(10, -5));
 	}
 	
 	@Test
+	public void testGetFeatureName() {
+		assertEquals(extractor.getFeatureName(), "Nomina de maximo importe");
+	}
+	@Test
 	public void testGetFeature() {
-		assertEquals(extractor.getFeature(), 5.0, Math.pow(10, -5));
+		assertEquals(extractor.getFeature(), 7.0, Math.pow(10, -5));
 	}
 
 	public DirectDebitTransaction getTransaction(String subject, double amount,
@@ -72,5 +77,4 @@ public class DoubleFeatureExtractorPayrrolAverageTests {
 		dt.setEffectiveDate(date);
 		return dt;
 	}
-
 }

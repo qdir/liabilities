@@ -42,6 +42,7 @@ public class HistoryTest {
 		Transaction transaction = new GenericTransaction(10.5d, new Date(),
 				"Imposicion");
 		assertTrue(this.accountHistory.add(transaction));
+		assertFalse(this.accountHistory.add(transaction));
 	}
 
 	/**

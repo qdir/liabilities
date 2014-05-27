@@ -9,5 +9,5 @@ public interface AbstractFeeCase<T> {
 
 	public Transaction calculateAmount() throws TransactionException;
 
-	public Features<T> getFeatureExtractor();
+	public Features<T> getFeatures();
 }

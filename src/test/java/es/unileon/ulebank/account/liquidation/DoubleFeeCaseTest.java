@@ -12,6 +12,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import es.unileon.ulebank.account.Account;
+import es.unileon.ulebank.account.liquidation.doubleFeatureExtractors.DoubleFeatureExtractorDirectDebitMaxAmount;
+import es.unileon.ulebank.account.liquidation.doubleFeatureExtractors.DoubleFeatureExtractorDirectDebitsAverage;
 import es.unileon.ulebank.bank.Bank;
 import es.unileon.ulebank.client.Client;
 import es.unileon.ulebank.client.Person;
@@ -24,7 +26,7 @@ import es.unileon.ulebank.history.TransactionHandlerProvider;
 import es.unileon.ulebank.history.conditions.WrongArgsException;
 import es.unileon.ulebank.office.Office;
 
-public class DoubleFeeCaseTests {
+public class DoubleFeeCaseTest {
 
 	private Features<Double> features;
 
@@ -51,6 +53,7 @@ public class DoubleFeeCaseTests {
 		account = new Account(office, bank, office.getNewAccountNumber(),
 				titular);
 		features = new Features<Double>();
+		features.addFeature(new DoubleFeatureExtractorDirectDebitMaxAmount());
 		this.amountFormula = "2*3";
 		this.subject = "subject";
 		feeCase = new DoubleFeeCase(features, amountFormula, subject, account);
@@ -67,6 +70,23 @@ public class DoubleFeeCaseTests {
 		feeCase.addConditionEquation("3", '>', "2");
 		assertTrue(feeCase.triggerCase());
 	}
+	
+	@Test(expected=TransactionException.class)
+	public void testCalculateAmountFail() throws TransactionException {
+		DoubleFeeCase cas = new DoubleFeeCase(features, "aaa", subject, account);
+		cas.calculateAmount();
+	}
+
+	@Test
+	public void testGetFeatureExtractor() throws InvalidCondition {
+		assertEquals(feeCase.getFeatures(), this.features);
+	}
+
+	@Test
+	public void testTriggerWithVariable() throws InvalidCondition {
+		feeCase.addConditionEquation("pago domiciliado mas alto", '>', "1");
+		feeCase.addConditionEquation("1", '>', "pago domiciliado mas alto");
+	}
 
 	@Test(expected = InvalidCondition.class)
 	public void testTriggerErrorComparator() throws InvalidCondition {
@@ -75,27 +95,28 @@ public class DoubleFeeCaseTests {
 
 	@Test(expected = InvalidCondition.class)
 	public void testTriggerErrorLeftOperand() throws InvalidCondition {
-		feeCase.addConditionEquation("a", '=', "1");
+		feeCase.addConditionEquation("a", '<', "1");
 	}
 
 	@Test(expected = InvalidCondition.class)
 	public void testTriggerErrorRightOperand() throws InvalidCondition {
-		feeCase.addConditionEquation("1", '=', "a");
+		feeCase.addConditionEquation("1", '>', "a");
 	}
 
 	@Test
 	public void testCalculateAmount() throws TransactionException {
 		Transaction t = feeCase.calculateAmount();
 		assertNotNull(t);
-		assertEquals(t.getAmount(),6, Math.pow(10, -6));
+		assertEquals(t.getAmount(), 6, Math.pow(10, -6));
 		assertEquals(subject, t.getSubject());
 	}
-	
+
 	@Test
-	public void testCalculateAmountNotTrigger() throws TransactionException, InvalidCondition {
+	public void testCalculateAmountNotTrigger() throws TransactionException,
+			InvalidCondition {
 		feeCase.addConditionEquation("1", '>', "2");
 		assertFalse(feeCase.triggerCase());
-		Transaction t =feeCase.calculateAmount();
+		Transaction t = feeCase.calculateAmount();
 		assertNull(t);
 	}
 

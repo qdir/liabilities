@@ -16,7 +16,7 @@ import es.unileon.ulebank.handler.MalformedHandlerException;
 import es.unileon.ulebank.history.conditions.WrongArgsException;
 import es.unileon.ulebank.office.Office;
 
-public class MockFeatureExtractorTests {
+public class MockFeatureExtractorTest {
 
 	private String feature;
 	private String randomFeature;

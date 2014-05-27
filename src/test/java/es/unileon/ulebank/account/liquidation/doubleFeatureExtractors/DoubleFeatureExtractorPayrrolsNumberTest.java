@@ -21,7 +21,8 @@ import es.unileon.ulebank.history.TransactionHandlerProvider;
 import es.unileon.ulebank.history.conditions.WrongArgsException;
 import es.unileon.ulebank.office.Office;
 
-public class DoubleFeatureExtractorNumberDirectDebitsTests {
+public class DoubleFeatureExtractorPayrrolsNumberTest {
+
 	private String subject;
 
 	private Account account;
@@ -48,8 +49,7 @@ public class DoubleFeatureExtractorNumberDirectDebitsTests {
 			account.doDirectDebit(getTransaction(subject, i % 2 == 0 ? -i : i,
 					new Date(i)));
 		}
-
-		extractor = new DoubleFeatureExtractorNumberDirectDebits();
+		extractor = new DoubleFeatureExtractorPayrrolsNumber();
 		assertEquals(extractor.getFeature(), 0.0, Math.pow(10, -5));
 		extractor.generateRandomFeature();
 		extractor.updateFeature(account, new Date(2), new Date(8));
@@ -57,12 +57,18 @@ public class DoubleFeatureExtractorNumberDirectDebitsTests {
 
 	@Test
 	public void testGetFeatureName() {
-		assertEquals(extractor.getFeatureName(), "Numero medio de pagos domiciliados");
+		assertEquals(extractor.getFeatureName(), "Numero de nominas");
 	}
-	
+
 	@Test
 	public void testGetFeature() {
-		assertEquals(extractor.getFeature(), 4, Math.pow(10, -5));
+		assertEquals(extractor.getFeature(), 3.0, Math.pow(10, -5));
+	}
+
+	@Test
+	public void testUpdateWrongArgs() {
+		extractor.updateFeature(account, new Date(8), new Date(2));
+		assertEquals(extractor.getFeature(), 0.0, Math.pow(10, -5));
 	}
 
 	public DirectDebitTransaction getTransaction(String subject, double amount,
