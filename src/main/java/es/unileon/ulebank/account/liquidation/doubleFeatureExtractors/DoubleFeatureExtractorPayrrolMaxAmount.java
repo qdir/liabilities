@@ -28,8 +28,10 @@ public class DoubleFeatureExtractorPayrrolMaxAmount implements
 		} catch (WrongArgsException e) {
 		}
 		for (DirectDebitTransaction actual : list) {
-			if (actual.getAmount() > maxAmount) {
-				maxAmount = actual.getAmount();
+			if (actual.getAmount() > 0) {
+				if (actual.getAmount() > maxAmount) {
+					maxAmount = actual.getAmount();
+				}
 			}
 		}
 		this.value = maxAmount;

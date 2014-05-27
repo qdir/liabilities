@@ -19,19 +19,21 @@ import es.unileon.ulebank.history.Transaction;
 public class GenericLiquidationFee<T> implements AbstractLiquidationFee<T> {
 
 	private List<AbstractFeeCase<T>> feeCases;
-	private Features<T> featureExtractor;
+	private Features<T> features;
 	private Account account;
 	private Handler id;
-	
-	public GenericLiquidationFee(Account account, Handler id) {
+
+	public GenericLiquidationFee(Account account, Handler id,
+			Features<T> features) {
 		this.feeCases = new ArrayList<AbstractFeeCase<T>>();
 		this.account = account;
+		this.features = features;
 		this.id = id;
 	}
 
 	@Override
 	public boolean addFeeCase(AbstractFeeCase<T> feeCase) {
-		if (feeCase.getFeatures() == featureExtractor) {
+		if (feeCase.getFeatures() == features) {
 			return this.feeCases.add(feeCase);
 		}
 		return false;
@@ -43,8 +45,8 @@ public class GenericLiquidationFee<T> implements AbstractLiquidationFee<T> {
 		boolean foundValidCase = false;
 		Transaction result = null;
 		int i = -1;
-		this.featureExtractor.updateFeatures(account, min, max);
-		while (foundValidCase && ++i < feeCases.size()) {
+		this.features.updateFeatures(account, min, max);
+		while (!foundValidCase && ++i < feeCases.size()) {
 			foundValidCase = this.feeCases.get(i).triggerCase();
 		}
 		if (foundValidCase) {

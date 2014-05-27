@@ -21,15 +21,17 @@ public class DoubleFeatureExtractorDirectDebitMaxAmount implements
 
 	@Override
 	public void updateFeature(Account account, Date min, Date max) {
-		double maxAmount = Double.MAX_VALUE;
+		double maxAmount = 0;
 		List<DirectDebitTransaction> list = new ArrayList<DirectDebitTransaction>();
 		try {
 			list = account.getFilteredDirectDebits(min, max);
 		} catch (WrongArgsException e) {
 		}
 		for (DirectDebitTransaction actual : list) {
-			if (actual.getAmount() < maxAmount) {
-				maxAmount = actual.getAmount();
+			if (actual.getAmount() < 0) {
+				if (actual.getAmount() < maxAmount) {
+					maxAmount = actual.getAmount();
+				}
 			}
 		}
 		this.value = maxAmount;
