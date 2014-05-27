@@ -21,7 +21,7 @@ import es.unileon.ulebank.history.TransactionHandlerProvider;
 import es.unileon.ulebank.history.conditions.WrongArgsException;
 import es.unileon.ulebank.office.Office;
 
-public class DoubleFeatureExtractorPayrrolSNumbertest {
+public class DoubleFeatureExtractorPayrrolsNumberTest {
 
 	private String subject;
 
