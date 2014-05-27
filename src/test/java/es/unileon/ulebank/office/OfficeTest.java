@@ -96,6 +96,12 @@ public class OfficeTest {
 	}
 
 	@Test
+	public void testSetAndGetBalance() {
+		office.setBalance();
+		assertEquals(office.getBalance(), -3000);
+	}
+
+	@Test
 	public void testGetEmployeeList() {
 		office.setEmployeeList(employeeTestList);
 		List<Employee> result = office.getEmployeeList();

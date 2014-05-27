@@ -9,14 +9,16 @@ import es.unileon.ulebank.Employee;
 import es.unileon.ulebank.account.Account;
 import es.unileon.ulebank.bank.Bank;
 import es.unileon.ulebank.client.Client;
+import es.unileon.ulebank.client.Enterprise;
 import es.unileon.ulebank.handler.Handler;
+import es.unileon.ulebank.handler.MalformedHandlerException;
+import es.unileon.ulebank.history.conditions.WrongArgsException;
 
 /**
  *
  * @author runix
  */
 public class Office {
-
 
 	/**
 	 * Max account number
@@ -71,6 +73,14 @@ public class Office {
 	 * The list of employees of this office
 	 */
 	private List<Employee> employeeList;
+	/**
+	 * The account of the office
+	 */
+	private Account account;
+	/**
+	 * Office's account user
+	 */
+	private Client officeClient;
 
 	/**
 	 * Create a new office
@@ -87,6 +97,25 @@ public class Office {
 		this.bank = bank;
 		this.nextAccountNumber = 0;
 		this.employeeList = new ArrayList<Employee>();
+		try {
+			this.officeClient = new Enterprise('K', 5000601, 'D');
+			this.account = new Account(this, bank, this.getNewAccountNumber(),
+					officeClient);
+		} catch (MalformedHandlerException e) {
+			// TODO change..
+		} catch (WrongArgsException excep) {
+			// TODO change..
+		}
+
+	}
+
+	/**
+	 * Get the account of the office
+	 * 
+	 * @return
+	 */
+	public Account getOfficeAccount() {
+		return account;
 	}
 
 	/**
@@ -178,7 +207,7 @@ public class Office {
 		}
 		return result;
 	}
-	
+
 	public Client searchClient(Handler id) {
 		Client result = null;
 		int i = -1;
@@ -278,12 +307,6 @@ public class Office {
 		this.employeeList = employeeList;
 	}
 
-	/**
-	 * Returns the list of accounts of the office
-	 */
-	public List<Account> getAccountList() {
-		return this.accounts;
-	}
 
 	/**
 	 * Adds an employee to the list of employees
