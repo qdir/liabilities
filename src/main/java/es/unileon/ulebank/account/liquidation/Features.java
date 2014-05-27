@@ -23,7 +23,7 @@ public class Features<T> {
 	public Map<String, T> getFeatures() {
 		Map<String, T> features = new HashMap<String, T>();
 		for (AbstractFeatureExtractor<T> feature : featureExtractors) {
-			features.put(feature.getFeatureName(), feature.getFeature());
+			features.put(feature.getFeatureName().replace(" ", ""), feature.getFeature());
 		}
 		return features;
 	}
@@ -31,7 +31,7 @@ public class Features<T> {
 	public Map<String, T> generateRandomFeatures() {
 		Map<String, T> features = new HashMap<String, T>();
 		for (AbstractFeatureExtractor<T> feature : featureExtractors) {
-			features.put(feature.getFeatureName(),
+			features.put(feature.getFeatureName().replace(" ", ""),
 					feature.generateRandomFeature());
 		}
 		return features;

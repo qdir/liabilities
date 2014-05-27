@@ -35,6 +35,8 @@ public class DoubleFeeCase implements AbstractFeeCase<Double> {
 
 	public void addConditionEquation(String leftOperand, char comparator,
 			String rightOperand) throws InvalidCondition {
+		leftOperand = leftOperand.replace(" ", "");
+		rightOperand = rightOperand.replace(" ", "");
 		if (isValidComparator(comparator) && testValidOperand(leftOperand)
 				&& testValidOperand(rightOperand)) {
 			if (this.triggeringConditions.length() > 0) {
@@ -67,8 +69,6 @@ public class DoubleFeeCase implements AbstractFeeCase<Double> {
 						.getInstance().getTime()), subject);
 			} catch (RuntimeException r) {
 				err.append(r);
-			} catch (Exception e) {
-				err.append(e);
 			}
 			if (err.length() > 0) {
 				throw new TransactionException(err.toString());
@@ -111,7 +111,7 @@ public class DoubleFeeCase implements AbstractFeeCase<Double> {
 	}
 
 	@Override
-	public Features<Double> getFeatureExtractor() {
+	public Features<Double> getFeatures() {
 		return this.features;
 	}
 }

@@ -29,7 +29,7 @@ public class GenericLiquidationFee<T> implements AbstractLiquidationFee<T> {
 
 	@Override
 	public boolean addFeeCase(AbstractFeeCase<T> feeCase) {
-		if (feeCase.getFeatureExtractor() == featureExtractor) {
+		if (feeCase.getFeatures() == featureExtractor) {
 			return this.feeCases.add(feeCase);
 		}
 		return false;
