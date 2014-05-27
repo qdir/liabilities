@@ -79,9 +79,12 @@ public class AccountHandler implements Handler {
 	public AccountHandler(Handler office, Handler bank, String accountNumber)
 			throws MalformedHandlerException {
 		StringBuilder errors = new StringBuilder();
-		if (office != null && office.toString() != null && bank != null
-				&& bank.toString() != null && accountNumber != null) {
-			Matcher matcher = NUMBER_PATTERN.matcher(accountNumber);
+		Matcher matcher;
+
+		if (accountNumber == null) {
+			errors.append("Error, account number is null\n");
+		} else {
+			matcher = NUMBER_PATTERN.matcher(accountNumber);
 			if (!matcher.find()) {
 				errors.append("The accountNumber can only have numbers\n");
 			}
@@ -90,7 +93,11 @@ public class AccountHandler implements Handler {
 				errors.append("The accountNumber length must be "
 						+ ACCOUNT_NUMBER_LENGTH + "\n");
 			}
+		}
 
+		if (office == null || office.toString() == null) {
+			errors.append("Error, office is null\n");
+		} else {
 			matcher = NUMBER_PATTERN.matcher(office.toString());
 			if (!matcher.find()) {
 				errors.append("The office id can only have numbers\n");
@@ -99,7 +106,11 @@ public class AccountHandler implements Handler {
 				errors.append("The office id length must be "
 						+ OFFICE_NUMBER_LENGTH + " \n");
 			}
+		}
 
+		if (bank == null || bank.toString() == null) {
+			errors.append("Error, bank is null\n");
+		} else {
 			matcher = NUMBER_PATTERN.matcher(bank.toString());
 			if (!matcher.find()) {
 				errors.append("The bank id can only have numbers\n");
@@ -109,9 +120,8 @@ public class AccountHandler implements Handler {
 				errors.append("The bank id length must be "
 						+ BANK_NUMBER_LENGTH + " \n");
 			}
-		} else {
-			errors.append("Error, there are null fields or the toString method return a null String");
 		}
+
 		if (errors.length() > 1) {
 			throw new MalformedHandlerException(errors.toString());
 		}

@@ -1,4 +1,4 @@
-package es.unileon.ulebank.account.liquidation.doubleFeatureExtractors;
+package es.unileon.ulebank.account.liquidation.doublefeaturextractors;
 
 import java.util.ArrayList;
 import java.util.Date;

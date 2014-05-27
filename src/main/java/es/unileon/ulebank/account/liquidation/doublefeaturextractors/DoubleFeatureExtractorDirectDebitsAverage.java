@@ -1,4 +1,4 @@
-package es.unileon.ulebank.account.liquidation.doubleFeatureExtractors;
+package es.unileon.ulebank.account.liquidation.doublefeaturextractors;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,18 +10,18 @@ import es.unileon.ulebank.account.liquidation.AbstractFeatureExtractor;
 import es.unileon.ulebank.history.DirectDebitTransaction;
 import es.unileon.ulebank.history.conditions.WrongArgsException;
 
-public class DoubleFeatureExtractorPayrrolsNumber implements
+public class DoubleFeatureExtractorDirectDebitsAverage implements
 		AbstractFeatureExtractor<Double> {
-
 	private double value;
 
 	@Override
 	public String getFeatureName() {
-		return "Numero de nominas";
+		return "importe medio pagos domiciliados";
 	}
 
 	@Override
 	public void updateFeature(Account account, Date min, Date max) {
+		double sum = 0;
 		int count = 0;
 		List<DirectDebitTransaction> list = new ArrayList<DirectDebitTransaction>();
 		try {
@@ -29,11 +29,12 @@ public class DoubleFeatureExtractorPayrrolsNumber implements
 		} catch (WrongArgsException e) {
 		}
 		for (DirectDebitTransaction actual : list) {
-			if (actual.getAmount() > 0) {
+			if (actual.getAmount() < 0) {
+				sum += actual.getAmount();
 				++count;
 			}
 		}
-		this.value = count;
+		this.value = sum / count;
 	}
 
 	@Override
@@ -45,5 +46,4 @@ public class DoubleFeatureExtractorPayrrolsNumber implements
 	public Double generateRandomFeature() {
 		return new Random().nextDouble() * 4;
 	}
-
 }

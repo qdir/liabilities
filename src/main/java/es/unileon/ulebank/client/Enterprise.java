@@ -5,6 +5,7 @@ package es.unileon.ulebank.client;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import es.unileon.ulebank.handler.Handler;
 import es.unileon.ulebank.handler.MalformedHandlerException;
@@ -19,7 +20,7 @@ public class Enterprise extends Client {
 	/**
      * 
      */
-	private ArrayList<Person> authorizedPersons;
+	private List<Person> authorizedPersons;
 
 	/**
      * 
@@ -63,8 +64,9 @@ public class Enterprise extends Client {
 	 * @param person
 	 */
 	public void addAuthorizedPerson(Person person) {
-		if (!existsAuthorizedPerson(person.getId()))
+		if (!existsAuthorizedPerson(person.getId())) {
 			authorizedPersons.add(person);
+		}
 	}
 
 	/**
@@ -96,8 +98,9 @@ public class Enterprise extends Client {
 		Iterator<Person> iterator = authorizedPersons.iterator();
 		while (iterator.hasNext()) {
 			Person person = iterator.next();
-			if (person.getId().compareTo(personHandler) == 0)
+			if (person.getId().compareTo(personHandler) == 0) {
 				result = true;
+			}
 		}
 		return result;
 	}

@@ -12,6 +12,10 @@ import java.util.Date;
  */
 public final class TimeUtils {
 
+	private TimeUtils() {
+
+	}
+
 	/**
 	 * Gets the date's month
 	 *

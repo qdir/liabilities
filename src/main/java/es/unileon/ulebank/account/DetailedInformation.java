@@ -8,7 +8,7 @@ package es.unileon.ulebank.account;
  */
 public class DetailedInformation {
 
-	private final StringBuffer info;
+	private final StringBuilder info;
 	private boolean nonEditable;
 
 	/**
@@ -16,7 +16,7 @@ public class DetailedInformation {
 	 * @param information
 	 */
 	public DetailedInformation(String information) {
-		this.info = new StringBuffer(information);
+		this.info = new StringBuilder(information);
 		this.nonEditable = false;
 	}
 

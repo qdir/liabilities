@@ -1,4 +1,4 @@
-package es.unileon.ulebank.account.liquidation.doubleFeatureExtractors;
+package es.unileon.ulebank.account.liquidation.doublefeaturextractors;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,31 +10,32 @@ import es.unileon.ulebank.account.liquidation.AbstractFeatureExtractor;
 import es.unileon.ulebank.history.DirectDebitTransaction;
 import es.unileon.ulebank.history.conditions.WrongArgsException;
 
-public class DoubleFeatureExtractorDirectDebitMaxAmount implements
+public class DoubleFeatureExtractorPayrrolAverage implements
 		AbstractFeatureExtractor<Double> {
+
 	private double value;
 
 	@Override
 	public String getFeatureName() {
-		return "pago domiciliado mas alto";
+		return "Importe medio nominas";
 	}
 
 	@Override
 	public void updateFeature(Account account, Date min, Date max) {
-		double maxAmount = 0;
+		double sum = 0;
+		int count = 0;
 		List<DirectDebitTransaction> list = new ArrayList<DirectDebitTransaction>();
 		try {
 			list = account.getFilteredDirectDebits(min, max);
 		} catch (WrongArgsException e) {
 		}
 		for (DirectDebitTransaction actual : list) {
-			if (actual.getAmount() < 0) {
-				if (actual.getAmount() < maxAmount) {
-					maxAmount = actual.getAmount();
-				}
+			if (actual.getAmount() > 0) {
+				sum += actual.getAmount();
+				++count;
 			}
 		}
-		this.value = maxAmount;
+		this.value = sum / count;
 	}
 
 	@Override
@@ -44,7 +45,6 @@ public class DoubleFeatureExtractorDirectDebitMaxAmount implements
 
 	@Override
 	public Double generateRandomFeature() {
-		return new Random().nextDouble() * 4;
+		return new Random().nextDouble() * 1000;
 	}
-
 }

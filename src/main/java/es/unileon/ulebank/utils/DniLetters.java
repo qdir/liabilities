@@ -36,10 +36,8 @@ public class DniLetters {
 	 * Constructos that create the dni letters table.
 	 */
 	private DniLetters() {
-
-		char[] dniLetters = { 'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D',
+		this.dniLetters = new char[]{ 'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D',
 				'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E' };
-		this.dniLetters = dniLetters;
 	}
 
 	/**

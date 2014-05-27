@@ -62,8 +62,9 @@ public class TaskList {
 	 * @return
 	 */
 	public static TaskList getInstance() {
-		if (instance == null)
+		if (instance == null) {
 			instance = new TaskList();
+		}
 		return instance;
 	}
 
@@ -151,7 +152,7 @@ public class TaskList {
      *
      */
 	public void executeTasks() {
-		while (this.tasks.size() > 0
+		while (!this.tasks.isEmpty()
 				&& this.tasks.get(0).getEffectiveDate().getTime() <= this.time
 						.getTime()) {
 			Task c = this.tasks.get(0);
@@ -160,32 +161,38 @@ public class TaskList {
 			this.tasksDone.add(c);
 		}
 		this.sort();
-		;
 	}
 
 	private boolean isInAnyList(Handler id) {
+		return this.isInDeleteTasks(id) || this.isInTasks(id) || this.isInTasksDone(id);
+	}
+
+	private boolean isInDeleteTasks(Handler id) {
+		boolean found = false;
+		int i = -1;
+		while (++i < this.deletedTasks.size() && !found) {
+			if (id.compareTo(this.deletedTasks.get(i).getID()) == 0) {
+				found = true;
+			}
+		}
+		return found;
+	}
+	private boolean isInTasks(Handler id) {
+		boolean found = false;
+		int i = -1;
+		while (++i < this.tasks.size() && !found) {
+			if (id.compareTo(this.tasks.get(i).getID()) == 0) {
+				found = true;
+			}
+		}
+		return found;
+	}
+	private boolean isInTasksDone(Handler id) {
 		boolean found = false;
 		int i = -1;
 		while (++i < this.tasksDone.size() && !found) {
 			if (id.compareTo(this.tasksDone.get(i).getID()) == 0) {
 				found = true;
-			}
-		}
-		if (!found) {
-			i = -1;
-			while (++i < this.tasks.size() && !found) {
-				if (id.compareTo(this.tasks.get(i).getID()) == 0) {
-					found = true;
-				}
-			}
-		}
-
-		if (!found) {
-			i = -1;
-			while (++i < this.deletedTasks.size() && !found) {
-				if (id.compareTo(this.deletedTasks.get(i).getID()) == 0) {
-					found = true;
-				}
 			}
 		}
 		return found;

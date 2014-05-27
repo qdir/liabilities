@@ -5,6 +5,7 @@ package es.unileon.ulebank.client;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import es.unileon.ulebank.account.Account;
 import es.unileon.ulebank.handler.Handler;
@@ -24,7 +25,7 @@ public class Client {
 	/**
 	 * Accounts where the client appear
 	 */
-	private ArrayList<Account> accounts;
+	private List<Account> accounts;
 
 	/**
 	 * Constructor of client. Receive the id and initilize the list of accounts

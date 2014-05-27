@@ -7,10 +7,10 @@ import es.unileon.ulebank.handler.Handler;
 
 public class MockTask extends Task {
 
-	public static int STATE_EXECUTE = 0;
-	public static int STATE_REDO = 1;
-	public static int STATE_UNDO = 2;
-	public static int STATE_NORMAL = 4;
+	public static final int STATE_EXECUTE = 0;
+	public static final int STATE_REDO = 1;
+	public static final int STATE_UNDO = 2;
+	public static final int STATE_NORMAL = 4;
 
 	public int state;
 

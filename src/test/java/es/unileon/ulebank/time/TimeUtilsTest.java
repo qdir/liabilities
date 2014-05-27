@@ -14,10 +14,6 @@ import org.junit.Test;
  */
 public class TimeUtilsTest {
 
-	@Test
-	public void testConstructor() {
-		TimeUtils t = new TimeUtils();
-	}
 
 	@Test
 	public void testGetYear() {

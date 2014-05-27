@@ -40,7 +40,7 @@ public class CommandFilterTransactionBySubject implements Command {
 
 	@Override
 	public void execute() {
-		if (this.result.size() == 0) {
+		if (this.result.isEmpty()) {
 			while (this.iteratorFiltered.hasNext()) {
 				this.result.add(this.iteratorFiltered.next());
 			}

@@ -4,10 +4,10 @@ import es.unileon.ulebank.handler.Handler;
 
 public class MockCommand implements Command {
 
-	public static int STATE_EXECUTE = 0;
-	public static int STATE_REDO = 1;
-	public static int STATE_UNDO = 2;
-	public static int STATE_NORMAL = 4;
+	public static final int STATE_EXECUTE = 0;
+	public static final int STATE_REDO = 1;
+	public static final int STATE_UNDO = 2;
+	public static final int STATE_NORMAL = 4;
 	private int state;
 	private Handler id;
 

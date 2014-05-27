@@ -28,18 +28,19 @@ public class CifControl {
 			int registrationCode, char controlCode) {
 		boolean result = false;
 		entityLetter = Character.toUpperCase(entityLetter);
-		if (entityLetter >= 'A' && entityLetter <= 'Z' && provinceCode < 100
-				&& provinceCode > 0
-				&& Integer.toString(registrationCode).length() <= 5) {
-			int code = provinceCode * 100000 + registrationCode;
-			int controlObtained = getControl(code);
-			if (Character.isLetter(controlCode)) {
-				if (cifControlLetters[controlObtained] == controlCode) {
+		if (entityLetter >= 'A' && entityLetter <= 'Z') {
+			if (provinceCode < 100 && provinceCode > 0
+					&& Integer.toString(registrationCode).length() <= 5) {
+				int code = provinceCode * 100000 + registrationCode;
+				int controlObtained = getControl(code);
+				if (Character.isLetter(controlCode)) {
+					if (cifControlLetters[controlObtained] == controlCode) {
+						result = true;
+					}
+				} else if (controlObtained == Integer.parseInt(Character
+						.toString(controlCode))) {
 					result = true;
 				}
-			} else if (controlObtained == Integer.parseInt(Character
-					.toString(controlCode))) {
-				result = true;
 			}
 		}
 		return result;
@@ -60,8 +61,9 @@ public class CifControl {
 		String controlData = String.valueOf(result);
 		result = Integer.parseInt(Character.toString(controlData
 				.charAt(controlData.length() - 1)));
-		if (result != 0)
+		if (result != 0) {
 			result = 10 - result;
+		}
 		return result;
 	}
 }

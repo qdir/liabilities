@@ -611,7 +611,7 @@ public class AccountHandlerTest {
 	}
 
 	@Test(expected = MalformedHandlerException.class)
-	public void testNullAccountNumberNullOfficeNullOffice()
+	public void testNullAccountNumberNullOfficeNullBank()
 			throws MalformedHandlerException {
 		new AccountHandler(null, null, null);
 	}

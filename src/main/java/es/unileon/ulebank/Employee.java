@@ -90,10 +90,8 @@ public class Employee {
 	 *            the new name
 	 */
 	public void setName(String name) {
-		if (name != null) {
-			if (name.length() > 0) {
-				this.name = name;
-			}
+		if (name != null && name.length() > 0) {
+			this.name = name;
 		}
 	}
 
@@ -113,10 +111,8 @@ public class Employee {
 	 *            the new surname
 	 */
 	public void setSurname(String surname) {
-		if (surname != null) {
-			if (surname.length() > 0) {
-				this.surname = surname;
-			}
+		if (surname != null && surname.length() > 0) {
+			this.surname = surname;
 		}
 	}
 

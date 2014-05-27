@@ -19,10 +19,6 @@ import es.unileon.ulebank.handler.Handler;
  */
 public class Office {
 
-	/**
-	 * Office's logger
-	 */
-	private static final Logger LOG = Logger.getLogger(Account.class.getName());
 
 	/**
 	 * Max account number

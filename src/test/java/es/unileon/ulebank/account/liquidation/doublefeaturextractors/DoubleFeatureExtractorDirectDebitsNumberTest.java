@@ -1,4 +1,4 @@
-package es.unileon.ulebank.account.liquidation.doubleFeatureExtractors;
+package es.unileon.ulebank.account.liquidation.doublefeaturextractors;
 
 import static org.junit.Assert.assertEquals;
 
@@ -10,6 +10,7 @@ import org.junit.Test;
 import es.unileon.ulebank.account.Account;
 import es.unileon.ulebank.account.liquidation.AbstractFeatureExtractor;
 import es.unileon.ulebank.account.liquidation.InvalidCondition;
+import es.unileon.ulebank.account.liquidation.doublefeaturextractors.DoubleFeatureExtractorDirectDebitsNumber;
 import es.unileon.ulebank.bank.Bank;
 import es.unileon.ulebank.client.Client;
 import es.unileon.ulebank.client.Person;

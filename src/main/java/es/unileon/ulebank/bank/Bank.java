@@ -17,8 +17,6 @@ import es.unileon.ulebank.office.Office;
  */
 public class Bank {
 
-	private static final Logger LOG = Logger.getLogger(Bank.class.getName());
-
 	private final List<Office> offices;
 
 	private final Handler bankID;

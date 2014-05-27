@@ -51,9 +51,10 @@ public class DoubleFeeCase implements AbstractFeeCase<Double> {
 
 	@Override
 	public boolean triggerCase() {
-		if (this.triggeringConditions.length() > 0)
+		if (this.triggeringConditions.length() > 0) {
 			return MVEL.evalToBoolean(this.triggeringConditions.toString(),
 					this.features.generateRandomFeatures());
+		}
 		return true;
 	}
 
@@ -78,15 +79,11 @@ public class DoubleFeeCase implements AbstractFeeCase<Double> {
 	}
 
 	private boolean testValidOperand(String operand) throws InvalidCondition {
-		StringBuilder err = new StringBuilder();
 		try {
 			EVALUATOR.evaluate(operand,
 					castTo(this.features.generateRandomFeatures()));
 		} catch (RuntimeException e) {
-			err.append(e.toString());
-		}
-		if (err.length() > 1) {
-			throw new InvalidCondition(err.toString());
+			throw new InvalidCondition(e.toString());
 		}
 		return true;
 	}
