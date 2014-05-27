@@ -88,6 +88,7 @@ public class GenericLiquidationFeeTest {
 		assertTrue(this.liquidationFee.addFeeCase(feeCase));
 		assertTrue(this.liquidationFee.addFeeCase(feeCase2));
 		assertTrue(this.liquidationFee.addFeeCase(feeCase3));
+		assertFalse(this.liquidationFee.addFeeCase(new DoubleFeeCase(new Features<Double>(), amountFormula, subject, account)));
 	}
 
 	@Test
