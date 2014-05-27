@@ -61,6 +61,7 @@ public class TaskListTest {
 		while (it.hasNext() && fromTaskList.hasNext()) {
 			assertEquals(it.next(), fromTaskList.next());
 		}
+		assertFalse(this.taskList.deleteTask(new GenericHandler("123123aasdad")));
 		for (int i = 0; i < this.taskToDo.size(); ++i) {
 			assertEquals(this.taskToDo.get(i).getState(),
 					MockTask.STATE_EXECUTE);
