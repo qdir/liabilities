@@ -24,7 +24,7 @@ import es.unileon.ulebank.history.TransactionHandlerProvider;
 import es.unileon.ulebank.history.conditions.WrongArgsException;
 import es.unileon.ulebank.office.Office;
 
-public class DoubleFeeCaseTests {
+public class DoubleFeeCaseTest {
 
 	private Features<Double> features;
 

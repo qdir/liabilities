@@ -21,7 +21,7 @@ import es.unileon.ulebank.history.TransactionHandlerProvider;
 import es.unileon.ulebank.history.conditions.WrongArgsException;
 import es.unileon.ulebank.office.Office;
 
-public class DoubleFeatureExtractorDirectDebitsMaxAmountTests {
+public class DoubleFeatureExtractorDirectDebitsMaxAmountTest {
 
 
 	private String subject;
@@ -50,7 +50,7 @@ public class DoubleFeatureExtractorDirectDebitsMaxAmountTests {
 			account.doDirectDebit(getTransaction(subject, i % 2 == 0 ? -i : i,
 					new Date(i)));
 		}
-		extractor = new DoubleFeatureExtractorMaxDirectDebit();
+		extractor = new DoubleFeatureExtractorDirectDebitMaxAmount();
 		assertEquals(extractor.getFeature(), 0.0, Math.pow(10, -5));
 		extractor.generateRandomFeature();
 		extractor.updateFeature(account, new Date(2), new Date(8));

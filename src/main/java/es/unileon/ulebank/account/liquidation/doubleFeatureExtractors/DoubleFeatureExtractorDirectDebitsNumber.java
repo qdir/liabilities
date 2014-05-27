@@ -10,7 +10,7 @@ import es.unileon.ulebank.account.liquidation.AbstractFeatureExtractor;
 import es.unileon.ulebank.history.DirectDebitTransaction;
 import es.unileon.ulebank.history.conditions.WrongArgsException;
 
-public class DoubleFeatureExtractorNumberDirectDebits implements
+public class DoubleFeatureExtractorDirectDebitsNumber implements
 		AbstractFeatureExtractor<Double> {
 
 	private double value;
