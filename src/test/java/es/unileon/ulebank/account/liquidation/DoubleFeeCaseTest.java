@@ -13,7 +13,6 @@ import org.junit.Test;
 
 import es.unileon.ulebank.account.Account;
 import es.unileon.ulebank.account.liquidation.doublefeaturextractors.DoubleFeatureExtractorDirectDebitMaxAmount;
-import es.unileon.ulebank.account.liquidation.doublefeaturextractors.DoubleFeatureExtractorDirectDebitsAverage;
 import es.unileon.ulebank.bank.Bank;
 import es.unileon.ulebank.client.Client;
 import es.unileon.ulebank.client.Person;

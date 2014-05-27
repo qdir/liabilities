@@ -10,7 +10,6 @@ import org.junit.Test;
 import es.unileon.ulebank.account.Account;
 import es.unileon.ulebank.account.liquidation.AbstractFeatureExtractor;
 import es.unileon.ulebank.account.liquidation.InvalidCondition;
-import es.unileon.ulebank.account.liquidation.doublefeaturextractors.DoubleFeatureExtractorPayrrolAverage;
 import es.unileon.ulebank.bank.Bank;
 import es.unileon.ulebank.client.Client;
 import es.unileon.ulebank.client.Person;

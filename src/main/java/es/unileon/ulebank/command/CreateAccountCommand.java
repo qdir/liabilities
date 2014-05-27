@@ -27,10 +27,10 @@ public class CreateAccountCommand implements Command {
 	private final Client titular;
 	private final List<Client> authorizeds;
 	private final List<Client> titulars;
-	private final static int STATE_EXECUTED = 0;
-	private final static int STATE_REDO = 1;
-	private final static int STATE_UNDO = 2;
-	private final static int STATE_NORMAL = 4;
+	private static final int STATE_EXECUTED = 0;
+	private static final int STATE_REDO = 1;
+	private static final int STATE_UNDO = 2;
+	private static final int STATE_NORMAL = 4;
 	private int state;
 
 	/**

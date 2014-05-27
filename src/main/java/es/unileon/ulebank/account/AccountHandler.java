@@ -41,7 +41,7 @@ public class AccountHandler implements Handler {
 	/**
 	 * Separator of the fields
 	 */
-	public final static String SEPARATOR = "-";
+	public static final  String SEPARATOR = "-";
 	/**
 	 * The account number, the number of digits of this number is given by {
 	 *

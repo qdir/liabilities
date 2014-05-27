@@ -33,10 +33,10 @@ public class CreateClientCommand implements Command {
 	private Client client;
 	private final Handler commandID;
 	private int state;
-	private final static int STATE_EXECUTED = 0;
-	private final static int STATE_REDO = 1;
-	private final static int STATE_UNDO = 2;
-	private final static int STATE_NORMAL = 4;
+	private static final int STATE_EXECUTED = 0;
+	private static final int STATE_REDO = 1;
+	private static final int STATE_UNDO = 2;
+	private static final int STATE_NORMAL = 4;
 
 	/**
 	 *
