@@ -19,7 +19,6 @@ public class TaskListTest {
 
 	private List<MockTask> taskToDo;
 	private List<MockTask> taskDone;
-	private List<MockTask> taskRemoved;
 	private TaskList taskList;
 	private static boolean init = false;
 
@@ -27,7 +26,6 @@ public class TaskListTest {
 		if (!init) {
 			this.taskToDo = new ArrayList<MockTask>();
 			this.taskDone = new ArrayList<MockTask>();
-			this.taskRemoved = new ArrayList<MockTask>();
 			Time.getInstance().updateTime();
 			this.taskList = TaskList.getInstance();
 			for (int i = 0; i < 10; ++i) {
