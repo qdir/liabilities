@@ -70,6 +70,12 @@ public class DoubleFeeCaseTest {
 		feeCase.addConditionEquation("3", '>', "2");
 		assertTrue(feeCase.triggerCase());
 	}
+	
+	@Test(expected=TransactionException.class)
+	public void testCalculateAmountFail() throws TransactionException {
+		DoubleFeeCase cas = new DoubleFeeCase(features, "aaa", subject, account);
+		cas.calculateAmount();
+	}
 
 	@Test
 	public void testGetFeatureExtractor() throws InvalidCondition {

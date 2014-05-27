@@ -59,9 +59,16 @@ public class DoubleFeatureExtractorPayrrolSNumbertest {
 	public void testGetFeatureName() {
 		assertEquals(extractor.getFeatureName(), "Numero de nominas");
 	}
+
 	@Test
 	public void testGetFeature() {
 		assertEquals(extractor.getFeature(), 3.0, Math.pow(10, -5));
+	}
+
+	@Test
+	public void testUpdateWrongArgs() {
+		extractor.updateFeature(account, new Date(8), new Date(2));
+		assertEquals(extractor.getFeature(), 0.0, Math.pow(10, -5));
 	}
 
 	public DirectDebitTransaction getTransaction(String subject, double amount,
@@ -71,6 +78,5 @@ public class DoubleFeatureExtractorPayrrolSNumbertest {
 		dt.setEffectiveDate(date);
 		return dt;
 	}
-
 
 }

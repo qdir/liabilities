@@ -54,6 +54,11 @@ public class DoubleFeatureExtractorPayrrolAverageTest {
 		extractor.generateRandomFeature();
 		extractor.updateFeature(account, new Date(2), new Date(8));
 	}
+	
+	public void testUpdateWrongArgs() {
+		extractor.updateFeature(account, new Date(8), new Date(2));
+		assertEquals(extractor.getFeature(), Double.NaN, Math.pow(10, -5));
+	}
 
 	@Test
 	public void testGetFeatureName() {
