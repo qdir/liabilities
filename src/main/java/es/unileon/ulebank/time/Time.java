@@ -26,12 +26,12 @@ public class Time {
 	/**
 	 * Equivalence between days and milliseconds
 	 */
-	public final static long DAYS_TO_MILLIS = (long) 24L * 60L * 60L * 1000L;
+	public static final  long DAYS_TO_MILLIS = (long) 24L * 60L * 60L * 1000L;
 
 	/**
 	 * Equivalence between milliseconds and days
 	 */
-	public final static long MILLIS_TO_DAYS = (long) 1L / DAYS_TO_MILLIS;
+	public static final  long MILLIS_TO_DAYS = (long) 1L / DAYS_TO_MILLIS;
 
 	/**
 	 * Private constructor

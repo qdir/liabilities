@@ -2,7 +2,6 @@
  group.*/
 package es.unileon.ulebank.handler;
 
-import java.util.Comparator;
 
 /**
  * Handler pattern.
