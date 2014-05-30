@@ -1,170 +1,158 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package es.unileon.ulebank.client;
-
-import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
+/**
+ *
+ * @author Oigrex
+ */
 public class AddressTest {
 
-	/**
-	 * 
-	 */
-	private Address address;
+    Address address;
 
-	/**
-	 * 
-	 */
-	private String street;
+    @Before
+    public void setUp() {
+        address = new Address("Calle de Peter", 314159, 10, 'A', "León", "León", 24001);
+    }
 
-	/**
-	 * Block in the street
-	 */
-	private int blockNumber;
+    /**
+     * Test of getStreet method, of class Address.
+     */
+    @Test
+    public void testGetStreet() {
+        assertNotNull(address.getStreet());
+        assertEquals(address.getStreet(), "Calle de Peter");
+    }
 
-	/**
-	 * Floor in the block
-	 */
-	private int floor;
+    /**
+     * Test of setStreet method, of class Address.
+     */
+    @Test
+    public void testSetStreet() {
+        assertEquals(address.getStreet(), "Calle de Peter");
+        address.setStreet("Calle de Juan");
+        assertEquals(address.getStreet(), "Calle de Juan");
+    }
 
-	/**
-	 * Door in the floor
-	 */
-	private char door;
+    /**
+     * Test of getBlockNumber method, of class Address.
+     */
+    @Test
+    public void testGetBlockNumber() {
+        assertNotNull(address.getBlockNumber());
+        assertEquals(address.getBlockNumber(), 314159);
+    }
 
-	/**
-	 * Locality
-	 */
-	private String locality;
+    /**
+     * Test of setBlockNumber method, of class Address.
+     */
+    @Test
+    public void testSetBlockNumber() {
+        assertEquals(address.getBlockNumber(), 314159);
+        address.setBlockNumber(4);
+        assertEquals(address.getBlockNumber(), 4);
+    }
 
-	/**
-	 * Province
-	 */
-	private String province;
+    /**
+     * Test of getFloor method, of class Address.
+     */
+    @Test
+    public void testGetFloor() {
+        assertNotNull(address.getFloor());
+        assertEquals(address.getFloor(), 10);
+    }
 
-	/**
-	 * Zip code
-	 */
-	private int zipCode;
+    /**
+     * Test of setFloor method, of class Address.
+     */
+    @Test
+    public void testSetFloor() {
+        assertEquals(address.getFloor(), 10);
+        address.setFloor(11);
+        assertEquals(address.getFloor(), 11);
+    }
 
-	@Before
-	public void setUp() {
-		this.province = "Leon";
-		this.zipCode = 24007;
-		this.locality = "Leon";
-		this.door = 'A';
-		this.floor = 3;
-		this.street = "Avn Universidad";
-		this.address = new Address(street, blockNumber, floor, door, locality,
-				province, zipCode);
-	}
+    /**
+     * Test of getDoor method, of class Address.
+     */
+    @Test
+    public void testGetDoor() {
+        assertNotNull(address.getDoor());
+        assertEquals(address.getDoor(), 'A');
+    }
 
-	@Test
-	public void testGetAndSetProvince() {
-		assertEquals(this.province.equals(this.address.getProvince()), true);
-		String other = "other";
-		this.address.setProvince(other);
-		assertEquals(other.equals(this.address.getProvince()), true);
-		other = "ElBierzo";
-		this.address.setProvince(other);
-		assertEquals(other.equals(this.address.getProvince()), true);
-		other = "Zamara";
-		this.address.setProvince(other);
-		assertEquals(other.equals(this.address.getProvince()), true);
-	}
+    /**
+     * Test of setDoor method, of class Address.
+     */
+    @Test
+    public void testSetDoor() {
+        assertEquals(address.getDoor(), 'A');
+        address.setDoor('B');
+        assertEquals(address.getDoor(), 'B');
+    }
 
-	@Test
-	public void testGetAndSetLocality() {
-		assertEquals(this.locality.equals(this.address.getLocality()), true);
-		String other = "other";
-		this.address.setLocality(other);
-		assertEquals(other.equals(this.address.getLocality()), true);
-		other = "Bembibre";
-		this.address.setLocality(other);
-		assertEquals(other.equals(this.address.getLocality()), true);
-		other = "Ponferrada";
-		this.address.setLocality(other);
-		assertEquals(other.equals(this.address.getLocality()), true);
+    /**
+     * Test of getLocality method, of class Address.
+     */
+    @Test
+    public void testGetLocality() {
+        assertNotNull(address.getLocality());
+        assertEquals(address.getLocality(), "León");
+    }
 
-	}
+    /**
+     * Test of setLocality method, of class Address.
+     */
+    @Test
+    public void testSetLocality() {
+        assertEquals(address.getLocality(), "León");
+        address.setLocality("Madrid");
+        assertEquals(address.getLocality(), "Madrid");
+    }
 
-	@Test
-	public void testGetAndSetStreet() {
-		assertEquals(this.street.equals(this.address.getStreet()), true);
-		String other = "other";
-		this.address.setStreet(other);
-		assertEquals(other.equals(this.address.getStreet()), true);
-		other = "Avn Universidad";
-		this.address.setStreet(other);
-		assertEquals(other.equals(this.address.getStreet()), true);
-		other = "La condesa";
-		this.address.setStreet(other);
-		assertEquals(other.equals(this.address.getStreet()), true);
-	}
+    /**
+     * Test of getProvince method, of class Address.
+     */
+    @Test
+    public void testGetProvince() {
+        assertNotNull(address.getProvince());
+        assertEquals(address.getProvince(), "León");
+    }
 
-	@Test
-	public void testGetAndSeZipCode() {
-		assertEquals(this.zipCode, this.address.getZipCode());
-		int newZip = 10;
-		this.address.setZipCode(newZip);
-		assertEquals(newZip, this.address.getZipCode());
-		newZip = 12;
-		this.address.setZipCode(newZip);
-		assertEquals(newZip, this.address.getZipCode());
-		newZip = 110;
-		this.address.setZipCode(newZip);
-		assertEquals(newZip, this.address.getZipCode());
-		newZip = 1201300;
-		this.address.setZipCode(newZip);
-		assertEquals(newZip, this.address.getZipCode());
-	}
+    /**
+     * Test of setProvince method, of class Address.
+     */
+    @Test
+    public void testSetProvince() {
+        assertEquals(address.getProvince(), "León");
+        address.setProvince("Madrid");
+        assertEquals(address.getProvince(), "Madrid");
+    }
 
-	@Test
-	public void testGetAndSetFloor() {
-		assertEquals(this.floor, this.address.getFloor());
-		int newFloor = 3;
-		this.address.setFloor(newFloor);
-		assertEquals(newFloor, this.address.getFloor());
-		newFloor = 103;
-		this.address.setFloor(newFloor);
-		assertEquals(newFloor, this.address.getFloor());
-		newFloor = 3222;
-		this.address.setFloor(newFloor);
-		assertEquals(newFloor, this.address.getFloor());
-		newFloor = 3101;
-		this.address.setFloor(newFloor);
-		assertEquals(newFloor, this.address.getFloor());
-	}
+    /**
+     * Test of getZipCode method, of class Address.
+     */
+    @Test
+    public void testGetZipCode() {
+        assertNotNull(address.getZipCode());
+        assertEquals(address.getZipCode(), 24001);
+    }
 
-	@Test
-	public void testGetAndSetDoor() {
-		assertEquals(this.door, this.address.getDoor());
-		char newDoor = 'Z';
-		this.address.setDoor(newDoor);
-		assertEquals(newDoor, this.address.getDoor());
-		newDoor = 'A';
-		this.address.setDoor(newDoor);
-		assertEquals(newDoor, this.address.getDoor());
-		newDoor = 'U';
-		this.address.setDoor(newDoor);
-		assertEquals(newDoor, this.address.getDoor());
-	}
-
-	@Test
-	public void testGetAndSetBlockNumber() {
-		assertEquals(this.blockNumber, this.address.getBlockNumber());
-		int newBlockNumber = 3;
-		this.address.setBlockNumber(newBlockNumber);
-		assertEquals(newBlockNumber, this.address.getBlockNumber());
-		newBlockNumber = 30;
-		this.address.setBlockNumber(newBlockNumber);
-		assertEquals(newBlockNumber, this.address.getBlockNumber());
-		newBlockNumber = 130;
-		this.address.setBlockNumber(newBlockNumber);
-		assertEquals(newBlockNumber, this.address.getBlockNumber());
-		newBlockNumber = 232;
-		this.address.setBlockNumber(newBlockNumber);
-		assertEquals(newBlockNumber, this.address.getBlockNumber());
-	}
+    /**
+     * Test of setZipCode method, of class Address.
+     */
+    @Test
+    public void testSetZipCode() {
+        assertEquals(address.getZipCode(), 24001);
+        address.setZipCode(24002);
+        assertEquals(address.getZipCode(), 24002);
+    }
 
 }
