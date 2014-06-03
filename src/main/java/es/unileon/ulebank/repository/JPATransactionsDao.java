@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import es.unileon.ulebank.domain.GenericTransactionDomain;
 
-@Repository(value = "transactionsDao")
+//@Repository(value = "transactionsDao")
 public class JPATransactionsDao implements TransactionsDao{
 
 	private EntityManager em = null;

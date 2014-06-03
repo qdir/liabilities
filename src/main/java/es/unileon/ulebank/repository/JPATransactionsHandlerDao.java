@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import es.unileon.ulebank.domain.TransactionHandlerDomain;
 
-@Repository(value = "transactionsHandlerDao")
+//@Repository(value = "transactionsHandlerDao")
 public class JPATransactionsHandlerDao implements TransactionsHandlerDao{
 
 	private EntityManager em = null;
