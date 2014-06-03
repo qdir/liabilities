@@ -50,6 +50,7 @@ public class TransactionsDaoImpl implements TransactionsDao {
 	public void remove(Transactions persistentInstance) {
 		log.debug("removing Transactions instance");
 		try {
+			persistentInstance = findById(persistentInstance.getTransactionId());
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
 		} catch (RuntimeException re) {

@@ -50,6 +50,7 @@ public class OfficesDaoImpl implements OfficesDao {
 	public void remove(Offices persistentInstance) {
 		log.debug("removing Offices instance");
 		try {
+			persistentInstance = findById(persistentInstance.getOfficeId());
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
 		} catch (RuntimeException re) {

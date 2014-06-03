@@ -50,6 +50,7 @@ public class AccountsDaoImpl implements AccountsDao {
 	public void remove(Accounts persistentInstance) {
 		log.debug("removing Accounts instance");
 		try {
+			persistentInstance = findById(persistentInstance.getAccountId());
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
 		} catch (RuntimeException re) {

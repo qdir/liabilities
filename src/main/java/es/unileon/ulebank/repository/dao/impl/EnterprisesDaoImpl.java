@@ -51,6 +51,7 @@ public class EnterprisesDaoImpl implements EnterprisesDao {
 	public void remove(Enterprises persistentInstance) {
 		log.debug("removing Enterprises instance");
 		try {
+			persistentInstance = findById(persistentInstance.getId());
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
 		} catch (RuntimeException re) {

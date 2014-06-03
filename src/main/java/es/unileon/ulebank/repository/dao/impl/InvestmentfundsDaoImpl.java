@@ -51,6 +51,7 @@ public class InvestmentfundsDaoImpl implements InvestmentfundsDao {
 	public void remove(Investmentfunds persistentInstance) {
 		log.debug("removing Investmentfunds instance");
 		try {
+			persistentInstance = findById(persistentInstance.getId());
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
 		} catch (RuntimeException re) {

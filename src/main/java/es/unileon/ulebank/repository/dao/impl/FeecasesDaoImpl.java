@@ -50,6 +50,7 @@ public class FeecasesDaoImpl implements FeecasesDao {
 	public void remove(Feecases persistentInstance) {
 		log.debug("removing Feecases instance");
 		try {
+			persistentInstance = findById(persistentInstance.getFeeCaseId());
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
 		} catch (RuntimeException re) {

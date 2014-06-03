@@ -51,6 +51,7 @@ public class CardsDaoImpl implements CardsDao {
 	public void remove(Cards persistentInstance) {
 		log.debug("removing Cards instance");
 		try {
+			persistentInstance = findById(persistentInstance.getId());
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
 		} catch (RuntimeException re) {

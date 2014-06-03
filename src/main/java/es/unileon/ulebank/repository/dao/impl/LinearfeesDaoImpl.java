@@ -50,6 +50,7 @@ public class LinearfeesDaoImpl implements LinearfeesDao {
 	public void remove(Linearfees persistentInstance) {
 		log.debug("removing Linearfees instance");
 		try {
+			persistentInstance = findById(persistentInstance.getFeeId());
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
 		} catch (RuntimeException re) {

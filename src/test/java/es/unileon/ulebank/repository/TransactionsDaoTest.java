@@ -53,6 +53,7 @@ public class TransactionsDaoTest {
     	history.getTransactionses().add(transaction);
     	historiesDao.persist(history);
     	
+    	historiesDao.remove(history);
 //    	GenericTransactionDomain transaction = new GenericTransactionDomain(20, new Date(), "Subject");
 //    	transaction.setEffectiveDate(new Date());
 //    	transactionsDao.persist(transaction);

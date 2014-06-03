@@ -50,6 +50,7 @@ public class LoansDaoImpl implements LoansDao {
 	public void remove(Loans persistentInstance) {
 		log.debug("removing Loans instance");
 		try {
+			persistentInstance = findById(persistentInstance.getLoanId());
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
 		} catch (RuntimeException re) {

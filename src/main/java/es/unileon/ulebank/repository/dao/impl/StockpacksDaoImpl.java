@@ -50,6 +50,7 @@ public class StockpacksDaoImpl implements StockpacksDao {
 	public void remove(Stockpacks persistentInstance) {
 		log.debug("removing Stockpacks instance");
 		try {
+			persistentInstance = findById(persistentInstance.getStockPackId());
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
 		} catch (RuntimeException re) {

@@ -50,6 +50,7 @@ public class EmployeesDaoImpl implements EmployeesDao {
 	public void remove(Employees persistentInstance) {
 		log.debug("removing Employees instance");
 		try {
+			persistentInstance = findById(persistentInstance.getEmployeeId());
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
 		} catch (RuntimeException re) {

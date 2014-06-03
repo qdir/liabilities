@@ -50,6 +50,7 @@ public class LiquidationfeesDaoImpl implements LiquidationfeesDao {
 	public void remove(Liquidationfees persistentInstance) {
 		log.debug("removing Liquidationfees instance");
 		try {
+			persistentInstance = findById(persistentInstance.getLiquidationFeeId());
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
 		} catch (RuntimeException re) {

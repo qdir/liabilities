@@ -51,6 +51,7 @@ public class ScheduledpaymentsDaoImpl implements ScheduledpaymentsDao {
 	public void remove(Scheduledpayments persistentInstance) {
 		log.debug("removing Scheduledpayments instance");
 		try {
+			persistentInstance = findById(persistentInstance.getSheduledPayementId());
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
 		} catch (RuntimeException re) {

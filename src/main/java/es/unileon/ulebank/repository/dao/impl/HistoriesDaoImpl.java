@@ -50,6 +50,7 @@ public class HistoriesDaoImpl implements HistoriesDao {
 	public void remove(Histories persistentInstance) {
 		log.debug("removing Histories instance");
 		try {
+			persistentInstance = findById(persistentInstance.getHistoryId());
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
 		} catch (RuntimeException re) {
