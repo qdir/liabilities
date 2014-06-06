@@ -3,6 +3,7 @@ package es.unileon.ulebank.repository.domain;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,6 +21,9 @@ import javax.persistence.TemporalType;
 public class Accounts implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	
+	public static final int DEFAULT_LIQUIDATION_FREQUENCY = 6;
 	
 	private String accountId;
 	private double balance;
@@ -111,7 +115,7 @@ public class Accounts implements java.io.Serializable {
 		this.maxOverdraft = maxOverdraft;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "accountsclients", catalog = "ulebank", joinColumns = { @JoinColumn(name = "accountID", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "clientID", nullable = false, updatable = false) })
 	public Set<Persons> getPersonses() {
 		return this.personses;
